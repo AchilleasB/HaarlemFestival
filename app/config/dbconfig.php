@@ -2,4 +2,4 @@
 $servername = "mysql";
 $username = "root";
 $password = "secret123";
-$database = "haarlem-festival";
+$database = "haarlem_festival";
