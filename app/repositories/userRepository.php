@@ -32,7 +32,7 @@ class UserRepository extends Repository
             $email = $user->getEmail();
             $password = $user->getPassword();
             $role = $user->getRole();
-            $registration_date = $user->getRegistrationDate()->format('d-m-Y');
+            $registration_date = $user->getRegistrationDate();
 
             $stmt = $this->connection->prepare("INSERT INTO users (firstname, lastname, email, password, role, registration_date) VALUES (:firstname, :lastname, :email, :password, :role, :registration_date)");
             $stmt->bindParam(':firstname', $firstname);
