@@ -23,6 +23,7 @@ services:
             MYSQL_DATABASE: 'haarlem_festival'
         volumes:
             - mysqldata:/var/lib/mysql
+            - ./sql:/docker-entrypoint-initdb.d
         ports:
             - 3306:3306
     phpmyadmin:
@@ -31,5 +32,6 @@ services:
             - 8080:80
         environment:
             - PMA_HOST=mysql
+        restart: unless-stopped
 volumes:
     mysqldata: {}
