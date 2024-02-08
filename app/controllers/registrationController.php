@@ -45,12 +45,12 @@ class RegistrationController extends Controller
                     $this->userService->register($user);
 
                     $_SESSION['successMessage'] = "You have successfully registered!\nYou can now log in.";
-                    // sleep(1);
+                    sleep(1);
 
                     header('Location: /login');
                     exit;
                 }
-                // header('Refresh: 2; URL=/registration');
+                header('Refresh: 2; URL=/registration');
                 return;
             }
         }
