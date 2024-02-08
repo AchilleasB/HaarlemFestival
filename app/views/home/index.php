@@ -17,10 +17,13 @@
     include __DIR__ . '/../header.php';
     ?>
     <main>
-        <div class="container">
-           <h1>Welcome to the Haarlem Festival</h1>
+        <div class="haarlem-welcome">
+            <div class="image-container">
+                <img src="/../images/haarlem-image.jpeg" alt="Haarlem" class="img-fluid">
+            </div>
+            <h1>Welcome to the city of Haarlem</h1>
         </div>
     </main>
     <?php
-    include __DIR__ . '/../footer.php';
+    // include __DIR__ . '/../footer.php';
     ?>

@@ -18,9 +18,9 @@
     include __DIR__ . '/../header.php';
     ?>
     <main>
-        <div class="signup-container">
+        <div class="registration-container">
             <div class="container fluid mt-4">
-                <h1 class="header mb-5 ">Registration</h1>
+                <h2 class="header mb-5">Registration</h2>
                 <?php
                 if (isset($_SESSION['errorMessage'])) {
                     echo '<div class="alert alert-danger" role="alert">' . $_SESSION['errorMessage'] . '</div>';
