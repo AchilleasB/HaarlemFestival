@@ -22,8 +22,14 @@ class LoginController extends Controller
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $captchaResponse = $_POST['g-recaptcha-response'];
+            $captchaSuccess = $this->userService->verifyCaptchaResponse($captchaResponse);
+
             if (empty($_POST['email']) || empty($_POST['password'])) {
                 $_SESSION['errorMessage'] = 'Please fill in both email and password.';
+            } elseif (!$captchaSuccess) {
+                $_SESSION['errorMessage'] = "Verify that you are not a robot";
             } else {
                 $email = htmlspecialchars($_POST['email']);
                 $password = htmlspecialchars($_POST['password']);

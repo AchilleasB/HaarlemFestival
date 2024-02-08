@@ -8,7 +8,7 @@ class User implements JsonSerializable
     private string $email;
     private string $password;
     private string $role;
-    private DateTime $registration_date;
+    private string $registration_date;
 
     const ADMINISTRATOR = "admin";
     const CUSTOMER = "customer";
@@ -73,14 +73,14 @@ class User implements JsonSerializable
         $this->role = $role;
     }
 
-    public function getRegistrationDate(): DateTime
+    public function getRegistrationDate(): string
     {
         return $this->registration_date;
     }
 
     public function setRegistrationDate(string $registration_date): void
     {
-        $this->registration_date = new DateTime($registration_date);
+        $this->registration_date = $registration_date;
     }
 
     public function jsonSerialize(): mixed
@@ -92,7 +92,7 @@ class User implements JsonSerializable
             'email' => $this->email,
             'password' => $this->password,
             'role' => $this->role,
-            'registration_date' => $this->registration_date->format('d-m-Y')
+            'registration_date' => $this->registration_date
         ];
     }
 } 
