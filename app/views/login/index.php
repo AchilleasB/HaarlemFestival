@@ -18,8 +18,8 @@
     ?>
     <main>
         <div class="login-container">
-            <div class="container fluid mt-4 high-full mb-5">
-                <h1 class="header mb-5 ">Log in</h1>
+            <div class="container fluid mt-5 mb-5">
+                <h2 class="header mb-5">Log in</h2>
                 <?php
                 if (isset($_SESSION['errorMessage'])) {
                     echo '<div class="alert alert-danger" role="alert">' . $_SESSION['errorMessage'] . '</div>';
