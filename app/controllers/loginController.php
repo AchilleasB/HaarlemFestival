@@ -42,7 +42,6 @@ class LoginController extends Controller
                     $_SESSION['errorMessage'] = 'Invalid email.';
                 } elseif (password_verify($password, $user->getPassword())) {
 
-                    $_SESSION['user'] = $user;
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['user_firstname'] = $user->getFirstname();
                     $_SESSION['user_lastname'] = $user->getLastname();

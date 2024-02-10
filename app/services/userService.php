@@ -23,6 +23,11 @@ class UserService
         return $this->userRepository->getUserByEmail($email);
     }
 
+    public function getUserById($id)
+    {
+        return $this->userRepository->getUserById($id);
+    }
+
     function userExists($email)
     {
         $existingUser = $this->getUserByEmail($email);
@@ -40,6 +45,11 @@ class UserService
         } else {
             return false;
         }
+    }
+
+    function updateProfile($firstname, $lastname, $email, $id)
+    {
+        $this->userRepository->updateUser($firstname, $lastname, $email, $id);
     }
 
     public function verifyCaptchaResponse($response) {
