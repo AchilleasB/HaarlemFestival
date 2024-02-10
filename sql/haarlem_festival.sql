@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Feb 07, 2024 at 10:48 PM
+-- Generation Time: Feb 10, 2024 at 10:18 AM
 -- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
 -- PHP Version: 8.2.9
 
@@ -42,7 +42,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `registration_date`) VALUES
-(1, 'Achilleas', 'Ballanos', 'achil@email.com', '$2y$10$mjD.jC/87HN3E9q1ZxwXHeY6Yvh3WNLpLMrWlTny9iRGaoDXBde0a', 'customer', '07-02-2024');
+(1, 'Achilleas', 'Ballanos', 'achil@email.com', '$2y$10$mjD.jC/87HN3E9q1ZxwXHeY6Yvh3WNLpLMrWlTny9iRGaoDXBde0a', 'customer', '07-02-2024'),
+(2, 'Odin', 'Odinson', 'odin@email.com', '$2y$10$9nQENvOLLdlj.RnMpB6ZpOnfTIyanK3msL/q/8Yu/NvtldzrIdXRe', 'customer', '08-02-2024'),
+(3, 'Tony', 'Stark', '686446@student.inholland.nl', '$2y$10$gikeOLWBalPi/..Wm8j.8.R1yRjtBplqytL9777xiXMflP5hBApb2', 'admin', '08-02-2024'),
+(4, 'Hulk', 'Banner', 'hulk@email.com', '$2y$10$6mVTfKfk.AdHFY4o2CRN0OvP2KDG..2RNWOWb2S0iiEC28lfwum/2', 'employee', '08-02-2024');
 
 --
 -- Indexes for dumped tables
@@ -62,7 +65,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
