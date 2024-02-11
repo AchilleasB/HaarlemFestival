@@ -24,6 +24,24 @@ class UserRepository extends Repository
 
     }
 
+    public function getUserById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT firstname, lastname, email FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $user = $stmt->fetch();
+
+            if (!$user) {
+                return null;
+            }
+            return $user;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     public function addUser(User $user)
     {
         try {
@@ -44,6 +62,20 @@ class UserRepository extends Repository
 
             $stmt->execute();
             return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function updateUser($firstname, $lastname, $email, $id)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':firstname', $firstname);
+            $stmt->bindParam(':lastname', $lastname);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
         } catch (PDOException $e) {
             echo $e;
         }
