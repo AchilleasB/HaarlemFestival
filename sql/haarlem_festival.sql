@@ -1,11 +1,12 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
 -- Generation Time: Feb 11, 2024 at 06:32 PM
 -- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
 -- PHP Version: 8.2.9
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -89,8 +90,6 @@ CREATE TABLE `tickets` (
   `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
 -- Table structure for table `users`
 --
@@ -98,7 +97,7 @@ CREATE TABLE `tickets` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `role` varchar(50) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
@@ -106,19 +105,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
---
 
 INSERT INTO `users` (`id`, `email`, `password`, `role`, `firstname`, `lastname`, `registration_date`) VALUES
 (1, 'ahilleasballanos@gmail.com', '$2y$10$1ieCTLfmvygGHzj.6UEt5OqRD9F68SyimR2FK8ZRtGGHd.KLvhHQC', 'admin', 'Achil', 'Ballanos', '11-02-2024'),
 (2, 'hulk@email.com', '$2y$10$OHrfraa8gWbiEHuKN1LulOeSiLKea5WpVcq5uJZxivD0hefkWBAQy', 'employee', 'Hulk', 'Banner', '11-02-2024'),
 (3, 'thor@email.com', '$2y$10$9nNSxnov0RodE0oYBAHZ5eDW8q4DUMcJFPXVIWG3bqRsRSWV23CMC', 'customer', 'Thor', 'Odinson', '11-02-2024');
-
---
--- Indexes for dumped tables
 --
 
---
 -- Indexes for table `artists`
 --
 ALTER TABLE `artists`
@@ -153,17 +146,7 @@ ALTER TABLE `tickets`
   ADD KEY `event` (`event_id`),
   ADD KEY `order` (`order_id`);
 
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
 -- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
@@ -199,11 +182,6 @@ ALTER TABLE `tickets`
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- Constraints for dumped tables
---
-
---
 -- Constraints for table `events`
 --
 ALTER TABLE `events`
@@ -222,6 +200,7 @@ ALTER TABLE `orders`
 ALTER TABLE `tickets`
   ADD CONSTRAINT `event` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
