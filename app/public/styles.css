@@ -23,7 +23,8 @@ main {
 }
 
 body .login-container,
-.registration-container {
+.registration-container,
+.profile-container {
     width: 40%;
     margin: 130px auto;
 }

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Feb 09, 2024 at 09:16 PM
--- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
--- PHP Version: 8.0.25
+-- Generation Time: Feb 11, 2024 at 07:15 PM
+-- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
+-- PHP Version: 8.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,37 +24,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ARTISTS`
+-- Table structure for table `artists`
 --
 
-CREATE TABLE `ARTISTS` (
+CREATE TABLE `artists` (
   `id` int(11) NOT NULL,
-  `artistName` varchar(50) NOT NULL,
-  `genre` varchar(50) DEFAULT NULL
+  `artist_name` varchar(50) NOT NULL,
+  `genre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `EVENTS`
+-- Table structure for table `events`
 --
 
-CREATE TABLE `EVENTS` (
+CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `type` varchar(100) NOT NULL,
-  `date_time` date NOT NULL,
-  `location` int(11) NOT NULL,
-  `artist` int(11) NOT NULL,
+  `date_time` varchar(50) NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `artist_id` int(11) NOT NULL,
   `tickets_available` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `LOCATIONS`
+-- Table structure for table `locations`
 --
 
-CREATE TABLE `LOCATIONS` (
+CREATE TABLE `locations` (
   `id` int(11) NOT NULL,
   `location_name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -64,90 +64,97 @@ CREATE TABLE `LOCATIONS` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ORDERS`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `ORDERS` (
+CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `date_time` date NOT NULL,
-  `payment_status` varchar(100) NOT NULL,
-  `user` int(11) NOT NULL
+  `date_time` varchar(50) NOT NULL,
+  `payment_status` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TICKETS`
+-- Table structure for table `tickets`
 --
 
-CREATE TABLE `TICKETS` (
+CREATE TABLE `tickets` (
   `id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `ticket_type` varchar(50) NOT NULL,
   `ticket_amount` int(11) NOT NULL,
-  `event` int(11) NOT NULL,
-  `order` int(11) NOT NULL
+  `event_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `USERS`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `USERS` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `role` varchar(50) NOT NULL,
-  `firstName` varchar(50) NOT NULL,
-  `lastName` varchar(50) NOT NULL,
-  `registrationDate` date NOT NULL
+  `registration_date` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `registration_date`) VALUES
+(2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$vkgWF4oRqig39VU2EtBqaeSIYZ65wrNcsEL8dHhCRH2TDjLu1YPcm', 'admin', '11-02-2024');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `ARTISTS`
+-- Indexes for table `artists`
 --
-ALTER TABLE `ARTISTS`
+ALTER TABLE `artists`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `EVENTS`
+-- Indexes for table `events`
 --
-ALTER TABLE `EVENTS`
+ALTER TABLE `events`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `artist` (`artist`),
-  ADD KEY `location` (`location`);
+  ADD KEY `artist_id` (`artist_id`),
+  ADD KEY `location_id` (`location_id`);
 
 --
--- Indexes for table `LOCATIONS`
+-- Indexes for table `locations`
 --
-ALTER TABLE `LOCATIONS`
+ALTER TABLE `locations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ORDERS`
+-- Indexes for table `orders`
 --
-ALTER TABLE `ORDERS`
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user` (`user`);
+  ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `TICKETS`
+-- Indexes for table `tickets`
 --
-ALTER TABLE `TICKETS`
+ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `event` (`event`),
-  ADD KEY `order` (`order`);
+  ADD KEY `event_id` (`event_id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
--- Indexes for table `USERS`
+-- Indexes for table `users`
 --
-ALTER TABLE `USERS`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -155,64 +162,64 @@ ALTER TABLE `USERS`
 --
 
 --
--- AUTO_INCREMENT for table `ARTISTS`
+-- AUTO_INCREMENT for table `artists`
 --
-ALTER TABLE `ARTISTS`
+ALTER TABLE `artists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `EVENTS`
+-- AUTO_INCREMENT for table `events`
 --
-ALTER TABLE `EVENTS`
+ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `LOCATIONS`
+-- AUTO_INCREMENT for table `locations`
 --
-ALTER TABLE `LOCATIONS`
+ALTER TABLE `locations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ORDERS`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `ORDERS`
+ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `TICKETS`
+-- AUTO_INCREMENT for table `tickets`
 --
-ALTER TABLE `TICKETS`
+ALTER TABLE `tickets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `USERS`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `USERS`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `EVENTS`
+-- Constraints for table `events`
 --
-ALTER TABLE `EVENTS`
-  ADD CONSTRAINT `artist` FOREIGN KEY (`artist`) REFERENCES `ARTISTS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `location` FOREIGN KEY (`location`) REFERENCES `LOCATIONS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`),
+  ADD CONSTRAINT `events_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 
 --
--- Constraints for table `ORDERS`
+-- Constraints for table `orders`
 --
-ALTER TABLE `ORDERS`
-  ADD CONSTRAINT `user` FOREIGN KEY (`user`) REFERENCES `USERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `TICKETS`
+-- Constraints for table `tickets`
 --
-ALTER TABLE `TICKETS`
-  ADD CONSTRAINT `event` FOREIGN KEY (`event`) REFERENCES `EVENTS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `order` FOREIGN KEY (`order`) REFERENCES `ORDERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tickets`
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
+  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
