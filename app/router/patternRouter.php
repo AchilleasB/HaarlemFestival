@@ -45,10 +45,10 @@ class PatternRouter
                 $controllerObj = new $controllerName();
                 $controllerObj->$methodName(...$additionalSegments);
             } catch (Exception $e) {
-                http_response_code(404);
+                $this->handle404();
             }
         } else {
-            http_response_code(404);
+            $this->handle404();
         }
     }
 
@@ -58,6 +58,13 @@ class PatternRouter
             $uri = substr($uri, 0, strpos($uri, '?'));
         }
         return $uri;
+    }
+
+    private function handle404() {
+        // URL not found
+        http_response_code(404);
+        require __DIR__ . '/../views/404.php';
+        exit;
     }
     
 }
