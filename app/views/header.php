@@ -23,7 +23,7 @@ if (isset($_SESSION['user_firstname'])) {
                             Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/history">
+                        <a class="nav-link" aria-current="page" href="#">
                             <img src="/../icons/history.svg" class="history-icon w-10 h-10" alt="History icon">
                             History</a>
                     </li>
@@ -38,7 +38,7 @@ if (isset($_SESSION['user_firstname'])) {
                             Music</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">
+                        <a class="nav-link" aria-current="page" href="/festival">
                             <img src="/../icons/human.svg" class="human-icon w-10 h-10" alt="Human icon">
                             Festival</a>
                     </li>
