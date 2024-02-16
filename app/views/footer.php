@@ -8,23 +8,8 @@
             </div>
             <div class="row mt-2 ">
            <div class="d-flex justify-content-center text-uppercase ">
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-5 border-start">
-                <p>
-                        <a href="/" class="text-reset text-decoration-none">Visit Haarlem</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset text-decoration-none">History</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset text-decoration-none">Music & Theatre</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset text-decoration-none">Cuisine</a>
-                    </p>
-
-                </div>
               
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-5 border-end">
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-5 border-start border-end">
                 <p>
                         <a href="/festival" class="text-reset text-decoration-none">The Festival</a>
                     </p>

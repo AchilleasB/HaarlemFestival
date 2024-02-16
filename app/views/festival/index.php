@@ -31,7 +31,7 @@
     </header>
 
     <section class="wine-bg">
-        <div class="container text-white w-75 py-4">
+        <div class="container text-white w-75 py-5">
             <div class="row">
                 <div class="col-md-4">
                     <h3 class="inline-text">The <span class="gold-text">Summer Festival</span></h3>
@@ -70,7 +70,7 @@
                     <div id="Description" class="tabcontent">
                         <h6 class = "fw-bold pt-3">Description</h6>
                         <p>Lorem ipsum dolor sit amet. Et inventore accusamus et ullam ratione sed incidunt quos in vero omnis et consequatur Quis id esse voluptatem. </p>
-                        <button class = "info-button">MORE INFO</button>
+                        <button class = "info-button" href>MORE INFO</button>
                     </div>
 
                     <div id="Location" class="tabcontent">
@@ -91,13 +91,12 @@
 
 
 
-
     <?php
     include __DIR__ . '/../footer.php';
     ?>
     <script>
 
-        function openTab(evt, cityName) {
+        function openTab(evt, tabName) {
             // Declare all variables
             var i, tabcontent, tablinks;
 
@@ -114,7 +113,7 @@
             }
 
             // Show the current tab, and add an "active" class to the button that opened the tab
-            document.getElementById(cityName).style.display = "block";
+            document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
         }
         document.getElementById("defaultOpen").click();
