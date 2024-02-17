@@ -28,6 +28,22 @@ class UserService
         return $this->userRepository->getUserById($id);
     }
 
+    public function getUserIdByToken($token)
+    {
+       return $this->userRepository->getUserIdByToken($token);
+    }
+
+    public function isExpiredToken($token)
+    {
+        $token = $this->userRepository->isExpiredToken($token);
+        
+    }
+
+    public function deleteToken($user_id)
+    {
+        $this->userRepository->deleteToken($user_id);
+    }
+
     function userExists($email)
     {
         $existingUser = $this->getUserByEmail($email);
@@ -50,6 +66,12 @@ class UserService
     function updateProfile($firstname, $lastname, $email, $id)
     {
         $this->userRepository->updateUser($firstname, $lastname, $email, $id);
+    }
+
+    public function updatePassword($user_id, $password)
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->userRepository->updatePassword($user_id, $hashedPassword);
     }
 
     public function verifyCaptchaResponse($response) {
