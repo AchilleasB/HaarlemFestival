@@ -1,0 +1,47 @@
+<?php
+require __DIR__ . '/../repositories/danceRepository.php';
+require_once __DIR__ . '/../models/dance.php';
+
+class DanceService
+{
+    private $danceRepository;
+
+    function __construct()
+    {
+        $this->danceRepository = new DanceRepository();
+    }
+
+    public function getAllDanceEvents()
+    {
+        $danceEvents = $this->danceRepository->getAllDanceEvents();
+        
+        foreach ($danceEvents as $danceEvent) {
+            $eventId = $danceEvent->getId();
+            $artists = $this->danceRepository->getEventArtists($eventId);
+            $danceEvent->setArtists($artists);
+        }
+        return $danceEvents;
+    }
+
+    public function addDanceEvent($danceEvent)
+    {
+        return $this->danceRepository->addDanceEvent($danceEvent);
+    }
+
+    public function updateDanceEvent($danceEvent)
+    {
+        return $this->danceRepository->updateDanceEvent($danceEvent);
+    }
+
+    public function deleteDanceEvent($id)
+    {
+        return $this->danceRepository->deleteDanceEvent($id);
+    }
+
+    public function getEventArtists($id)
+    {
+        return $this->danceRepository->getEventArtists($id);   
+    }
+
+
+}
