@@ -19,7 +19,12 @@ class DanceService
             $eventId = $danceEvent->getId();
             $artists = $this->danceRepository->getEventArtists($eventId);
             $danceEvent->setArtists($artists);
+    
+            $venueId = $danceEvent->getVenueId();
+            $venueName = $this->danceRepository->getVenueNameById($venueId);
+            $danceEvent->setVenueName($venueName);
         }
+    
         return $danceEvents;
     }
 
@@ -43,5 +48,8 @@ class DanceService
         return $this->danceRepository->getEventArtists($id);   
     }
 
+    function addTicketToCart($danceTicket) {
+        return $this->danceRepository->addTicketToCart($danceTicket);
+    }
 
 }
