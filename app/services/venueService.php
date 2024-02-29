@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../repositories/venueRepository.php';
+require_once __DIR__ . '/../repositories/venueRepository.php';
 require_once __DIR__ . '/../models/venue.php';
 
 class VenueService

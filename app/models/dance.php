@@ -4,13 +4,19 @@ class Dance implements JsonSerializable
 {
     private int $id;
     private int $venue_id;
+    private string $venue_name;
     private string $date;
     private string $start_time;
     private string $end_time;
     private string $session;
     private int $tickets_available;
     private float $price;
+    private string $type;
     private array $artists = [];
+
+    const SINGLE_CONCERT = 'SINGLE-CONCERT';
+    const ONE_DAY_PASS = '1-DAY-PASS';
+    const THREE_DAY_PASS = '3-DAY-PASS';
 
     public function getId(): int
     {
@@ -27,6 +33,14 @@ class Dance implements JsonSerializable
     public function setVenueId(int $venue_id): void
     {
         $this->venue_id = $venue_id;
+    }
+    public function getVenueName(): string
+    {
+        return $this->venue_name;
+    }
+    public function setVenueName(string $venue_name): void
+    {
+        $this->venue_name = $venue_name;
     }
     public function getDate(): string
     {
@@ -76,6 +90,15 @@ class Dance implements JsonSerializable
     {
         $this->price = $price;
     }
+    public function getType(){
+        return $this->type;
+    }
+    public function setType($type){
+        if ($type !== self::SINGLE_CONCERT && $type !== self::ONE_DAY_PASS && $type !== self::THREE_DAY_PASS){
+            throw new Exception('Invalid type');
+        }
+        $this->type = $type;
+    }
     public function getArtists(): array
     {
         return $this->artists;
@@ -95,7 +118,10 @@ class Dance implements JsonSerializable
             'end_time' => $this->end_time,
             'session' => $this->session,
             'tickets_available' => $this->tickets_available,
-            'price' => $this->price
+            'price' => $this->price,
+            'type' => $this->type,
+            'artists' => $this->artists,
+            'venue_name' => $this->venue_name
         ];
     }
 }

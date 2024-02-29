@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/../../services/danceService.php';
 require_once __DIR__ . '/../../models/dance.php';
+require_once __DIR__ . '/../../models/danceTicket.php';
 
 class DanceEventsController
 {
@@ -69,6 +70,37 @@ class DanceEventsController
 
             header('Content-Type: application/json');
             echo json_encode(['message' => $message, 'recipe' => $object]);
+        }
+    }
+
+    public function tickets()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $body = file_get_contents('php://input');
+            $object = json_decode($body);
+
+            if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
+                header('Content-Type: application/json');
+                echo json_encode('Invalid JSON');
+            }
+
+            $danceTicket = new DanceTicket();
+            $danceTicket->setAmount(htmlspecialchars($object->amount));
+            $danceTicket->setEventId(htmlspecialchars($object->event_id));
+            $danceTicket->setUserId(htmlspecialchars($object->user_id));
+
+            if ($object->amount === 0) {
+                $message = 'Invalid amount! Try again with a valid amount of tickets';
+            }
+            elseif ($this->danceService->addTicketToCart($danceTicket)) {
+                $message = 'Ticket(s) added to cart successfully';
+            } else {
+                $message = 'An error occurred while adding ticket(s) to cart';
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode(['message'=>$message, 'danceTicket'=>$danceTicket]);
         }
     }
 

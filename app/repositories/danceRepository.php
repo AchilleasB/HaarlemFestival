@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/repository.php';
 require_once __DIR__ . ' /../models/dance.php';
+require_once __DIR__ . ' /../models/venue.php';
 
 class DanceRepository extends Repository
 {
@@ -79,7 +80,7 @@ class DanceRepository extends Repository
     public function getEventArtists($id)
     {
         try {
-            $stmt = $this->connection->prepare('SELECT artists.id, artists.name
+            $stmt = $this->connection->prepare('SELECT artists.id, artists.name, artists.artist_image, artists.genre
                                                 FROM artists 
                                                 INNER JOIN event_artists 
                                                 ON artists.id = event_artists.artist_id 
@@ -92,6 +93,37 @@ class DanceRepository extends Repository
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $eventArtists = $stmt->fetchAll();
             return $eventArtists;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function getVenueNameById($id){
+        try {
+            $stmt = $this->connection->prepare('SELECT name FROM venues WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Venue');
+            $venue = $stmt->fetch();
+
+            return $venue->getName();
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function addTicketToCart($danceTicket){
+        try {
+            $stmt = $this->connection->prepare('INSERT INTO dance_tickets (amount, event_id, user_id) VALUES (:amount, :event_id, :user_id)');
+            $stmt->execute([
+                ':amount' => $danceTicket->getAmount(),
+                ':event_id' => $danceTicket->getEventId(),
+                ':user_id' => $danceTicket->getUserId()            
+            ]);
+            
+            return true;
 
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();

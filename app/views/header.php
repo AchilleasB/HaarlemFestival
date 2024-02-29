@@ -33,9 +33,9 @@ if (isset($_SESSION['user_firstname'])) {
                             Cuisines</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">
+                        <a class="nav-link" aria-current="page" href="/dance">
                             <img src="/../icons/music.svg" class="music-icon w-10 h-10" alt="Music icon">
-                            Music</a>
+                            Dance</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">
