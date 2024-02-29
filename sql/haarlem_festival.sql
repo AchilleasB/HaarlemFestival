@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Feb 20, 2024 at 10:12 PM
+-- Generation Time: Feb 29, 2024 at 08:39 PM
 -- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
 -- PHP Version: 8.2.9
 
@@ -40,12 +40,12 @@ CREATE TABLE `artists` (
 --
 
 INSERT INTO `artists` (`id`, `name`, `genre`, `description`, `artist_image`) VALUES
-(1, 'Harwell', 'dance and house', 'Robbert van de Corput , known professionally as Hardwell, is a Dutch DJ and music producer from Breda. He was voted the world\'s number one DJ by DJ Mag in 2013 and again in 2014. In 202. he was also ranked at number 43 in the top 100 DJs poll by DJ Mag.', '/../images/artists/hardwell.png'),
-(2, 'Armin van Buuren', 'trance and techno', 'ARMIN VAN BUUREN a Dutch DJ and record producer from Leiden, South Holland. Since 2001, he has hosted A State of Trance (ASOT), a weekly radio show, which is broadcast to nearly 40 million listeners in 84 countries on over 100 FM radio stations. He has been ranked the number one DJ by DJ Mag a record of five times, four years in a row. ', '/../images/artists/armin_van_buuren.png'),
-(3, 'Martin Garrix', 'dance and electronic', 'Martin Garrix, also known as Ytram and GRX, is a Dutch DJ and record producer, who was ranked number one on DJ Mag\'s Top 100 DJs list for three consecutive years—2016, 2017, and 2018. He is best known for his singles \'Animals\', \'In the Name of Love\', and \'Scared to Be Lonely\'.', '/../images/artists/martin_garrix.png'),
-(4, 'Tiesto', 'trance,  techno, minimal, house and electro', 'Tijs Michiel Verwest born 17 January 1969, known professionally as Tiësto, is a Dutch DJ and record producer. He was voted \'The Greatest DJ of All Time\' by Mix magazine in a 2010/2011 poll amongst fans. In 2013, he was voted by DJ Mag readers as the \'best DJ of the last 20 years\'. He is also regarded by many as the \'Godfather of EDM\'.', '/../images/artists/tiesto.png'),
-(5, 'Nicky Romero', 'electrohouse and progressive house', 'Nick Rotteveel born January 6 1989, professionally known as Nicky Romero or Monocule, is a Dutch DJ, record producer and remixer from Amerongen, Utrecht Province. He has worked with, and received support from DJs, such as Tiësto, Fedde le Grand, Sander van Doorn, David Guetta, Calvin Harris, Armand van Helden, Avicii and Hardwell. He currently ranks at number 20 on DJ Mag\'s annual Top 100 DJs poll. He is known for his viral hit song \'Toulouse\'.', '/../images/artists/nicky_romero.png'),
-(6, 'Afrojack', 'house', 'Nick Leonardus van de Wall born 9 September 1987, better known as Afrojack, is a Dutch DJ, music producer and remixer. In 2007, he founded the record label Wall Recordings; his debut album Forget the World was released in 2014. Afrojack regularly features as one of the ten best artists in the Top 100 DJs published by DJ Mag.', '/../images/artists/afrojack.png');
+(1, 'HARDWELL', 'DANCE / HOUSE', 'Robbert van de Corput , known professionally as Hardwell, is a Dutch DJ and music producer from Breda. He was voted the world\'s number one DJ by DJ Mag in 2013 and again in 2014. In 202. he was also ranked at number 43 in the top 100 DJs poll by DJ Mag.', 'artists/hardwell.png'),
+(2, 'ARMIN VAN BUUREN', 'TRANCE / TECHNO', 'Armin van Buuren is a Dutch DJ and record producer from Leiden, South Holland. Since 2001, he has hosted A State of Trance (ASOT), a weekly radio show, which is broadcast to nearly 40 million listeners in 84 countries on over 100 FM radio stations. He has been ranked the number one DJ by DJ Mag a record of five times, four years in a row. ', 'artists/armin_van_buuren.png'),
+(3, 'MARTIN GARRIX', 'DANCE / ELECTRONIC', 'Martin Garrix, also known as Ytram and GRX, is a Dutch DJ and record producer, who was ranked number one on DJ Mag\'s Top 100 DJs list for three consecutive years—2016, 2017, and 2018. He is best known for his singles \'Animals\', \'In the Name of Love\', and \'Scared to Be Lonely\'.', 'artists/martin_garrix.png'),
+(4, 'TIESTO', 'TRANCE/ TECHNO/HOUSE/ELECTRO', 'Tijs Michiel Verwest born 17 January 1969, known professionally as Tiësto, is a Dutch DJ and record producer. He was voted \'The Greatest DJ of All Time\' by Mix magazine in a 2010/2011 poll amongst fans. In 2013, he was voted by DJ Mag readers as the \'best DJ of the last 20 years\'. He is also regarded by many as the \'Godfather of EDM\'.', 'artists/tiesto.png'),
+(5, 'NICKY ROMERO', 'ELECTROHOUSE / PROGRESSIVE HOUSE', 'Nick Rotteveel born January 6 1989, professionally known as Nicky Romero or Monocule, is a Dutch DJ, record producer and remixer from Amerongen, Utrecht Province. He has worked with, and received support from DJs, such as Tiësto, Fedde le Grand, Sander van Doorn, David Guetta, Calvin Harris, Armand van Helden, Avicii and Hardwell. He currently ranks at number 20 on DJ Mag\'s annual Top 100 DJs poll. He is known for his viral hit song \'Toulouse\'.', 'artists/nicky_romero.png'),
+(6, 'AFROJACK', 'HOUSE', 'Nick Leonardus van de Wall born 9 September 1987, better known as Afrojack, is a Dutch DJ, music producer and remixer. In 2007, he founded the record label Wall Recordings; his debut album Forget the World was released in 2014. Afrojack regularly features as one of the ten best artists in the Top 100 DJs published by DJ Mag.', 'artists/afrojack.png');
 
 -- --------------------------------------------------------
 
@@ -61,27 +61,62 @@ CREATE TABLE `dance_events` (
   `end_time` varchar(50) NOT NULL,
   `session` varchar(50) NOT NULL,
   `tickets_available` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `price` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dance_events`
 --
 
-INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, `session`, `tickets_available`, `price`) VALUES
-(1, 1, 'Friday 27 July', '20:00', '02:00', 'Back2Back', 1500, 75),
-(2, 3, 'Friday 27 July', '22:00', '23:30', 'Club', 200, 60),
-(3, 4, 'Friday 27 July', '23:00', '00:30', 'Club', 300, 60),
-(4, 5, 'Friday 27 July', '22:00', '23:30', 'Club', 200, 60),
-(5, 6, 'Friday 27 July', '22:00', '23:30', 'Club', 200, 60),
-(6, 2, 'Saturday 28 July', '14:00', '23:00', 'Back2Back', 2000, 110),
-(7, 4, 'Saturday 28 July', '22:00', '23:30', 'Club', 300, 60),
-(8, 1, 'Saturday 28 July', '21:00', '01:00', 'TiestoWorld', 1500, 75),
-(9, 3, 'Saturday 28 July', '23:00', '00:30', 'Club', 200, 60),
-(10, 2, 'Sunday 29 July', '14:00', '23:00', 'Back2Back', 2000, 110),
-(11, 4, 'Sunday 29 July', '19:00', '20:30', 'Club', 300, 60),
-(12, 5, 'Sunday 29 July', '21:00', '22:30', 'Club', 1500, 90),
-(13, 3, 'Sunday 29 July', '18:00', '19:30', 'Club', 200, 60);
+INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, `session`, `tickets_available`, `price`, `type`) VALUES
+(1, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 1500, 75, 'SINGLE-CONCERT'),
+(2, 3, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60, 'SINGLE-CONCERT'),
+(3, 4, 'FRIDAY 27 JULY', '23:00', '00:30', 'CLUB', 300, 60, 'SINGLE-CONCERT'),
+(4, 5, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60, 'SINGLE-CONCERT'),
+(5, 6, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60, 'SINGLE-CONCERT'),
+(6, 2, 'SATURDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 2000, 110, 'SINGLE-CONCERT'),
+(7, 4, 'SATURDAY 28 JULY', '22:00', '23:30', 'CLUB', 300, 60, 'SINGLE-CONCERT'),
+(8, 1, 'SATURDAY 28 JULY', '21:00', '01:00', 'TIESTOWORLD', 1500, 75, 'SINGLE-CONCERT'),
+(9, 3, 'SATURDAY 28 JULY', '23:00', '00:30', 'CLUB', 200, 60, 'SINGLE-CONCERT'),
+(10, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 2000, 110, 'SINGLE-CONCERT'),
+(11, 4, 'SUNDAY 29 JULY', '19:00', '20:30', 'CLUB', 300, 60, 'SINGLE-CONCERT'),
+(12, 5, 'SUNDAY 29 JULY', '21:00', '22:30', 'CLUB', 1500, 90, 'SINGLE-CONCERT'),
+(13, 3, 'SUNDAY 29 JULY', '18:00', '19:30', 'CLUB', 200, 60, 'SINGLE-CONCERT'),
+(14, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 150, 125, '1-DAY-PASS'),
+(15, 2, 'SATURDAY 28 JULY', '14:00', '01:00', 'BACK2BACK', 150, 150, '1-DAY-PASS'),
+(16, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 150, 150, '1-DAY-PASS'),
+(17, 1, 'FRIDAY 27 JULY', '20:00', '23:00', 'BACK2BACK', 150, 250, '3-DAY-PASS');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dance_tickets`
+--
+
+CREATE TABLE `dance_tickets` (
+  `id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dance_tickets`
+--
+
+INSERT INTO `dance_tickets` (`id`, `amount`, `event_id`, `user_id`) VALUES
+(33, 3, 1, 2),
+(46, 2, 1, 2),
+(47, 2, 2, 2),
+(48, 3, 3, 2),
+(49, 4, 4, 2),
+(50, 4, 6, 2),
+(51, 4, 9, 2),
+(52, 2, 17, 2),
+(53, 1, 14, 4),
+(55, 1, 5, 3),
+(56, 3, 10, 3);
 
 -- --------------------------------------------------------
 
@@ -185,7 +220,7 @@ CREATE TABLE `tickets` (
   `ticket_type` varchar(50) NOT NULL,
   `ticket_amount` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -209,7 +244,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `registration_date`) VALUES
-(2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$FL2ULD6vLiLcWytbszeV.OdHFujzs4lLv2P9A4siQHtKp5EBeu/HO', 'admin', '11-02-2024');
+(2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$ZSIYLLcEL.tgMorcLdTzcO84RRvfPPZHyNntErm3IK5TdYCKAG73K', 'admin', '11-02-2024'),
+(3, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$MJglj4Tb6TbC3Y9VLhd0x.zMyeUQGvqBSFZa2kLuRivBP46YfYplC', 'customer', '27-02-2024'),
+(4, 'Tony', 'Stark', 'stark@email.com', '$2y$10$iFLnmaPFjBjFRBH021OpYu38HrI0DzHhSD1g0qb8hcHtMu0QQzq4S', 'customer', '27-02-2024');
 
 -- --------------------------------------------------------
 
@@ -229,12 +266,12 @@ CREATE TABLE `venues` (
 --
 
 INSERT INTO `venues` (`id`, `name`, `address`, `venue_image`) VALUES
-(1, 'Lichtfabriek', 'Minckelersweg 2', '/../images/venues/lichtfabriek.png'),
-(2, 'Caprera Openluchttheater', 'Hoge Duin en Daalseweg 2', '/../images/venues/caprera_openluchttheater.png'),
-(3, 'Club Stalker', 'Kromme Elleboogsteeg 2', '/../images/venues/club_stalker.png'),
-(4, 'Jopenkerk', 'Gedemte Voldergracht 2', '/../images/venues/jopenkerk.png'),
-(5, 'XO the club', 'Grote Markt 8', '/../images/venues/xo_club.png'),
-(6, 'Club Ruis', 'Smedestraat 32', '/../images/venues/club_ruis.png');
+(1, 'LICHTFABRIEK', 'MINCKERSWEG 2', 'venues/lichtfabriek.png'),
+(2, 'CAPRERA OPENLUCHTTHEATER', 'HOGE DUIN EN DAALSWEG 2', 'venues/caprera_openluchttheater.png'),
+(3, 'CLUB STALKER', 'KROMME ELLEBOOGSTEEG 2', 'venues/club_stalker.png'),
+(4, 'JOPENKERK', 'GEDEMTE VOLDERGRACHT 2', 'venues/jopenkerk.png'),
+(5, 'XO THE CLUB', 'GROTE MARKT 8', 'venues/xo_club.png'),
+(6, 'CLUB RUIS', 'SMEDESTRAAT 32', 'venues/club_ruis.png');
 
 --
 -- Indexes for dumped tables
@@ -252,6 +289,14 @@ ALTER TABLE `artists`
 ALTER TABLE `dance_events`
   ADD PRIMARY KEY (`id`),
   ADD KEY `venue_id` (`venue_id`);
+
+--
+-- Indexes for table `dance_tickets`
+--
+ALTER TABLE `dance_tickets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dance_tickets_ibfk_1` (`event_id`),
+  ADD KEY `dance_tickets_ibfk_2` (`user_id`);
 
 --
 -- Indexes for table `events`
@@ -293,7 +338,7 @@ ALTER TABLE `password_reset_tokens`
 ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
   ADD KEY `event_id` (`event_id`),
-  ADD KEY `order_id` (`order_id`);
+  ADD KEY `order_id` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -321,7 +366,13 @@ ALTER TABLE `artists`
 -- AUTO_INCREMENT for table `dance_events`
 --
 ALTER TABLE `dance_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `dance_tickets`
+--
+ALTER TABLE `dance_tickets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -345,7 +396,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tickets`
@@ -357,7 +408,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `venues`
@@ -374,6 +425,13 @@ ALTER TABLE `venues`
 --
 ALTER TABLE `dance_events`
   ADD CONSTRAINT `dance_events_ibfk_1` FOREIGN KEY (`venue_id`) REFERENCES `venues` (`id`);
+
+--
+-- Constraints for table `dance_tickets`
+--
+ALTER TABLE `dance_tickets`
+  ADD CONSTRAINT `dance_tickets_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `dance_events` (`id`),
+  ADD CONSTRAINT `dance_tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `events`
@@ -406,7 +464,7 @@ ALTER TABLE `password_reset_tokens`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
-  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
