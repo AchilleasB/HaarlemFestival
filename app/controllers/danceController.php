@@ -18,4 +18,8 @@ class DanceController extends Controller
         $this->displayView($this);
     } 
 
+    public function tickets(){
+        $this->displayView($this);
+    }
+
 }
