@@ -30,7 +30,7 @@
                 </div>
                 <div class="image-secondary-text position-absolute top-0 end-0 ">
                     <h1 class="">27.07 / 28.07 / 29.07</h1>
-                    <button id="getTicketsBtn" class="fw-bold bg-danger d-inline-block">GET YOUR TICKETS NOW!</button>
+                    <button id="getTicketsBtn" class="buy-tickets-btn fw-bold bg-danger d-inline-block">GET YOUR TICKETS NOW!</button>
                 </div>
             </div>
             <div class="dance-events-section">
