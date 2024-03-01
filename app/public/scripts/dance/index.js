@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    displayDateButtons();
+    await displayDateButtons();
     displayVenues();
+    displaySchedule();
 });
 
 async function getDanceEventsFromAPI() {
@@ -13,7 +14,7 @@ async function getDanceEventsFromAPI() {
         const danceEvents = await response.json();
         // return only the events that have a type of single-concert
         const filteredEvents = danceEvents.filter(event => event.type === 'SINGLE-CONCERT');
-        console.log(filteredEvents);
+        // console.log(filteredEvents);
         return filteredEvents;
     } catch (error) {
         console.error(error);
@@ -25,7 +26,7 @@ async function displayDateButtons() {
     const danceEvents = await getDanceEventsFromAPI();
     const uniqueDates = [...new Set(danceEvents.map(event => event.date))];
 
-    const danceEventsContainer = document.querySelector('.dance-events-container');
+    const danceEventsSection = document.querySelector('.dance-events-section');
     const dateButtons = document.querySelector('.date-buttons');
     dateButtons.innerHTML = '';
 
@@ -55,14 +56,17 @@ async function displayDateButtons() {
         dateButtons.appendChild(button);
     });
 
-    danceEventsContainer.appendChild(dateButtons);
+    danceEventsSection.appendChild(dateButtons);
+
+    await displayDanceEvents(uniqueDates[0]);
+
 }
 
 // dance events section
 async function displayDanceEvents(date) {
     const danceEvents = await getDanceEventsFromAPI();
-    const danceDaySessions = document.querySelector('.dance-day-sessions');
-    danceDaySessions.innerHTML = '';
+    const danceEventsContainer = document.querySelector('.dance-events-container');
+    danceEventsContainer.innerHTML = '';
 
     const selectedEvents = danceEvents.filter(event => event.date === date);
     selectedEvents.forEach((danceEvent, index) => {
@@ -71,8 +75,8 @@ async function displayDanceEvents(date) {
         if (index === 0) {
             danceEventCard.style.width = '50%';
         }
-        
-        danceDaySessions.appendChild(danceEventCard);
+
+        danceEventsContainer.appendChild(danceEventCard);
     });
 
 }
@@ -138,7 +142,7 @@ function htmlEventSession(danceEvent) {
 }
 
 
-// event artists section
+// event artists section //
 function renderEventArtists(danceEvent) {
     const eventArtistsContainer = document.createElement('div');
     eventArtistsContainer.classList.add('event-artists');
@@ -191,7 +195,7 @@ function htmlArtistGenre(artist) {
     return artistGenre;
 }
 
-// venues section
+// venues section //
 
 async function getVenuesFromAPI() {
     try {
@@ -211,8 +215,8 @@ async function getVenuesFromAPI() {
 
 async function displayVenues() {
     const venues = await getVenuesFromAPI();
-    console.log(venues);
-    const venueContainer = document.querySelector('.venues');
+    // console.log(venues);
+    const venueContainer = document.querySelector('.venues-container');
     venueContainer.innerHTML = '';
 
     venues.forEach((venue) => {
@@ -259,5 +263,56 @@ function htmlVenueAddress(venue) {
 
     return venueAddress;
 }
+
+// schedule section //
+
+async function displaySchedule() {
+    const danceEvents = await getDanceEventsFromAPI();
+    const scheduleContainer = document.querySelector('.schedule-container');
+    scheduleContainer.innerHTML = '';
+
+    const uniqueDates = [...new Set(danceEvents.map(event => event.date))];
+
+    uniqueDates.forEach((date) => {
+        const dateSchedule = renderDateSchedule(danceEvents, date);
+        scheduleContainer.appendChild(dateSchedule);
+    });
+}
+
+function renderDateSchedule(danceEvents, date) {
+    const dateScheduleCard = document.createElement('div');
+    dateScheduleCard.classList.add('date-schedule-card');
+
+    const dayCardTitle = document.createElement('div');
+    dayCardTitle.classList.add('schedule-date');
+    dayCardTitle.innerHTML = date;
+
+    dateScheduleCard.appendChild(dayCardTitle);
+
+    danceEvents.filter(event => event.date === date).forEach((event) => {
+
+
+        const artists = document.createElement('div');
+        artists.classList.add('schedule-artists');
+        artists.innerHTML = event.artists.map(artist => artist.name).join('/ ');
+
+        const venue = document.createElement('div');
+        venue.classList.add('schedule-venue');
+        venue.innerHTML = event.venue_name;
+
+        const time = document.createElement('div');
+        time.classList.add('schedule-time');
+        time.innerHTML = event.start_time + ' - ' + event.end_time;
+
+        dateScheduleCard.appendChild(artists);
+        dateScheduleCard.appendChild(venue);
+        dateScheduleCard.appendChild(time);
+
+    });
+
+    return dateScheduleCard;
+
+}
+
 
 
