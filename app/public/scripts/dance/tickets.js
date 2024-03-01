@@ -109,7 +109,7 @@ function htmlDisplayTicket(event, eventType) {
                     <div class="row d-flex align-items-center">
                         <div class="col">
                             <div class="ticket-details">
-                                <h5 class="ticket-title">${showArtistsNames(event.artists)}</h5>
+                                <h5 class="ticket-title">${showArtistsNamesOrDayPass(event.artists, eventType)}</h5>
                                 <p class="ticket-text">
                                     <i class="fa-solid fa-calendar-days"></i>
                                     ${showDateAndTime(event.date, event.start_time)}</br>
@@ -120,7 +120,7 @@ function htmlDisplayTicket(event, eventType) {
                                     <div class="col">
                                         <p class="ticket-price">€ ${event.price}</p>
                                         <div class="ticket-action">
-                                            <input type="number" class="ticket-amount" placeholder="0" min="0">
+                                            <input type="number" class="ticket-amount" placeholder="0" min="1">
                                             <button class="addToCart-button">Add to cart</button>
                                         </div>
                                     </div>
@@ -171,8 +171,19 @@ async function handleAddToCart(event_id, amount) {
     displayMessage(data.message, 3000);
 }
 
-function showArtistsNames(artists) {
-    return artists.map(artist => artist.name).join(' & ');
+function showArtistsNamesOrDayPass(artists, eventType) {
+
+    if (eventType === 'SINGLE-CONCERT') {
+        return artists.map(artist => artist.name).join(' & ');
+    }
+
+    if (eventType === '1-DAY-PASS') {
+        return '1-DAY ALL ACCESS PASS';
+    }
+
+    if (eventType === '3-DAY-PASS') {
+        return '3-DAY ALL ACCESS PASS';
+    }
 }
 
 function showDateAndTime(date, time) {
