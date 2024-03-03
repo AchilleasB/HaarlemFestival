@@ -22,18 +22,18 @@
         <div class="cms-container">
             <h1 class="header mb-5">Content Management System</h1>
             <div class="row cms-button-container">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <a href="history" class="cms-btn d-inline-block">History</a>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <a href="/dance/management" class="cms-btn d-inline-block">Dance</a>
                 </div>
             </div>
             <div class="row cms-button-container">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <a href="yummie" class="cms-btn d-inline-block">Yummie</a>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <a href="users" class="cms-btn d-inline-block">Users</a>
                 </div>
             </div>
