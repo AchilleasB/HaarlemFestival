@@ -59,6 +59,11 @@ class DanceRepository extends Repository
         }
     }
 
+    public function getLastInsertedEventId()
+    {
+        return $this->connection->lastInsertId();
+    }
+
     public function updateDanceEvent($danceEvent)
     {
         try {
