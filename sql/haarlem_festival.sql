@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 03, 2024 at 08:36 PM
+-- Generation Time: Mar 03, 2024 at 10:59 PM
 -- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
 -- PHP Version: 8.2.9
 
@@ -255,9 +255,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `registration_date`) VALUES
 (2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$ZSIYLLcEL.tgMorcLdTzcO84RRvfPPZHyNntErm3IK5TdYCKAG73K', 'Admin', '11-02-2024'),
-(5, 'Hulk', 'Banner', 'achilleasballanos@outlook.com', '$2y$10$ncp7mP0hjtXyKua87OGQUuFxBmEL9r9PzuLIKAQMj0GhJ//ML.vuC', 'Employee', '03-03-2024'),
-(6, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$FKn5WvU4.YDLV3IjmuATqugZtA1dMBOnqaK/LGXpXKSCsGfFE.CD6', 'Employee', '03-03-2024'),
-(7, 'Tony', 'Stark', 'stark@email.com', '$2y$10$cv1rrTS179h1RsWHGXo4J.ho0UH3C49dpEQdvo2srjwa1zSjU9cP.', 'Customer', '03-03-2024');
+(5, 'Hulk', 'Banner', 'achilleasballanos@outlook.com', '$2y$10$ncp7mP0hjtXyKua87OGQUuFxBmEL9r9PzuLIKAQMj0GhJ//ML.vuC', 'Employee', '25-02-2024'),
+(6, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$FKn5WvU4.YDLV3IjmuATqugZtA1dMBOnqaK/LGXpXKSCsGfFE.CD6', 'Employee', '23-02-2024'),
+(7, 'Tony', 'Stark', 'stark@email.com', '$2y$10$cv1rrTS179h1RsWHGXo4J.ho0UH3C49dpEQdvo2srjwa1zSjU9cP.', 'Customer', '12-02-2024');
 
 -- --------------------------------------------------------
 

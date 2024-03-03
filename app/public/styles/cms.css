@@ -64,8 +64,14 @@
 #add-event-form,
 #add-artist-form,
 #add-venue-form,
-#add-user-form {
+#add-user-form,
+#filtering-container {
     width: 50%;
+    margin: 0 auto;
+}
+
+#filtering-container {
+    width: 25%;
     margin: 0 auto;
 }
 
