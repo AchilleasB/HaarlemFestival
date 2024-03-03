@@ -18,6 +18,7 @@
     } else {
         echo '<script>const user_id = ' . $_SESSION['user_id'] . ';</script>';
     }
+
     ?>
     <main>
         <div class="red-line"></div>

@@ -2,11 +2,11 @@
 
 class Artist implements JsonSerializable
 {
-    private int $id;
-    private string $name;
-    private string $genre;
-    private string $description;
-    private string $artist_image;
+    private $id;
+    private $name;
+    private $genre;
+    private $description;
+    private $artist_image;
 
     public function getId(): int
     {

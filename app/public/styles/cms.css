@@ -1,0 +1,92 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    color: #000;
+    border-radius: .3em;
+}
+
+.cms-container {
+    padding: 1em;
+    height: 50vh;
+    width: 75%;
+    margin: auto;
+    margin-top: 3em;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+}
+
+.cms-button-container {
+    width: 100%;
+    margin: 4em 0 4em 4em;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.cms-btn {
+    padding: 1em 2em;
+    margin: 0 2em 0 2em;
+    border: none;
+    border-radius: 5px;
+    background-color: #e86e6e;
+    color: #fff;
+    font-size: 1.8em;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.cms-btn:hover {
+    background-color: #A60303;
+    color: #fff;
+    font-size: 2em;
+    transform: scale(1.2);
+}
+
+.dance-cms-container {
+    width: 100%;
+}
+
+.btn-group {
+    width: 100%;
+}
+
+.item-data-value {
+    margin: auto;
+}
+
+#add-event-form,
+#add-artist-form,
+#add-venue-form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.message-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to right, #a770ef, #cf8bf3, #FDB99B);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}

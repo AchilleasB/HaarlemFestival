@@ -2,7 +2,7 @@
 
 class Dance implements JsonSerializable
 {
-    private int $id;
+    private ?int $id = 0;
     private int $venue_id;
     private string $venue_name;
     private string $date;
