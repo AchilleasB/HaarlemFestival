@@ -109,6 +109,9 @@ function createItemLabel(itemType) {
                                 <div class="item-data-label border-bottom"><em>Date</em></div>
                             </div>
                             <div class="col">
+                                <div class="item-data-label border-bottom"><em>Venue</em></div>
+                            </div>
+                            <div class="col">
                                 <div class="item-data-label border-bottom"><em>Start time</em></div>
                             </div>
                             <div class="col">
@@ -188,6 +191,9 @@ function createItemElement(item, itemType) {
                     <div class="row d-flex align-items-center">
                         <div class="col">
                             <span class="item-data-value">${item.date}</span>
+                        </div>
+                        <div class="col">
+                            <span class="item-data-value">${item.venue_name}</span>
                         </div>
                         <div class="col">
                             <span class="item-data-value">${item.start_time}</span>
