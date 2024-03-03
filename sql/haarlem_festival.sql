@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 03, 2024 at 05:37 PM
+-- Generation Time: Mar 03, 2024 at 08:36 PM
 -- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
 -- PHP Version: 8.2.9
 
@@ -111,7 +111,6 @@ CREATE TABLE `dance_tickets` (
 --
 
 INSERT INTO `dance_tickets` (`id`, `amount`, `event_id`, `user_id`) VALUES
-(33, 3, 1, 2),
 (46, 2, 1, 2),
 (47, 2, 2, 2),
 (48, 3, 3, 2),
@@ -119,11 +118,11 @@ INSERT INTO `dance_tickets` (`id`, `amount`, `event_id`, `user_id`) VALUES
 (50, 4, 6, 2),
 (51, 4, 9, 2),
 (52, 2, 17, 2),
-(53, 1, 14, 4),
-(55, 1, 5, 3),
-(56, 3, 10, 3),
-(57, 1, 1, 2),
-(58, 2, 6, 2);
+(58, 2, 6, 2),
+(59, 1, 36, 7),
+(60, 2, 13, 7),
+(61, 1, 37, 6),
+(62, 1, 6, 6);
 
 -- --------------------------------------------------------
 
@@ -255,9 +254,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `registration_date`) VALUES
-(2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$ZSIYLLcEL.tgMorcLdTzcO84RRvfPPZHyNntErm3IK5TdYCKAG73K', 'admin', '11-02-2024'),
-(3, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$MJglj4Tb6TbC3Y9VLhd0x.zMyeUQGvqBSFZa2kLuRivBP46YfYplC', 'customer', '27-02-2024'),
-(4, 'Tony', 'Stark', 'stark@email.com', '$2y$10$iFLnmaPFjBjFRBH021OpYu38HrI0DzHhSD1g0qb8hcHtMu0QQzq4S', 'customer', '27-02-2024');
+(2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$ZSIYLLcEL.tgMorcLdTzcO84RRvfPPZHyNntErm3IK5TdYCKAG73K', 'Admin', '11-02-2024'),
+(5, 'Hulk', 'Banner', 'achilleasballanos@outlook.com', '$2y$10$ncp7mP0hjtXyKua87OGQUuFxBmEL9r9PzuLIKAQMj0GhJ//ML.vuC', 'Employee', '03-03-2024'),
+(6, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$FKn5WvU4.YDLV3IjmuATqugZtA1dMBOnqaK/LGXpXKSCsGfFE.CD6', 'Employee', '03-03-2024'),
+(7, 'Tony', 'Stark', 'stark@email.com', '$2y$10$cv1rrTS179h1RsWHGXo4J.ho0UH3C49dpEQdvo2srjwa1zSjU9cP.', 'Customer', '03-03-2024');
 
 -- --------------------------------------------------------
 
@@ -385,7 +385,7 @@ ALTER TABLE `dance_events`
 -- AUTO_INCREMENT for table `dance_tickets`
 --
 ALTER TABLE `dance_tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -427,7 +427,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `venues`
@@ -450,7 +450,7 @@ ALTER TABLE `dance_events`
 --
 ALTER TABLE `dance_tickets`
   ADD CONSTRAINT `dance_tickets_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `dance_events` (`id`),
-  ADD CONSTRAINT `dance_tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `dance_tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `events`
