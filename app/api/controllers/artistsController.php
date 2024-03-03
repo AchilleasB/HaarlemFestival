@@ -72,6 +72,10 @@ class ArtistsController
             }
 
             if ($this->artistService->deleteArtist($object->id)) {
+                $imagePath = $_SERVER['DOCUMENT_ROOT'] . '/images/' . $object->image;
+                if (file_exists($imagePath) && is_file($imagePath)) {
+                    unlink($imagePath);
+                }
                 $message = 'Artist ' . $object->name . ' was deleted successfully';
             } else {
                 $message = 'An error occurred while deleting artist' . $object->name;
