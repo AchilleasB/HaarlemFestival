@@ -5,6 +5,57 @@ require_once __DIR__ . ' /../models/user.php';
 class UserRepository extends Repository
 {
 
+    public function getAllUsers()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM users");
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $users = $stmt->fetchAll();
+
+            if (!$users) {
+                return null;
+            }
+            return $users;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function editUser($user)
+    {
+        try {
+            $id = $user->getId();
+            $firstname = $user->getFirstname();
+            $lastname = $user->getLastname();
+            $email = $user->getEmail();
+            $role = $user->getRole();
+
+            $stmt = $this->connection->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, role = :role WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':firstname', $firstname);
+            $stmt->bindParam(':lastname', $lastname);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':role', $role);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     public function getUserByEmail($email)
     {
         try {

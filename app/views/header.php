@@ -59,18 +59,18 @@ if (isset($_SESSION['user_firstname'])) {
                                 <?= $username ?>
                             </a>
                         </li>
-                        <?php if ($_SESSION['user_role'] == 'admin') { ?>
+                        <?php if ($_SESSION['user_role'] == 'Admin') { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="/cms"><i class="fa-solid fa-clipboard"></i> CMS</a>
                             </li>
                         <?php } ?>
-                        <?php if ($_SESSION['user_role'] == 'employee') { ?>
+                        <?php if ($_SESSION['user_role'] == 'Employee') { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="/qrCodeChecker"><i class="fa-solid fa-clipboard"></i> QR code
                                     checker</a>
                             </li>
                         <?php } ?>
-                        <?php if ($_SESSION['user_role'] == 'customer') { ?>
+                        <?php if ($_SESSION['user_role'] == 'Customer') { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="/shoppingCart">
                                     <img src="/../icons/shopping-cart.svg" class="shopping-cart-icon w-10 h-10"

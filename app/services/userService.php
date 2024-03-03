@@ -12,10 +12,25 @@ class UserService
 
     }
 
+    public function getAllUsers()
+    {
+        return $this->userRepository->getAllUsers();
+    }
+
     public function register(User $user)
     {
         return $this->userRepository->addUser($user);
 
+    }
+
+    public function editUser($user)
+    {
+        return $this->userRepository->editUser($user);
+    }
+
+    public function deleteUser($id)
+    {
+        return $this->userRepository->deleteUser($id);
     }
 
     public function getUserByEmail($email)
