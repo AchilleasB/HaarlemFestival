@@ -6,7 +6,8 @@ async function handleDeleteArtist(artist) {
         },
         body: JSON.stringify({
             id: artist.id,
-            name: artist.name
+            name: artist.name,
+            image: artist.artist_image
         })
     });
     

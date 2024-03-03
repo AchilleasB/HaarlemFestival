@@ -1,4 +1,4 @@
-async function deleteVenue(venue) {
+async function handleDeleteVenue(venue) {
     const response = await fetch(`/api/venues`, {
         method: "DELETE",
         headers: {
@@ -6,7 +6,8 @@ async function deleteVenue(venue) {
         },
         body: JSON.stringify({
             id: venue.id,
-            name: venue.name
+            name: venue.name,
+            image: venue.venue_image
         })
     });
 

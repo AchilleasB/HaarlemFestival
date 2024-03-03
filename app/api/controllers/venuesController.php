@@ -40,7 +40,7 @@ class VenuesController
 
             if ($id === 0) {
                 if ($this->venueService->addVenue($venue)) {
-                    $message = $venue . ' venue added successfully';
+                    $message = $venue->getName() . ' venue added successfully';
                 } else {
                     $message = 'An error occurred while adding a new venue';
                 }
@@ -61,6 +61,10 @@ class VenuesController
             $object = json_decode($body);
 
             if ($this->venueService->deleteVenue($object->id)) {
+                $imagePath = $_SERVER['DOCUMENT_ROOT'] . '/images/' . $object->image;
+                if (file_exists($imagePath) && is_file($imagePath)) {
+                    unlink($imagePath);
+                }
                 $message = 'Venue ' . $object->name . ' was deleted successfully';
             } else {
                 $message = 'An error occurred while deleting venue' . $object->name;
