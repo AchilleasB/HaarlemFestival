@@ -50,7 +50,10 @@
 }
 
 .btn-group {
-    width: 100%;
+    width: 50%;
+    display: flex;
+    margin: 0 auto;
+
 }
 
 .item-data-value {
@@ -62,6 +65,17 @@
 #add-venue-form {
     width: 50%;
     margin: 0 auto;
+}
+
+.items-list {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border: #A60303 2px solid;
+    color: #000;
+    border-radius: .3em;
+
 }
 
 .message-container {

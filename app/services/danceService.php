@@ -14,17 +14,17 @@ class DanceService
     public function getAllDanceEvents()
     {
         $danceEvents = $this->danceRepository->getAllDanceEvents();
-        
+
         foreach ($danceEvents as $danceEvent) {
             $eventId = $danceEvent->getId();
             $artists = $this->danceRepository->getEventArtists($eventId);
             $danceEvent->setArtists($artists);
-    
+
             $venueId = $danceEvent->getVenueId();
             $venueName = $this->danceRepository->getVenueNameById($venueId);
             $danceEvent->setVenueName($venueName);
         }
-    
+
         return $danceEvents;
     }
 
@@ -39,13 +39,26 @@ class DanceService
                 $this->danceRepository->addEventArtists($eventId, $artistId);
             }
         }
-        
+
         return $savedEvent;
     }
 
     public function updateDanceEvent($danceEvent)
     {
-        return $this->danceRepository->updateDanceEvent($danceEvent);
+        $updatedEvent = $this->danceRepository->updateDanceEvent($danceEvent);
+
+        if ($updatedEvent) {
+            $eventId = $danceEvent->getId();
+            $newArtists = $danceEvent->getArtists();
+
+            $this->danceRepository->removeEventArtists($eventId);
+
+            foreach ($newArtists as $artistId) {
+                $this->danceRepository->addEventArtists($eventId, $artistId);
+            }
+        }
+
+        return $updatedEvent;
     }
 
     public function deleteDanceEvent($id)
@@ -55,10 +68,11 @@ class DanceService
 
     public function getEventArtists($id)
     {
-        return $this->danceRepository->getEventArtists($id);   
+        return $this->danceRepository->getEventArtists($id);
     }
 
-    function addTicketToCart($danceTicket) {
+    function addTicketToCart($danceTicket)
+    {
         return $this->danceRepository->addTicketToCart($danceTicket);
     }
 

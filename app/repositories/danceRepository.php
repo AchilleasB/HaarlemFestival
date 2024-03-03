@@ -59,6 +59,19 @@ class DanceRepository extends Repository
         }
     }
 
+    public function removeEventArtists($eventId)
+    {
+        try {
+            $stmt = $this->connection->prepare('DELETE FROM event_artists WHERE event_id = :event_id');
+            $stmt->execute([':event_id' => $eventId]);
+
+            return true;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
     public function getLastInsertedEventId()
     {
         return $this->connection->lastInsertId();

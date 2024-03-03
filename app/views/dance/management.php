@@ -33,19 +33,21 @@
                 <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
                 <label class="btn btn-outline-primary" for="btnradio3">Venues</label>
             </div>
-            <div class="add-event-container mt-5 mb-5" id="add-event-button">
-            </div>
-            <div class="add-event-container mt-5 mb-5" id="add-artist-button">
-            </div>
-            <div class="add-event-container mt-5 mb-5" id="add-venue-button">
-            </div>
-            <div class=" add-event-form container-lg" id="add-event-form-container">
-            </div>
-            <div class=" add-artist-form container-lg" id="add-artist-form-container">
-            </div>
-            <div class="add-venue-form container-lg" id="add-venue-form-container">
-            </div>
-            <div class="items-list container-lg" id="items-list">
+            <div class="content-container">
+                <div class="add-event-container mt-5 mb-5" id="add-event-button">
+                </div>
+                <div class="add-event-container mt-5 mb-5" id="add-artist-button">
+                </div>
+                <div class="add-event-container mt-5 mb-5" id="add-venue-button">
+                </div>
+                <div class=" add-event-form container-lg" id="add-event-form-container">
+                </div>
+                <div class=" add-artist-form container-lg" id="add-artist-form-container">
+                </div>
+                <div class="add-venue-form container-lg" id="add-venue-form-container">
+                </div>
+                <div class="items-list container-lg" id="items-list">
+                </div>
             </div>
         </div>
     </main>
