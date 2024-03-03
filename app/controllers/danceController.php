@@ -22,4 +22,8 @@ class DanceController extends Controller
         $this->displayView($this);
     }
 
+    public function management(){
+        $this->displayView($this);
+    }
+
 }

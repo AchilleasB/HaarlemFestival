@@ -24,7 +24,7 @@ class DanceRepository extends Repository
     public function addDanceEvent($danceEvent)
     {
         try {
-            $stmt = $this->connection->prepare('INSERT INTO dance_events (venue_id, date, start_time, end_time, session, tickets_available, price) VALUES (:venue_id, :date, :start_time, :end_time, :session, :tickets_available, :price)');
+            $stmt = $this->connection->prepare('INSERT INTO dance_events (venue_id, date, start_time, end_time, session, tickets_available, price, type) VALUES (:venue_id, :date, :start_time, :end_time, :session, :tickets_available, :price, :type)');
             $stmt->execute([
                 ':venue_id' => $danceEvent->getVenueId(),
                 ':date' => $danceEvent->getDate(),
@@ -32,7 +32,24 @@ class DanceRepository extends Repository
                 ':end_time' => $danceEvent->getEndTime(),
                 ':session' => $danceEvent->getSession(),
                 ':tickets_available' => $danceEvent->getTicketsAvailable(),
-                ':price' => $danceEvent->getPrice()
+                ':price' => $danceEvent->getPrice(),
+                ':type' => $danceEvent->getType()
+            ]);
+
+            return true;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function addEventArtists($eventId, $artistId)
+    {
+        try {
+            $stmt = $this->connection->prepare('INSERT INTO event_artists (event_id, artist_id) VALUES (:event_id, :artist_id)');
+            $stmt->execute([
+                ':event_id' => $eventId,
+                ':artist_id' => $artistId
             ]);
 
             return true;
@@ -45,7 +62,7 @@ class DanceRepository extends Repository
     public function updateDanceEvent($danceEvent)
     {
         try {
-            $stmt = $this->connection->prepare('UPDATE dance_events SET venue_id = :venue_id, date = :date, start_time = :start_time, end_time = :end_time, session = :session, tickets_available = :tickets_available, price = :price WHERE id = :id');
+            $stmt = $this->connection->prepare('UPDATE dance_events SET venue_id = :venue_id, date = :date, start_time = :start_time, end_time = :end_time, session = :session, tickets_available = :tickets_available, price = :price, type = :type WHERE id = :id');
             $stmt->execute([
                 ':id' => $danceEvent->getId(),
                 ':venue_id' => $danceEvent->getVenueId(),
@@ -54,7 +71,8 @@ class DanceRepository extends Repository
                 ':end_time' => $danceEvent->getEndTime(),
                 ':session' => $danceEvent->getSession(),
                 ':tickets_available' => $danceEvent->getTicketsAvailable(),
-                ':price' => $danceEvent->getPrice()
+                ':price' => $danceEvent->getPrice(),
+                ':type' => $danceEvent->getType()
             ]);
 
             return true;

@@ -20,47 +20,22 @@ class DanceEventsController
             echo json_encode($danceEvents);
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = isset($_POST['id']) ? htmlspecialchars($_POST['id']) : 0;
-            $venue_id = isset($_POST['venue_id']) ? htmlspecialchars($_POST['venue_id']) : 0;
-            $date = isset($_POST['date']) ? htmlspecialchars($_POST['date']) : '';
-            $start_time = isset($_POST['start_time']) ? htmlspecialchars($_POST['start_time']) : '';
-            $end_time = isset($_POST['end_time']) ? htmlspecialchars($_POST['end_time']) : '';
-            $session = isset($_POST['session']) ? htmlspecialchars($_POST['session']) : '';
-            $tickets_available = isset($_POST['tickets_available']) ? htmlspecialchars($_POST['tickets_available']) : 0;
-            $price = isset($_POST['price']) ? htmlspecialchars($_POST['price']) : 0.0;
-
-            $danceEvent = new Dance();
-            $danceEvent->setId($id);
-            $danceEvent->setVenueId($venue_id);
-            $danceEvent->setDate($date);
-            $danceEvent->setStartTime($start_time);
-            $danceEvent->setEndTime($end_time);
-            $danceEvent->setSession($session);
-            $danceEvent->setTicketsAvailable($tickets_available);
-            $danceEvent->setPrice($price);
-
-            if ($id === 0) {
-                if ($this->danceService->addDanceEvent($danceEvent)) {
-                    $message = 'A new dance event added successfully';
-                } else {
-                    $message = 'An error occurred while adding a new dance event';
-                }
-            } else {
-                if ($this->danceService->updateDanceEvent($danceEvent)) {
-                    $message = 'The dance event updated successfully';
-                } else {
-                    $message = 'An error occurred while updating the dance event';
-                }
-            }
-
-            header('Content-Type: application/json');
-            echo json_encode(['message'=>$message, 'danceEvent'=>$danceEvent]);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->handleDanceEventRequest('add');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+        if ($_SERVER["REQUEST_METHOD"] == "PUT") {
+            $this->handleDanceEventRequest('edit');
+        }
+
+        if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
             $body = file_get_contents('php://input');
             $object = json_decode($body);
+
+            if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
+                header('Content-Type: application/json');
+                echo json_encode('Invalid JSON');
+            }
 
             if ($this->danceService->deleteDanceEvent($object->id)) {
                 $message = 'Dance event was deleted successfully';
@@ -69,8 +44,52 @@ class DanceEventsController
             }
 
             header('Content-Type: application/json');
-            echo json_encode(['message' => $message, 'recipe' => $object]);
+            echo json_encode(['message' => $message, 'event' => $object]);
         }
+    }
+
+    function handleDanceEventRequest($request_type)
+    {
+        $body = file_get_contents('php://input');
+        $object = json_decode($body);
+
+        if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
+            header('Content-Type: application/json');
+            echo json_encode('Invalid JSON');
+        }
+
+        $danceEvent = new Dance();
+        $danceEvent->setVenueId(htmlspecialchars($object->venue_id));
+        $danceEvent->setDate(htmlspecialchars($object->date));
+        $danceEvent->setStartTime(htmlspecialchars($object->start_time));
+        $danceEvent->setEndTime(htmlspecialchars($object->end_time));
+        $danceEvent->setSession(htmlspecialchars($object->session));
+        $danceEvent->setTicketsAvailable($object->tickets_available);
+        $danceEvent->setPrice($object->price);
+        $danceEvent->setType(htmlspecialchars($object->type));
+        $danceEvent->setArtists($object->artists);
+        $danceEvent->setVenueName(htmlspecialchars($object->venue_name));
+
+        if ($request_type === 'add') {
+            if ($this->danceService->addDanceEvent($danceEvent)) {
+                $message = 'A new dance event added successfully';
+            } else {
+                $message = 'An error occurred while adding a new dance event';
+            }
+        }
+
+        if ($request_type === 'edit') {
+            $danceEvent->setId(htmlspecialchars($object->id));
+
+            if ($this->danceService->updateDanceEvent($danceEvent)) {
+                $message = 'The dance event updated successfully';
+            } else {
+                $message = 'An error occurred while updating the dance event';
+            }
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode(['message' => $message, 'danceEvent' => $danceEvent]);
     }
 
     public function tickets()
@@ -92,15 +111,14 @@ class DanceEventsController
 
             if ($object->amount === 0) {
                 $message = 'Invalid amount! Try again with a valid amount of tickets';
-            }
-            elseif ($this->danceService->addTicketToCart($danceTicket)) {
+            } elseif ($this->danceService->addTicketToCart($danceTicket)) {
                 $message = 'Ticket(s) added to cart successfully';
             } else {
                 $message = 'An error occurred while adding ticket(s) to cart';
             }
 
             header('Content-Type: application/json');
-            echo json_encode(['message'=>$message, 'danceTicket'=>$danceTicket]);
+            echo json_encode(['message' => $message, 'danceTicket' => $danceTicket]);
         }
     }
 

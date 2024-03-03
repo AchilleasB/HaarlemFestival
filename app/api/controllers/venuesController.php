@@ -2,7 +2,8 @@
 require __DIR__ . '/../../services/venueService.php';
 require_once __DIR__ . '/../../models/venue.php';
 
-class VenuesController {
+class VenuesController
+{
     private $venueService;
 
     function __construct()
@@ -26,8 +27,9 @@ class VenuesController {
 
             if (!empty($_FILES['image']['name'])) {
                 $uploadedImage = $_FILES['image'];
-                $venue_image = '/../images/' . basename($uploadedImage['name']);
-                move_uploaded_file($uploadedImage['tmp_name'], 'images/' . $uploadedImage['name']);
+                $venue_image = 'venues/' . basename($uploadedImage['name']);
+                $destinationFile = $_SERVER['DOCUMENT_ROOT'] . '/images/' . $venue_image;
+                move_uploaded_file($uploadedImage['tmp_name'], $destinationFile);
             }
 
             $venue = new Venue();
@@ -38,7 +40,7 @@ class VenuesController {
 
             if ($id === 0) {
                 if ($this->venueService->addVenue($venue)) {
-                    $message = $venue.' venue added successfully';
+                    $message = $venue . ' venue added successfully';
                 } else {
                     $message = 'An error occurred while adding a new venue';
                 }
@@ -46,7 +48,7 @@ class VenuesController {
                 if ($this->venueService->updateVenue($venue)) {
                     $message = $venue->getName() . ' venue updated successfully';
                 } else {
-                    $message = 'An error occurred while updating the ' .$venue->getName().' venue';
+                    $message = 'An error occurred while updating the ' . $venue->getName() . ' venue';
                 }
             }
 
@@ -68,4 +70,5 @@ class VenuesController {
             echo json_encode(['message' => $message, 'recipe' => $object]);
         }
     }
+
 }

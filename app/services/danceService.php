@@ -30,6 +30,10 @@ class DanceService
 
     public function addDanceEvent($danceEvent)
     {
+        $artists = $danceEvent->getArtists();
+        foreach ($artists as $artistId) {
+            $this->danceRepository->addEventArtists($danceEvent->getId(), $artistId);
+        }
         return $this->danceRepository->addDanceEvent($danceEvent);
     }
 

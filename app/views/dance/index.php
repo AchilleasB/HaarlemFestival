@@ -22,7 +22,7 @@
     <main>
         <div class="dance-container">
             <div class="image-container">
-                <img src="/../images/dance_event.png" alt="Dance Event" class="dance-image">
+                <img src="<?php echo $imageBasePath; ?>dance_event.png" alt="Dance Event" class="dance-image">
                 <div class="image-primary-text position-absolute top-0 start-0">
                     <h1 class="text fw-bold">HAARLEM</h1>
                     <h1>FESTIVAL</h1>
