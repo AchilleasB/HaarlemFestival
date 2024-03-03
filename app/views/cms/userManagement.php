@@ -22,9 +22,11 @@
     <main>
         <div class="red-line"></div>
         <div class="user-cms-container">
-            <h1 class="header mb-5">User Content Management</h1>
+            <h1 class="header">User Content Management</h1>
+            <div class="container-sm" id="filtering-container">
+            </div>
             <div class="content-container">
-                <div class="container mt-5 mb-5" id="add-user-button">
+                <div class="container mb-5" id="add-user-button">
                 </div>
                 <div class="container-lg" id="add-user-form-container">
                 </div>
