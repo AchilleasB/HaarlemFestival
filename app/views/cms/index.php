@@ -26,7 +26,7 @@
                     <a href="history" class="cms-btn d-inline-block">History</a>
                 </div>
                 <div class="col-md-3">
-                    <a href="/dance/management" class="cms-btn d-inline-block">Dance</a>
+                    <a href="/cms/danceManagement" class="cms-btn d-inline-block">Dance</a>
                 </div>
             </div>
             <div class="row cms-button-container">
@@ -34,7 +34,7 @@
                     <a href="yummie" class="cms-btn d-inline-block">Yummie</a>
                 </div>
                 <div class="col-md-3">
-                    <a href="users" class="cms-btn d-inline-block">Users</a>
+                    <a href="/cms/userManagement" class="cms-btn d-inline-block">Users</a>
                 </div>
             </div>
         </div>

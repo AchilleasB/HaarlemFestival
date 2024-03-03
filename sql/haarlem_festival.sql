@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Feb 29, 2024 at 08:39 PM
+-- Generation Time: Mar 03, 2024 at 05:37 PM
 -- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
 -- PHP Version: 8.2.9
 
@@ -40,12 +40,15 @@ CREATE TABLE `artists` (
 --
 
 INSERT INTO `artists` (`id`, `name`, `genre`, `description`, `artist_image`) VALUES
-(1, 'HARDWELL', 'DANCE / HOUSE', 'Robbert van de Corput , known professionally as Hardwell, is a Dutch DJ and music producer from Breda. He was voted the world\'s number one DJ by DJ Mag in 2013 and again in 2014. In 202. he was also ranked at number 43 in the top 100 DJs poll by DJ Mag.', 'artists/hardwell.png'),
+(1, 'HARDWELL', 'DANCE / HOUSE', 'Robbert van de Corput, known professionally as Hardwell, is a Dutch DJ and music producer from Breda. He was voted the world\'s number-one DJ by DJ Mag in 2013 and again in 2014. In 2020. He was also ranked at number 43 in the top 100 DJs poll by DJ Mag.', 'artists/hardwell.png'),
 (2, 'ARMIN VAN BUUREN', 'TRANCE / TECHNO', 'Armin van Buuren is a Dutch DJ and record producer from Leiden, South Holland. Since 2001, he has hosted A State of Trance (ASOT), a weekly radio show, which is broadcast to nearly 40 million listeners in 84 countries on over 100 FM radio stations. He has been ranked the number one DJ by DJ Mag a record of five times, four years in a row. ', 'artists/armin_van_buuren.png'),
 (3, 'MARTIN GARRIX', 'DANCE / ELECTRONIC', 'Martin Garrix, also known as Ytram and GRX, is a Dutch DJ and record producer, who was ranked number one on DJ Mag\'s Top 100 DJs list for three consecutive years—2016, 2017, and 2018. He is best known for his singles \'Animals\', \'In the Name of Love\', and \'Scared to Be Lonely\'.', 'artists/martin_garrix.png'),
 (4, 'TIESTO', 'TRANCE/ TECHNO/HOUSE/ELECTRO', 'Tijs Michiel Verwest born 17 January 1969, known professionally as Tiësto, is a Dutch DJ and record producer. He was voted \'The Greatest DJ of All Time\' by Mix magazine in a 2010/2011 poll amongst fans. In 2013, he was voted by DJ Mag readers as the \'best DJ of the last 20 years\'. He is also regarded by many as the \'Godfather of EDM\'.', 'artists/tiesto.png'),
 (5, 'NICKY ROMERO', 'ELECTROHOUSE / PROGRESSIVE HOUSE', 'Nick Rotteveel born January 6 1989, professionally known as Nicky Romero or Monocule, is a Dutch DJ, record producer and remixer from Amerongen, Utrecht Province. He has worked with, and received support from DJs, such as Tiësto, Fedde le Grand, Sander van Doorn, David Guetta, Calvin Harris, Armand van Helden, Avicii and Hardwell. He currently ranks at number 20 on DJ Mag\'s annual Top 100 DJs poll. He is known for his viral hit song \'Toulouse\'.', 'artists/nicky_romero.png'),
-(6, 'AFROJACK', 'HOUSE', 'Nick Leonardus van de Wall born 9 September 1987, better known as Afrojack, is a Dutch DJ, music producer and remixer. In 2007, he founded the record label Wall Recordings; his debut album Forget the World was released in 2014. Afrojack regularly features as one of the ten best artists in the Top 100 DJs published by DJ Mag.', 'artists/afrojack.png');
+(6, 'AFROJACK', 'HOUSE', 'Nick Leonardus van de Wall born 9 September 1987, better known as Afrojack, is a Dutch DJ, music producer and remixer. In 2007, he founded the record label Wall Recordings; his debut album Forget the World was released in 2014. Afrojack regularly features as one of the ten best artists in the Top 100 DJs published by DJ Mag.', 'artists/afrojack.png'),
+(28, 'ODIN', 'EPIC VIKING', 'KILL KILL KILL ÉM ALL', 'artists/odin.png'),
+(29, 'ZEUS', 'ELECTRONIC', 'THUNDER THUNDER THUNDER', 'artists/zeus.png'),
+(30, 'ATHENA', 'POP / HOUSE', 'GO GO GO', 'artists/athena.png');
 
 -- --------------------------------------------------------
 
@@ -86,7 +89,9 @@ INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, 
 (14, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 150, 125, '1-DAY-PASS'),
 (15, 2, 'SATURDAY 28 JULY', '14:00', '01:00', 'BACK2BACK', 150, 150, '1-DAY-PASS'),
 (16, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 150, 150, '1-DAY-PASS'),
-(17, 1, 'FRIDAY 27 JULY', '20:00', '23:00', 'BACK2BACK', 150, 250, '3-DAY-PASS');
+(17, 1, 'FRIDAY 27 JULY', '20:00', '23:00', 'BACK2BACK', 150, 250, '3-DAY-PASS'),
+(36, 2, 'MONDAY 30 JULY', '13:00', '18:00', 'BACK2BACK', 2000, 500, 'SINGLE-CONCERT'),
+(37, 4, 'MONDAY 30 JULY', '20:00', '22:30', 'CLUB', 200, 250, 'SINGLE-CONCERT');
 
 -- --------------------------------------------------------
 
@@ -116,7 +121,9 @@ INSERT INTO `dance_tickets` (`id`, `amount`, `event_id`, `user_id`) VALUES
 (52, 2, 17, 2),
 (53, 1, 14, 4),
 (55, 1, 5, 3),
-(56, 3, 10, 3);
+(56, 3, 10, 3),
+(57, 1, 1, 2),
+(58, 2, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -140,33 +147,37 @@ CREATE TABLE `events` (
 --
 
 CREATE TABLE `event_artists` (
-  `event_id` int(11) NOT NULL,
-  `artist_id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `event_id` int(11) DEFAULT NULL,
+  `artist_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event_artists`
 --
 
-INSERT INTO `event_artists` (`event_id`, `artist_id`) VALUES
-(1, 5),
-(1, 6),
-(2, 4),
-(3, 1),
-(4, 2),
-(5, 3),
-(6, 1),
-(6, 2),
-(6, 3),
-(7, 6),
-(8, 4),
-(9, 5),
-(10, 4),
-(10, 5),
-(10, 6),
-(11, 2),
-(12, 1),
-(13, 3);
+INSERT INTO `event_artists` (`id`, `event_id`, `artist_id`) VALUES
+(1, 1, 5),
+(2, 1, 6),
+(3, 2, 4),
+(4, 3, 1),
+(5, 4, 2),
+(6, 5, 3),
+(7, 6, 1),
+(8, 6, 2),
+(9, 6, 3),
+(11, 7, 6),
+(12, 8, 4),
+(13, 9, 5),
+(14, 10, 4),
+(15, 10, 5),
+(16, 10, 6),
+(17, 11, 2),
+(18, 12, 1),
+(19, 13, 3),
+(43, 36, 28),
+(44, 36, 29),
+(46, 37, 30);
 
 -- --------------------------------------------------------
 
@@ -288,7 +299,7 @@ ALTER TABLE `artists`
 --
 ALTER TABLE `dance_events`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `venue_id` (`venue_id`);
+  ADD KEY `dance_events_ibfk_1` (`venue_id`);
 
 --
 -- Indexes for table `dance_tickets`
@@ -310,7 +321,9 @@ ALTER TABLE `events`
 -- Indexes for table `event_artists`
 --
 ALTER TABLE `event_artists`
-  ADD PRIMARY KEY (`event_id`,`artist_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_event_artists_event` (`event_id`),
+  ADD KEY `fk_event_artists_artist` (`artist_id`);
 
 --
 -- Indexes for table `locations`
@@ -360,25 +373,31 @@ ALTER TABLE `venues`
 -- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `dance_events`
 --
 ALTER TABLE `dance_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `dance_tickets`
 --
 ALTER TABLE `dance_tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `event_artists`
+--
+ALTER TABLE `event_artists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -414,7 +433,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `venues`
 --
 ALTER TABLE `venues`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -424,7 +443,7 @@ ALTER TABLE `venues`
 -- Constraints for table `dance_events`
 --
 ALTER TABLE `dance_events`
-  ADD CONSTRAINT `dance_events_ibfk_1` FOREIGN KEY (`venue_id`) REFERENCES `venues` (`id`);
+  ADD CONSTRAINT `dance_events_ibfk_1` FOREIGN KEY (`venue_id`) REFERENCES `venues` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `dance_tickets`
@@ -444,8 +463,8 @@ ALTER TABLE `events`
 -- Constraints for table `event_artists`
 --
 ALTER TABLE `event_artists`
-  ADD CONSTRAINT `event_artists_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `dance_events` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `event_artists_ibfk_2` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_event_artists_artist` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_event_artists_event` FOREIGN KEY (`event_id`) REFERENCES `dance_events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
