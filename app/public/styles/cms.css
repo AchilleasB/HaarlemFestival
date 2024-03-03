@@ -45,7 +45,8 @@
     transform: scale(1.2);
 }
 
-.dance-cms-container {
+.dance-cms-container,
+.user-cms-container {
     width: 100%;
 }
 
@@ -62,7 +63,8 @@
 
 #add-event-form,
 #add-artist-form,
-#add-venue-form {
+#add-venue-form,
+#add-user-form {
     width: 50%;
     margin: 0 auto;
 }
@@ -75,7 +77,6 @@
     border: #A60303 2px solid;
     color: #000;
     border-radius: .3em;
-
 }
 
 .message-container {

@@ -10,13 +10,18 @@ class User implements JsonSerializable
     private string $role;
     private string $registration_date;
 
-    const ADMINISTRATOR = "admin";
-    const CUSTOMER = "customer";
-    const EMPLOYEE = "employee";
+    const ADMINISTRATOR = "Admin";
+    const CUSTOMER = "Customer";
+    const EMPLOYEE = "Employee";
 
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getFirstname(): string
