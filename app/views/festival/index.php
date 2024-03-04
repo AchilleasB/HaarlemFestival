@@ -11,6 +11,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../festivalStyle.css">
     <link rel="stylesheet" href="../styles.css">
+    <script src="js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
 </head>
 
 <body>
@@ -52,7 +58,7 @@
 
 
 
-    <section class="d-flex justify-content-center">
+    <!-- <section class="d-flex justify-content-center">
         <div class="col-6 my-5 border-bottom border-3 pb-5">
             <div class="row">
                 <h2>DANCE!</h2>
@@ -63,23 +69,25 @@
                 </div>
                 <div class="col">
                     <div class="tab text-white">
-                        <button class="tablinks" onclick="openTab(event, 'Description')" id="defaultOpen">DESCRIPTION</button>
+                        <button class="tablinks" onclick="openTab(event, 'Description')"
+                            id="defaultOpen">DESCRIPTION</button>
                         <button class="tablinks" onclick="openTab(event, 'Location')">LOCATION</button>
                         <button class="tablinks" onclick="openTab(event, 'Schedule')">SCHEDULE</button>
                     </div>
                     <div id="Description" class="tabcontent">
-                        <h6 class = "fw-bold pt-3">Description</h6>
-                        <p>Lorem ipsum dolor sit amet. Et inventore accusamus et ullam ratione sed incidunt quos in vero omnis et consequatur Quis id esse voluptatem. </p>
-                        <button class = "info-button" href>MORE INFO</button>
+                        <h6 class="fw-bold pt-3">Description</h6>
+                        <p>Lorem ipsum dolor sit amet. Et inventore accusamus et ullam ratione sed incidunt quos in vero
+                            omnis et consequatur Quis id esse voluptatem. </p>
+                        <button class="info-button" href>MORE INFO</button>
                     </div>
 
                     <div id="Location" class="tabcontent">
-                        <h6 class = "fw-bold pt-3">Location</h6>
+                        <h6 class="fw-bold pt-3">Location</h6>
                         <p></p>
                     </div>
 
                     <div id="Schedule" class="tabcontent">
-                        <h6 class = "fw-bold pt-3">Simple schedule</h6>
+                        <h6 class="fw-bold pt-3">Simple schedule</h6>
                         <p></p>
                     </div>
                 </div>
@@ -87,37 +95,73 @@
             </div>
 
         </div>
+
     </section>
+
+-->
+
+
+    <div class="tabs">
+        <div class="tabs__sidebar">
+            <button class="tabs__button" data-for-tab="1">TAB 1</button>
+            <button class="tabs__button" data-for-tab="2">TAB 2</button>
+            <button class="tabs__button" data-for-tab="3">TAB 3</button>
+        </div>
+        <div class="tabs__content" data-tab="1">
+            <p>haha</p>
+        </div>
+        <div class="tabs__content" data-tab="2">
+            <p>kkkkk</p>
+        </div>
+        <div class="tabs__content" data-tab="3">
+            <p>hjkvgh</p>
+        </div>
+    </div>
 
 
 
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+
+
+
     <script>
 
-        function openTab(evt, tabName) {
-            // Declare all variables
-            var i, tabcontent, tablinks;
+        function setupTabs() {
+            document.querySelectorAll(".tabs__button").forEach(button => {
+                button.addEventListener("click", () => {
+                    const sideBar = button.parentElement;
+                    const tabsContainer = sideBar.parentElement;
+                    const tabNumber = button.dataset.forTab;
+                    const tabToActivate = tabsContainer.querySelector(`.tabs__content[data-tab="${tabNumber}"]`);
 
-            // Get all elements with class="tabcontent" and hide them
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
+                    sideBar.querySelectorAll(".tabs__button").forEach(btn => {
+                        btn.classList.remove("tabs__button--active");
+                    });
+                    tabsContainer.querySelectorAll(".tabs__content").forEach(tab => {
+                        tab.classList.remove("tabs__content--active");
+                    });
 
-            // Get all elements with class="tablinks" and remove the class "active"
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-
-            // Show the current tab, and add an "active" class to the button that opened the tab
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
+                    button.classList.add("tabs__button--active");
+                    tabToActivate.classList.add("tabs__content--active");
+                });
+            });
         }
-        document.getElementById("defaultOpen").click();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setupTabs();
+
+            document.querySelectorAll(".tabs").forEach(tabsContainer => {
+                tabsContainer.querySelector(".tabs__sidebar .tabs__button").click();
+            });
+        });
+
+
     </script>
+
+
+
 </body>
 
 </html>
