@@ -5,6 +5,57 @@ require_once __DIR__ . ' /../models/user.php';
 class UserRepository extends Repository
 {
 
+    public function getAllUsers()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM users");
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $users = $stmt->fetchAll();
+
+            if (!$users) {
+                return null;
+            }
+            return $users;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function editUser($user)
+    {
+        try {
+            $id = $user->getId();
+            $firstname = $user->getFirstname();
+            $lastname = $user->getLastname();
+            $email = $user->getEmail();
+            $role = $user->getRole();
+
+            $stmt = $this->connection->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, role = :role WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':firstname', $firstname);
+            $stmt->bindParam(':lastname', $lastname);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':role', $role);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     public function getUserByEmail($email)
     {
         try {
@@ -27,7 +78,7 @@ class UserRepository extends Repository
     public function getUserById($id)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT firstname, lastname, email FROM users WHERE id = :id");
+            $stmt = $this->connection->prepare("SELECT * FROM users WHERE id = :id");
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
@@ -76,9 +127,88 @@ class UserRepository extends Repository
             $stmt->bindParam(':lastname', $lastname);
             $stmt->bindParam(':email', $email);
             $stmt->execute();
+            return true;
         } catch (PDOException $e) {
             echo $e;
         }
     }
 
+    public function updatePassword($id, $newPassword)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE users SET password = :newPassword WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':newPassword', $newPassword);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function addToken($id, $token)
+    {
+        try {
+            $expiresAt = date('Y-m-d H:i:s', strtotime('+2 hour'));
+            $stmt = $this->connection->prepare("INSERT INTO password_reset_tokens (user_id, token, expires_at) VALUES (:id, :token, :expiresAt)");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':token', $token);
+            $stmt->bindParam(':expiresAt', $expiresAt);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function deleteToken($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM password_reset_tokens WHERE user_id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function getUserIdByToken($token)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT user_id FROM password_reset_tokens WHERE token = :token");
+            $stmt->bindParam(':token', $token);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
+            if (!$result) {
+                return null;
+            }
+            return $result['user_id'];
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    // the isExpiredToken should return true if the token is expired and false if it is not
+    public function isExpiredToken($token)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT expires_at FROM password_reset_tokens WHERE token = :token");
+            $stmt->bindParam(':token', $token);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
+            if (!$result) {
+                return false;
+            }
+            $expiresAt = $result['expires_at'];
+            if (strtotime($expiresAt) < time()) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

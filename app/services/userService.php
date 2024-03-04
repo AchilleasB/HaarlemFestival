@@ -12,10 +12,25 @@ class UserService
 
     }
 
+    public function getAllUsers()
+    {
+        return $this->userRepository->getAllUsers();
+    }
+
     public function register(User $user)
     {
         return $this->userRepository->addUser($user);
 
+    }
+
+    public function editUser($user)
+    {
+        return $this->userRepository->editUser($user);
+    }
+
+    public function deleteUser($id)
+    {
+        return $this->userRepository->deleteUser($id);
     }
 
     public function getUserByEmail($email)
@@ -26,6 +41,22 @@ class UserService
     public function getUserById($id)
     {
         return $this->userRepository->getUserById($id);
+    }
+
+    public function getUserIdByToken($token)
+    {
+       return $this->userRepository->getUserIdByToken($token);
+    }
+
+    public function isExpiredToken($token)
+    {
+        $token = $this->userRepository->isExpiredToken($token);
+        
+    }
+
+    public function deleteToken($user_id)
+    {
+        $this->userRepository->deleteToken($user_id);
     }
 
     function userExists($email)
@@ -50,6 +81,12 @@ class UserService
     function updateProfile($firstname, $lastname, $email, $id)
     {
         $this->userRepository->updateUser($firstname, $lastname, $email, $id);
+    }
+
+    public function updatePassword($user_id, $password)
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->userRepository->updatePassword($user_id, $hashedPassword);
     }
 
     public function verifyCaptchaResponse($response) {

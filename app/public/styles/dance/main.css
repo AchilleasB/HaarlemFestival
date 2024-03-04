@@ -1,0 +1,305 @@
+* {
+    box-sizing: border-box;
+}
+
+.dance-container {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.dance-image {
+    width: 100%;
+    height: 100%;
+    margin-top: 3em;
+}
+
+.image-primary-text {
+    margin-top: 6em;
+    margin-left: 2em;
+    letter-spacing: 1em;
+    font-size: larger;
+}
+
+.image-primary-text h1 {
+    font-size: 4em;
+}
+
+.image-secondary-text {
+    margin-top: 20em;
+    margin-right: 2em;
+    letter-spacing: 0.7em;
+}
+
+.image-secondary-text button {
+    width: 100%;
+    height: 4em;
+    letter-spacing: 0.7em;
+    margin-top: 5em;
+    border: none;
+    color: #ffffff;
+    font-size: large;
+}
+
+.text {
+    letter-spacing: 20px;
+}
+
+.dance-events-container {
+    padding: 20px;
+}
+
+.date-buttons {
+    width: 50%;
+    margin-left: auto;
+}
+
+.date-button {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    margin: 5px;
+    padding: 10px 20px;
+}
+
+.date-button.active {
+    background-color: white;
+    color: black;
+}
+
+.buy-tickets-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end   ;
+    align-items: center;
+    margin: .5em auto;
+}
+
+.buy-tickets-btn {
+    height: 5em;
+    letter-spacing: 0.7em;
+    border: none;
+    color: #ffffff;
+    background-color: #C63C3C; 
+    font-size: larger;
+}
+
+/* events section styles */
+.dance-events-container {
+    display: flex;
+}
+
+.venues-container {
+    padding: 20px;
+    margin: 1.2em 0 2em 0;
+}
+
+.dance-event-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px;
+    overflow: hidden;
+    width: calc(20% - .6em);
+}
+
+.event-time {
+    background-color: #000;
+    padding: 10px;
+    margin: auto;
+}
+
+.venue-name {
+    width: 100%;
+    background-color: #fff;
+    color: #000;
+    padding: .3em;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.event-session {
+    padding: 10px;
+    margin: 0;
+    font-size: 1em;
+}
+
+.dance-events-section,
+.venues-section,
+.schedule-section {
+    padding: 4em;
+}
+
+.section-title {
+    display: flex;
+    justify-content: left;
+    margin: 0 0 .5em .5em;
+    font-size: 3em;
+}
+
+
+/* artists section styles */
+
+.event-artists {
+    display: flex;
+    justify-content: center;
+}
+
+.artist-card {
+    text-align: center;
+    margin: 10px;
+}
+
+.artist-image {
+    object-fit: cover;
+    margin: .6em 0 .6em 0;
+}
+
+.artist-name {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.artist-genre {
+    font-size: .8em;
+    margin: 0;
+}
+
+/* venues section styles */
+
+.venues-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.venue-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    margin: .6em;
+    overflow: hidden;
+    width: calc(33.33%);
+}
+
+.venue-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.venue-card-name {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 1.2em;
+    max-height: 2em;
+}
+
+.venue-address {
+    padding: .3em;
+    text-align: center;
+    font-size: .9em;
+}
+
+/* schedule section styles */
+
+.schedule-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1.2em;
+}
+
+.date-schedule-card {
+    width: 75%;
+}
+
+.schedule-date {
+    font-size: 1.2em;
+    height: 2.5em;
+    padding: .5em;
+    margin: 0 1.2em 1.2em 0;
+    background-color: white;
+    color: black;
+    text-align: center;
+}
+
+.schedule-artists {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1em 0 0 0;
+    font-size: larger;
+}
+
+.schedule-venue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0 0 0;
+    font-size: medium;
+}
+
+.schedule-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2em 0 0 0;
+    border-bottom: #fff 1px solid;
+    font-size: larger;
+}
+
+@media screen and (max-width: 1200px) {
+    .image-primary-text {
+        margin-top: 20%;
+        margin-left: 5%;
+        letter-spacing: 1em;
+    }
+
+    .image-primary-text h1 {
+        font-size: 2em;
+    }
+
+    .image-secondary-text {
+        margin-top: 15em;
+        margin-right: 4em;
+        letter-spacing: 0.3em;
+        width: 20%;
+    }
+
+    .image-secondary-text button {
+        border: none;
+        color: #ffffff;
+        width: 80%;
+        height: 100px;
+        letter-spacing: 0.5em;
+        margin-top: 10%;
+    }
+
+    .text {
+        letter-spacing: 1.2em;
+    }
+
+    .dance-event-card {
+        width: calc(33.33% - 20px);
+    }
+
+    .artist-card {
+        width: calc(33.33% - 20px);
+    }
+
+
+}
