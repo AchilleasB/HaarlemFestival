@@ -75,7 +75,11 @@ if (isset($_SESSION['user_firstname'])) {
                                 <a class="nav-link" href="/shoppingCart">
                                     <img src="/../icons/shopping-cart.svg" class="shopping-cart-icon w-10 h-10"
                                         alt="Shopping cart icon">
-                                    Shopping cart</a>
+                                    Shopping cart
+                                    <?php if (!isset($_SESSION['order_items_data'])) { 
+                             $_SESSION['order_items_data'] = []; } ?>
+                                
+                                </a>
                             </li>
                         <?php } ?>
                         <li class="nav-item">
