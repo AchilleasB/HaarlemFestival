@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class = "bg-light">
+<body class="bg-light">
     <?php
     include __DIR__ . '/../header.php';
     ?>
@@ -76,18 +76,26 @@
         <h2 class="text-center py-3 text-bold">FEATURED <span class="text-red">LOCATIONS</span></h2>
     </section>
 
+
     <section class="d-flex justify-content-center py-5">
-        <div class="row w-50 gray-bg p-4">
-            <div class="col">
-                <h3>1. Church of St. Bavo</h3>
-                <p class="text-muted">The St Bavo church was built in 1895–1930 & dedicated in 1948, named for the
-                    city's patron saint.
-                </p>
-                <button>Learn more ></button>
-            </div>
-            <div class="col">
-                <img src="/../images/dance.png" class="img-fluid">
-            </div>
+        <div class="container" style="max-width: 800px;">
+            <?php foreach ($locations as $index => $location) { ?>
+                <div class="row gray-bg p-4 mb-4">
+                    <div class="col-8">
+                        <h3>
+                            <?php echo ($index + 1) . '. ' . $location['location_name']; ?>
+                        </h3>
+                        <p class="text-muted">
+                            <?php echo $location['description']; ?>
+                        </p>
+                        <button class="info-button">Learn more ></button>
+                    </div>
+                    <div class="col-4">
+                        <!-- CHANGE-->
+                        <img src="/../images/dance.png" class="img-fluid">
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </section>
 
@@ -95,10 +103,89 @@
         <h2 class="text-center py-3 text-bold">TOUR <span class="text-red">SCHEDULE</span></h2>
     </section>
 
+<!--
+ <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+         
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($historyTours as $tour) {
+                ?>
+                <tr>
+                    <td><?php echo date('d F Y', strtotime($tour['date'])); ?></td>
+                    <td><?php echo date('H:i', strtotime($tour['time'])); ?></td>
+                </tr>
+            <?php
+            }
+            ?>
+        </tbody>
+    </table>
+        -->
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
     <section>
         <h2 class="text-center py-3 text-bold">LOCATIONS <span class="text-red">OVERVIEW</span></h2>
     </section>
 
+    <section>
+        <div class='row w-75 small'>
+            <div class='col-4 d-flex justify-content-end'>
+                <ol type="A">
+                    <?php foreach ($locations as $index => $location) { ?>
+                        <li>
+                            <?php echo $location['location_name']; ?>
+                        </li>
+                    <?php } ?>
+                </ol>
+            </div>
+            <div class='col-8'>
+                <img src="/../images/map-history.png" class="img-fluid">
+            </div>
+        </div>
+        <!-- !! -->
+        <div class='p-4'>
+            <p class='text-center'>The tour begins at the <span class="text-success">Green</span> point A (Church of St.
+                Bavo) and ends at the <span class="text-danger">Red</span> point I. The break location (Jopenkerk) is
+                marked in Blue at point E.</p>
+        </div>
+    </section>
 
 
 
