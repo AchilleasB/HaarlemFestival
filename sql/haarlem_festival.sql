@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 03, 2024 at 10:59 PM
--- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
--- PHP Version: 8.2.9
+-- Generation Time: Mar 07, 2024 at 11:13 AM
+-- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -181,6 +181,91 @@ INSERT INTO `event_artists` (`id`, `event_id`, `artist_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `history_tours`
+--
+
+CREATE TABLE `history_tours` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `time` time(5) NOT NULL,
+  `guide` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `history_tours`
+--
+
+INSERT INTO `history_tours` (`id`, `date`, `time`, `guide`) VALUES
+(1, '2023-07-26', '10:00:00.00000', 1),
+(2, '2023-07-26', '10:00:00.00000', 4),
+(3, '2023-07-26', '13:00:00.00000', 1),
+(4, '2023-07-26', '13:00:00.00000', 4),
+(5, '2023-07-26', '16:00:00.00000', 1),
+(6, '2023-07-26', '16:00:00.00000', 4),
+(7, '2023-07-27', '10:00:00.00000', 5),
+(8, '2023-07-27', '10:00:00.00000', 2),
+(9, '2023-07-27', '13:00:00.00000', 5),
+(10, '2023-07-27', '13:00:00.00000', 2),
+(11, '2023-07-27', '13:00:00.00000', 7),
+(12, '2023-07-27', '16:00:00.00000', 5),
+(13, '2023-07-27', '16:00:00.00000', 2),
+(14, '2023-07-28', '10:00:00.00000', 1),
+(15, '2023-07-28', '10:00:00.00000', 2),
+(16, '2023-07-28', '10:00:00.00000', 5),
+(17, '2023-07-28', '10:00:00.00000', 4),
+(18, '2023-07-28', '13:00:00.00000', 1),
+(19, '2023-07-28', '13:00:00.00000', 2),
+(20, '2023-07-28', '13:00:00.00000', 5),
+(21, '2023-07-28', '13:00:00.00000', 4),
+(22, '2023-07-28', '13:00:00.00000', 7),
+(23, '2023-07-28', '16:00:00.00000', 1),
+(24, '2023-07-28', '16:00:00.00000', 4),
+(25, '2023-07-28', '16:00:00.00000', 7),
+(26, '2023-07-29', '10:00:00.00000', 1),
+(27, '2023-07-29', '10:00:00.00000', 3),
+(28, '2023-07-29', '10:00:00.00000', 5),
+(29, '2023-07-29', '10:00:00.00000', 6),
+(30, '2023-07-29', '10:00:00.00000', 8),
+(31, '2023-07-29', '13:00:00.00000', 1),
+(32, '2023-07-29', '13:00:00.00000', 2),
+(33, '2023-07-29', '13:00:00.00000', 3),
+(34, '2023-07-29', '13:00:00.00000', 4),
+(35, '2023-07-29', '13:00:00.00000', 5),
+(36, '2023-07-29', '13:00:00.00000', 6),
+(37, '2023-07-29', '13:00:00.00000', 7),
+(38, '2023-07-29', '13:00:00.00000', 8),
+(39, '2023-07-29', '16:00:00.00000', 2),
+(40, '2023-07-29', '16:00:00.00000', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL,
+  `image` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `image`) VALUES
+(1, 'stbavo.png'),
+(2, 'grotemarkt.png'),
+(3, 'dehallen.png'),
+(4, 'proveniershof.png'),
+(5, 'jopenkerk.png'),
+(6, 'waalsekerk.png'),
+(7, 'molenadreiaan.png'),
+(8, 'amsterdamsepoort.png'),
+(9, 'hofvanbakenes.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `locations`
 --
 
@@ -188,8 +273,26 @@ CREATE TABLE `locations` (
   `id` int(11) NOT NULL,
   `location_name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
-  `location_type` varchar(100) NOT NULL
+  `location_type` varchar(100) NOT NULL,
+  `description` varchar(10000) DEFAULT NULL,
+  `links` varchar(1000) DEFAULT NULL,
+  `images` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`id`, `location_name`, `address`, `location_type`, `description`, `links`, `images`) VALUES
+(1, 'Church of St. Bavo', 'Grote Markt 22, 2011 RD Haarlem', 'Landmark', 'The St Bavo church was built in 1895-1930 and dedicated in 1948, named for the city&#039;s patron saint.', 'https://en.wikipedia.org/wiki/Grote_Kerk,_Haarlem', 1),
+(2, 'Grote Markt', 'Grote Markt 1, 2011 RD Haarlem', 'Landmark', 'This is the city centre of Haarlem. Located in this centre, are some of the most historical buildings of Haarlem, the most obvious St Bavo church.', 'https://nl.wikipedia.org/wiki/Grote_Markt_(Haarlem)', 2),
+(3, 'De Hallen', 'Groot Heiligland 62, 2011 ES Haarlem', 'Landmark', 'In this museum, you can view contemporary, modern art and more!', 'https://nl.wikipedia.org/wiki/Hal_(Frans_Hals_Museum)', 3),
+(4, 'Proveniershof', 'Grote Houtstraat 142D, 2011 SV Haarlem', 'Landmark', 'The Proveniershof was founded in 1704 and has a lot of history that leads to its creation. Find out more by visiting!', 'https://nl.wikipedia.org/wiki/Proveniershof', 4),
+(5, 'Jopenkerk', 'Gedempte Voldersgracht 2, 2011 WD Haarlem', 'Landmark', 'Beer enjoyers are definitely going to love this place. It is a brewery that is focused on creating traditional Haarlem beers and to bring them to the commercial market!', 'https://nl.wikipedia.org/wiki/Brouwerij_Jopen', 5),
+(6, 'Waalse Kerk', 'Begijnhof 28, 2011 HE Haarlem', 'Landmark', 'This is the oldest church in Haarlem. It was built in the year 1348 and since then, has been a very important part of Haarlem’s history.', 'https://nl.wikipedia.org/wiki/De_Adriaan_(Haarlem)', 6),
+(7, 'Molen Adriaan', 'Papentorenvest 1A, 2011 AV Haarlem', 'Landmark', 'This is one of the most distinctive part of Haarlem’s skyline. It is one of the monuments you see when you enter Haarlem.', 'https://nl.wikipedia.org/wiki/De_Adriaan_(Haarlem)', 7),
+(8, 'Amsterdamse Poort', 'Zijlvest 39, 2011 VB Haarlem', 'Landmark', 'Previously called the Spaarnwouderpoort, it was built in 1486 and is located at the end of the old route from Amsterdam to Haarlem. Its also the only gate left from the 12 original city gates.', 'https://nl.wikipedia.org/wiki/Amsterdamse_Poort_(Haarlem)', 8),
+(9, 'Hof van Bakenes', 'Wijde Appelaarsteeg 11F, 2011 HB Haarlem', 'Landmark', 'This is the oldest hofje in the Netherlands, found by Dirck van Bakenes in the year 1395.', 'https://nl.wikipedia.org/wiki/Hofje_van_Bakenes', 9);
 
 -- --------------------------------------------------------
 
@@ -232,6 +335,32 @@ CREATE TABLE `tickets` (
   `event_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tour_guides`
+--
+
+CREATE TABLE `tour_guides` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `language` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tour_guides`
+--
+
+INSERT INTO `tour_guides` (`id`, `name`, `language`) VALUES
+(1, 'Frederic', 'English'),
+(2, 'Williams', 'English'),
+(3, 'Deirdre', 'English'),
+(4, 'Jan Willem', 'Dutch'),
+(5, 'Annet', 'Dutch'),
+(6, 'Lisa', 'Dutch'),
+(7, 'Kim', 'Chinese'),
+(8, 'Susan', 'Chinese');
 
 -- --------------------------------------------------------
 
@@ -326,10 +455,24 @@ ALTER TABLE `event_artists`
   ADD KEY `fk_event_artists_artist` (`artist_id`);
 
 --
+-- Indexes for table `history_tours`
+--
+ALTER TABLE `history_tours`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `guide` (`guide`);
+
+--
+-- Indexes for table `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `locations`
 --
 ALTER TABLE `locations`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `image` (`images`);
 
 --
 -- Indexes for table `orders`
@@ -352,6 +495,12 @@ ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
   ADD KEY `event_id` (`event_id`),
   ADD KEY `order_id` (`user_id`);
+
+--
+-- Indexes for table `tour_guides`
+--
+ALTER TABLE `tour_guides`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -400,10 +549,22 @@ ALTER TABLE `event_artists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
+-- AUTO_INCREMENT for table `history_tours`
+--
+ALTER TABLE `history_tours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `images`
+--
+ALTER TABLE `images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -422,6 +583,12 @@ ALTER TABLE `password_reset_tokens`
 --
 ALTER TABLE `tickets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tour_guides`
+--
+ALTER TABLE `tour_guides`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -465,6 +632,18 @@ ALTER TABLE `events`
 ALTER TABLE `event_artists`
   ADD CONSTRAINT `fk_event_artists_artist` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_event_artists_event` FOREIGN KEY (`event_id`) REFERENCES `dance_events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `history_tours`
+--
+ALTER TABLE `history_tours`
+  ADD CONSTRAINT `guide` FOREIGN KEY (`guide`) REFERENCES `tour_guides` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `locations`
+--
+ALTER TABLE `locations`
+  ADD CONSTRAINT `image` FOREIGN KEY (`images`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
