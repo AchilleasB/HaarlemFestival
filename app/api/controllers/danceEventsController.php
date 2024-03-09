@@ -2,6 +2,8 @@
 require __DIR__ . '/../../services/danceService.php';
 require_once __DIR__ . '/../../models/dance.php';
 require_once __DIR__ . '/../../models/danceTicket.php';
+require_once __DIR__ . '/../../services/ticketService.php';
+
 
 class DanceEventsController
 {
@@ -106,6 +108,12 @@ class DanceEventsController
                 $message = 'Invalid amount! Try again with a valid amount of tickets';
             } elseif ($this->danceService->addTicketToCart($danceTicket)) {
                 $message = 'Ticket(s) added to cart successfully';
+                
+                $ticketService = new TicketService();
+                $previousDanceTicketId = $ticketService->retrievePreviousDanceTicketId();
+               $danceTicket->setId($previousDanceTicketId);
+                $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$danceTicket;
+
             } else {
                 $message = 'An error occurred while adding ticket(s) to cart';
             }
