@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 07, 2024 at 11:13 AM
--- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
--- PHP Version: 8.0.25
+-- Generation Time: Mar 09, 2024 at 10:15 PM
+-- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
+-- PHP Version: 8.2.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,6 +49,30 @@ INSERT INTO `artists` (`id`, `name`, `genre`, `description`, `artist_image`) VAL
 (28, 'ODIN', 'EPIC VIKING', 'KILL KILL KILL ÉM ALL', 'artists/odin.png'),
 (29, 'ZEUS', 'ELECTRONIC', 'THUNDER THUNDER THUNDER', 'artists/zeus.png'),
 (30, 'ATHENA', 'POP / HOUSE', 'GO GO GO', 'artists/athena.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cuisines`
+--
+
+CREATE TABLE `cuisines` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cuisines`
+--
+
+INSERT INTO `cuisines` (`id`, `name`) VALUES
+(1, 'Dutch'),
+(2, 'French'),
+(3, 'European'),
+(4, 'International'),
+(5, 'Fish and Seafood'),
+(6, 'Modern'),
+(7, 'Asian');
 
 -- --------------------------------------------------------
 
@@ -123,6 +147,28 @@ INSERT INTO `dance_tickets` (`id`, `amount`, `event_id`, `user_id`) VALUES
 (60, 2, 13, 7),
 (61, 1, 37, 6),
 (62, 1, 6, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `drinks`
+--
+
+CREATE TABLE `drinks` (
+  `id` int(11) NOT NULL,
+  `price_bottle` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `drinks`
+--
+
+INSERT INTO `drinks` (`id`, `price_bottle`) VALUES
+(11, 120),
+(12, 150),
+(13, 100),
+(14, 180),
+(15, 90);
 
 -- --------------------------------------------------------
 
@@ -297,6 +343,41 @@ INSERT INTO `locations` (`id`, `location_name`, `address`, `location_type`, `des
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `menu_items`
+--
+
+CREATE TABLE `menu_items` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `price_per_portion` decimal(10,2) DEFAULT NULL,
+  `restaurant_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `menu_items`
+--
+
+INSERT INTO `menu_items` (`id`, `name`, `description`, `price_per_portion`, `restaurant_id`) VALUES
+(1, 'Grilled Salmon', 'Fresh salmon with a lemon herb seasoning', 25.00, 1),
+(2, 'Caesar Salad', 'Classic Caesar salad with homemade dressing', 12.00, 1),
+(3, 'Beef Burger', 'Juicy beef burger with cheese and special sauce', 15.00, 1),
+(4, 'Margherita Pizza', 'Classic pizza with tomatoes, mozzarella, and basil', 18.00, 1),
+(5, 'Chocolate Lava Cake', 'Warm cake with a gooey chocolate center', 10.00, 1),
+(6, 'Sushi Platter', 'Assorted nigiri and rolls, serves two', 30.00, 2),
+(7, 'Ramen Bowl', 'Rich broth with noodles, pork, and vegetables', 20.00, 2),
+(8, 'Vegetarian Pasta', 'Pasta with seasonal vegetables in tomato sauce', 16.00, 2),
+(9, 'Tiramisu', 'Classic Italian dessert with coffee and mascarpone', 11.00, 2),
+(10, 'Mediterranean Salad', 'Mixed greens with feta, olives, and vinaigrette', 14.00, 2),
+(11, 'Chardonnay', 'Elegant white wine with notes of apple and oak', 5.00, 1),
+(12, 'Pinot Noir', 'Medium-bodied red wine with flavors of cherry and raspberry', NULL, 1),
+(13, 'Sauvignon Blanc', 'Crisp and refreshing white wine with citrus notes', 8.50, 1),
+(14, 'Cabernet Sauvignon', 'Robust red wine with hints of blackberry and vanilla', 7.00, 2),
+(15, 'Merlot', 'Smooth red wine with soft tannins and plum flavors', 22.20, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -320,6 +401,126 @@ CREATE TABLE `password_reset_tokens` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `expires_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurants`
+--
+
+CREATE TABLE `restaurants` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `number_of_seats` int(11) NOT NULL DEFAULT 50,
+  `number_of_stars` enum('1','2','3','4','5') NOT NULL,
+  `banner` int(11) NOT NULL,
+  `is_recommended` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `restaurants`
+--
+
+INSERT INTO `restaurants` (`id`, `name`, `location`, `description`, `number_of_seats`, `number_of_stars`, `banner`, `is_recommended`) VALUES
+(1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 52, '4', 1, 1),
+(2, 'Restaurant ML', 'Kleine Houtstraat 70, 2011 DR Haarlem, Nederland', 'Still at a top level but also with a more lower price, Toujours wins the top for the the best restaurant in terms of price-quality. For an intimate, cozy and beautiful dinner with friends or family, take a seat in our beautiful restaurant area. With radiant daylight thanks to the domes on our roof. Which provide a magical beautiful light in the evening, when dining under the starry sky comes very close.', 60, '4', 1, 0),
+(3, 'Restaurant Fris', 'Twijnderslaan 7, 2012 BG Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 45, '4', 1, 0),
+(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 1, 0),
+(5, 'Grand Cafe Brinkman', 'Grote Markt 13, 2011 RC Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 100, '3', 1, 0),
+(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 48, '3', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurants_cuisines`
+--
+
+CREATE TABLE `restaurants_cuisines` (
+  `restaurant_id` int(11) NOT NULL,
+  `cuisine_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `restaurants_cuisines`
+--
+
+INSERT INTO `restaurants_cuisines` (`restaurant_id`, `cuisine_id`) VALUES
+(2, 1),
+(3, 1),
+(5, 1),
+(6, 1),
+(1, 2),
+(3, 2),
+(1, 3),
+(2, 3),
+(3, 3),
+(4, 3),
+(5, 3),
+(6, 3),
+(4, 4),
+(1, 5),
+(2, 5),
+(6, 5),
+(5, 6),
+(4, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurants_sessions`
+--
+
+CREATE TABLE `restaurants_sessions` (
+  `restaurant_id` int(11) NOT NULL,
+  `session_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `restaurants_sessions`
+--
+
+INSERT INTO `restaurants_sessions` (`restaurant_id`, `session_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(1, 2),
+(2, 2),
+(3, 2),
+(4, 2),
+(5, 2),
+(6, 2),
+(1, 3),
+(2, 3),
+(3, 3),
+(4, 3),
+(5, 3),
+(6, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` int(11) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `start_date`, `end_date`) VALUES
+(1, '2024-03-05 18:00:00', '2024-03-05 19:30:00'),
+(2, '2024-03-05 19:30:00', '2024-03-05 21:00:00'),
+(3, '2024-03-05 21:00:00', '2024-03-05 22:30:00');
 
 -- --------------------------------------------------------
 
@@ -386,7 +587,8 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`,
 (2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$ZSIYLLcEL.tgMorcLdTzcO84RRvfPPZHyNntErm3IK5TdYCKAG73K', 'Admin', '11-02-2024'),
 (5, 'Hulk', 'Banner', 'achilleasballanos@outlook.com', '$2y$10$ncp7mP0hjtXyKua87OGQUuFxBmEL9r9PzuLIKAQMj0GhJ//ML.vuC', 'Employee', '25-02-2024'),
 (6, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$FKn5WvU4.YDLV3IjmuATqugZtA1dMBOnqaK/LGXpXKSCsGfFE.CD6', 'Employee', '23-02-2024'),
-(7, 'Tony', 'Stark', 'stark@email.com', '$2y$10$cv1rrTS179h1RsWHGXo4J.ho0UH3C49dpEQdvo2srjwa1zSjU9cP.', 'Customer', '12-02-2024');
+(7, 'Tony', 'Stark', 'stark@email.com', '$2y$10$cv1rrTS179h1RsWHGXo4J.ho0UH3C49dpEQdvo2srjwa1zSjU9cP.', 'Customer', '12-02-2024'),
+(8, 'John', 'Doe', 'johndoe@mail.com', '$2y$10$EPBD8eQqFU5H/2IVapkpa.umoHV3f1XwvUKWIWVqN7Bn2VTlGcubG', 'Admin', '04-03-2024');
 
 -- --------------------------------------------------------
 
@@ -424,6 +626,12 @@ ALTER TABLE `artists`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cuisines`
+--
+ALTER TABLE `cuisines`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dance_events`
 --
 ALTER TABLE `dance_events`
@@ -437,6 +645,12 @@ ALTER TABLE `dance_tickets`
   ADD PRIMARY KEY (`id`),
   ADD KEY `dance_tickets_ibfk_1` (`event_id`),
   ADD KEY `dance_tickets_ibfk_2` (`user_id`);
+
+--
+-- Indexes for table `drinks`
+--
+ALTER TABLE `drinks`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `events`
@@ -475,6 +689,13 @@ ALTER TABLE `locations`
   ADD KEY `image` (`images`);
 
 --
+-- Indexes for table `menu_items`
+--
+ALTER TABLE `menu_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -487,6 +708,33 @@ ALTER TABLE `orders`
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_user_token` (`user_id`,`token`);
+
+--
+-- Indexes for table `restaurants`
+--
+ALTER TABLE `restaurants`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `banner` (`banner`);
+
+--
+-- Indexes for table `restaurants_cuisines`
+--
+ALTER TABLE `restaurants_cuisines`
+  ADD PRIMARY KEY (`restaurant_id`,`cuisine_id`),
+  ADD KEY `cuisine_id` (`cuisine_id`);
+
+--
+-- Indexes for table `restaurants_sessions`
+--
+ALTER TABLE `restaurants_sessions`
+  ADD PRIMARY KEY (`restaurant_id`,`session_id`),
+  ADD KEY `session_id` (`session_id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tickets`
@@ -525,6 +773,12 @@ ALTER TABLE `artists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
+-- AUTO_INCREMENT for table `cuisines`
+--
+ALTER TABLE `cuisines`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `dance_events`
 --
 ALTER TABLE `dance_events`
@@ -535,6 +789,12 @@ ALTER TABLE `dance_events`
 --
 ALTER TABLE `dance_tickets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT for table `drinks`
+--
+ALTER TABLE `drinks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -567,6 +827,12 @@ ALTER TABLE `locations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `menu_items`
+--
+ALTER TABLE `menu_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
@@ -594,7 +860,7 @@ ALTER TABLE `tour_guides`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `venues`
@@ -618,6 +884,12 @@ ALTER TABLE `dance_events`
 ALTER TABLE `dance_tickets`
   ADD CONSTRAINT `dance_tickets_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `dance_events` (`id`),
   ADD CONSTRAINT `dance_tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `drinks`
+--
+ALTER TABLE `drinks`
+  ADD CONSTRAINT `drinks_ibfk_1` FOREIGN KEY (`id`) REFERENCES `menu_items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `events`
@@ -646,6 +918,12 @@ ALTER TABLE `locations`
   ADD CONSTRAINT `image` FOREIGN KEY (`images`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `menu_items`
+--
+ALTER TABLE `menu_items`
+  ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
@@ -656,6 +934,26 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `password_reset_tokens`
   ADD CONSTRAINT `password_reset_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `restaurants`
+--
+ALTER TABLE `restaurants`
+  ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`banner`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `restaurants_cuisines`
+--
+ALTER TABLE `restaurants_cuisines`
+  ADD CONSTRAINT `restaurants_cuisines_ibfk_1` FOREIGN KEY (`cuisine_id`) REFERENCES `cuisines` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `restaurants_cuisines_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `restaurants_sessions`
+--
+ALTER TABLE `restaurants_sessions`
+  ADD CONSTRAINT `restaurants_sessions_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `restaurants_sessions_ibfk_2` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tickets`
