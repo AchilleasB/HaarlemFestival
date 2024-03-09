@@ -30,23 +30,33 @@
                 </div>
                 <div class="image-secondary-text position-absolute top-0 end-0 ">
                     <h1 class="">27.07 / 28.07 / 29.07</h1>
-                    <button id="getTicketsBtn" class="buy-tickets-btn fw-bold bg-danger d-inline-block">GET YOUR TICKETS NOW!</button>
+                    <button class="buy-tickets-btn fw-bold bg-danger d-inline-block">GET YOUR TICKETS NOW!</button>
                 </div>
             </div>
+            <div class="dance-page-description">
+                <h1>ALL YOUR FAVORITE ARTISTS,</h1>
+                <h2>ONE EVENT</h2>
+                <p>
+                    Get ready to ignite the dance floor to the rhythm of electronic music. Our lineup features the
+                    world’s most renowned DJs. So grab your friends or come solo and join us for an experience that
+                    you'll never forget!
+                </p>
+            </div>
+
             <div class="dance-events-section">
                 <h2 class="section-title">EVENTS</h2>
                 <div class="date-buttons"></div>
                 <div class="dance-events-container"></div>
             </div>
             <div class="buy-tickets-container">
-                <button id="getTicketsBtn" class="buy-tickets-btn">GET YOUR TICKETS NOW!</button>
+                <button class="buy-tickets-btn">GET YOUR TICKETS NOW!</button>
             </div>
             <div class="venues-section">
                 <h2 class="section-title">VENUES</h2>
                 <div class="venues-container"></div>
             </div>
             <div class="buy-tickets-container">
-                <button id="getTicketsBtn" class="buy-tickets-btn">GET YOUR TICKETS NOW!</button>
+                <button class="buy-tickets-btn">GET YOUR TICKETS NOW!</button>
             </div>
             <div class="schedule-section">
                 <h2 class="section-title">SCHEDULE</h2>
