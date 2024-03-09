@@ -25,6 +25,7 @@ class HistoryController extends Controller
     public function location()
     {
         $location = $this->locationService->getLocationById();
+        $images = $this->locationService->getLocationImages();
 
     }
 

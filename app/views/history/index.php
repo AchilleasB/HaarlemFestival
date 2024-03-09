@@ -25,6 +25,7 @@
                 <div>
                     <h1 class="text-white fw-bold display-4">A STROLL TROUGH HISTORY</h1>
                     <h4 class="bg-white d-inline-block p-1">Visiting Haarlem's Historical Landmarks</h4>
+                    <div><button>GET YOUR TICKETS</button></div>
                 </div>
             </div>
         </div>
@@ -91,8 +92,10 @@
                         <button class="info-button">Learn more ></button>
                     </div>
                     <div class="col-4">
-                        <!-- CHANGE-->
-                        <img src="/../images/dance.png" class="img-fluid">
+                        <img src="../../images/history<? if (!empty($location['images'])) {
+                            echo $location['images'];
+                        } else
+                            echo "no-image.jpg"; ?>" class="img-fluid" style="width: 100%; height: 80%;">
                     </div>
                 </div>
             <?php } ?>
@@ -103,7 +106,7 @@
         <h2 class="text-center py-3 text-bold">TOUR <span class="text-red">SCHEDULE</span></h2>
     </section>
 
-<!--
+    <!--
  <table class="table">
         <thead>
             <tr>
@@ -126,38 +129,72 @@
         </tbody>
     </table>
         -->
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+    <section>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">THURSDAY</th>
+                    <th scope="col">FRIDAY</th>
+                    <th scope="col">SATURDAY</th>
+                    <th scope="col">SUNDAY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">10:00</th>
+                    <td>lalalala</td>
+                    <td>lalalala</td>
+                    <td>lalalala</td>
+                    <td>lalalala</td>
+                </tr>
+                <tr>
+                    <th scope="row">13:00</th>
+                    <td>lalalala</td>
+                    <td>Thornton</td>
+                    <td>lalalala</td>
+                    <td>lalalala</td>
+                </tr>
+                <tr>
+                    <th scope="row">16:00</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>lalalala</td>
+                </tr>
+            </tbody>
+        </table>
 
+    </section>
 
+    <section class='d-flex justify-content-center p-5'>
+        <div class='row dropdown'>
+            <div class="col">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Language</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Date</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Time</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ticket</button>
+            </div>
+        </div>
+        <div class='row'>
+            <button type="button" class="btn btn-warning">Add to cart</button>
+            <button></button>
+        </div>
+    </section>
 
 
     <section>

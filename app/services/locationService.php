@@ -46,5 +46,13 @@ class LocationService
             $this->locationRepository->deleteLocation($_GET['id']);
         }
     }
+    public function getLocationImages()
+    {
+        if (isset($_GET['id'])) {
+            return $this->locationRepository->getLocationImages($_GET['id']);
+        } else {
+            return null;
+        }
+    }
 
 }
