@@ -17,6 +17,7 @@
     <?php
     include __DIR__ . '/../header.php';
 
+    $user_id = $_SESSION['user_id'];
     require __DIR__ . '/../../config/imgconfig.php';
 
     ?>
@@ -35,4 +36,7 @@
     ?>
 
     <script type="module" src="../scripts/dance/tickets.js"></script>
-    <script> var imageBasePath = "<?php echo $imageBasePath; ?>";</script>
+    <script>
+        const imageBasePath = "<?php echo $imageBasePath; ?>";
+        const user_id = <?php echo json_encode($user_id) ?>;
+    </script>
