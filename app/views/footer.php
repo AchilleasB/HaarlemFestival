@@ -3,7 +3,7 @@
         <div class="foot-nav">
         <a class="nav-link active" href="/">Home</a>
         <a class="nav-link active" href="#">History</a>
-        <a class="nav-link active" href="#">Cuisines</a>
+        <a class="nav-link active" href="/yummy">Cuisines</a>
         <a class="nav-link active" href="#">Music</a>
         <a class="nav-link active" href="#">Festival</a>
         </div>

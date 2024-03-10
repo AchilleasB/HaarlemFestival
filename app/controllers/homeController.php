@@ -12,5 +12,4 @@ class HomeController extends Controller
     {
         $this->displayView($this);
     }
-
 }
