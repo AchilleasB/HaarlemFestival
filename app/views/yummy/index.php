@@ -93,7 +93,7 @@
                 <?php foreach ($restaurantsRecommended as $restaurantRecommended): ?>
                 <div class="row mb-4">
                     <div class="col-md-4">
-                        <img src="/../../public/images/yummy/banners/<?php echo htmlspecialchars($restaurantRecommended->getBanner()) ?>"
+                        <img src="/../../images/yummy/banners/<?php echo htmlspecialchars($restaurantRecommended->getBanner()) ?>"
                             class="img-fluid card-img-top"
                             alt="Image of <?php echo htmlspecialchars($restaurantRecommended->getName()); ?>">
                     </div>
@@ -128,7 +128,7 @@
                 <?php foreach ($restaurants as $restaurant): ?>
                 <div class="col-md-3 mb-3 d-flex">
                     <div class="card custom-shadow flex-fill">
-                        <img src="/../../public/images/yummy/banners/<?php echo htmlspecialchars($restaurant->getBanner())?>"
+                        <img src="/../../images/yummy/banners/<?php echo htmlspecialchars($restaurant->getBanner())?>"
                             class="img-fluid card-img-top"
                             alt="Image of <?php echo htmlspecialchars($restaurant->getName()) ?>">
                         <div class="card-body d-flex flex-column">
