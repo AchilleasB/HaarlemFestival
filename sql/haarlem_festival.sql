@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 09, 2024 at 10:15 PM
+-- Generation Time: Mar 10, 2024 at 12:40 AM
 -- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
 -- PHP Version: 8.2.16
 
@@ -307,7 +307,13 @@ INSERT INTO `images` (`id`, `image`) VALUES
 (6, 'waalsekerk.png'),
 (7, 'molenadreiaan.png'),
 (8, 'amsterdamsepoort.png'),
-(9, 'hofvanbakenes.png');
+(9, 'hofvanbakenes.png'),
+(10, 'ratatouille-banner.png'),
+(11, 'restaurant-ml-banner.png'),
+(12, 'restaurant-fris-banner.png'),
+(13, 'specktakel-banner.png'),
+(14, 'grand-cafe-brinkman-banner.png'),
+(15, 'urban-frenchy-bistro-toujours-banner.png');
 
 -- --------------------------------------------------------
 
@@ -424,12 +430,12 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `name`, `location`, `description`, `number_of_seats`, `number_of_stars`, `banner`, `is_recommended`) VALUES
-(1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 52, '4', 1, 1),
-(2, 'Restaurant ML', 'Kleine Houtstraat 70, 2011 DR Haarlem, Nederland', 'Still at a top level but also with a more lower price, Toujours wins the top for the the best restaurant in terms of price-quality. For an intimate, cozy and beautiful dinner with friends or family, take a seat in our beautiful restaurant area. With radiant daylight thanks to the domes on our roof. Which provide a magical beautiful light in the evening, when dining under the starry sky comes very close.', 60, '4', 1, 0),
-(3, 'Restaurant Fris', 'Twijnderslaan 7, 2012 BG Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 45, '4', 1, 0),
-(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 1, 0),
-(5, 'Grand Cafe Brinkman', 'Grote Markt 13, 2011 RC Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 100, '3', 1, 0),
-(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 48, '3', 1, 1);
+(1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 52, '4', 10, 1),
+(2, 'Restaurant ML', 'Kleine Houtstraat 70, 2011 DR Haarlem, Nederland', 'Still at a top level but also with a more lower price, Toujours wins the top for the the best restaurant in terms of price-quality. For an intimate, cozy and beautiful dinner with friends or family, take a seat in our beautiful restaurant area. With radiant daylight thanks to the domes on our roof. Which provide a magical beautiful light in the evening, when dining under the starry sky comes very close.', 60, '4', 11, 0),
+(3, 'Restaurant Fris', 'Twijnderslaan 7, 2012 BG Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 45, '4', 12, 0),
+(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 13, 0),
+(5, 'Grand Cafe Brinkman', 'Grote Markt 13, 2011 RC Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 100, '3', 14, 0),
+(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 48, '3', 15, 1);
 
 -- --------------------------------------------------------
 
@@ -794,7 +800,7 @@ ALTER TABLE `dance_tickets`
 -- AUTO_INCREMENT for table `drinks`
 --
 ALTER TABLE `drinks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -818,7 +824,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `locations`
