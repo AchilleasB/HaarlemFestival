@@ -79,28 +79,28 @@
 
 
     <section class="d-flex justify-content-center py-5">
-        <div class="container" style="max-width: 800px;">
-            <?php foreach ($locations as $index => $location) { ?>
-                <div class="row gray-bg p-4 mb-4">
-                    <div class="col-8">
-                        <h3>
-                            <?php echo ($index + 1) . '. ' . $location['location_name']; ?>
-                        </h3>
-                        <p class="text-muted">
-                            <?php echo $location['description']; ?>
-                        </p>
-                        <button class="info-button">Learn more ></button>
-                    </div>
-                    <div class="col-4">
-                        <img src="../../images/history<? if (!empty($location['images'])) {
-                            echo $location['images'];
-                        } else
-                            echo "no-image.jpg"; ?>" class="img-fluid" style="width: 100%; height: 80%;">
-                    </div>
+    <div class="container" style="max-width: 800px;">
+        <?php foreach ($locations as $index => $location) { ?>
+            <div class="row gray-bg p-4 mb-4">
+                <div class="col-8">
+                    <h3>
+                        <?php echo ($index + 1) . '. ' . $location['location_name']; ?>
+                    </h3>
+                    <p class="text-muted">
+                        <?php echo $location['description']; ?>
+                    </p>
+                    <button class="info-button">Learn more ></button>
                 </div>
-            <?php } ?>
-        </div>
-    </section>
+                <div class="col-4">
+                    <?php 
+                    $imageSrc = !empty($location['image']) ? "../../images/".$location['image'] : "../../images/no-image.jpg"; 
+                    ?>
+                    <img src="<?php echo $imageSrc; ?>" class="img-fluid" style="width: 300px; height: 170px;" alt="Location Image">
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</section>
 
     <section>
         <h2 class="text-center py-3 text-bold">TOUR <span class="text-red">SCHEDULE</span></h2>

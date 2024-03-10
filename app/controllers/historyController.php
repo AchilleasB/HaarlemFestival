@@ -6,10 +6,12 @@ require_once(__DIR__ . '/../models/locations.php');
 require_once(__DIR__ . '/../models/user.php');
 require_once(__DIR__ . '/../services/locationService.php');
 
+
 class HistoryController extends Controller
 {
     protected $historyService;
-    private LocationService $locationService;
+    protected $locationService;
+
     function __construct()
     {
         $this->historyService = new HistoryService();
@@ -18,7 +20,8 @@ class HistoryController extends Controller
  
     public function index()
     {
-        $locations = $this->historyService->getAllLocations(); 
+        $locations = $this->historyService->getAllLocationsWithImages();
+        $locationService = $this->locationService;
         require(__DIR__ . '/../views/history/index.php');
     
     }

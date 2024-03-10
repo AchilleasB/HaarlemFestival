@@ -21,7 +21,25 @@ class HistoryRepository extends Repository
             return [];
         }
     }
+    function getAllLocationsWithImages()
+    {
+        try {
+            $sql = "SELECT l.*, i.image 
+            FROM locations l
+            LEFT JOIN images i ON l.images = i.id";
+
+            $statement = $this->connection->prepare($sql);
+            $statement->execute();
+
+            $locations = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $locations;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+}
 
    
 
-}

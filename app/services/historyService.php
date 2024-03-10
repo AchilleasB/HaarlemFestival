@@ -9,9 +9,9 @@ class HistoryService
     {
         $this->repository = new HistoryRepository();
     }
-    function getAllLocations()
+    public function getAllLocationsWithImages()
     {
-        return $this->repository->getAllLocations();
+        return $this->repository->getAllLocationsWithImages();
     }
 
 }
