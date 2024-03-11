@@ -12,27 +12,26 @@
     padding: 1em;
     height: 50vh;
     width: 75%;
-    margin: auto;
-    margin-top: 3em;
+    margin: 3em auto 3em auto;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
 }
 
-.cms-button-container {
-    width: 100%;
-    margin-top: 4em;
+.cms-buttons-container {
+    margin-top: 2em;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .cms-btn {
-    padding: 1em 2em;
-    margin: 0 2em 0 2em;
+    padding: 1em 1em;
+    margin: auto;
     border: none;
     border-radius: 5px;
     background-color: #e86e6e;
     color: #fff;
-    font-size: 1.8em;
+    font-size: 1.5em;
     text-decoration: none;
     display: inline-block;
     transition: all 0.3s ease;
@@ -94,20 +93,4 @@
     color: white;
     padding: 10px;
     border-radius: 5px;
-}
-
-.backToTop {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #f2f2f2;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
 }

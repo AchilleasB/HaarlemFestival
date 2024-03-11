@@ -21,23 +21,12 @@
         <div class="red-line"></div>
         <div class="cms-container">
             <h1 class="header mb-5">Content Management System</h1>
-            <div class="row cms-button-container">
-                <div class="col-md-3">
-                    <a href="history" class="cms-btn d-inline-block">History</a>
-                </div>
-                <div class="col-md-3">
-                    <a href="/cms/danceManagement" class="cms-btn d-inline-block">Dance</a>
-                </div>
+            <div class="cms-buttons-container">
+                <a href="history" class="cms-btn d-inline-block">History</a>
+                <a href="/cms/danceManagement" class="cms-btn d-inline-block">Dance</a>
+                <a href="yummie" class="cms-btn d-inline-block">Yummie</a>
+                <a href="/cms/userManagement" class="cms-btn d-inline-block">Users</a>
             </div>
-            <div class="row cms-button-container">
-                <div class="col-md-3">
-                    <a href="yummie" class="cms-btn d-inline-block">Yummie</a>
-                </div>
-                <div class="col-md-3">
-                    <a href="/cms/userManagement" class="cms-btn d-inline-block">Users</a>
-                </div>
-            </div>
-        </div>
     </main>
     <?php
     include __DIR__ . '/../footer.php';

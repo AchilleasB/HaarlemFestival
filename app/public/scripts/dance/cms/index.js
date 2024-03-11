@@ -146,9 +146,6 @@ function createItemLabel(itemType) {
                             <div class="col">
                                 <div class="item-data-label border-bottom"><em>Genre</em></div>
                             </div>
-                            <div class="col">
-                                <div class="item-data-label border-bottom"><em>Description</em></div>
-                            </div>
                         </div>
                     </div>    
                 </div>
@@ -233,9 +230,6 @@ function createItemElement(item, itemType) {
                         <div class="col">
                             <span class="item-data-value">${item.genre}</span>
                         </div>
-                        <div class="col">
-                            <span class="item-data-value">${item.description}</span>
-                        </div>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 d-flex mb-3 ">
@@ -275,7 +269,9 @@ function createItemElement(item, itemType) {
     itemElement.innerHTML = itemData;
 
     const editButton = itemElement.querySelector(".edit-item-button");
+
     editButton.addEventListener("click", function () {
+        
         if (itemType === "danceEvents") {
             handleEditDanceEvent(item);
         } else if (itemType === "artists") {
@@ -286,7 +282,12 @@ function createItemElement(item, itemType) {
     });
 
     const deleteButton = itemElement.querySelector(".delete-item-button");
+
     deleteButton.addEventListener("click", function () {
+
+        const userConfirmation = confirm("Are you sure you want to delete this item?");
+        if (!userConfirmation) return;
+
         if (itemType === "danceEvents") {
             handleDeleteDanceEvent(item);
         } else if (itemType === "artists") {

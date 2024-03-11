@@ -7,7 +7,7 @@ if (isset($_SESSION['user_firstname'])) {
 ?>
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid">
         <img src="/../icons/haarlem-logo.svg" class="header-logo" alt="Visit Haarlem icon" id="logo">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -28,7 +28,7 @@ if (isset($_SESSION['user_firstname'])) {
                             History</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">
+                        <a class="nav-link" aria-current="page" href="/yummy">
                             <img src="/../icons/cutlery.svg" class="cutlery-icon w-10 h-10" alt="Cutlery icon">
                             Cuisines</a>
                     </li>
@@ -75,7 +75,11 @@ if (isset($_SESSION['user_firstname'])) {
                                 <a class="nav-link" href="/shoppingCart">
                                     <img src="/../icons/shopping-cart.svg" class="shopping-cart-icon w-10 h-10"
                                         alt="Shopping cart icon">
-                                    Shopping cart</a>
+                                    Shopping cart
+                                    <?php if (!isset($_SESSION['order_items_data'])) { 
+                             $_SESSION['order_items_data'] = []; } ?>
+                                
+                                </a>
                             </li>
                         <?php } ?>
                         <li class="nav-item">

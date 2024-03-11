@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function () {
+    // await initCarousel();
     await displayDateButtons();
     displayVenues();
     displaySchedule();
@@ -62,7 +63,7 @@ async function displayDateButtons() {
 
 }
 
-// dance events section
+// dance events section //
 async function displayDanceEvents(date) {
     const danceEvents = await getDanceEventsFromAPI();
     const danceEventsContainer = document.querySelector('.dance-events-container');
@@ -71,10 +72,6 @@ async function displayDanceEvents(date) {
     const selectedEvents = danceEvents.filter(event => event.date === date);
     selectedEvents.forEach((danceEvent, index) => {
         const danceEventCard = renderDanceEventCard(danceEvent);
-
-        if (index === 0) {
-            danceEventCard.style.width = '50%';
-        }
 
         danceEventsContainer.appendChild(danceEventCard);
     });
@@ -176,7 +173,18 @@ function htmlArtistImage(artist) {
     artistImage.classList.add('artist-image');
     artistImage.src = imageBasePath + artist.artist_image;
 
-    return artistImage;
+    // Create a link to the artist page
+    const artistLink = document.createElement('a');
+    artistLink.href = '/dance/artist/' + artist.id + '/' + artist.name.toLowerCase();
+    artistLink.appendChild(artistImage);
+
+    artistLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        // Redirect to the artist page
+        window.location.href = artistLink.href;
+    });
+
+    return artistLink;
 }
 
 function htmlArtistName(artist) {

@@ -243,7 +243,7 @@ function sortUsers(userData, selectedSortCriterion) {
             sortedUsers = userData.sort((a, b) => {
                 // Convert date strings to Date objects for comparison
                 const dateA = new Date(
-                    a.registration_date.split('-').reverse().join('-')  // Convert dd-mm-yy to yy-mm-dd
+                    a.registration_date.split('-').reverse().join('-')
                 );
                 const dateB = new Date(
                     b.registration_date.split('-').reverse().join('-')

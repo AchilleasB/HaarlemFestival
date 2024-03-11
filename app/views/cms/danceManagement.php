@@ -56,7 +56,7 @@
     include __DIR__ . '/../footer.php';
     ?>
 
-    <script src="/../scripts/dance/cms/main.js"></script>
+    <script src="/../scripts/dance/cms/index.js"></script>
     <script src="/../scripts/dance/cms/addEvent.js"></script>
     <script src="/../scripts/dance/cms/addArtist.js"></script>
     <script src="/../scripts/dance/cms/addVenue.js"></script>
