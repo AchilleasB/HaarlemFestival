@@ -11,5 +11,5 @@ header("Access-Control-Allow-Headers: *");
 
 $uri = trim($_SERVER['REQUEST_URI'], '/');
 
-$router = new PatternRouter();
+$router = new PatternRouter($uri);
 $router->route($uri);

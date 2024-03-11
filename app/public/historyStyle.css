@@ -1,0 +1,26 @@
+.header-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 60vh;
+}
+.gray-bg{
+    background: #DADADA;
+}
+.text-red{
+    color: #A60303;
+}
+.text-bold{
+    font-weight: 600;
+}
+.bold-headers h3,
+.bold-headers h4 {
+    font-weight: 550;
+}
+.no-border th {
+    border: none;
+}
+
+
+
+

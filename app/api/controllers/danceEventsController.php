@@ -109,11 +109,12 @@ class DanceEventsController
             } elseif ($this->danceService->addTicketToCart($danceTicket)) {
                 $message = 'Ticket(s) added to cart successfully';
                 
+                // Start of added by Maria
                 $ticketService = new TicketService();
                 $previousDanceTicketId = $ticketService->retrievePreviousDanceTicketId();
-               $danceTicket->setId($previousDanceTicketId);
+                $danceTicket->setId($previousDanceTicketId);
                 $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$danceTicket;
-
+                // End of added by Maria
             } else {
                 $message = 'An error occurred while adding ticket(s) to cart';
             }

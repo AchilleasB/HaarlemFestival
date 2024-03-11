@@ -193,10 +193,8 @@ function showDateAndTime(date, time) {
 
 function showEventImages(artists, eventType) {
     if (eventType === 'SINGLE-CONCERT') {
-        console.log(eventType)
         return artists.map(artist => `<img src="${imageBasePath}${artist.artist_image}" class="ticket-image" >`).join('');
     } else {
-        console.log(imageBasePath)
         return `<img src="${imageBasePath}dance_event.png" class="ticket-image">`;
     }
 }
