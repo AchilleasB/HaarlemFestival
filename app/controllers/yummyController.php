@@ -26,9 +26,20 @@ class YummyController extends Controller
         $this->displayView($this, $data);
     }
 
-    // public function restaurant() {
-    //     $restaurants = $this->restaurantService->getAllRestaurantsBaseInfo();
-    //     $restaurantsRecommended = $this->restaurantService->getAllRestaurantsRecommended();
-    //     $this->displayView($this, ['restaurants' => $restaurants], ['restaurantsRecommended' => $restaurantsRecommended]);
-    // }
+    public function restaurant() {
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $id = $_GET['id'];
+            $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
+            $this->displayRestaurant($restaurant);
+        } else {
+            // TODO: handle error
+        }
+    } 
+    
+    private function displayRestaurant($restaurant) {
+        $directory = substr(get_class($this), 0, -10);
+        $view = debug_backtrace()[1]['function'];
+
+        require __DIR__ . "/../views/$directory/$view.php";
+    }
 }

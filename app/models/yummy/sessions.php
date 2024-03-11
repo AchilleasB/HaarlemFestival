@@ -35,4 +35,14 @@ class Session
     {
         $this->end_date = $end_date;
     }
+
+    public function __toString(): string
+    {
+        return sprintf(
+            "Session ID: %d, Start: %s, End: %s",
+            $this->getId(),
+            $this->getStartDate()->format('Y-m-d H:i:s'),
+            $this->getEndDate()->format('Y-m-d H:i:s')
+        );
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../repository.php';
-require_once __DIR__ . '/../../models/yummy/session.php';
+require_once __DIR__ . '/../../models/yummy/sessions.php';
 
 class SessionRepository extends Repository
 {
@@ -19,6 +19,30 @@ class SessionRepository extends Repository
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }
+    }
+
+    public function fetchSessionsForRestaurant($restaurantId): array {
+        $sessions = [];
+        try {
+            $stmt = $this->connection->prepare("
+                SELECT s.id, s.start_date, s.end_date
+                FROM sessions s
+                JOIN restaurants_sessions rs ON s.id = rs.session_id
+                WHERE rs.restaurant_id = ?
+            ");
+            $stmt->execute([$restaurantId]);
+    
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $sessions[] = new Session(
+                    $row['id'],
+                    new DateTime($row['start_date']),
+                    new DateTime($row['end_date'])
+                );
+            }
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+        return $sessions;
     }
 
     public function addSession($session)

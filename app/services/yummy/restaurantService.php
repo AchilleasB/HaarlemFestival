@@ -25,12 +25,13 @@ class RestaurantService {
         return $this->restaurantRepository->getAllRestaurantsRecommended();
     }
 
+    public function getRestaurantDetailedInfoById($id) {
+        return $this->restaurantRepository->getRestaurantDetailedInfoById($id);
+    }
+
     public function addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner) {
         $restaurant = new Restaurant();
         $restaurant->setName($name);
-        $restaurant->setLocation($location);
-        $restaurant->setDescription($description);
-        $restaurant->setNumberOfSeats($numberOfSeats);
         $restaurant->setNumberOfStars($numberOfStars);
         $restaurant->setBanner($banner);
         
@@ -41,9 +42,6 @@ class RestaurantService {
         $restaurant = new Restaurant();
         $restaurant->setId($id);
         $restaurant->setName($name);
-        $restaurant->setLocation($location);
-        $restaurant->setDescription($description);
-        $restaurant->setNumberOfSeats($numberOfSeats);
         $restaurant->setNumberOfStars($numberOfStars);
         $restaurant->setBanner($banner);
         

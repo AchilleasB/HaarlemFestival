@@ -115,7 +115,7 @@
                             </ul>
                         </div>
                         <div>
-                            <a href="restaurant-details.php?id=<?php echo htmlspecialchars($restaurantRecommended->getId()); ?>"
+                        <a href="/yummy/restaurant?id=<?php echo htmlspecialchars($restaurantRecommended->getId()); ?>"
                                 class="btn custom-more-info-btn mt-auto">More Info</a>
                         </div>
                     </div>
@@ -144,7 +144,7 @@
                                     </p>
                                 </li>
                             </ul>
-                            <a href="/yummy/restaurant"
+                            <a href="/yummy/restaurant?id=<?php echo htmlspecialchars($restaurant->getId()); ?>"
                                 class="btn custom-more-info-btn mt-auto">More Info</a>
                         </div>
                     </div>

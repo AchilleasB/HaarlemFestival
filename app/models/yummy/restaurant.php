@@ -27,37 +27,7 @@ class Restaurant
     {
         $this->name = $name;
     }
-
-    public function getLocation(): string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(string $location): void
-    {
-        $this->location = $location;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    public function getNumberOfSeats(): int
-    {
-        return $this->number_of_seats;
-    }
-
-    public function setNumberOfSeats(string $number_of_seats): void
-    {
-        $this->number_of_seats = $number_of_seats;
-    }
-
+    
     public function getNumberOfStars(): int
     {
         return $this->number_of_stars;
