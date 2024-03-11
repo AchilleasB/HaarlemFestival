@@ -6,6 +6,7 @@
     private string $location_name;
     private string $address;
     private ?string $description;
+    
 
 
     /**

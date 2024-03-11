@@ -17,6 +17,10 @@
 .bold-headers h4 {
     font-weight: 550;
 }
+.no-border th {
+    border: none;
+}
+
 
 
 

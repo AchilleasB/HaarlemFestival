@@ -11,6 +11,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../historyStyle.css">
     <link rel="stylesheet" href="../styles.css">
+    
+   
 </head>
 
 <body class="bg-light">
@@ -25,7 +27,7 @@
                 <div>
                     <h1 class="text-white fw-bold display-4">A STROLL TROUGH HISTORY</h1>
                     <h4 class="bg-white d-inline-block p-1">Visiting Haarlem's Historical Landmarks</h4>
-                    <div><button>GET YOUR TICKETS</button></div>
+                    <div><button class = "btn btn-danger" id="getTicketsBtn" >GET YOUR TICKETS</button></div>
                 </div>
             </div>
         </div>
@@ -89,7 +91,7 @@
                     <p class="text-muted">
                         <?php echo $location['description']; ?>
                     </p>
-                    <button class="info-button">Learn more ></button>
+                    <a href="<?php echo $location['links']; ?>" class="btn btn-outline-secondary" target="_blank">Learn more</a>
                 </div>
                 <div class="col-4">
                     <?php 
@@ -106,95 +108,41 @@
         <h2 class="text-center py-3 text-bold">TOUR <span class="text-red">SCHEDULE</span></h2>
     </section>
 
-    <!--
- <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Time</th>
-         
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($historyTours as $tour) {
-                ?>
-                <tr>
-                    <td><?php echo date('d F Y', strtotime($tour['date'])); ?></td>
-                    <td><?php echo date('H:i', strtotime($tour['time'])); ?></td>
-                </tr>
-            <?php
-            }
-            ?>
-        </tbody>
-    </table>
-        -->
-    <section>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">THURSDAY</th>
-                    <th scope="col">FRIDAY</th>
-                    <th scope="col">SATURDAY</th>
-                    <th scope="col">SUNDAY</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">10:00</th>
-                    <td>lalalala</td>
-                    <td>lalalala</td>
-                    <td>lalalala</td>
-                    <td>lalalala</td>
-                </tr>
-                <tr>
-                    <th scope="row">13:00</th>
-                    <td>lalalala</td>
-                    <td>Thornton</td>
-                    <td>lalalala</td>
-                    <td>lalalala</td>
-                </tr>
-                <tr>
-                    <th scope="row">16:00</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>lalalala</td>
-                </tr>
-            </tbody>
-        </table>
+    <section class="text-center">
+    <div class="container">
+        <?php if (!empty($organizedTours)) : ?>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <?php foreach ($organizedTours as $tour) : ?>
+                                    <th scope="col"><?php echo $tour['formatted_date']; ?></th>
+                                <?php endforeach; ?>
+                            </tr>
+                        </thead>
+                        <tbody class>
+                            <?php $times = ['10:00', '13:00', '16:00']; ?>
+                            <?php foreach ($times as $time) : ?>
+                                <tr>
+                                    <td><?php echo $time; ?></td>
+                                    <?php foreach ($organizedTours as $tour) : ?>
+                                        <td><?php echo $tour[$time] ?? ''; ?></td>
+                                    <?php endforeach; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php else : ?>
+            <p>No history tours found.</p>
+        <?php endif; ?>
+    </div>
+</section>
 
-    </section>
-
-    <section class='d-flex justify-content-center p-5'>
-        <div class='row dropdown'>
-            <div class="col">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Language</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Date</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Time</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Ticket</button>
-            </div>
-        </div>
-        <div class='row'>
-            <button type="button" class="btn btn-warning">Add to cart</button>
-            <button></button>
-        </div>
-    </section>
+    
 
 
     <section>
@@ -216,7 +164,6 @@
                 <img src="/../images/map-history.png" class="img-fluid">
             </div>
         </div>
-        <!-- !! -->
         <div class='p-4'>
             <p class='text-center'>The tour begins at the <span class="text-success">Green</span> point A (Church of St.
                 Bavo) and ends at the <span class="text-danger">Red</span> point I. The break location (Jopenkerk) is
@@ -224,15 +171,76 @@
         </div>
     </section>
 
+    <section id="ticketSection">
+        <h2 class="text-center py-3 text-bold">GET YOUR <span class="text-red">TICKETS</span></h2>
+    </section>
 
-
-
+    <section class='d-flex justify-content-center p-5'>
+    <div class="row gray-bg p-5">
+        <div class="col">
+            <div class="row dropdown">
+                <div class="col p-4">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Language
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <?php foreach ($languages as $language): ?>
+                            <a class="dropdown-item" href="#"><?php echo $language; ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="col p-4">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dateDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Date
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dateDropdown">
+                        <?php foreach ($dates as $date): ?>
+                            <a class="dropdown-item" href="#"><?php echo $date; ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="col p-4">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="timeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Time
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="timeDropdown">
+                        <?php foreach ($times as $time): ?>
+                            <a class="dropdown-item" href="#"><?php echo $time; ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="col p-4">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="ticketDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ticket
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="ticketDropdown">
+                       <!-- Dummy values -->
+                       <a class="dropdown-item" href="#">Ticket 1</a>
+                        <a class="dropdown-item" href="#">Ticket 2</a>
+                    </div>
+                </div>
+            </div>
+            <div class='row mt-5'>
+                <div class='col text-center'>
+                    <button type="button" class="btn btn-warning btn-block">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     <?php
     include __DIR__ . '/../footer.php';
     ?>
 
-
-
+<script>
+       
+            $('#getTicketsBtn').click(function() {
+                $('html, body').animate({
+                    scrollTop: $('#ticketSection').offset().top
+                }, 1000);
+            });
+        });
+    </script>
 </body>
 
 </html>
