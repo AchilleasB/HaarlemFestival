@@ -73,6 +73,41 @@ class TicketRepository extends Repository
     }
 
 
+
+
+
+
+    function getTicketByEvent($customerName, $event)
+    {
+        $customerName = preg_split("/[\s\t]/" , $customerName);
+        $customerFirstname = reset($customerName);
+        $customerLastname = next($customerName);
+
+        
+        try {
+            $query = "SELECT users.firstname, users.lastname, artists.name, dance_events.date, dance_events.start_time FROM dance_tickets
+                        LEFT JOIN users ON dance_tickets.user_id = users.id                                               
+                        LEFT JOIN event_artists ON dance_tickets.event_id = event_artists.event_id
+                        LEFT JOIN artists ON event_artists.artist_id = artists.id
+                        LEFT JOIN dance_events ON dance_tickets.event_id = dance_events.id
+                        WHERE users.firstname = :firstname AND users.lastname=:lastname AND artists.name = :event;";
+
+            $stmt = $this->connection->prepare($query);
+            $stmt->bindParam(':firstname', $customerFirstname);
+            $stmt->bindParam(':lastname', $customerLastname);
+            $stmt->bindParam(':event', $event);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
+           return $row;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+
+
     
     function convertDbRowToDanceTicketInstance($row) {
         try {
