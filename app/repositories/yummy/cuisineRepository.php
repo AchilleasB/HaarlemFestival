@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/../repository.php';
-require_once __DIR__ . ' /../../models/yummy/restaurant.php';
+require_once __DIR__ . ' /../../models/yummy/cuisine.php';
 
-class RestaurantRepository extends Repository
+class CuisineRepository extends Repository
 {
     public function getAllRestaurants()
     {
