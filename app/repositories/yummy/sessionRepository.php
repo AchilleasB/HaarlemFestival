@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../repository.php';
-require_once __DIR__ . '/../../models/yummy/sessions.php';
+require_once __DIR__ . '/../../models/yummy/session.php';
 
 class SessionRepository extends Repository
 {
