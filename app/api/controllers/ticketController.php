@@ -83,6 +83,27 @@ class TicketController extends ApiController
         }
     }
 
+
+
+    public function getTicketByEvent(){
+
+        try {
+            $this->sendHeaders();
+
+            if (!empty($_GET['name'] && !empty($_GET['event']))) {
+                $customer_name= htmlspecialchars($_GET['name']);
+                $event= htmlspecialchars($_GET['event']);
+                $ticket = $this->ticketService->getTicketByEvent($customer_name, $event);
+
+            }
+
+            echo Json_encode($ticket);
+        } catch (InvalidArgumentException | Exception $e) {
+            http_response_code(500); // sending bad request error to APi request if something goes wrong
+            echo $e->getMessage();
+        }
+    }
+
 }
 
 ?>
