@@ -4,7 +4,6 @@ require_once(__DIR__ . '/../models/locations.php');
 
 class LocationRepository extends Repository
 {
-    // Method to get all locations
     public function getAllLocations()
     {
         try {
