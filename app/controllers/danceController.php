@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/controller.php';
 require __DIR__ . '/../services/artistService.php';
-require __DIR__ . '/../models/dance.php';
 
 class DanceController extends Controller
 {
@@ -20,13 +19,21 @@ class DanceController extends Controller
     public function artist()
     {
         if (isset($_GET['id'])) {
-            $artist_id = htmlspecialchars($_GET['id']);
-            $artist = $this->artistService->getArtistById($artist_id);
-            $this->displayView($artist);
+            $_SESSION['artist_id'] = $_GET['id'];
+            $artist = $this->artistService->getArtistById($_SESSION['artist_id']);
+
+            $_SESSION['artist_name'] = $artist->getName();
+            $_SESSION['artist_genre'] = $artist->getGenre();
+            $_SESSION['artist_description'] = $artist->getDescription();
+            $_SESSION['artist_image'] = $artist->getArtistImage();
+
+            $this->displayView($this);
+
         } else {
             header('Location: /dance');
             exit();
         }
+
 
     }
 

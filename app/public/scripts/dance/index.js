@@ -175,12 +175,13 @@ function htmlArtistImage(artist) {
 
     // Create a link to the artist page
     const artistLink = document.createElement('a');
-    artistLink.href = '/dance/artist/' + artist.id + '/' + artist.name.toLowerCase();
+    artistLink.href = '/dance/artist/?id=' + artist.id;
     artistLink.appendChild(artistImage);
 
     artistLink.addEventListener('click', function(event) {
         event.preventDefault();
         // Redirect to the artist page
+        console.log("Redirecting to:", artistLink.href);
         window.location.href = artistLink.href;
     });
 

@@ -23,7 +23,7 @@ class YummyController extends Controller
         ];
 
 
-        $this->displayView($this, $data);
+        $this->displayYummyView($this, $data);
     }
 
     public function restaurant() {

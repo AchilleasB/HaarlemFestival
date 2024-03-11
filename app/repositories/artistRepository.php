@@ -20,6 +20,22 @@ class ArtistRepository extends Repository
         }
     }
 
+    public function getArtistById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare('SELECT * FROM artists WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Artist');
+            $artist = $stmt->fetch();
+
+            return $artist;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
     public function addArtist($artist)
     {
         try {
