@@ -36,6 +36,11 @@ class TicketService
         return $this->ticketRepository->getDanceTicketById($id);
     }
 
+
+    public function getTicketByEvent($customerName, $event){
+    return $this->ticketRepository->getTicketByEvent($customerName, $event);
+    }
+
     public function updateDanceTicketQuantity($orderItemId, $productQuantity)
     {
         return $this->ticketRepository->updateDanceTicketQuantity($orderItemId, $productQuantity);

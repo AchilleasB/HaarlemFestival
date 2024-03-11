@@ -118,15 +118,16 @@ public function createInvoicePdf($user, $orderItems, $products, $invoice)
     public  function createTicketPdf($user, $orderItems, $products){
         
     $tickets = [];
+    $ticketsCount = count(glob("/../public/tickets/" ."*" ));
     foreach($products as $item=>$i){
     $ticket = $orderItems[$item];
     $event = $products[$item]['Event'];
     $eventName = $event->getName();
     $ticketType = $products[$item]['Event']->getTicketType();
     $dateTime = $event->getDateTime();
-    $ticketsCount = count(glob("/../public/tickets" ."*" ));
-    $ticketId = $item;
-    $qrData = $this->generateQrCode($user,$ticketId, $event);
+    $ticketId = ++$ticketsCount;
+    $qrCodeId = bin2hex(random_bytes(50));
+    $qrData = $this->generateQrCode($user,$qrCodeId, $event);
     $ticketHtmlTemplate = __DIR__ . "/../views/shoppingcart/ticket.php";
     
     ob_start();
@@ -149,8 +150,8 @@ public function createInvoicePdf($user, $orderItems, $products, $invoice)
     public function generateQrCode($user, $ticketId, $eventData){
     $name = $user->getFirstname() ." ". $user->getLastname();
     $qr = QrCode::create("Name:". $name ."
-    Event:". $eventData->getName() . "Datetime:" . $eventData->getDateTime() ."");
-    
+    Event:". $eventData->getName() . "
+    Datetime:" . $eventData->getDateTime() ."");
     $writer = new PngWriter();
     $output = $writer->write($qr);
     $file = __DIR__ . "/../public/tickets/qr/qr" . $ticketId . ".png";

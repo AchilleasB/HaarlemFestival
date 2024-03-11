@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 10, 2024 at 12:40 AM
--- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
--- PHP Version: 8.2.16
+-- Generation Time: Mar 11, 2024 at 12:36 PM
+-- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
+-- PHP Version: 8.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -391,7 +391,7 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `date_time` varchar(50) NOT NULL,
   `payment_status` varchar(50) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `total_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -536,11 +536,13 @@ INSERT INTO `sessions` (`id`, `start_date`, `end_date`) VALUES
 
 CREATE TABLE `tickets` (
   `id` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `ticket_type` varchar(50) NOT NULL,
-  `ticket_amount` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `calc_price` decimal(10,2) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `dance_events_id` int(11) DEFAULT NULL,
+  `history_tours_id` int(11) DEFAULT NULL,
+  `reservation_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `order_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -705,8 +707,7 @@ ALTER TABLE `menu_items`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `password_reset_tokens`
@@ -747,8 +748,9 @@ ALTER TABLE `sessions`
 --
 ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `event_id` (`event_id`),
-  ADD KEY `order_id` (`user_id`);
+  ADD KEY `event_id` (`dance_events_id`),
+  ADD KEY `order_id` (`user_id`),
+  ADD KEY `tickets_ibfk_2` (`history_tours_id`);
 
 --
 -- Indexes for table `tour_guides`
@@ -930,12 +932,6 @@ ALTER TABLE `menu_items`
   ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
 -- Constraints for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
@@ -965,8 +961,9 @@ ALTER TABLE `restaurants_sessions`
 -- Constraints for table `tickets`
 --
 ALTER TABLE `tickets`
-  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
-  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`dance_events_id`) REFERENCES `dance_events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`history_tours_id`) REFERENCES `history_tours` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
