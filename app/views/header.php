@@ -23,7 +23,7 @@ if (isset($_SESSION['user_firstname'])) {
                             Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">
+                        <a class="nav-link" aria-current="page" href="/history">
                             <img src="/../icons/history.svg" class="history-icon w-10 h-10" alt="History icon">
                             History</a>
                     </li>
