@@ -7,6 +7,9 @@ require_once __DIR__ . ' /../../models/yummy/restaurantRecommended.php';
 require_once __DIR__ . ' /../../models/yummy/restaurantDetailed.php';
 require_once __DIR__ . ' /../../models/yummy/menuItem.php';
 require_once __DIR__ . ' /../../models/yummy/drinkItem.php';
+require_once __DIR__ . '/../../exceptions/baseException.php';
+require_once __DIR__ . '/../../exceptions/repositoryException.php';
+
 
 class RestaurantRepository extends Repository
 {
@@ -18,18 +21,11 @@ class RestaurantRepository extends Repository
                 r.id, 
                 r.name, 
                 r.number_of_stars,
-                i.image AS banner,
-                GROUP_CONCAT(c.name ORDER BY c.name SEPARATOR ', ') AS cuisines
+                i.image AS banner
             FROM 
                 restaurants r
             INNER JOIN 
-                images i ON r.banner = i.id
-            INNER JOIN 
-                restaurants_cuisines rc ON r.id = rc.restaurant_id
-            INNER JOIN 
-                cuisines c ON rc.cuisine_id = c.id
-            GROUP BY 
-                r.id, r.name, r.number_of_stars, i.image");
+                images i ON r.banner = i.id");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'RestaurantBase');
@@ -38,31 +34,33 @@ class RestaurantRepository extends Repository
             return $restaurants;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
         }
     }
 
-    private function getRestaurantBaseInfoById($restaurantId) {
-        $stmt = $this->connection->prepare("
-        SELECT 
-            r.id, r.name, r.number_of_stars, i.image AS banner, 
-            GROUP_CONCAT(c.name ORDER BY c.name SEPARATOR ', ') AS cuisines
-        FROM 
-            restaurants r
-        INNER JOIN 
-            images i ON r.banner = i.id
-        INNER JOIN 
-            restaurants_cuisines rc ON r.id = rc.restaurant_id
-        INNER JOIN 
-            cuisines c ON rc.cuisine_id = c.id
-        WHERE 
-            r.id = ?
-        GROUP BY 
-            r.id, r.name, r.number_of_stars, i.image
-        LIMIT 1");
-        $stmt->execute([$restaurantId]);
+    public function getRestaurantBaseInfoById($restaurantId) 
+    {
+        try {
+            $stmt = $this->connection->prepare("
+            SELECT 
+                r.id, 
+                r.name, 
+                r.number_of_stars, 
+                i.image AS banner
+            FROM 
+                restaurants r
+            INNER JOIN 
+                images i ON r.banner = i.id
+            WHERE 
+                r.id = ?
+            LIMIT 1");
+            $stmt->execute([$restaurantId]);
 
-        return $stmt->fetchObject('RestaurantBase');
+            return $stmt->fetchObject('RestaurantBase');
+
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
+        }
     }
 
     public function getAllRestaurantsRecommended()
@@ -74,20 +72,13 @@ class RestaurantRepository extends Repository
                 r.name, 
                 r.description,
                 r.number_of_stars,
-                i.image AS banner,
-                GROUP_CONCAT(c.name ORDER BY c.name SEPARATOR ', ') AS cuisines
+                i.image AS banner
             FROM 
                 restaurants r
             INNER JOIN 
                 images i ON r.banner = i.id
-            INNER JOIN 
-                restaurants_cuisines rc ON r.id = rc.restaurant_id
-            INNER JOIN 
-                cuisines c ON rc.cuisine_id = c.id
             WHERE 
-                r.is_recommended = 1
-            GROUP BY 
-                r.id, r.name, r.number_of_stars, i.image");
+                r.is_recommended = 1");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'RestaurantRecommended');
@@ -96,7 +87,8 @@ class RestaurantRepository extends Repository
             return $restaurants;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            //throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
+            echo "" . $e->getMessage();
         }
     }
 
@@ -123,7 +115,8 @@ class RestaurantRepository extends Repository
             return $restaurants;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            //throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
+            echo "" . $e->getMessage();
         }
     }
 
@@ -158,7 +151,9 @@ class RestaurantRepository extends Repository
         $restaurantDetailed->setImages($images);
         foreach ($menu as $category => $items) {
             $restaurantDetailed->setMenu($category, $items);
-        }        
+        }  
+        
+        
 
         return $restaurantDetailed;
     }
@@ -248,7 +243,7 @@ class RestaurantRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error adding restaurant', $e->getCode(), $e);
         }
     }
 
@@ -269,7 +264,7 @@ class RestaurantRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error updating restaurant', $e->getCode(), $e);
         }
     }
 
@@ -282,7 +277,7 @@ class RestaurantRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error deleting restaurant', $e->getCode(), $e);
         }
     }
 }

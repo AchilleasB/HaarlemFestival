@@ -38,7 +38,6 @@ class CuisineRepository extends Repository
     }
 
     public function getCuisinesByRestaurantId($restaurantId): array {
-        $sessions = [];
         try {
             $stmt = $this->connection->prepare("
                 SELECT c.id, c.name
@@ -48,17 +47,14 @@ class CuisineRepository extends Repository
             ");
             $stmt->execute([$restaurantId]);
     
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $sessions[] = new Session(
-                    $row['id'],
-                    new DateTime($row['start_date']),
-                    new DateTime($row['end_date'])
-                );
-            }
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cuisine');
+            $cuisines = $stmt->fetchAll();	
+
+            return $cuisines;
+
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }
-        return $sessions;
     }
 
     public function addCuisine($cuisine)

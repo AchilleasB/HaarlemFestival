@@ -50,7 +50,12 @@ class RestaurantBase
 
     public function getCuisines(): array
     {
-        return $this->cuisines;
+        $cuisineNames = [];
+        foreach ($this->cuisines as $cuisine) {
+            $cuisineNames[] = $cuisine->getName();
+        }
+
+        return $cuisineNames;
     }
 
     public function setCuisines(array $cuisines): void

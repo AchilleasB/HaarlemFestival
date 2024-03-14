@@ -1,27 +1,45 @@
 <?php
 
 require_once __DIR__ . '/../../repositories/yummy/restaurantRepository.php';
+require_once __DIR__ . '/../../repositories/yummy/cuisineRepository.php';
 
 class RestaurantService {
     private $restaurantRepository;
+    private $cuisineRepository;
 
     public function __construct() {
         $this->restaurantRepository = new RestaurantRepository();
+        $this->cuisineRepository = new CuisineRepository();
     }
     
     public function getAllRestaurantsBaseInfo() {
-        return $this->restaurantRepository->getAllRestaurantsBaseInfo();
+        $restaurants = $this->restaurantRepository->getAllRestaurantsBaseInfo();
+        foreach ($restaurants as $restaurant) {
+            $restaurant->setCuisines($this->cuisineRepository->getCuisinesByRestaurantId($restaurant->getId()));
+        }
+
+        return $restaurants;
     }
     
     public function getAllRestaurantsRecommended() {
-        return $this->restaurantRepository->getAllRestaurantsRecommended();
+        $restaurants = $this->restaurantRepository->getAllRestaurantsRecommended();
+        foreach ($restaurants as $restaurant) {
+            $restaurant->setCuisines($this->cuisineRepository->getCuisinesByRestaurantId($restaurant->getId()));
+        }
+
+        return $restaurants;
     }
 
-    public function getAllRestaurantsDetailed() {
-        return $this->restaurantRepository->getAllRestaurantsRecommended();
-    }
+    // public function getAllRestaurantsDetailed() {
+    //     return $this->restaurantRepository->getAllRestaurantsRecommended();
+    // }
 
     public function getRestaurantDetailedInfoById($id) {
+        $restaurantBaseInfo = $this->restaurantRepository->getRestaurantBaseInfoById($id);
+        $restaurantBaseInfo->setCuisines($this->cuisineRepository->getCuisinesByRestaurantId($id));
+
+        
+
         return $this->restaurantRepository->getRestaurantDetailedInfoById($id);
     }
 

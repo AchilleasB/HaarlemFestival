@@ -109,13 +109,15 @@
                             </p>
                             <ul>
                                 <li>
-                                    <p><?php echo htmlspecialchars($restaurantRecommended->getCuisines()); ?>
-                                    </p>
+                                    <?php 
+                                    $cuisineList = implode(', ', $restaurantRecommended->getCuisines());
+                                    echo htmlspecialchars($cuisineList); 
+                                    ?>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                        <a href="/yummy/restaurant?id=<?php echo htmlspecialchars($restaurantRecommended->getId()); ?>"
+                            <a href="/yummy/restaurant?id=<?php echo htmlspecialchars($restaurantRecommended->getId()); ?>"
                                 class="btn custom-more-info-btn mt-auto">More Info</a>
                         </div>
                     </div>
@@ -140,8 +142,10 @@
                             </p>
                             <ul class="mb-3" style="padding-left: 5%;">
                                 <li>
-                                    <p class="card-text"><?php echo htmlspecialchars($restaurant->getCuisines()); ?>
-                                    </p>
+                                    <?php 
+                                    $cuisineList = implode(', ', $restaurant->getCuisines());
+                                    echo htmlspecialchars($cuisineList); 
+                                    ?>
                                 </li>
                             </ul>
                             <a href="/yummy/restaurant?id=<?php echo htmlspecialchars($restaurant->getId()); ?>"
