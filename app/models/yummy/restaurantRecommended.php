@@ -1,6 +1,6 @@
 <?php
 
-class RestaurantRecommended extends Restaurant
+class RestaurantRecommended extends RestaurantBase
 {
     protected string $description;
 

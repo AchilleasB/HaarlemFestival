@@ -8,10 +8,6 @@ class RestaurantService {
     public function __construct() {
         $this->restaurantRepository = new RestaurantRepository();
     }
-
-    public function getAllRestaurants() {
-        return $this->restaurantRepository->getAllRestaurants();
-    }
     
     public function getAllRestaurantsBaseInfo() {
         return $this->restaurantRepository->getAllRestaurantsBaseInfo();
@@ -30,7 +26,7 @@ class RestaurantService {
     }
 
     public function addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner) {
-        $restaurant = new Restaurant();
+        $restaurant = new RestaurantBase();
         $restaurant->setName($name);
         $restaurant->setNumberOfStars($numberOfStars);
         $restaurant->setBanner($banner);
@@ -39,7 +35,7 @@ class RestaurantService {
     }
 
     public function updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $banner) {
-        $restaurant = new Restaurant();
+        $restaurant = new RestaurantBase();
         $restaurant->setId($id);
         $restaurant->setName($name);
         $restaurant->setNumberOfStars($numberOfStars);

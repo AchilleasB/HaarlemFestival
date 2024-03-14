@@ -9,21 +9,14 @@ class SessionService {
         $this->sessionRepository = new SessionRepository();
     }
 
-    private function validateDates($startDate, $endDate) {
-        $startDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $startDate);
-        $endDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $endDate);
-
-        if ($startDateTime === false || $endDateTime === false) {
-            throw new Exception("Invalid date format. Please use 'Y-m-d H:i:s'.");
-        }
-
-        if ($startDateTime >= $endDateTime) {
-            throw new Exception("Start date must be before end date.");
-        }
-
-        return [$startDateTime, $endDateTime];
+    public function getAllSessions() {
+        return $this->sessionRepository->getAllSessions();
     }
 
+    public function getSessionsByRestaurantId($restaurantId) {
+        return $this->sessionRepository->getSessionsByRestaurantId($restaurantId);
+    }
+    
     public function addSession($startDate, $endDate) {
         list($startDateTime, $endDateTime) = $this->validateDates($startDate, $endDate);
 
@@ -47,5 +40,20 @@ class SessionService {
 
     public function deleteSession($id) {
         return $this->sessionRepository->deleteSession($id);
+    }
+
+    private function validateDates($startDate, $endDate) {
+        $startDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $startDate);
+        $endDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $endDate);
+
+        if ($startDateTime === false || $endDateTime === false) {
+            throw new Exception("Invalid date format. Please use 'Y-m-d H:i:s'.");
+        }
+
+        if ($startDateTime >= $endDateTime) {
+            throw new Exception("Start date must be before end date.");
+        }
+
+        return [$startDateTime, $endDateTime];
     }
 }

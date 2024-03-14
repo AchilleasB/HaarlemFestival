@@ -21,7 +21,7 @@ class SessionRepository extends Repository
         }
     }
 
-    public function fetchSessionsForRestaurant($restaurantId): array {
+    public function getSessionsByRestaurantId($restaurantId): array {
         $sessions = [];
         try {
             $stmt = $this->connection->prepare("

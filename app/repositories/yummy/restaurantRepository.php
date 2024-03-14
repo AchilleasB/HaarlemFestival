@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/restaurantImageRepository.php';
 require_once __DIR__ . '/sessionRepository.php';
-require_once __DIR__ . ' /../../models/yummy/restaurant.php';
+require_once __DIR__ . ' /../../models/yummy/restaurantBase.php';
 require_once __DIR__ . ' /../../models/yummy/restaurantRecommended.php';
 require_once __DIR__ . ' /../../models/yummy/restaurantDetailed.php';
 require_once __DIR__ . ' /../../models/yummy/menuItem.php';
@@ -32,7 +32,7 @@ class RestaurantRepository extends Repository
                 r.id, r.name, r.number_of_stars, i.image");
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Restaurant');
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'RestaurantBase');
             $restaurants = $stmt->fetchAll();
 
             return $restaurants;
@@ -62,7 +62,7 @@ class RestaurantRepository extends Repository
         LIMIT 1");
         $stmt->execute([$restaurantId]);
 
-        return $stmt->fetchObject('Restaurant');
+        return $stmt->fetchObject('RestaurantBase');
     }
 
     public function getAllRestaurantsRecommended()
@@ -149,8 +149,8 @@ class RestaurantRepository extends Repository
         $number_of_seats = $this->fetchNumberOfSeatsForRestaurant($restaurantId);
         $menu = $this->fetchMenuForRestaurant($restaurantId);
         $images = $imageRepository->getImagesByRestaurantId($restaurantId);
-        $sessions = $sessionRepository->fetchSessionsForRestaurant($restaurantId);
-        $restaurantDetailed->setSessions($sessions);
+        //$sessions = $sessionRepository->fetchSessionsForRestaurant($restaurantId);
+        //$restaurantDetailed->setSessions($sessions);
 
         $restaurantDetailed->setLocation($location);
         $restaurantDetailed->setNumberOfSeats($number_of_seats);

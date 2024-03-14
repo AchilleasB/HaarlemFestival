@@ -1,12 +1,12 @@
 <?php
 
-class Restaurant
+class RestaurantBase
 {
     protected int $id;
     protected string $name;
     protected int $number_of_stars;
     protected string $banner;
-    protected string $cuisines;
+    protected array $cuisines;
 
     public function getId(): int
     {
@@ -27,7 +27,7 @@ class Restaurant
     {
         $this->name = $name;
     }
-    
+
     public function getNumberOfStars(): int
     {
         return $this->number_of_stars;
@@ -48,13 +48,13 @@ class Restaurant
         $this->banner = $banner;
     }
 
-    public function getCuisines(): string
+    public function getCuisines(): array
     {
         return $this->cuisines;
     }
 
-    public function setCuisines(string $cuisines): void
+    public function setCuisines(array $cuisines): void
     {
         $this->cuisines = $cuisines;
     }
-} 
+}
