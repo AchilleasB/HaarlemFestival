@@ -17,6 +17,7 @@
     <?php
     include __DIR__ . '/../header.php';
     require __DIR__ . '/../../config/imgconfig.php';
+    require __DIR__ . '/../../config/urlconfig.php';
     ?>
 
     <main>
@@ -56,6 +57,10 @@
     include __DIR__ . '/../footer.php';
     ?>
 
+    <script>
+        const imageBasePath = "<?php echo $imageBasePath; ?>";
+        const urlBasePath = "<?php echo $urlBasePath; ?>";
+    </script>
     <script src="/../scripts/dance/cms/index.js"></script>
     <script src="/../scripts/dance/cms/addEvent.js"></script>
     <script src="/../scripts/dance/cms/addArtist.js"></script>
@@ -66,4 +71,3 @@
     <script src="/../scripts/dance/cms/deleteEvent.js"></script>
     <script src="/../scripts/dance/cms/deleteArtist.js"></script>
     <script src="/../scripts/dance/cms/deleteVenue.js"></script>
-    <script> var imageBasePath = "<?php echo $imageBasePath; ?>";</script>

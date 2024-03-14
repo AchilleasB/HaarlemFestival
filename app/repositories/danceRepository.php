@@ -152,14 +152,59 @@ class DanceRepository extends Repository
 
     function addTicketToCart($danceTicket){
         try {
-            $stmt = $this->connection->prepare('INSERT INTO dance_tickets (amount, event_id, user_id) VALUES (:amount, :event_id, :user_id)');
+            $stmt = $this->connection->prepare('INSERT INTO tickets (id, amount, calc_price, dance_event_id, user_id) 
+                                                VALUES (:id, :amount, :calc_price, :dance_event_id, :user_id)');
             $stmt->execute([
+                ':id' => $danceTicket->getId(),
                 ':amount' => $danceTicket->getAmount(),
-                ':event_id' => $danceTicket->getEventId(),
+                ':calc_price' => $danceTicket->getCalcPrice(),
+                ':dance_event_id' => $danceTicket->getDanceEventId(),
                 ':user_id' => $danceTicket->getUserId()            
             ]);
             
             return true;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function getDanceEventPrice($id){
+        try {
+            $stmt = $this->connection->prepare('SELECT price FROM dance_events WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Dance');
+            $price = $stmt->fetch();
+
+            return $price->getPrice();
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function checkTicketAvailablityAndDeduct($ticket){
+
+        try {
+            $stmt = $this->connection->prepare('SELECT tickets_available FROM dance_events WHERE id = :id');
+            $stmt->execute([':id' => $ticket->getDanceEventId()]);
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Dance');
+            $ticketsAvailable = $stmt->fetch();
+
+            if ($ticketsAvailable->getTicketsAvailable() >= $ticket->getAmount()) {
+                $newTicketsAvailable = $ticketsAvailable->getTicketsAvailable() - $ticket->getAmount();
+                $stmt = $this->connection->prepare('UPDATE dance_events SET tickets_available = :tickets_available WHERE id = :id');
+                $stmt->execute([
+                    ':id' => $ticket->getDanceEventId(),
+                    ':tickets_available' => $newTicketsAvailable
+                ]);
+
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();

@@ -1,6 +1,6 @@
-const danceEventsAPIendpoint = "http://localhost/api/danceEvents";
-const artistsAPIendpoint = "http://localhost/api/artists";
-const venuesAPIendpoint = "http://localhost/api/venues";
+const danceEventsAPIendpoint = urlBasePath + 'api/danceEvents';
+const artistsAPIendpoint = urlBasePath + 'api/artists';
+const venuesAPIendpoint = urlBasePath + 'api/venues';
 
 const itemsListContainer = document.getElementById("items-list");
 const eventsRadioButton = document.getElementById("btnradio1");

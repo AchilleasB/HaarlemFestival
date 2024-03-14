@@ -16,6 +16,7 @@
 <body>
     <?php
     include __DIR__ . '/../header.php';
+
     ?>
     <main>
         <div class="red-line"></div>
@@ -31,3 +32,5 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+    
+    

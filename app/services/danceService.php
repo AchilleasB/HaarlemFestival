@@ -76,4 +76,14 @@ class DanceService
         return $this->danceRepository->addTicketToCart($danceTicket);
     }
 
+    function getDanceEventPrice($id)
+    {
+        return $this->danceRepository->getDanceEventPrice($id);
+    }
+
+    function checkTicketAvailablityAndDeduct($danceTicket)
+    {
+        return $this->danceRepository->checkTicketAvailablityAndDeduct($danceTicket);
+    }
+
 }
