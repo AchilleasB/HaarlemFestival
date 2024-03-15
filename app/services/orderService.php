@@ -30,9 +30,9 @@ class OrderService
     }
 
     
-    public function addOrder($id, $payment_status, $user_id)
+    public function addOrder($id, $payment_status, $total_price)
     {
-        return $this->orderRepository->addOrder($id, $payment_status, $user_id);
+        return $this->orderRepository->addOrder($id, $payment_status, $total_price);
     }
 
 

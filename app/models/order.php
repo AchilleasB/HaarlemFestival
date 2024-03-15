@@ -7,7 +7,7 @@ class Order implements \JsonSerializable
     private int $id;
     private string $date_time;
     private string $payment_status;
-    private int $user_id;
+    private float $total_price;
 
     public function jsonSerialize(): mixed
     {
@@ -64,17 +64,17 @@ public function setPaymentStatus(string $payment_status)
 
 
 /**
- * @return int
+ * @return float
  */
-public function getUserId(): int
+public function getTotalPrice(): int
 {
-    return $this->user_id;
+    return $this->total_price;
 }
 
 
-public function setUserId(int $user_id)
+public function setTotalPrice(float $total_price)
 {
-    $this->user_id = $user_id;
+    $this->total_price = $total_price;
 }  
 
 
