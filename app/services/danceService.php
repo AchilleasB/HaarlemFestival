@@ -81,9 +81,18 @@ class DanceService
         return $this->danceRepository->getDanceEventPrice($id);
     }
 
-    function checkTicketAvailablityAndDeduct($danceTicket)
+    function checkTicketAvailablityAndUpdate($danceTicket)
     {
-        return $this->danceRepository->checkTicketAvailablityAndDeduct($danceTicket);
+        $id = $danceTicket->getDanceEventId();
+        $danceTicketsAvailable = $this->danceRepository->ticketsAvailable($id);
+
+        if ($danceTicketsAvailable >= $danceTicket->getAmount()) {
+            $newTicketAmount = $danceTicketsAvailable - $danceTicket->getAmount();
+            return $this->danceRepository->updateTicketsAmount($id, $newTicketAmount);
+        }
+        else{
+            return false;
+        }
     }
 
 }

@@ -111,7 +111,7 @@ class DanceEventsController
 
             if ($object->amount === 0) {
                 $message = 'Invalid amount! Try again with a valid amount of tickets';
-            } elseif ($this->danceService->checkTicketAvailablityAndDeduct($danceTicket)) {
+            } elseif ($this->danceService->checkTicketAvailablityAndUpdate($danceTicket)) {
                 if($this->danceService->addTicketToCart($danceTicket)){
                     $message = 'Ticket(s) added to cart successfully';
                 } else {

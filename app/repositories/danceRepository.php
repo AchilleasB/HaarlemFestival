@@ -184,8 +184,7 @@ class DanceRepository extends Repository
         }
     }
 
-    function checkTicketAvailablityAndDeduct($ticket){
-
+    function areTicketsAvailable($ticket){
         try {
             $stmt = $this->connection->prepare('SELECT tickets_available FROM dance_events WHERE id = :id');
             $stmt->execute([':id' => $ticket->getDanceEventId()]);
@@ -194,17 +193,40 @@ class DanceRepository extends Repository
             $ticketsAvailable = $stmt->fetch();
 
             if ($ticketsAvailable->getTicketsAvailable() >= $ticket->getAmount()) {
-                $newTicketsAvailable = $ticketsAvailable->getTicketsAvailable() - $ticket->getAmount();
-                $stmt = $this->connection->prepare('UPDATE dance_events SET tickets_available = :tickets_available WHERE id = :id');
-                $stmt->execute([
-                    ':id' => $ticket->getDanceEventId(),
-                    ':tickets_available' => $newTicketsAvailable
-                ]);
-
                 return true;
             } else {
                 return false;
             }
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+    
+    function ticketsAvailable($id){
+        try {
+            $stmt = $this->connection->prepare('SELECT tickets_available FROM dance_events WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Dance');
+            $dance_event = $stmt->fetch();
+
+            return $dance_event->getTicketsAvailable();
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function updateTicketsAmount($id, $newTicketsAvailable){
+        try {
+            $stmt = $this->connection->prepare('UPDATE dance_events SET tickets_available = :tickets_available WHERE id = :id');
+            $stmt->execute([
+                ':id' => $id,
+                ':tickets_available' => $newTicketsAvailable
+            ]);
+
+            return true;
 
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
