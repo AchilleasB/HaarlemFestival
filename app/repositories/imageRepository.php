@@ -1,8 +1,6 @@
 <?php
 
-require __DIR__ . '/../repository.php';
-
-class RestaurantImageRepository extends Repository
+class ImageRepository extends Repository
 {
     public function getImagesByRestaurantId($restaurantId)
     {
@@ -17,7 +15,7 @@ class RestaurantImageRepository extends Repository
         }
     }
 
-    public function addImage($restaurantId, $imagePath)
+    public function addImageToRestaurant($restaurantId, $imagePath)
     {
         try {
             $stmt = $this->connection->prepare('INSERT INTO images (image, restaurant_id) VALUES (:image, :restaurant_id)');

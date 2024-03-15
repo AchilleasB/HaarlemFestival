@@ -33,16 +33,17 @@ class SessionRepository extends Repository
             $stmt->execute([$restaurantId]);
     
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $sessions[] = new Session(
-                    $row['id'],
-                    new DateTime($row['start_date']),
-                    new DateTime($row['end_date'])
-                );
+                $session = new Session();
+                $session->setId($row['id']);
+                $session->setStartDate(new DateTime($row['start_date']));
+                $session->setEndDate(new DateTime($row['end_date']));
+                $sessions[] = $session;
             }
+    
+            return $sessions;
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }
-        return $sessions;
     }
 
     public function addSession($session)

@@ -51,7 +51,11 @@ class RestaurantDetailed extends RestaurantRecommended
     }
 
     public function getSessions(): array {
-        return $this->sessions;
+        $sessionDates = [];
+        foreach ($this->sessions as $session) {
+            $sessionDates[] = $session->__toString();
+        }
+        return $sessionDates;
     }
     
     public function setSessions(array $sessions): void {

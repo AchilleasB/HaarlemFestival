@@ -82,6 +82,30 @@
     .menu-price {
         margin-left: 15px;
     }
+
+    .table-wrapper {
+        background-color: #f2f2f2;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .schedule {
+        background-color: #D9D9D9;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0px;
+    }
+
+    .table th {
+        border: 2px solid;
+        padding: 8px;
+    }
     </style>
 </head>
 
@@ -104,10 +128,12 @@
                 </div>
                 <p><?php echo htmlspecialchars($restaurant->getDescription()); ?></p>
                 <h4>Offered Cuisines</h4>
-                <ul class="list-unstyled mb-3">
+                <ul>
+                    <?php foreach ($restaurant->getCuisines() as $cuisine): ?>
                     <li>
-                        <p><b><?php echo htmlspecialchars($restaurant->getCuisines()); ?></b></p>
+                        <?php echo htmlspecialchars($cuisine); ?>
                     </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -192,7 +218,40 @@
                 </div>
             </div>
         </div>
-
+        <div class="row mb-5">
+            <div class="col-md-8 schedule">
+                <h3>Schedule</h3>
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Start</th>
+                                <th>End</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $count = 1; ?>
+                            <?php foreach ($restaurant->getSessions() as $session): ?>
+                            <?php list($start, $end) = explode(', ', $session); ?>
+                            <tr>
+                                <td><?php echo $count++; ?></td>
+                                <td><?php echo $start; ?></td>
+                                <td><?php echo $end; ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3>Location</h3>
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-map-marker-alt text-danger me-2" style="font-size: 1.5rem;"></i>
+                    <p class="mb-0"><?php echo htmlspecialchars($restaurant->getLocation()); ?></p>
+                </div>
+            </div>
+        </div>
     </div>
     <?php
     include __DIR__ . '/../footer.php';

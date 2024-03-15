@@ -39,10 +39,9 @@ class Session
     public function __toString(): string
     {
         return sprintf(
-            "Session ID: %d, Start: %s, End: %s",
-            $this->getId(),
-            $this->getStartDate()->format('Y-m-d H:i:s'),
-            $this->getEndDate()->format('Y-m-d H:i:s')
+            "%s, %s",
+            $this->getStartDate()->format('d.m.Y - H:i'),
+            $this->getEndDate()->format('H:i - d.m.Y')
         );
     }
 }
