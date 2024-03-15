@@ -35,6 +35,7 @@ class ShoppingCartController extends Controller
     $this->currentOrderItems = $this->getItems();
     $this->products = $this->shoppingCartService->getProducts($this->currentOrderItems);
     $this->orderTotal = $this->shoppingCartService->calculateOrderTotal($this->currentOrderItems, $this->products);
+    $this->orderVAT= $this->shoppingCartService->calculateOrderVAT($this->currentOrderItems, $this->products);
     $this->mollie = new \Mollie\Api\MollieApiClient();
     $this->mollie->setApiKey($mollieKey);
     $this->mollieProfile = $this->mollie->profiles->getCurrent();
