@@ -19,10 +19,9 @@
 
     $user_id = $_SESSION['user_id'];
     require __DIR__ . '/../../config/imgconfig.php';
-
+    require __DIR__ . '/../../config/urlconfig.php';
     ?>
     <main>
-        <div class="red-line"></div>
         <div class="tickets-container">
             <h1 class="header mb-5">GET YOUR TICKETS</h1>
             <div class="tickets-menu" role="group" aria-label="Basic radio toggle button group"></div>
@@ -35,8 +34,9 @@
     include __DIR__ . '/../footer.php';
     ?>
 
-    <script type="module" src="../scripts/dance/tickets.js"></script>
     <script>
         const imageBasePath = "<?php echo $imageBasePath; ?>";
         const user_id = <?php echo json_encode($user_id) ?>;
+        const urlBasePath = "<?php echo $urlBasePath; ?>";
     </script>
+    <script type="module" src="../scripts/dance/tickets.js"></script>

@@ -90,3 +90,5 @@ if (isset($_SESSION['user_firstname'])) {
         </div>
     </div>
 </nav>
+<div class="red-line"></div>
+<!-- end of navbar -->

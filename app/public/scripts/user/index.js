@@ -1,4 +1,4 @@
-const usersAPIendpoint = "http://localhost/api/users";
+const usersAPIendpoint = urlBasePath + "api/users";
 const itemsListContainer = document.getElementById("items-list");
 const addUserButtonContainer = document.getElementById("add-user-button");
 const addUserFormContainer = document.getElementById("add-user-form-container")
