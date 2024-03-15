@@ -15,8 +15,10 @@
 <body class="border border-white ">
   <?php
     include __DIR__ . '/../header.php';
+    require __DIR__ . '/../../config/hostnameConfig.php';
+
     ?>
-  <main class="border border-white">
+  <main class="border border-white mb-5">
     <div class="grid pt-5" style="--bs-columns: 10; --bs-gap: 1rem;">
       <div class="g-col-7">
         <div class="table-responsive">
@@ -169,7 +171,7 @@
         <form method="" action="/shoppingCart/selectPaymentMethod">
           <input class="rounded-0 py-3 w-100 " type=submit name=action id="checkoutBtn" value="CHECKOUT NOW" />
         </form>
-        <div class="grid ">
+        <div class="grid">
           <div class="g-col-2 ">Payment methods</div>
           <div class="g-col-2 "><img src="https://www.svgrepo.com/show/266085/ideal.svg" width="64" height="64"></div>
           <div class="g-col-2 "><img src="https://www.svgrepo.com/show/266070/visa.svg" width="64" height="64"></div>
@@ -183,5 +185,6 @@
     include __DIR__ . '/../footer.php';
     ?>
 </body>
+<script> var host = "<?php echo $hostname; ?>";</script>
 <script src="/scripts/shoppingcart/shoppingcart.js"></script>
 </html>

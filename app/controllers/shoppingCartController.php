@@ -4,7 +4,6 @@ require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/userService.php';
 require_once __DIR__ . '/../services/orderService.php';
 require_once __DIR__ . '/../services/shoppingCartService.php';
-require_once __DIR__ . '/../services/invoiceService.php';
 
 
 
@@ -13,7 +12,6 @@ class ShoppingCartController extends Controller
   private $shoppingCartService;
   private $userService;
   private $orderService;
-  private $invoiceService;
   private $user;
   private $currentOrder;
   private $currentOrderItems;
@@ -29,18 +27,18 @@ class ShoppingCartController extends Controller
   function __construct()
   {
 
+    require_once __DIR__ . '/../config/mollieConfig.php';
     $this->userService = new UserService();
     $this->orderService = new OrderService();
     $this->shoppingCartService = new ShoppingCartService();
-    $this->invoiceService = new InvoiceService();
     $this->user = $this->userService->getUserByEmail($_SESSION['user_email']);
     $this->currentOrderItems = $this->getItems();
     $this->products = $this->shoppingCartService->getProducts($this->currentOrderItems);
     $this->orderTotal = $this->shoppingCartService->calculateOrderTotal($this->currentOrderItems, $this->products);
-    $this->orderVAT = $this->shoppingCartService->calculateOrderVAT($this->currentOrderItems, $this->products);
     $this->mollie = new \Mollie\Api\MollieApiClient();
-    $this->mollie->setApiKey("test_j9xt6arbDFryMyzy94MRsT9VTH553s");
+    $this->mollie->setApiKey($mollieKey);
     $this->mollieProfile = $this->mollie->profiles->getCurrent();
+    
 
   }
 
@@ -83,7 +81,6 @@ class ShoppingCartController extends Controller
         $newTicket->setEventId($ticket->getEventId());
         $newTicket->setUserId($ticket->getUserId());
 
-       // array_splice($_SESSION['order_items_data'], $itemCount, 1);
         $_SESSION['order_items_data'][$itemCount] = $newTicket; 
     }
   }
@@ -95,8 +92,12 @@ class ShoppingCartController extends Controller
 
   public function selectPaymentMethod()
   {
+    if ($this->orderTotal > 0) {
     require '../views/shoppingCart/paymentMethod.php';
-
+  }
+  else {
+    header("location: /shoppingCart");
+  }
 
   }
 
@@ -168,8 +169,6 @@ class ShoppingCartController extends Controller
           "order_id" => $orderId,
           "user_email" => $this->user->getEmail(),
           "order_items" => $this->currentOrderItems,
-          "order_vat" => $this->orderVAT,
-
 
         ],
       ]);
@@ -221,7 +220,6 @@ class ShoppingCartController extends Controller
           "order_id" => $orderId,
           "user_email" => $this->user->getEmail(),
           "order_items" => $this->currentOrderItems,
-          "order_vat" => $this->orderVAT,
         ],
         "captureMode" => 'manual',
         "method" => "creditcard",

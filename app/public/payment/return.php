@@ -26,21 +26,18 @@
  if ($currentPayment->status=="paid" ||  $currentPayment->status=="authorized"){
 
   //create new order then create invoice, send invoice and tickets
-  $order = new Order();
   $orderId = $currentPayment->metadata->order_id; 
+  $orderTotal = $currentPayment->amount->value;
   $orderPaymentStatus='paid';
   $user =  $userService->getUserByEmail($userEmail);
   $orderUserId = $user->getId();
-  $orderService->addOrder($orderId, $orderPaymentStatus,$orderUserId);
+  $order = $orderService->addOrder($orderId, $orderPaymentStatus, $orderTotal);
 
 
   $orderItems = $currentPayment->metadata->order_items;
   $products = $shoppingCartService->getProducts($orderItems, true);
-  $orderTotal = $currentPayment->amount->value;
-  $orderVAT = $currentPayment->metadata->order_vat;
-  $invoice = $invoiceService->addBill($_GET["order_id"], $orderVAT, $orderTotal);
-  $shoppingCartService->createInvoicePdf($user, $orderItems, $products, $invoice);
-  $mailService->sendInvoiceMail($userEmail, __DIR__ . "/../invoices/InvoiceNr". $invoice->getId() . ".pdf");
+  $shoppingCartService->createInvoicePdf($user, $orderItems, $products, $order);
+  $mailService->sendInvoiceMail($userEmail, __DIR__ . "/../invoices/InvoiceNr". $order->getId() . ".pdf");
   $tickets = $shoppingCartService->createTicketPdf($user, $orderItems, $products);
   $mailService->sendTicketsMail($userEmail, $tickets);
 

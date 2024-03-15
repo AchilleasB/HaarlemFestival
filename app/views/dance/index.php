@@ -16,7 +16,7 @@
 <body>
     <?php
     include __DIR__ . '/../header.php';
-    require __DIR__ . '/../../config/imgconfig.php';
+    // require __DIR__ . '/../../config/imgconfig.php';
 
     ?>
     <main>
@@ -69,7 +69,7 @@
     ?>
 
     <script type="module" src="../scripts/dance/index.js"></script>
-    <script> var imageBasePath = "<?php echo $imageBasePath; ?>";</script>
+    <script> var imageBasePath = "<?php echo '/images/'; ?>";</script>
     <script>
         document.querySelectorAll('.buy-tickets-btn').forEach(function (button) {
             button.addEventListener('click', function () {
