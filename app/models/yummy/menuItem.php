@@ -5,7 +5,7 @@ class MenuItem
     private int $id;
     private string $name;
     private string $description;
-    private string $price_per_portion;
+    private ?string $price_per_portion;
 
     public function getId(): int
     {
@@ -37,12 +37,12 @@ class MenuItem
         $this->description = $description;
     }
 
-    public function getPricePerPortion(): string
+    public function getPricePerPortion(): ?string
     {
         return $this->price_per_portion;
     }
 
-    public function setPricePerPortion(string $price_per_portion): void
+    public function setPricePerPortion(?string $price_per_portion): void
     {
         $this->price_per_portion = $price_per_portion;
     }

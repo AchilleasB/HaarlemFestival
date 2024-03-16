@@ -40,14 +40,14 @@ class RestaurantService {
     }
 
     public function getRestaurantDetailedInfoById($id) {
-        $restaurantDetailedInfo = $this->restaurantRepository->getRestaurantDetailedInfoById($id);
-        $restaurantDetailedInfo->setCuisines($this->cuisineRepository->getCuisinesByRestaurantId($id));
         $menu = $this->menuRepository->getMenuForRestaurant($id);
         $images = $this->imageRepository->getImagesByRestaurantId($id);
         $sessions = $this->sessionRepository->getSessionsByRestaurantId($id);
+
+        $restaurantDetailedInfo = $this->restaurantRepository->getRestaurantDetailedInfoById($id);
+        $restaurantDetailedInfo->setCuisines($this->cuisineRepository->getCuisinesByRestaurantId($id));
         $restaurantDetailedInfo->setImages($images);
         $restaurantDetailedInfo->setSessions($sessions);
-        
         foreach ($menu as $category => $items) {
             $restaurantDetailedInfo->setMenu($category, $items);
         }

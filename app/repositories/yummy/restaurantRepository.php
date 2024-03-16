@@ -1,12 +1,9 @@
 <?php
 
-//require_once __DIR__ . '/../imageRepository.php';
 require_once __DIR__ . '/sessionRepository.php';
 require_once __DIR__ . ' /../../models/yummy/restaurantBase.php';
 require_once __DIR__ . ' /../../models/yummy/restaurantRecommended.php';
 require_once __DIR__ . ' /../../models/yummy/restaurantDetailed.php';
-//require_once __DIR__ . ' /../../models/yummy/menuItem.php';
-//require_once __DIR__ . ' /../../models/yummy/drinkItem.php';
 require_once __DIR__ . '/../../exceptions/baseException.php';
 require_once __DIR__ . '/../../exceptions/repositoryException.php';
 
@@ -87,8 +84,7 @@ class RestaurantRepository extends Repository
             return $restaurants;
 
         } catch (PDOException $e) {
-            //throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
-            echo "" . $e->getMessage();
+            throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
         }
     }
 
@@ -115,8 +111,7 @@ class RestaurantRepository extends Repository
             return $restaurants;
 
         } catch (PDOException $e) {
-            //throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
-            echo "" . $e->getMessage();
+            throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
         }
     }
 
@@ -146,51 +141,6 @@ class RestaurantRepository extends Repository
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
         }
-    }
-
-    private function fetchLocationForRestaurant($restaurantId) {
-        $stmt = $this->connection->prepare("SELECT location FROM restaurants WHERE id = ?");
-        $stmt->execute([$restaurantId]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            return $row['location'];
-        }
-
-        //TODO: Throw an exception
-        return null;
-    }
-
-    private function fetchMenuForRestaurant($restaurantId) {
-        $menuItems = [];
-        $stmt = $this->connection->prepare("
-            SELECT mi.*, d.price_bottle 
-            FROM menu_items mi
-            LEFT JOIN drinks d ON mi.id = d.id
-            WHERE mi.restaurant_id = ?");
-        $stmt->execute([$restaurantId]);
-        
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if (is_null($row['price_bottle'])) {
-                // It's a regular menu item (food), not a drink
-                $menuItem = new MenuItem();
-                $menuItem->setId($row['id']);
-                $menuItem->setName($row['name']);
-                $menuItem->setDescription($row['description']);
-                $menuItem->setPricePerPortion($row['price_per_portion']);
-                $menuItems['food'][] = $menuItem;
-            } else {
-                // It's a drink
-                $drinkItem = new DrinkItem();
-                $drinkItem->setId($row['id']);
-                $drinkItem->setName($row['name']);
-                $drinkItem->setDescription($row['description']);
-                $drinkItem->setPricePerPortion($row['price_per_portion']);
-                $drinkItem->setPriceBottle($row['price_bottle']);
-                $menuItems['drinks'][] = $drinkItem;
-            }
-        }
-
-        return $menuItems;
     }
 
     public function addRestaurant($restaurant)

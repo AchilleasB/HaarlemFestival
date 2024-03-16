@@ -106,6 +106,20 @@
         border: 2px solid;
         padding: 8px;
     }
+
+    .btn-custom {
+        background-color: #040404;
+        color: white;
+        padding: 20px 40px;
+        font-size: 1.8rem;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background-color: #C63C3C;
+    }
     </style>
 </head>
 
@@ -116,7 +130,7 @@
     ?>
 
     <div class="container pt-5">
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-md-8">
                 <div class="d-flex align-items-center mb-3 heading">
                     <h1 class="mb-0"><?php echo htmlspecialchars($restaurant->getName()); ?></h1>
@@ -142,11 +156,17 @@
                     alt="Image of <?php echo htmlspecialchars($restaurant->getName()) ?>">
             </div>
         </div>
-        <div class="row mt-5 menu">
+
+        <?php 
+        $foodItems = $restaurant->getMenu('food'); 
+        $drinkItems = $restaurant->getMenu('drinks'); 
+        ?>
+        <?php if (!empty($foodItems) || !empty($drinkItems)): ?>
+        <!-- Render menus -->
+        <div class="row mt-5 mb-3 menu">
             <div>
                 <h3 class="heading">Menu</h3>
                 <ul class="list-unstyled">
-                    <?php $foodItems = $restaurant->getMenu('food'); ?>
                     <?php if (!empty($foodItems)): ?>
                     <?php foreach ($foodItems as $menuItem): ?>
                     <li>
@@ -157,8 +177,12 @@
                                         <span
                                             class="menu-title"><?php echo htmlspecialchars($menuItem->getName()); ?></span>
                                         <div class="dotted-line"></div>
-                                        <span
-                                            class="menu-prices">&#8364;<?php echo htmlspecialchars($menuItem->getPricePerPortion()); ?></span>
+                                        <span class="menu-prices">
+                                            <?php 
+                                                    $pricePerPortion = $menuItem->getPricePerPortion();
+                                                    echo ($pricePerPortion !== null) ? '&#8364;' . htmlspecialchars($pricePerPortion) : 'Price not available'; 
+                                                ?>
+                                        </span>
                                     </div>
                                     <div class="menu-description">
                                         <?php echo htmlspecialchars($menuItem->getDescription()); ?>
@@ -169,7 +193,7 @@
                     </li>
                     <?php endforeach; ?>
                     <?php endif; ?>
-                    <?php $drinkItems = $restaurant->getMenu('drinks'); ?>
+
                     <?php if (!empty($drinkItems)): ?>
                     <h3 class="heading mt-5 d-flex align-items-center">Drinks</h3>
                     <?php foreach ($drinkItems as $menuItem): ?>
@@ -183,8 +207,10 @@
                                         <div class="dotted-line"></div>
                                         <div class="menu-prices">
                                             <span class="me-3">
-                                                <i class="fas fa-wine-glass"></i>
-                                                &#8364;<?php echo htmlspecialchars($menuItem->getPricePerPortion()); ?>
+                                                <?php 
+                                                        $pricePerPortion = $menuItem->getPricePerPortion();
+                                                        echo ($pricePerPortion !== null) ? '<i class="fas fa-wine-glass"></i> &#8364;' . htmlspecialchars($pricePerPortion) : ''; 
+                                                    ?>
                                             </span>
                                             <span>
                                                 <i class="fas fa-wine-bottle"></i>
@@ -204,7 +230,10 @@
                 </ul>
             </div>
         </div>
-        <div class="row mt-3">
+        <?php endif; ?>
+        <?php if (!empty($restaurant->getImages())): ?>
+        <!-- Render gallery -->
+        <div class="row">
             <div class="col-md-12">
                 <h4>Gallery</h4>
                 <div class="row">
@@ -218,6 +247,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
         <div class="row mb-5">
             <div class="col-md-8 schedule">
                 <h3>Schedule</h3>
@@ -250,6 +280,11 @@
                     <i class="fas fa-map-marker-alt text-danger me-2" style="font-size: 1.5rem;"></i>
                     <p class="mb-0"><?php echo htmlspecialchars($restaurant->getLocation()); ?></p>
                 </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-custom">Reserve</button>
             </div>
         </div>
     </div>

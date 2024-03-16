@@ -29,10 +29,15 @@ class YummyController extends Controller
     public function restaurant() {
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $id = $_GET['id'];
-            $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
-            $this->displayRestaurant($restaurant);
+            try {
+                $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
+                $this->displayRestaurant($restaurant);
+            } catch (RepositoryException $e) {
+                $this->handleException($e);
+            }
         } else {
-            // TODO: handle error
+            // Handle error: No ID provided
+            $this->handleError("No ID provided for the restaurant.");
         }
     } 
     
