@@ -26,6 +26,8 @@ class HistoryController extends Controller
         $historyTours = $this->historyTourService->getAllHistoryTours();
         $locationService = $this->locationService;
         $organizedTours = $this->historyTourService->getOrganizedTours();
+
+        
         require(__DIR__ . '/../views/history/index.php');
     }
 

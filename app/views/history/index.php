@@ -75,172 +75,41 @@
         </div>
     </section>
 
+    
     <section>
         <h2 class="text-center py-3 text-bold">FEATURED <span class="text-red">LOCATIONS</span></h2>
     </section>
 
-
-    <section class="d-flex justify-content-center py-5">
-    <div class="container" style="max-width: 800px;">
-        <?php foreach ($locations as $index => $location) { ?>
-            <div class="row gray-bg p-4 mb-4">
-                <div class="col-8">
-                    <h3>
-                        <?php echo ($index + 1) . '. ' . $location['location_name']; ?>
-                    </h3>
-                    <p class="text-muted">
-                        <?php echo $location['description']; ?>
-                    </p>
-                    <a href="<?php echo $location['links']; ?>" class="btn btn-outline-secondary" target="_blank">Learn more</a>
-                </div>
-                <div class="col-4">
-                    <?php 
-                    $imageSrc = !empty($location['image']) ? "../../images/".$location['image'] : "../../images/no-image.jpg"; 
-                    ?>
-                    <img src="<?php echo $imageSrc; ?>" class="img-fluid" style="width: 300px; height: 170px;" alt="Location Image">
-                </div>
-            </div>
-        <?php } ?>
-    </div>
-</section>
+    <?php
+    include __DIR__ . '/../history/locations.php';
+    ?>
 
     <section>
         <h2 class="text-center py-3 text-bold">TOUR <span class="text-red">SCHEDULE</span></h2>
     </section>
 
-    <section class="text-center">
-    <div class="container">
-        <?php if (!empty($organizedTours)) : ?>
-            <div class="row justify-content-center">
-                <div class="col">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <?php foreach ($organizedTours as $tour) : ?>
-                                    <th scope="col"><?php echo $tour['formatted_date']; ?></th>
-                                <?php endforeach; ?>
-                            </tr>
-                        </thead>
-                        <tbody class>
-                            <?php $times = ['10:00', '13:00', '16:00']; ?>
-                            <?php foreach ($times as $time) : ?>
-                                <tr>
-                                    <td><?php echo $time; ?></td>
-                                    <?php foreach ($organizedTours as $tour) : ?>
-                                        <td><?php echo $tour[$time] ?? ''; ?></td>
-                                    <?php endforeach; ?>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        <?php else : ?>
-            <p>No history tours found.</p>
-        <?php endif; ?>
-    </div>
-</section>
-
-    
-
+    <?php
+    include __DIR__ . '/../history/schedule.php';
+    ?>
 
     <section>
         <h2 class="text-center py-3 text-bold">LOCATIONS <span class="text-red">OVERVIEW</span></h2>
     </section>
 
-    <section>
-        <div class='row w-75 small'>
-            <div class='col-4 d-flex justify-content-end'>
-                <ol type="A">
-                    <?php foreach ($locations as $index => $location) { ?>
-                        <li>
-                            <?php echo $location['location_name']; ?>
-                        </li>
-                    <?php } ?>
-                </ol>
-            </div>
-            <div class='col-8'>
-                <img src="/../images/map-history.png" class="img-fluid">
-            </div>
-        </div>
-        <div class='p-4'>
-            <p class='text-center'>The tour begins at the <span class="text-success">Green</span> point A (Church of St.
-                Bavo) and ends at the <span class="text-danger">Red</span> point I. The break location (Jopenkerk) is
-                marked in Blue at point E.</p>
-        </div>
-    </section>
+    <?php
+    include __DIR__ . '/../history/locations_overview.php';
+    ?>
 
     <section id="ticketSection">
         <h2 class="text-center py-3 text-bold">GET YOUR <span class="text-red">TICKETS</span></h2>
     </section>
 
-    <section class='d-flex justify-content-center p-5'>
-    <div class="row gray-bg p-5">
-        <div class="col">
-            <div class="row dropdown">
-                <div class="col p-4">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Language
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                        <?php foreach ($languages as $language): ?>
-                            <a class="dropdown-item" href="#"><?php echo $language; ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <div class="col p-4">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dateDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Date
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dateDropdown">
-                        <?php foreach ($dates as $date): ?>
-                            <a class="dropdown-item" href="#"><?php echo $date; ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <div class="col p-4">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="timeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Time
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="timeDropdown">
-                        <?php foreach ($times as $time): ?>
-                            <a class="dropdown-item" href="#"><?php echo $time; ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <div class="col p-4">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="ticketDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Ticket
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="ticketDropdown">
-                       <!-- Dummy values -->
-                       <a class="dropdown-item" href="#">Ticket 1</a>
-                        <a class="dropdown-item" href="#">Ticket 2</a>
-                    </div>
-                </div>
-            </div>
-            <div class='row mt-5'>
-                <div class='col text-center'>
-                    <button type="button" class="btn btn-warning btn-block">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
     <?php
+    include __DIR__ . '/../history/tickets.php';
+ 
     include __DIR__ . '/../footer.php';
     ?>
 
-<script>
-       
-            $('#getTicketsBtn').click(function() {
-                $('html, body').animate({
-                    scrollTop: $('#ticketSection').offset().top
-                }, 1000);
-            });
-        });
-    </script>
 </body>
 
 </html>
