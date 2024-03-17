@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    // await initCarousel();
     await displayDateButtons();
     displayVenues();
     displaySchedule();
@@ -7,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 async function getDanceEventsFromAPI() {
     try {
-        const response = await fetch('http://localhost/api/danceEvents');
+        const response = await fetch(urlBasePath + 'api/danceEvents');
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
@@ -70,7 +69,7 @@ async function displayDanceEvents(date) {
     danceEventsContainer.innerHTML = '';
 
     const selectedEvents = danceEvents.filter(event => event.date === date);
-    selectedEvents.forEach((danceEvent, index) => {
+    selectedEvents.forEach((danceEvent) => {
         const danceEventCard = renderDanceEventCard(danceEvent);
 
         danceEventsContainer.appendChild(danceEventCard);
@@ -208,7 +207,7 @@ function htmlArtistGenre(artist) {
 
 async function getVenuesFromAPI() {
     try {
-        const response = await fetch('http://localhost/api/venues');
+        const response = await fetch(urlBasePath + 'api/venues');
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }

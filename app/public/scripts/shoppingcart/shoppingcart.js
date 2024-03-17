@@ -3,7 +3,7 @@ function getTicketById($id) {
     var res;
 
     $.ajax({
-        url: "http://localhost/api/Ticket/getDanceTicketById?id=" + $id,
+        url: `http://${host}/api/Ticket/getDanceTicketById?id=` + $id,
         type: "GET",
         dataType: "JSON",
         async: false,
@@ -21,7 +21,7 @@ function getEventDataByEventId($id) {
     var res;
 
     $.ajax({
-        url: "http://localhost/api/ShoppingCart/getProductData?id=" + $id,
+        url: `http://${host}/api/ShoppingCart/getProductData?id=` + $id,
         type: "GET",
         dataType: "JSON",
         async: false,
@@ -38,7 +38,7 @@ function updateDanceTicketQuantity(orderItemData) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost/api/Ticket/UpdateDanceTicketQuantity",
+        url: `http://${host}/api/Ticket/UpdateDanceTicketQuantity`,
         data: orderItemData,
         success: function () {
             window.location.reload();
@@ -55,7 +55,7 @@ function updateAvailableTickets(eventData) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost/api/Ticket/UpdateAvailableTicketsForDanceEvent",
+        url: `http://${host}/api/Ticket/UpdateAvailableTicketsForDanceEvent`,
         data: eventData,
         success: function () {
             window.location.reload();
@@ -66,6 +66,7 @@ function updateAvailableTickets(eventData) {
 
 
 function setOrderItemsData() {
+
     let btns = document.querySelectorAll('.updateQuantity');
 
     let selectors = document.querySelectorAll(".quantityValues");
@@ -125,7 +126,7 @@ function calculateTicketQuantities(orderItem, event, input)
 function deleteDanceTicket($id) {
 
     $.ajax({
-        url: "http://localhost/api/Ticket/deleteDanceTicket?id=" + $id,
+        url: `http://${host}/api/Ticket/deleteDanceTicket?id=` + $id,
         type: "DELETE",
         success: function () {
             window.location.reload();
@@ -161,7 +162,6 @@ function onClickDeleteProduct() {
     });
 
 }
-
 
 
  setOrderItemsData();

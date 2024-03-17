@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dance Events</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/dance/main.css">
     <link rel="stylesheet" href="../styles/main.css">
@@ -17,12 +17,12 @@
     <?php
     include __DIR__ . '/../header.php';
     require __DIR__ . '/../../config/imgconfig.php';
-
+    require __DIR__ . '/../../config/urlconfig.php';
     ?>
     <main>
         <div class="dance-container">
             <div class="image-container">
-                <img src="<?php echo $imageBasePath; ?>dance_event.png" alt="Dance Event" class="dance-image">
+                <img src="<?php echo $imageBasePath; ?>dance.png" alt="Dance Event" class="dance-image">
                 <div class="image-primary-text position-absolute top-0 start-0">
                     <h1 class="text fw-bold">HAARLEM</h1>
                     <h1>FESTIVAL</h1>
@@ -68,8 +68,13 @@
     include __DIR__ . '/../footer.php';
     ?>
 
+    <script>
+        const imageBasePath = "<?php echo $imageBasePath; ?>";
+        const urlBasePath = "<?php echo $urlBasePath; ?>";
+    </script>
+    
     <script type="module" src="../scripts/dance/index.js"></script>
-    <script> var imageBasePath = "<?php echo $imageBasePath; ?>";</script>
+
     <script>
         document.querySelectorAll('.buy-tickets-btn').forEach(function (button) {
             button.addEventListener('click', function () {

@@ -18,6 +18,8 @@
 <body class="border border-white ">
 <?php
     include __DIR__ . '/../header.php';
+    require __DIR__ . '/../../config/hostnameConfig.php';
+
     ?>
   <main class="border border-white">
   <video id="preview"><img src="/../public/tickets/qr/qr0.png"></video>
@@ -65,6 +67,7 @@
     include __DIR__ . '/../footer.php';
     ?>
 </body>
+<script> var host = "<?php echo $hostname; ?>";</script>
 <script src="/scripts/qrCodeChecker/qrCodeChecker.js"></script>
 
 </html>

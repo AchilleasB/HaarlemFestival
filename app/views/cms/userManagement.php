@@ -16,7 +16,7 @@
 <body>
     <?php
     include __DIR__ . '/../header.php';
-    require __DIR__ . '/../../config/imgconfig.php';
+    require __DIR__ . '/../../config/urlconfig.php';
     ?>
 
     <main>
@@ -40,6 +40,7 @@
     include __DIR__ . '/../footer.php';
     ?>
 
+    <script> const urlBasePath = "<?php echo $urlBasePath; ?>";</script>
     <script src="/../scripts/user/index.js"></script>
     <script src="/../scripts/user/addUser.js"></script>
     <script src="/../scripts/user/editUser.js"></script>

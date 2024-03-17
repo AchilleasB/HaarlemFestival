@@ -16,6 +16,7 @@
 <body>
     <?php
     include __DIR__ . '/../header.php';
+
     ?>
     <main>
         <div class="red-line"></div>
@@ -26,8 +27,12 @@
                 <a href="/cms/danceManagement" class="cms-btn d-inline-block">Dance</a>
                 <a href="yummie" class="cms-btn d-inline-block">Yummie</a>
                 <a href="/cms/userManagement" class="cms-btn d-inline-block">Users</a>
+                <a href="/cms/orderManagement" class="cms-btn d-inline-block">Orders</a>
+
             </div>
     </main>
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+    
+    

@@ -101,48 +101,49 @@ public function createPdf($html, $pdfPath){
     
     }
     
-public function createInvoicePdf($user, $orderItems, $products, $invoice)
-{
-
-    $invoiceHtmlTemplate = __DIR__ . "/../views/shoppingcart/invoice.php";
-    ob_start();
-    require($invoiceHtmlTemplate);
-    $html = ob_get_contents();
-    ob_get_clean();
-    $pdfPath = __DIR__ . "/../public/invoices/InvoiceNr" . $invoice->getId() .".pdf";
+    public function createInvoicePdf($user, $orderItems, $products, $order)
+    {
     
-    $this->createPdf($html, $pdfPath);
-    }
+        $invoiceHtmlTemplate = __DIR__ . "/../views/shoppingcart/invoice.php";
+        ob_start();
+        require($invoiceHtmlTemplate);
+        $html = ob_get_contents();
+        ob_get_clean();
+        $pdfPath = __DIR__ . "/../public/invoices/InvoiceNr" . $order->getId() .".pdf";
+        
+        $this->createPdf($html, $pdfPath);
+        }
+        
     
     
     public  function createTicketPdf($user, $orderItems, $products){
         
-    $tickets = [];
-    $ticketsCount = count(glob("/../public/tickets/" ."*" ));
-    foreach($products as $item=>$i){
-    $ticket = $orderItems[$item];
-    $event = $products[$item]['Event'];
-    $eventName = $event->getName();
-    $ticketType = $products[$item]['Event']->getTicketType();
-    $dateTime = $event->getDateTime();
-    $ticketId = ++$ticketsCount;
-    $qrCodeId = bin2hex(random_bytes(50));
-    $qrData = $this->generateQrCode($user,$qrCodeId, $event);
-    $ticketHtmlTemplate = __DIR__ . "/../views/shoppingcart/ticket.php";
+        $tickets = [];
+        $ticketsCount = count(glob(__DIR__ ."/../public/tickets/" ."*" ));
+        foreach($products as $item=>$i){
+        $ticket = $orderItems[$item];
+        $event = $products[$item]['Event'];
+        $eventName = $event->getName();
+        $ticketType = $products[$item]['Event']->getTicketType();
+        $dateTime = $event->getDateTime();
+        $ticketId = $ticketsCount++;
+        $qrCodeId = bin2hex(random_bytes(50));
+        $qrData = $this->generateQrCode($user,$qrCodeId, $event);
+        $ticketHtmlTemplate = __DIR__ . "/../views/shoppingcart/ticket.php";
+        
+        ob_start();
+        require($ticketHtmlTemplate);
+        $html = ob_get_contents();
+        ob_get_clean();
+        $pdfPath = __DIR__ . "/../public/tickets/ticket". $ticketId . ".pdf";
+        $this->createPdf($html, $pdfPath);
+        $tickets[count($tickets)] = $pdfPath;
+        }
     
-    ob_start();
-    require($ticketHtmlTemplate);
-    $html = ob_get_contents();
-    ob_get_clean();
-    $pdfPath = __DIR__ . "/../public/tickets/ticket". $ticketId . ".pdf";
-    $this->createPdf($html, $pdfPath);
-    $tickets[count($tickets)] = $pdfPath;
+        return $tickets;
+    
+    
     }
-
-    return $tickets;
-
-
-}
     
     
     
