@@ -5,7 +5,6 @@ class Artist implements JsonSerializable
     private $id;
     private $name;
     private $genre;
-    private $description;
     private $artist_image;
 
     public function getId(): int
@@ -32,14 +31,7 @@ class Artist implements JsonSerializable
     {
         $this->genre = $genre;
     }
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
+
     public function getArtistImage(): string
     {
         return $this->artist_image;
@@ -55,7 +47,6 @@ class Artist implements JsonSerializable
             'id' => $this->id,
             'name' => $this->name,
             'genre' => $this->genre,
-            'description' => $this->description,
             'artist_image' => $this->artist_image
         ];
     }
