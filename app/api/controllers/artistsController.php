@@ -1,10 +1,12 @@
 <?php
 require __DIR__ . '/../../services/artistService.php';
 require_once __DIR__ . '/../../models/artist.php';
+require_once __DIR__ . '/../../models/artistInfo.php';
 
 class ArtistsController
 {
     private $artistService;
+    private $danceService;
 
     function __construct()
     {
@@ -23,7 +25,6 @@ class ArtistsController
             $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
             $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
             $genre = isset($_POST['genre']) ? htmlspecialchars($_POST['genre']) : '';
-            $description = isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '';
             $artist_image = isset($_POST['artist_image']) ? htmlspecialchars($_POST['artist_image']) : '';
 
             if (!empty($_FILES['image']['name'])) {
@@ -37,7 +38,6 @@ class ArtistsController
             $artist->setId(htmlspecialchars($id));
             $artist->setName(htmlspecialchars($name));
             $artist->setGenre(htmlspecialchars($genre));
-            $artist->setDescription(htmlspecialchars($description));
             $artist->setArtistImage(htmlspecialchars($artist_image));
 
             if ($id === 0) {
@@ -86,5 +86,38 @@ class ArtistsController
         }
     }
 
+
+    public function artistPage()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+            if (isset($_GET['id'])) {
+                $id = intval($_GET['id']);
+
+                $artistsInfo = $this->artistService->getArtistInfo($id);
+                
+                header('Content-Type: application/json');
+                echo json_encode([$artistsInfo]);
+            }
+
+        }
+    }
+
+
+    public function artistAppearances()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+            if (isset($_GET['id'])) {
+                $id = intval($_GET['id']);
+
+                $appearances = $this->artistService->getArtistDanceAppearances($id);
+                
+                header('Content-Type: application/json');
+                echo json_encode($appearances);
+            }
+
+        }
+    }
 }
 
