@@ -1,28 +1,9 @@
 <?php
-require_once(__DIR__ . '/Repository.php');
+require_once(__DIR__ . '/repository.php');
 
 class HistoryTourRepository extends Repository
 {
-    function getAllHistoryTours()
-    {
-        try {
-            $sql = "SELECT ht.date, ht.time, tg.name AS guide_name, tg.language FROM history_tours ht
-                    INNER JOIN tour_guides tg ON ht.guide = tg.id
-                    ORDER BY ht.date, ht.time";
-            $statement = $this->connection->prepare($sql);
-            $statement->execute();
-            $historyTours = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach ($historyTours as &$tour) {
-                $tour['date'] = date('j F', strtotime($tour['date']));
-            }
-
-            return $historyTours;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return [];
-        }
-    }
+   
     public function getOrganizedTours()
     {
         try {
@@ -75,12 +56,8 @@ class HistoryTourRepository extends Repository
             $statement->execute();
             $dates = $statement->fetchAll(PDO::FETCH_COLUMN);
 
-            // Format dates as 'Day Month Year'
-            $formattedDates = array_map(function($date) {
-                return date('j F', strtotime($date));
-            }, $dates);
-
-            return $formattedDates;
+            
+            return $dates;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return []; 
@@ -95,12 +72,8 @@ class HistoryTourRepository extends Repository
             $statement->execute();
             $times = $statement->fetchAll(PDO::FETCH_COLUMN);
 
-            // Format times as 'Hour:Minute AM/PM'
-            $formattedTimes = array_map(function($time) {
-                return date('H:i', strtotime($time));
-            }, $times);
-
-            return $formattedTimes;
+          
+            return $times;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return []; 
@@ -120,6 +93,102 @@ class HistoryTourRepository extends Repository
             return [];
         }
     }
+    public function checkForMatchingTour($language, $date, $time)
+{
+    try {
+        $sql = "SELECT ht.id
+                FROM history_tours ht
+                JOIN tour_guides g ON ht.guide = g.id
+                WHERE g.language = :language
+                AND ht.date = :date
+                AND ht.time = :time";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(':language', $language);
+        $statement->bindParam(':date', $date);
+        $statement->bindParam(':time', $time);
+        $statement->execute();
+        $historyTourId = $statement->fetchColumn();
 
+        return $historyTourId ? $historyTourId : null;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return null;
+    }
+}
+public function getAvailableSeats($language, $date, $time)
+{
+    try {
+
+        $sql = "SELECT seats FROM history_tours ht
+                JOIN tour_guides g ON ht.guide = g.id
+                WHERE g.language = :language
+                AND ht.date = :date
+                AND ht.time = :time";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(':language', $language);
+        $statement->bindParam(':date', $date);
+        $statement->bindParam(':time', $time);
+        $statement->execute();
+        $seats = $statement->fetchColumn();
+
+        return $seats;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return 0; 
+    }
+}
+public function getTicketTypePrice($ticketType)
+{
+    try {
+        $sql = "SELECT price FROM ticket_types WHERE ticket_type = :ticket_type";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(':ticket_type', $ticketType);
+        $statement->execute();
+        $price = $statement->fetchColumn();
+
+        return $price;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return null;
+    }
+}
+function addTicketToCart($historyTicket){
+    try {
+        $stmt = $this->connection->prepare('INSERT INTO tickets (id, amount, calc_price, history_tour_id, user_id) 
+                                            VALUES (:id, :amount, :calc_price, :history_tour_id, :user_id)');
+        $stmt->execute([
+            ':id' => $historyTicket->getId(),
+            ':amount' => $historyTicket->getAmount(),
+            ':calc_price' => $historyTicket->getCalcPrice(),
+            ':history_tour_id' => $historyTicket->getHistoryTourId(),
+            ':user_id' => $historyTicket->getUserId()            
+        ]);
+        
+        return true;
+
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
+}
+public function updateSeats($historyTourId, $seatsToDeduct)
+{
+    try {
+        $sql = "UPDATE history_tours 
+                SET seats = seats - :seatsToDeduct 
+                WHERE id = :historyTourId";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(':seatsToDeduct', $seatsToDeduct, PDO::PARAM_INT);
+        $statement->bindParam(':historyTourId', $historyTourId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+        return false;
+    }
+}
 }
 ?>

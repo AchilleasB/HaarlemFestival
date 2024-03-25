@@ -1,16 +1,16 @@
-<section>
+<section class = 'py-3'> 
         <div class='row w-75 small'>
             <div class='col-4 d-flex justify-content-end'>
                 <ol type="A">
                     <?php foreach ($locations as $index => $location) { ?>
                         <li>
-                            <?php echo $location['location_name']; ?>
+                        <?php echo $location->getLocationName(); ?>
                         </li>
                     <?php } ?>
                 </ol>
             </div>
-            <div class='col-8'>
-                <img src="/../images/map-history.png" class="img-fluid">
+            <div class='col-8 px-4'>
+            <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1gbTLEaenCOggNmicRBhyuYjcSll5FDs&ehbc=2E312F&noprof=1" width="680" height="520"></iframe>
             </div>
         </div>
         <div class='p-4'>

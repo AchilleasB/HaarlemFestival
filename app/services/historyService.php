@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../repositories/HistoryRepository.php');
+require_once(__DIR__ . '/../repositories/historyRepository.php');
 require_once(__DIR__ . '/../models/locations.php');
 class HistoryService
 {
@@ -12,6 +12,10 @@ class HistoryService
     public function getAllLocationsWithImages()
     {
         return $this->repository->getAllLocationsWithImages();
+    }
+    public function getEventDetails()
+    {
+        return $this->repository->getEventDetails();
     }
 
 }

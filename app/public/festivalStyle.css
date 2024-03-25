@@ -2,7 +2,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    height: 60vh;
+    height: 90vh;
 }
 
 .wine-bg{
@@ -19,13 +19,7 @@
     font-weight: lighter;
   }
   
-  .tab button:hover {
-    background-color: #600808;
-  }
-  
-  .tab button.active {
-    background-color: #A60303;
-  }
+
   .info-button{
     background-color: #A60303;
     color: white;
@@ -41,6 +35,24 @@
   .tabs__content--active{
     display: block;
   }
+  .text-shadow{
+    text-shadow: 1px 1px 2px #600808;
+}
+.nav-tabs .nav-link {
+  padding: 0.25rem 0.5rem; 
+  font-size: 0.9rem; 
+  background-color: black;
+  color: white;
+  border-radius: 0;
+}
+.nav-tabs .nav-link.active {
+  background-color: #A60303; 
+  color: white; 
+}
+.nav-tabs .nav-link:hover {
+  background-color: #600808;
+  color: white; 
+}
 
 
 

@@ -23,7 +23,7 @@
         <div class="cms-container">
             <h1 class="header mb-5">Content Management System</h1>
             <div class="cms-buttons-container">
-                <a href="/cms/historyManagment" class="cms-btn d-inline-block">History</a>
+                <a href="/cms/historyManagement" class="cms-btn d-inline-block">History</a>
                 <a href="/cms/danceManagement" class="cms-btn d-inline-block">Dance</a>
                 <a href="yummie" class="cms-btn d-inline-block">Yummie</a>
                 <a href="/cms/userManagement" class="cms-btn d-inline-block">Users</a>
