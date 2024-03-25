@@ -10,9 +10,6 @@ class OrderItemController extends ApiController
     {
         $this->shoppingCartService = new OrderItemService();
     }
-          
-
-
 
     public function getProductData(){
 
