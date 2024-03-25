@@ -34,10 +34,10 @@
     <section class="wine-bg">
         <div class="container text-white w-75 py-5">
             <div class="row">
-                <div class="col-md-4 id="editable-div>
+                <div class="col-md-4">
                     <h3 class="inline-text">The <span class="gold-text">Summer Festival</span></h3>
                     <h5>Fun events for everyone!</h5>
-                </div>
+</div>
                 <div class="col-md-8">
                     <p class="small text-justify"><?php echo $event->getDescription(); ?>
                     </p>
@@ -61,9 +61,7 @@
     ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
   });
 </script>
-<textarea>
-  Welcome to TinyMCE!
-</textarea>
+
 
     <?php foreach ($events as $event): ?>
     <section class="d-flex justify-content-center">
