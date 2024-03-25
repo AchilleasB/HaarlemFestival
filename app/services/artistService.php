@@ -35,15 +35,4 @@ class ArtistService
         return $this->artistRepository->deleteArtist($id);
     }
 
-    public function getArtistInfo($id)
-    {
-        return $this->artistRepository->getArtistInfo($id);
-    }
-
-    
-    function getArtistDanceAppearances($id)
-    {
-        return  $this->artistRepository->getArtistDanceAppearances($id);
-        
-    }
 }

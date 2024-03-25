@@ -24,6 +24,7 @@ class DanceController extends Controller
 
             $_SESSION['artist_name'] = $artist->getName();
             $_SESSION['artist_genre'] = $artist->getGenre();
+            $_SESSION['artist_description'] = $artist->getDescription();
             $_SESSION['artist_image'] = $artist->getArtistImage();
 
             $this->displayView($this);

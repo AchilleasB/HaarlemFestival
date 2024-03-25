@@ -140,8 +140,7 @@ function htmlDisplayTicket(event, eventType) {
 
     const addToCart = ticket.querySelector(".addToCart-button");
     addToCart.addEventListener("click", function () {
-        const amountInput = ticket.querySelector(".ticket-amount").value;
-        const amount = amountInput === '' ? 0 : amountInput;
+        const amount = ticket.querySelector(".ticket-amount").value;
         handleAddToCart(event.id, amount);
         fetchAndDisplayTickets(eventType);
     });

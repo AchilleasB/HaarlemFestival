@@ -47,6 +47,9 @@ function htmlAddArtistForm() {
         <div class="mb-3">
             <label for="genre" class="form-label">Genre</label>
             <input type="text" class="form-control" id="genre" name="genre" required>
+        </div><div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text-area" class="form-control" id="description" name="description" required>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Upload Image</label>

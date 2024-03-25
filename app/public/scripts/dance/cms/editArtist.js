@@ -3,7 +3,7 @@ function handleEditArtist(artist) {
     const editArtistContainer = document.getElementById(editArtistContainerId);
 
     editArtistContainer.innerHTML = `
-    <div class="row justify-content-center border-bottom mb-3">
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <form id="edit-artist-form" style="margin-top:6px">
                 <h3>Edit ${artist.name}'s Information</h3>
@@ -17,6 +17,10 @@ function handleEditArtist(artist) {
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genre</label>
                     <input class="form-control" id="genre" name="genre" rows="3" value="${artist.genre}" required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input class="form-control" id="description" name="description" rows="3" value="${artist.description}" required></input>
                 </div>
                 <div class="mb-3">
                     <label for="artist_image" class="form-label">Upload Artist Image</label>
