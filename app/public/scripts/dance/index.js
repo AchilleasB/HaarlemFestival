@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     displaySchedule();
 });
 
-async function getDanceEventsFromAPI() {
+export async function getDanceEventsFromAPI() {
     try {
         const response = await fetch(urlBasePath + 'api/danceEvents');
         if (!response.ok) {
@@ -26,7 +26,6 @@ async function displayDateButtons() {
     const danceEvents = await getDanceEventsFromAPI();
     const uniqueDates = [...new Set(danceEvents.map(event => event.date))];
 
-    const danceEventsSection = document.querySelector('.dance-events-section');
     const dateButtons = document.querySelector('.date-buttons');
     dateButtons.innerHTML = '';
 
@@ -55,10 +54,6 @@ async function displayDateButtons() {
 
         dateButtons.appendChild(button);
     });
-
-    danceEventsSection.appendChild(dateButtons);
-
-    await displayDanceEvents(uniqueDates[0]);
 
 }
 

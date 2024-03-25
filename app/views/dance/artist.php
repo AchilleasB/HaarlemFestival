@@ -6,58 +6,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?php $_SESSION['artist_name']?>
+        <?php echo $_SESSION['artist_name'] ?> at Haarlem Festival
     </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/dance/artist.css">
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="/../styles/dance/artist.css">
+    <link rel="stylesheet" href="/../styles/main.css">
 </head>
 
 <body>
     <?php
-    var_dump($_SESSION['artist_id']);
-    var_dump($_SESSION['artist_name']);
-    var_dump($_SESSION['artist_genre']);
-    var_dump($_SESSION['artist_description']);
-    var_dump($_SESSION['artist_image']);
+
     include __DIR__ . '/../header.php';
 
     require __DIR__ . '/../../config/imgconfig.php';
+    require __DIR__ . '/../../config/urlconfig.php';
 
     ?>
     <main>
-        <div class="red-line"></div>
         <div class="artist-container">
             <div class="image-container">
-                <img src="<?php echo $imageBasePath . $_SESSION['artist_image']?>" alt="DJ image" class="artist-image">
-                <div class="image-primary-text position-absolute top-10 start-0">
-                    <h1 class="text fw-bold">
+                <div id="artistPageImg"></div>
+                <div class="primary-text ">
+                    <h1 class="artist-name">
+                        <?php echo $_SESSION['artist_name'] ?>
                     </h1>
-                    <h1 class="text fw-bold bg-black d-inline-block w-auto">AT DANCE!</h1>
+                    <h1 class="dance-text">AT DANCE!</h1>
                 </div>
-                <div class="image-secondary-text position-absolute top-10 end-0 ">
-                    <h1 class=""><?php $_SESSION['artist_name']?></h1>
-                    <button class="buy-tickets-btn fw-bold bg-danger d-inline-block">GET YOUR TICKETS NOW!</button>
+                <div class="image-buttons">
+                    <button class="get-tickets-btn" id="tickets-btn">GET YOUR TICKETS NOW!</button>
+                    <button class="see-appearances-btn" id="appearances-btn">SEE DANCE! APPEARANCES</button>
                 </div>
             </div>
             <div class="artist-description">
-                <h1>WHO IS <strong>
-                    </strong></h1>
-                <p>
-                </p>
+                <div class="description-title">
+                    <h2>WHO IS
+                        <strong>
+                            <?php echo $_SESSION['artist_name'] ?>
+                            ?
+                        </strong>
+                    </h2>
+                </div>
+                <div id="artistDescription"></div>
             </div>
-
             <div class="career-hightlight-section">
-                <h2 class="career-hightlight-title">HIGHTLIGHT TITLE</h2>
-                <div class="career-hightlight-image"></div>
-                <div class="career-hightlight-text"></div>
+                <div id="careerHighlightTitle">
+                </div>
+                <div id="careerHighlightImgContainer">
+                </div>
+                <div id="careerHighlightText">
+                </div>
             </div>
+            <div class="latest-realeases-container">
+                <h2>LATEST RELEASES</h2>
+                <div class="spotify-songs" id="artistLatestReleases">
+                </div>
+            </div>
+            <div class="artist-appearances-section">
+                <div id="appearances-title">
+                    <h2><strong>
+                            <?php echo $_SESSION['artist_name'] ?> APPEARANCES
+                        </strong></h2>
+                    <h3>AT DANCE!</h3>
+                </div>
+                <div id="artistAppearances">
+                </div>
+            </div>
+        </div>
     </main>
 
     <?php
     include __DIR__ . '/../footer.php';
     ?>
 
-    <!-- <script type="module" src="../scripts/dance/artist.js"></script> -->
+    <script>
+        const imageBasePath = "<?php echo $imageBasePath; ?>";
+        const urlBasePath = "<?php echo $urlBasePath; ?>";
+        const artistName = "<?php echo $_SESSION['artist_name']; ?>";
+    </script>
+    <script type="module" src="/../scripts/dance/artist.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ticketsButton = document.getElementById('tickets-btn');
+            const appearancesButton = document.getElementById('appearances-btn');
+            const appearancesSection = document.getElementById('appearances-section');
+
+            ticketsButton.addEventListener('click', function () {
+                window.location.href = urlBasePath + 'dance/tickets';
+            });
+
+            appearancesButton.addEventListener('click', function () {
+                appearancesSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
