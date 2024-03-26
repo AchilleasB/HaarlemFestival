@@ -45,7 +45,8 @@
 }
 
 .dance-cms-container,
-.user-cms-container {
+.user-cms-container,
+.yummy-cms-container {
     width: 100%;
 }
 
@@ -94,3 +95,4 @@
     padding: 10px;
     border-radius: 5px;
 }
+

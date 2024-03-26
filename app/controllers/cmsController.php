@@ -24,4 +24,9 @@ class CmsController extends Controller
         $this->displayView($this);
     }
 
+    public function yummyManagement()
+    {
+        $this->displayView($this);
+    }
+
 }

@@ -1,12 +1,27 @@
 <?php
 
-class RestaurantBase
+class RestaurantBase implements JsonSerializable
 {
-    protected int $id;
-    protected string $name;
-    protected int $number_of_stars;
-    protected string $banner;
-    protected array $cuisines;
+    private int $id;
+    private string $name;
+    private int $number_of_stars;
+    private string $banner;
+    private array $cuisines;
+
+    /**
+     * RestaurantBase constructor.
+     * @param string $name
+     * @param int $number_of_stars
+     * @param string $banner
+     * @param array $cuisines
+     */
+    public function __construct(string $name, int $number_of_stars, string $banner, array $cuisines)
+    {
+        $this->name = $name;
+        $this->number_of_stars = $number_of_stars;
+        $this->banner = $banner;
+        $this->cuisines = $cuisines;
+    }
 
     public function getId(): int
     {
@@ -61,5 +76,15 @@ class RestaurantBase
     public function setCuisines(array $cuisines): void
     {
         $this->cuisines = $cuisines;
+    }
+
+    public function jsonSerialize(): mixed {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'numberOfStars' => $this->getNumberOfStars(),
+            'banner' => $this->getBanner(),
+            'cuisines' => $this->getCuisines()
+        ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../repositories/yummy/sessionRepository.php';
+require_once(__DIR__ . '/../../repositories/yummy/sessionRepository.php');
 
 class SessionService {
     private $sessionRepository;
@@ -13,30 +13,33 @@ class SessionService {
         return $this->sessionRepository->getAllSessions();
     }
 
+    public function getSessionById($sessionId) {
+        return $this->sessionRepository->getSessionById($sessionId);
+    }
+
     public function getSessionsByRestaurantId($restaurantId) {
         return $this->sessionRepository->getSessionsByRestaurantId($restaurantId);
     }
     
-    public function addSession($startDate, $endDate) {
-        list($startDateTime, $endDateTime) = $this->validateDates($startDate, $endDate);
+    public function addSession($session) {
+        // list($startDateTime, $endDateTime) = $this->validateDates($startDate, $endDate);
 
-        $session = new Session();
-        $session->setStartDate($startDateTime);
-        $session->setEndDate($endDateTime);
+        // $session = new Session();
+        // $session->setStartDate($startDateTime);
+        // $session->setEndDate($endDateTime);
         
         return $this->sessionRepository->addSession($session);
     }
 
-    public function updateSession($id, $startDate, $endDate) {
-        list($startDateTime, $endDateTime) = $this->validateDates($startDate, $endDate);
-
-        $session = new Session();
-        $session->setId($id);
-        $session->setStartDate($startDateTime);
-        $session->setEndDate($endDateTime);
+    public function updateSession($session) {
+        // list($validatedStartDate, $validatedEndDate) = $this->validateDates($session->getStartDate(), $session->getEndDate());
+    
+        // $session->setStartDate($validatedStartDate);
+        // $session->setEndDate($validatedEndDate);
         
         return $this->sessionRepository->updateSession($session);
     }
+    
 
     public function deleteSession($id) {
         return $this->sessionRepository->deleteSession($id);

@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../repositories/yummy/cuisineRepository.php';
-require_once __DIR__ . '/../../models/cuisine.php';
+require_once(__DIR__ . '/../../repositories/yummy/cuisineRepository.php');
+require_once(__DIR__ . '/../../models/yummy/cuisine.php');
 
 class CuisineService
 {
@@ -17,9 +17,9 @@ class CuisineService
         return $this->cuisineRepository->getAllCuisines();
     }
 
-    public function getCuisineById($id)
+    public function getCuisineById($cuisineId)
     {
-        return $this->cuisineRepository->getCuisineById($id);
+        return $this->cuisineRepository->getCuisineById($cuisineId);
     }
 
     public function getCuisinesByRestaurantId($restaurantId)
@@ -27,35 +27,19 @@ class CuisineService
         return $this->cuisineRepository->getCuisinesByRestaurantId($restaurantId);
     }
     
-    public function addCuisine($name)
+    public function addCuisine($cuisine)
     {
-        $cuisine = new Cuisine();
-        $cuisine->setName($name);
-
         return $this->cuisineRepository->addCuisine($cuisine);
     }
 
-    public function updateCuisine($id, $name)
+    public function updateCuisine($cuisine)
     {
-        $cuisine = $this->cuisineRepository->getCuisineById($id);
-
-        if ($cuisine) {
-            $cuisine->setName($name);
-            return $this->cuisineRepository->updateCuisine($cuisine);
-        }
-
-        return false;
+        return $this->cuisineRepository->updateCuisine($cuisine);
     }
 
-    public function deleteCuisine($id)
+    public function deleteCuisine($cuisineId)
     {
-        $cuisine = $this->cuisineRepository->getCuisineById($id);
-
-        if ($cuisine) {
-            return $this->cuisineRepository->deleteCuisine($id);
-        }
-
-        return false;
+        return $this->cuisineRepository->deleteCuisine($cuisineId);
     }
 }
 

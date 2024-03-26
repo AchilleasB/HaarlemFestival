@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../repository.php';
-require_once __DIR__ . '/../../models/yummy/cuisine.php';
+require_once(__DIR__ . '/../repository.php');
+require_once(__DIR__ . '/../../models/yummy/cuisine.php');
 
 class CuisineRepository extends Repository
 {
@@ -11,29 +11,37 @@ class CuisineRepository extends Repository
             $stmt = $this->connection->prepare('SELECT * FROM cuisines');
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cuisine');
-            $cuisines = $stmt->fetchAll();
+            $cuisinesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $cuisines = [];
+            foreach ($cuisinesData as $data) {
+                $cuisine = new Cuisine($data['name']);
+                $cuisine->setId($data['id']);
+                $cuisines[] = $cuisine;
+            }
 
             return $cuisines;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error fetching cuisines', $e->getCode(), $e);
         }
     }
 
-    public function getCuisineById($id)
+    public function getCuisineById($cuisineId)
     {
         try {
             $stmt = $this->connection->prepare('SELECT * FROM cuisines WHERE id = ?');
-            $stmt->execute([$id]);
+            $stmt->execute([$cuisineId]);
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cuisine');
-            $cuisine = $stmt->fetch();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $cuisine = new Cuisine($data['name']);
+            $cuisine->setId($data['id']);
 
             return $cuisine;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error fetching cuisine', $e->getCode(), $e);
         }
     }
 
@@ -47,13 +55,19 @@ class CuisineRepository extends Repository
             ");
             $stmt->execute([$restaurantId]);
     
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Cuisine');
-            $cuisines = $stmt->fetchAll();	
+            $cuisinesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $cuisines = [];
+            foreach ($cuisinesData as $data) {
+                $cuisine = new Cuisine($data['name']);
+                $cuisine->setId($data['id']);
+                $cuisines[] = $cuisine;
+            }
 
             return $cuisines;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error fetching cuisines', $e->getCode(), $e);
         }
     }
 
@@ -66,7 +80,7 @@ class CuisineRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error adding cuisine', $e->getCode(), $e);
         }
     }
 
@@ -79,7 +93,7 @@ class CuisineRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error updating cuisine', $e->getCode(), $e);
         }
     }
 
@@ -92,7 +106,7 @@ class CuisineRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error deleting cuisine', $e->getCode(), $e);
         }
     }
 }

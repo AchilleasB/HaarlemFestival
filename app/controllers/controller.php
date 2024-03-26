@@ -38,13 +38,13 @@ class Controller
     
     protected function displayExceptionView($data) {
         $directory = substr(get_class($this), 0, -10);
-        $view = "exception"; // Or whatever your exception view is named
+        $view = "exception";
         require __DIR__ . "/../views/$directory/$view.php";
     }
     
     protected function displayErrorView($data) {
         $directory = substr(get_class($this), 0, -10);
-        $view = "error"; // Or whatever your error view is named
+        $view = "error";
         require __DIR__ . "/../views/$directory/$view.php";
     }
 }

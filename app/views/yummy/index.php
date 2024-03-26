@@ -9,68 +9,14 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
-    <style>
-    .banner-image {
-        height: 694px;
-        background: url('/../images/yummy/yummy.png') center center no-repeat;
-        background-size: cover;
-    }
-
-    .info-box {
-        background-color: #EED899;
-        padding: 20px;
-    }
-
-    body {
-        background-color: #EAE2E2;
-    }
-
-    .custom-shadow {
-        box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.5);
-    }
-
-    .custom-more-info-btn {
-        width: 60%;
-        border-radius: 0;
-        background-color: #A60303;
-        border-color: #A60303;
-        color: white;
-        font-size: 1.50rem;
-    }
-
-    .card-img-top {
-        height: 300px;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .all {
-        position: relative;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .all::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: currentColor;
-        display: block;
-    }
-
-    .recommendations {
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-        text-decoration: underline;
-    }
-    </style>
+    <link rel="stylesheet" href="../styles/yummy/index.css">
 </head>
 
 <body>
 
     <?php
-    include __DIR__ . '/../header.php';
+    include_once(__DIR__ . '/../header.php');
+    require_once(__DIR__ . '/../../config/imgconfig.php');
     ?>
     <div class="banner-image d-flex justify-content-center align-items-center">
         <h1 class="text-white display-1">YUMMY!</h1>
@@ -93,7 +39,7 @@
                 <?php foreach ($restaurantsRecommended as $restaurantRecommended): ?>
                 <div class="row mb-4">
                     <div class="col-md-4">
-                        <img src="/../../images/yummy/banners/<?php echo htmlspecialchars($restaurantRecommended->getBanner()) ?>"
+                        <img src="<?php echo $restaurantBannerPath . htmlspecialchars($restaurantRecommended->getBanner()) ?>"
                             class="img-fluid card-img-top"
                             alt="Image of <?php echo htmlspecialchars($restaurantRecommended->getName()); ?>">
                     </div>
@@ -130,7 +76,7 @@
                 <?php foreach ($restaurants as $restaurant): ?>
                 <div class="col-md-3 mb-3 d-flex">
                     <div class="card custom-shadow flex-fill">
-                        <img src="/../../images/yummy/banners/<?php echo htmlspecialchars($restaurant->getBanner())?>"
+                        <img src="<?php echo $restaurantBannerPath . htmlspecialchars($restaurant->getBanner())?>"
                             class="img-fluid card-img-top"
                             alt="Image of <?php echo htmlspecialchars($restaurant->getName()) ?>">
                         <div class="card-body d-flex flex-column">
@@ -158,7 +104,7 @@
         </section>
     </main>
     <?php
-    include __DIR__ . '/../footer.php';
+    include_once(__DIR__ . '/../footer.php');
     ?>
 </body>
 

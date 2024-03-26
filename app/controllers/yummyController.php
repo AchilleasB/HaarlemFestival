@@ -36,10 +36,19 @@ class YummyController extends Controller
                 $this->handleException($e);
             }
         } else {
-            // Handle error: No ID provided
             $this->handleError("No ID provided for the restaurant.");
         }
-    } 
+    }
+    
+    public function reservation() {
+        $id = $_SESSION['restaurant_id'];
+        try {
+            $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
+            $this->displayRestaurant($restaurant);
+        } catch (RepositoryException $e) {
+            $this->handleException($e);
+        }
+    }
     
     private function displayRestaurant($restaurant) {
         $directory = substr(get_class($this), 0, -10);

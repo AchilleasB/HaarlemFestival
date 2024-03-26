@@ -1,10 +1,21 @@
 <?php
 
-class Session
+class Session implements JsonSerializable
 {
     private int $id;
     private DateTime $start_date;
     private DateTime $end_date;
+
+     /**
+     * Session constructor.
+     * @param DateTime $start_date
+     * @param DateTime $end_date
+     */
+    public function __construct(DateTime $start_date, DateTime $end_date)
+    {
+        $this->start_date = $start_date;
+        $this->end_date = $end_date;
+    }
 
     public function getId(): int
     {
@@ -44,4 +55,13 @@ class Session
             $this->getEndDate()->format('H:i - d.m.Y')
         );
     }
+
+    public function jsonSerialize(): mixed {
+        return [
+            'id' => $this->getId(),
+            'startDate' => $this->getStartDate()->format('d.m.Y - H:i'),
+            'endDate' => $this->getEndDate()->format('H:i - d.m.Y')
+        ];
+    }
+    
 }

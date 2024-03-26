@@ -1,11 +1,11 @@
 <?php
 
-require_once __DIR__ . '/sessionRepository.php';
-require_once __DIR__ . ' /../../models/yummy/restaurantBase.php';
-require_once __DIR__ . ' /../../models/yummy/restaurantRecommended.php';
-require_once __DIR__ . ' /../../models/yummy/restaurantDetailed.php';
-require_once __DIR__ . '/../../exceptions/baseException.php';
-require_once __DIR__ . '/../../exceptions/repositoryException.php';
+require_once(__DIR__ . '/sessionRepository.php');
+require_once(__DIR__ . ' /../../models/yummy/restaurantBase.php');
+require_once(__DIR__ . ' /../../models/yummy/restaurantRecommended.php');
+require_once(__DIR__ . ' /../../models/yummy/restaurantDetailed.php');
+require_once(__DIR__ . '/../../exceptions/baseException.php');
+require_once(__DIR__ . '/../../exceptions/repositoryException.php');
 
 
 class RestaurantRepository extends Repository
@@ -14,19 +14,25 @@ class RestaurantRepository extends Repository
     {
         try {
             $stmt = $this->connection->prepare("
-            SELECT 
-                r.id, 
-                r.name, 
-                r.number_of_stars,
-                i.image AS banner
-            FROM 
-                restaurants r
-            INNER JOIN 
-                images i ON r.banner = i.id");
+                SELECT 
+                    r.id, 
+                    r.name, 
+                    r.number_of_stars,
+                    i.image AS banner
+                FROM 
+                    restaurants r
+                INNER JOIN 
+                    images i ON r.banner = i.id");
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'RestaurantBase');
-            $restaurants = $stmt->fetchAll();
+            $restaurantsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $restaurants = [];
+            foreach ($restaurantsData as $data) {
+                $restaurant = new RestaurantBase($data['name'], $data['number_of_stars'], $data['banner'], []);
+                $restaurant->setId($data['id']);
+                $restaurants[] = $restaurant;
+            }
 
             return $restaurants;
 
@@ -53,7 +59,13 @@ class RestaurantRepository extends Repository
             LIMIT 1");
             $stmt->execute([$restaurantId]);
 
-            return $stmt->fetchObject('RestaurantBase');
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Instantiate RestaurantDetailed object
+            $restaurant = new RestaurantBase($data['name'], $data['number_of_stars'], $data['banner'], []);
+            $restaurant->setId($data['id']);
+
+            return $restaurant;
 
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
@@ -78,8 +90,14 @@ class RestaurantRepository extends Repository
                 r.is_recommended = 1");
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'RestaurantRecommended');
-            $restaurants = $stmt->fetchAll();
+            $restaurantsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $restaurants = [];
+            foreach ($restaurantsData as $data) {
+                $restaurant = new RestaurantRecommended($data['name'], $data['number_of_stars'], $data['banner'], [], $data['description']);
+                $restaurant->setId($data['id']);
+                $restaurants[] = $restaurant;
+            }
 
             return $restaurants;
 
@@ -88,6 +106,7 @@ class RestaurantRepository extends Repository
         }
     }
 
+    //Not used yet
     public function getAllRestaurantsDetailed()
     {
         try {
@@ -105,8 +124,14 @@ class RestaurantRepository extends Repository
                 r.id, r.name, r.banner");
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'RestaurantRecommended');
-            $restaurants = $stmt->fetchAll();
+            $restaurantsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $restaurants = [];
+            foreach ($restaurantsData as $data) {
+                $restaurant = new RestaurantDetailed($data['name'], $data['number_of_stars'], $data['banner'], [], $data['description'], $data['location'], $data['number_of_seats'], [], [], []);
+                $restaurant->setId($data['id']);
+                $restaurants[] = $restaurant;
+            }
 
             return $restaurants;
 
@@ -119,29 +144,47 @@ class RestaurantRepository extends Repository
     {
         try {
             $stmt = $this->connection->prepare("
-            SELECT 
-                r.id, 
-                r.name, 
-                r.number_of_stars,
-                r.number_of_seats,
-                r.description,
-                r.location, 
-                i.image AS banner
-            FROM 
-                restaurants r
-            INNER JOIN 
-                images i ON r.banner = i.id
-            WHERE 
-                r.id = ?
-            LIMIT 1");
+                SELECT 
+                    r.id, 
+                    r.name, 
+                    r.number_of_stars,
+                    r.number_of_seats,
+                    r.description,
+                    r.location, 
+                    i.image AS banner
+                FROM 
+                    restaurants r
+                INNER JOIN 
+                    images i ON r.banner = i.id
+                WHERE 
+                    r.id = ?
+                LIMIT 1");
             $stmt->execute([$restaurantId]);
 
-            return $stmt->fetchObject('RestaurantDetailed');
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Instantiate RestaurantDetailed object
+            $restaurant = new RestaurantDetailed(
+                $data['name'], 
+                $data['number_of_stars'], 
+                $data['banner'], 
+                [], // Assuming you populate these fields later
+                $data['description'], 
+                $data['location'], 
+                $data['number_of_seats'], 
+                [], 
+                [], 
+                []
+            );
+            $restaurant->setId($data['id']);
+
+            return $restaurant;
 
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
         }
     }
+
 
     public function addRestaurant($restaurant)
     {
@@ -184,11 +227,11 @@ class RestaurantRepository extends Repository
         }
     }
 
-    public function deleteRestaurant($id)
+    public function deleteRestaurant($restaurantId)
     {
         try {
             $stmt = $this->connection->prepare('DELETE FROM restaurants WHERE id = :id');
-            $stmt->execute([':id' => $id]);
+            $stmt->execute([':id' => $restaurantId]);
 
             return true;
 
