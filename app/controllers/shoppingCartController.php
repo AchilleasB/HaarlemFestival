@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/danceTicket.php';
+// require_once __DIR__ . '/../models/danceTicket.php';
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/userService.php';
 require_once __DIR__ . '/../services/orderService.php';

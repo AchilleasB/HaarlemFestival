@@ -91,7 +91,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const ticketsButton = document.getElementById('tickets-btn');
             const appearancesButton = document.getElementById('appearances-btn');
-            const appearancesSection = document.getElementById('appearances-section');
+            const appearancesSection = document.getElementById('artistAppearances');
 
             ticketsButton.addEventListener('click', function () {
                 window.location.href = urlBasePath + 'dance/tickets';
