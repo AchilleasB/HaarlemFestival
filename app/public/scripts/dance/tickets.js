@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', async () => {
     // console.log('user_id: ', user_id);
     const ticketsMenu = await renderTicketsMenu();
@@ -16,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function getDanceEventsFromAPI() {
     try {
-        const response = await fetch('http://localhost/api/danceEvents');
+        const response = await fetch(urlBasePath + 'api/danceEvents');
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
@@ -141,7 +140,8 @@ function htmlDisplayTicket(event, eventType) {
 
     const addToCart = ticket.querySelector(".addToCart-button");
     addToCart.addEventListener("click", function () {
-        const amount = ticket.querySelector(".ticket-amount").value;
+        const amountInput = ticket.querySelector(".ticket-amount").value;
+        const amount = amountInput === '' ? 0 : amountInput;
         handleAddToCart(event.id, amount);
         fetchAndDisplayTickets(eventType);
     });
@@ -150,7 +150,7 @@ function htmlDisplayTicket(event, eventType) {
 }
 
 async function handleAddToCart(event_id, amount) {
-    const response = await fetch('http://localhost/api/danceEvents/tickets', {
+    const response = await fetch(urlBasePath + 'api/danceEvents/generateTicket', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -195,7 +195,7 @@ function showEventImages(artists, eventType) {
     if (eventType === 'SINGLE-CONCERT') {
         return artists.map(artist => `<img src="${imageBasePath}${artist.artist_image}" class="ticket-image" >`).join('');
     } else {
-        return `<img src="${imageBasePath}dance_event.png" class="ticket-image">`;
+        return `<img src="${imageBasePath}dance.png" class="ticket-image">`;
     }
 }
 

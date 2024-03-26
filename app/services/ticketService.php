@@ -6,57 +6,57 @@ require_once  __DIR__ . '/../repositories/ticketRepository.php';
 
 class TicketService
 {
-    private $ticketRepository;
+//     private $ticketRepository;
 
-    public function __construct()
-    {
+//     public function __construct()
+//     {
 
-        $this->ticketRepository = new TicketRepository();
-    }
-
-    
-    public function getAllDanceTickets()
-    {
-        return $this->ticketRepository->getAllDanceTickets();
-    }
-
-    public function retrievePreviousDanceTicket()
-    {
-        return $this->ticketRepository->retrievePreviousDanceTicket();
-    }
-
-    public function retrievePreviousDanceTicketId()
-    {
-        return $this->ticketRepository->retrievePreviousDanceTicketId();
-    }
+//         $this->ticketRepository = new TicketRepository();
+//     }
 
     
-    public function getDanceTicketById($id)
-    {
-        return $this->ticketRepository->getDanceTicketById($id);
-    }
+//     public function getAllDanceTickets()
+//     {
+//         return $this->ticketRepository->getAllDanceTickets();
+//     }
+
+//     public function retrievePreviousDanceTicket()
+//     {
+//         return $this->ticketRepository->retrievePreviousDanceTicket();
+//     }
+
+//     public function retrievePreviousDanceTicketId()
+//     {
+//         return $this->ticketRepository->retrievePreviousDanceTicketId();
+//     }
+
+    
+//     public function getDanceTicketById($id)
+//     {
+//         return $this->ticketRepository->getDanceTicketById($id);
+//     }
 
 
-    public function getTicketByEvent($customerName, $event){
-    return $this->ticketRepository->getTicketByEvent($customerName, $event);
-    }
+//     public function getTicketByEvent($customerName, $event){
+//     return $this->ticketRepository->getTicketByEvent($customerName, $event);
+//     }
 
-    public function updateDanceTicketQuantity($orderItemId, $productQuantity)
-    {
-        return $this->ticketRepository->updateDanceTicketQuantity($orderItemId, $productQuantity);
-    }
+//     public function updateDanceTicketQuantity($orderItemId, $productQuantity)
+//     {
+//         return $this->ticketRepository->updateDanceTicketQuantity($orderItemId, $productQuantity);
+//     }
  
-    public function deleteDanceTicket($id) {     
+//     public function deleteDanceTicket($id) {     
     
-     return $this->ticketRepository->deleteDanceTicket($id);   
-}
+//      return $this->ticketRepository->deleteDanceTicket($id);   
+// }
 
 
-function updateAvailableTicketsForDanceEvent($orderItemId, $availableTickets)
-{
-    return $this->ticketRepository->updateAvailableTicketsForDanceEvent($orderItemId, $availableTickets);
+// function updateAvailableTicketsForDanceEvent($orderItemId, $availableTickets)
+// {
+//     return $this->ticketRepository->updateAvailableTicketsForDanceEvent($orderItemId, $availableTickets);
 
-}
+// }
 
 
 }

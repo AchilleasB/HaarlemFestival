@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../services/danceService.php';
 require_once __DIR__ . '/../../models/dance.php';
-require_once __DIR__ . '/../../models/danceTicket.php';
+require_once __DIR__ . '/../../models/ticket.php';
 require_once __DIR__ . '/../../services/ticketService.php';
 
 
@@ -99,24 +99,34 @@ class DanceEventsController
                 echo json_encode('Invalid JSON');
             }
 
-            $danceTicket = new DanceTicket();
-            $danceTicket->setAmount(htmlspecialchars($object->amount));
-            $danceTicket->setEventId(htmlspecialchars($object->event_id));
-            $danceTicket->setUserId(htmlspecialchars($object->user_id));
+            $danceTicket = new Ticket();
+            $danceTicket->setAmount($object->amount);
+            $danceTicket->setDanceEventId($object->event_id);
+            $danceTicket->setUserId($object->user_id);
+
+            $event_price = $this->danceService->getDanceEventPrice($object->event_id);
+            $calc_price = $event_price * $object->amount;
+            $danceTicket->setCalcPrice($calc_price);
+
 
             if ($object->amount === 0) {
                 $message = 'Invalid amount! Try again with a valid amount of tickets';
-            } elseif ($this->danceService->addTicketToCart($danceTicket)) {
-                $message = 'Ticket(s) added to cart successfully';
+            } elseif ($this->danceService->checkTicketAvailability($danceTicket)) {
+                if($this->danceService->addTicketToCart($danceTicket)){
+                    $this->danceService->updateAvailableTickets($danceTicket);
+                    $message = 'Ticket(s) added to cart successfully';
+                } else {
+                    $message = 'An error occurred while adding ticket(s) to cart';
+                }
                 
                 // Start of added by Maria
-                $ticketService = new TicketService();
-                $previousDanceTicketId = $ticketService->retrievePreviousDanceTicketId();
-                $danceTicket->setId($previousDanceTicketId);
-                $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$danceTicket;
+                // $ticketService = new TicketService();
+                // $previousDanceTicketId = $ticketService->retrievePreviousDanceTicketId();
+                // $danceTicket->setId($previousDanceTicketId);
+                // $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$danceTicket;
                 // End of added by Maria
             } else {
-                $message = 'An error occurred while adding ticket(s) to cart';
+                $message = 'The requested amount of tickets is not available for this event';
             }
 
             header('Content-Type: application/json');

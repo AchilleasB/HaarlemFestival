@@ -13,10 +13,10 @@
       <div class="g-col-4">
         <h2>Invoice</h2>
         <div>Invoice number:
-          <?= $invoice->getId() ?>
+          <?= $order->getId() ?>
         </div>
         <div>Date:
-          <?= $invoice->getIssueDate() ?>
+          <?= date( 'd-m-Y') ?>
         </div>
         <div>To:
           <?= $user->getFirstname() . $user->getLastName() ?>
@@ -67,10 +67,10 @@
       </div>
       <div class="px-3 col-md-auto  text-end">
         <h5>VAT: &euro;
-          <?= $invoice->getTotalVAT() ?>
+          <?= $order->getTotalPrice() * 0.21 ?>
         </h5>
         <h5>Total: &euro;
-          <?= $invoice->getTotalCost() ?>
+          <?= $order->getTotalPrice()?>
         </h5>
       </div>
     </div>

@@ -8,7 +8,26 @@ require_once __DIR__ . '/../models/order.php';
 class OrderRepository extends Repository
 {
 
-   
+    function getOne($id)
+{
+    try {
+        $query = "SELECT * FROM orders WHERE id = :id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch();
+        $invoice = $this->convertDbRowToOrderInstance($row);
+
+        return $invoice;
+    } catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+
+
     public function getAllOrders()
     {
 
@@ -61,7 +80,7 @@ class OrderRepository extends Repository
                 $order->setId($row['id']);
                 $order->setDateTime($row['date_time']);
                 $order->setPaymentStatus($row['payment_status']);
-                $order->setUserId($row['user_id']);
+                $order->setTotalPrice($row['total_price']);
 
                 return $order;
     
@@ -74,16 +93,20 @@ echo $exp;
 
 
 
-public function addOrder($id, $payment_status, $user_id)
+public function addOrder($id, $payment_status, $total_price)
 {
-    $stmt = $this->connection->prepare("INSERT INTO orders(id, date_time, payment_status, user_id)VALUES(:id, :date_time, :payment_status, :user_id)");
+    $stmt = $this->connection->prepare("INSERT INTO orders(id, date_time, payment_status, total_price)VALUES(:id, :date_time, :payment_status, :total_price)");
     $now = date("Y-m-d H:i:s"); 
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':date_time', $now);
     $stmt->bindParam(':payment_status', $payment_status);
-    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bindParam(':total_price', $total_price);
 
     $stmt->execute();
+
+    $orderId= $this->connection->lastInsertId();
+
+    return $this->getOne($orderId);
 
 }
 

@@ -34,7 +34,7 @@ function getTicketByEvent($userName, $eventName) {
     var res;
 
     $.ajax({
-        url: "http://localhost/api/Ticket/getTicketByEvent",
+        url: `http://${host}/api/Ticket/getTicketByEvent`,
         type: "GET",
         dataType: "JSON",
         data:{ name: $userName, event: $eventName },

@@ -2,10 +2,10 @@
 
 require_once __DIR__ . '/controller.php';
 require_once(__DIR__ . '/../services/historyService.php');
-require_once(__DIR__ . '/../models/locations.php');
-require_once(__DIR__ . '/../models/user.php');
 require_once(__DIR__ . '/../services/locationService.php');
 require_once(__DIR__ . '/../services/HistoryTourService.php');
+require_once(__DIR__ . '/../models/eventPage.php');
+
 
 class HistoryController extends Controller
 {
@@ -13,7 +13,7 @@ class HistoryController extends Controller
     protected $locationService;
     protected $historyTourService;
 
-    function __construct()
+    public function __construct()
     {
         $this->historyService = new HistoryService();
         $this->locationService = new LocationService();
@@ -23,16 +23,18 @@ class HistoryController extends Controller
     public function index()
     {
         $locations = $this->historyService->getAllLocationsWithImages();
-        $historyTours = $this->historyTourService->getAllHistoryTours();
-        $locationService = $this->locationService;
         $organizedTours = $this->historyTourService->getOrganizedTours();
+        $languages = $this->historyTourService->getLanguages();
+        $dates = $this->historyTourService->getDates();
+        $times = $this->historyTourService->getTimes();
+        $ticketTypes = $this->historyTourService->getTicketTypes();
+        $event = $this->historyService->getEventDetails();
+
         require(__DIR__ . '/../views/history/index.php');
     }
 
-    public function location()
-    {
-        $location = $this->locationService->getLocationById();
-        $images = $this->locationService->getLocationImages();
-    }
+
+   
+  
 }
 ?>

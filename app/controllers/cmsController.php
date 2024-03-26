@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/controller.php';
+require_once __DIR__ . '/../services/orderService.php';
+
 
 class CmsController extends Controller
 {
@@ -22,6 +24,23 @@ class CmsController extends Controller
     public function userManagement()
     {
         $this->displayView($this);
+    }
+    public function historyManagement()
+    {
+        $this->displayView($this);
+    }
+
+    public function orderManagement()
+    {
+        $orderService = new OrderService();
+        $orders = $orderService->getAllOrders();
+        $data=[
+
+            'orders' => $orders
+        ];
+        
+        $this->displayOrders($this, $data);
+
     }
 
     public function yummyManagement()
