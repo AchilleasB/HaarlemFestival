@@ -15,7 +15,10 @@ class CmsController extends Controller
             exit();
         }
     }
-
+    public function festivalManagement()
+    {
+        $this->displayView($this);
+    }
     public function danceManagement()
     {
         $this->displayView($this);

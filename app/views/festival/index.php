@@ -51,37 +51,37 @@
     <section class="d-flex justify-content-center">
         <div class="col-6 my-5 border-bottom border-3 pb-5">
             <div class="row">
-                <h2><?php echo $event['title']; ?></h2>
+                <h2><?php echo $event->getTitle(); ?></h2>
             </div>
             <div class="row">
                 <div class="col">
                     <?php 
-                    $imageSrc = !empty($event['event_image']) ? "../../images/history/".$event['event_image'] : "../../images/no-image.jpg"; 
+                    $imageSrc = !empty($event->getImage()) ? "../../images/".$event->getImage() : "../../images/no-image.jpg"; 
                     ?>
                     <img src="<?php echo $imageSrc; ?>" class="img-fluid" style="width: 300px; height: 170px;" alt="Event Image">
                 </div>
                 <div class="col">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#Description_<?php echo $event['id']; ?>">DESCRIPTION</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#Description_<?php echo $event->getId(); ?>">DESCRIPTION</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#Location_<?php echo $event['id']; ?>">LOCATION</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#Location_<?php echo $event->getId(); ?>">LOCATION</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#Schedule_<?php echo $event['id']; ?>">SCHEDULE</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#Schedule_<?php echo $event->getId(); ?>">SCHEDULE</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div id="Description_<?php echo $event['id']; ?>" class="tab-pane fade show active">
-                            <h4 class="pt-3"><?php echo $event['sub_title']; ?></h4>
-                            <p><?php echo $event['description']; ?></p>
+                        <div id="Description_<?php echo $event->getId(); ?>" class="tab-pane fade show active">
+                            <h4 class="pt-3"><?php echo $event->getSubTitle(); ?></h4>
+                            <p><?php echo $event->getDescription(); ?></p>
                         </div>
-                        <div id="Location_<?php echo $event['id']; ?>" class="tab-pane fade">
-                            <h5 class="pt-3"><?php echo $event['locations']; ?></h5>
+                        <div id="Location_<?php echo $event->getId(); ?>" class="tab-pane fade">
+                            <h5 class="pt-3"><?php echo $event->getLocations(); ?></h5>
                         </div>
-                        <div id="Schedule_<?php echo $event['id']; ?>" class="tab-pane fade">
-                            <h5 class="pt-3"><?php echo $event['schedule']; ?></h5>
+                        <div id="Schedule_<?php echo $event->getId(); ?>" class="tab-pane fade">
+                            <h5 class="pt-3"><?php echo $event->getSchedule(); ?></h5>
                         </div>
                     </div>
                     <button class="info-button" href>DISCOVER MORE</button>
@@ -90,6 +90,27 @@
         </div>
     </section>
 <?php endforeach; ?>
+
+
+
+<p>July 27, 2023: <br>
+20:00 - 02:00 Nicky Romero / Afrojack<br>
+22:00 - 23:30 Tiesto<br>
+23:00 - 00:30 Hardwell<br>
+22:00 - 23:30 Armin van Buuren<br>
+22:00 - 23:30 Martin Garrix<br>
+<br>
+July 28, 2023:<br>
+14:00 - 23:00 Hardwell / Martin Garrix / Armin van Buuren<br>
+22:00 - 23:30 Afrojack<br>
+21:00 - 01:00 Tiesto<br>
+23:30 - 01:00 Nicky Romero<br>
+<br>
+July 29, 2023:<br>
+14:00 - 23:00 Afrojack / Tiesto / Nicky Romero<br>
+19:00 - 20:30 Armin van Buuren<br>
+21:00 - 22:30 Hardwell<br>
+18:00 - 19:30 Martin Garrix</p>
 
     <?php include __DIR__ . '/../footer.php'; ?>
 
