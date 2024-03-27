@@ -8,12 +8,50 @@ require_once __DIR__ . '/../models/eventData.php';
 
 
 
-class ShoppingCartRepository extends Repository
+class OrderItemRepository extends Repository
 {
 
+function getEventDataTable($ticketId){
 
+try{
+
+    $stmt = $this->connection->prepare("SELECT * FROM tickets WHERE id = :id;");
+    $stmt->bindParam(':id', $ticketId);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+
+    if ($result['dance_event_id']!= NULL){
+
+        $eventTableData = [ "table" => "dance_events", "event_id" => $result['dance_event_id']];
+    }
+    else if($result['history_tour_id'] != NULL){
+        $eventTableData = "history_tours";
+    }
+
+    return $eventTableData;
+
+    } catch (PDOException $e) {
+    echo $e->getMessage() . $e->getLine();
+    }
+
+} 
+
+
+function getProductData($ticketId){
+
+    $eventDataTable = $this->getEventDataTable($ticketId);
+
+    if ($eventDataTable["table"] == "dance_events"){
+        $res = $this->getDanceEventData($eventDataTable["event_id"]);
+    }
+
+    return $res;
+}
    
-function getProductData($eventId)
+
+
+function getDanceEventData($eventId)
 {
     try {
         $stmt = $this->connection->prepare("SELECT dance_events.date, dance_events.start_time, dance_events.tickets_available, dance_events.type, dance_events.price, artists.name AS artistName, artists.artist_image, venues.name, venues.address 
@@ -28,7 +66,7 @@ function getProductData($eventId)
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $eventData = $this->createProductDataInstance($result);
+        $eventData = $this->createDanceEventDataInstance($result);
         
         
         return $eventData;
@@ -37,14 +75,9 @@ function getProductData($eventId)
         echo $e->getMessage() . $e->getLine();
     }
 
-
-
-
-
-    
 }
 
-private function createProductDataInstance($result): EventData
+private function createDanceEventDataInstance($result): EventData
 { 
     try{
 
@@ -55,11 +88,11 @@ private function createProductDataInstance($result): EventData
         if (isset($result['artistName'])){
         $eventData->setName($result['artistName']);}
         else {
-            $eventData->setName('');}
+            $eventData->setName('Dance!'.$result['type']);}
         if (isset($result['artist_image'])){
             $eventData->setArtistImage($result['artist_image']);}
             else {
-                $eventData->setArtistImage('../images/dance_event.png');}
+                $eventData->setArtistImage('../images/dance.png');}
         $eventData->setTicketType($result['type']);
         $eventData->setLocationName($result['name']);
         $eventData->setLocationAddress($result['address']);

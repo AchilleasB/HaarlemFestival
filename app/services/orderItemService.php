@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../repositories/shoppingCartRepository.php';
+require_once __DIR__ . '/../repositories/orderItemRepository.php';
 require_once __DIR__ . '/../services/userService.php';
 require_once __DIR__ .  '/../vendor/autoload.php';
 
@@ -10,7 +10,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 
 
-class ShoppingCartService
+class OrderItemService
 {
     private $ShoppingCartRepository;
     
@@ -18,7 +18,7 @@ class ShoppingCartService
     public function __construct()
     {
 
-        $this->ShoppingCartRepository = new ShoppingCartRepository();
+        $this->ShoppingCartRepository = new OrderItemRepository();
 
     }
 
@@ -33,8 +33,9 @@ class ShoppingCartService
             foreach($orderItems as $orderItem=>$i){
     
                 if (!$itemIsStdClass){
-                $event = $this->ShoppingCartRepository->getProductData($i->getEventId());}
-                else {$event = $this->ShoppingCartRepository->getProductData($i->event_id);}
+                $event =$this->ShoppingCartRepository->getProductData($i->getId());
+                }
+                else {$event = $this->ShoppingCartRepository->getProductData($i->id);}
                 $eventsData[$orderItem]['Event'] = $event;
     
             }
@@ -43,15 +44,17 @@ class ShoppingCartService
         }
 
 
+        function getProductData($ticketId){
 
+            return $this->ShoppingCartRepository->getProductData($ticketId);
+        }
 
-        public function getProductData($eventId){
+        public function getDanceEventData($eventId){
 
-            return $this->ShoppingCartRepository->getProductData($eventId);
+            return $this->ShoppingCartRepository->getDanceEventData($eventId);
         
         }
         
-    
     
 
     function calculateOrderTotal($orderItems, $productData)
@@ -119,26 +122,40 @@ public function createPdf($html, $pdfPath){
     public  function createTicketPdf($user, $orderItems, $products){
         
         $tickets = [];
-        $ticketsCount = count(glob(__DIR__ ."/../public/tickets/" ."*" ));
+        $ticketsCount = count(glob(__DIR__ ."/../public/tickets/" ."*.{pdf}" ));
         foreach($products as $item=>$i){
         $ticket = $orderItems[$item];
+        $ticketAmount=$orderItems[$item]->amount;
         $event = $products[$item]['Event'];
         $eventName = $event->getName();
         $ticketType = $products[$item]['Event']->getTicketType();
         $dateTime = $event->getDateTime();
-        $ticketId = $ticketsCount++;
+        $ticketCount = $ticketsCount++;
         $qrCodeId = bin2hex(random_bytes(50));
-        $qrData = $this->generateQrCode($user,$qrCodeId, $event);
+        $qrData = $this->generateQrCode($ticket->id);
         $ticketHtmlTemplate = __DIR__ . "/../views/shoppingcart/ticket.php";
         
         ob_start();
         require($ticketHtmlTemplate);
         $html = ob_get_contents();
         ob_get_clean();
-        $pdfPath = __DIR__ . "/../public/tickets/ticket". $ticketId . ".pdf";
+
+      if ($ticketAmount > 1){
+        for($i=0; $i<$ticketAmount; $i++){
+        $pdfPath = __DIR__ . "/../public/tickets/ticket". $ticketsCount++ . ".pdf";
         $this->createPdf($html, $pdfPath);
         $tickets[count($tickets)] = $pdfPath;
+         }
         }
+    else{
+        $pdfPath = __DIR__ . "/../public/tickets/ticket". $ticketCount++ . ".pdf";
+        $this->createPdf($html, $pdfPath);
+        $tickets[count($tickets)] = $pdfPath;
+    }
+
+    }
+
+
     
         return $tickets;
     
@@ -148,11 +165,8 @@ public function createPdf($html, $pdfPath){
     
     
     
-    public function generateQrCode($user, $ticketId, $eventData){
-    $name = $user->getFirstname() ." ". $user->getLastname();
-    $qr = QrCode::create("Name:". $name ."
-    Event:". $eventData->getName() . "
-    Datetime:" . $eventData->getDateTime() ."");
+    public function generateQrCode($ticketId){
+    $qr = QrCode::create("TicketId:". $ticketId);
     $writer = new PngWriter();
     $output = $writer->write($qr);
     $file = __DIR__ . "/../public/tickets/qr/qr" . $ticketId . ".png";

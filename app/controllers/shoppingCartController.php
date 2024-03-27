@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/../models/danceTicket.php';
+require_once __DIR__ . '/../models/ticket.php';
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/userService.php';
 require_once __DIR__ . '/../services/orderService.php';
-require_once __DIR__ . '/../services/shoppingCartService.php';
+require_once __DIR__ . '/../services/orderItemService.php';
 
 
 
@@ -26,11 +26,10 @@ class ShoppingCartController extends Controller
 
   function __construct()
   {
-
     require_once __DIR__ . '/../config/mollieConfig.php';
     $this->userService = new UserService();
     $this->orderService = new OrderService();
-    $this->shoppingCartService = new ShoppingCartService();
+    $this->shoppingCartService = new OrderItemService();
     $this->user = $this->userService->getUserByEmail($_SESSION['user_email']);
     $this->currentOrderItems = $this->getItems();
     $this->products = $this->shoppingCartService->getProducts($this->currentOrderItems);
@@ -54,7 +53,10 @@ class ShoppingCartController extends Controller
   public function getItems()
   {
 
-    $orderItems = unserialize(serialize($_SESSION['order_items_data']));
+    if (!isset($_SESSION['selected_items_to_purchase'])){
+      $_SESSION['selected_items_to_purchase']=[];
+    }
+    $orderItems = unserialize(serialize($_SESSION['selected_items_to_purchase']));
 
     return $orderItems;
 
@@ -63,9 +65,9 @@ class ShoppingCartController extends Controller
 
   public function removeItem()
   {
-    foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
+    foreach ($_SESSION['selected_items_to_purchase'] as $itemCount => $item) {
       if ($itemCount == $_POST['removeItem'])
-        array_splice($_SESSION['order_items_data'], $itemCount, 1);
+        array_splice($_SESSION['selected_items_to_purchase'], $itemCount, 1);
     }
     header("location: /shoppingCart");
   }
@@ -73,16 +75,18 @@ class ShoppingCartController extends Controller
 
   public function updateTicketQuantity()
   {
-    foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
+    foreach ($_SESSION['selected_items_to_purchase'] as $itemCount => $item) {
       if ($itemCount == $_POST['update']){
         $ticket = $this->currentOrderItems[$itemCount];
-         $newTicket = new DanceTicket();
+         $newTicket = new Ticket();
          $newTicket->setId($ticket->getId());
         $newTicket->setAmount($_POST['quantity']);
-        $newTicket->setEventId($ticket->getEventId());
+        $newTicket->setCalcPrice($ticket->getCalcPrice());
+        if ($ticket->getDanceEventId() !==null){
+        $newTicket->setDanceEventId($ticket->getDanceEventId());}
         $newTicket->setUserId($ticket->getUserId());
 
-        $_SESSION['order_items_data'][$itemCount] = $newTicket; 
+        $_SESSION['selected_items_to_purchase'][$itemCount] = $newTicket; 
     }
   }
   header("location: /shoppingCart");
@@ -252,7 +256,7 @@ class ShoppingCartController extends Controller
   public function displayOrderConfirmation()
   {
 
-    $_SESSION['order_items_data'] = [];
+    $_SESSION['selected_items_to_purchase']=[];
 
     require_once __DIR__ . "/../views/shoppingCart/confirmedOrder.php";
   }
