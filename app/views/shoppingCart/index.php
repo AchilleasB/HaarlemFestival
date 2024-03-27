@@ -15,10 +15,10 @@
 <body class="border border-white ">
   <?php
     include __DIR__ . '/../header.php';
-    require __DIR__ . '/../../config/hostnameConfig.php';
+    require __DIR__ . '/../../config/urlconfig.php';
 
     ?>
-  <main class="border border-white mb-5">
+  <main class="border border-white " style="margin-bottom:100px;">
     <div class="grid pt-5" style="--bs-columns: 10; --bs-gap: 1rem;">
       <div class="g-col-7">
         <div class="table-responsive">
@@ -37,11 +37,23 @@
               <?php 
               foreach ($this->products as $orderItem=>$i) {    ?>
               <tr class="product bg-white">
-                <?php $product = $this->products[$orderItem]['Event']->getName()?>
-                <td class="col-md-4 text-start">
+                <?php $product = $this->products[$orderItem]['Event']->getName();
+                 $orderItemId = $this->currentOrderItems[$orderItem]->getId();
+                $eventImage = $this->products[$orderItem]['Event']->getArtistImage();
+                 $locationName = $this->products[$orderItem]['Event']->getLocationName();
+                $locationAddress = $this->products[$orderItem]['Event']->getLocationAddress(); 
+                $datetime = $this->products[$orderItem]['Event']->getDateTime();
+                $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
+                $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
+                $ticketsAvailableForEvent = $this->products[$orderItem]['Event']->getTicketsAvailable();
+                $totalPrice = $this->orderTotal;
+                $totalVAT = $this->orderVAT;?>
+                
+                <td class="itemId" style="display:none"><?= $orderItemId ?></td>
+                <td class="col-md-4 text-start align-middle">
                   <div class="grid py-2">
                     <div class="g-col-4"><img id="productImg"
-                        src="/images/<?= $this->products[$orderItem]['Event']->getArtistImage()?>"
+                        src="/images/<?= $eventImage?>"
                         class="img-fluid rounded-0" alt="...">
                     </div>
                     <div class="g-col-4">
@@ -62,44 +74,41 @@
                 <td class="col-md-2">
                   <ul class="list-group ">
                     <li class="list-group-item border-0">
-                      <?php  if ($this->products[$orderItem]['Event']->getLocationName() != "") { ?>
+                      <?php  if ($locationName != "") { ?>
                     <li class="list-group-item border-0 pt-5">
                       <strong>
-                        <?= $this->products[$orderItem]['Event']->getLocationName() ?>
+                        <?= $locationName ?>
                       </strong>,
-                      <?= $this->products[$orderItem]['Event']->getLocationAddress() ?>
+                      <?= $locationAddress ?>
                     </li>
                     <?php }
                     else { ?>
                     <li class="list-group-item border-0 pt-5">
                       <strong>
-                        <?= $this->products[$orderItem]['Event']->getLocationName() ?>
+                        <?= $locationName ?>
                       </strong>
                     </li>
                     <?php } ?>
                     <li class="list-group-item border-0 pt-5">
-                      <?= $this->products[$orderItem]['Event']->getDateTime() ?>
+                      <?= $datetime ?>
                     </li>
                   </ul>
                 </td>
                 <td class="align-middle">
                   <div class="quantityValues m-1">
-                  <form method="POST" action="/shoppingCart/UpdateTicketQuantity">
+                  <form method="POST" action="/shoppingCart/updateTicketQuantity">
 
                     <input type="number" id="quantity" name="quantity" class="quantity"
-                      value=<?=$this->currentOrderItems[$orderItem]->getAmount()?> min="1"
+                      value=<?= $ticketAmount ?> min="1"
                     max="10">
 
                     <button id="updateQuantity" class="updateQuantity" type=submit name=update
-                      value=<?=$orderItem?>>Save<span id="orderItemId"
-                        style="display:none">
-                        <?= $this->currentOrderItems[$orderItem]->getId() ?>
-                      </span></button>
+                      value=<?=$orderItem?>>Save</button>
                     
                     </form>
-                    <?php  if ($this->products[$orderItem]['Event']->getTicketsAvailable() > 0) {?>
+                    <?php  if ($ticketsAvailableForEvent > 0) {?>
                     <div>Only
-                      <?= $this->products[$orderItem]['Event']->getTicketsAvailable() ?> left
+                      <?= $ticketsAvailableForEvent ?> left
                     </div>
                     <?php } 
                   else {?>
@@ -108,14 +117,11 @@
                 </td>
                 <td class="align-middle">
                   &euro;
-                  <?= $this->products[$orderItem]['Event']->getTicketPrice() * $this->currentOrderItems[$orderItem]->getAmount() ?>
+                  <?= $ticketPrice * $ticketAmount ?>
                 </td>
                 <td class="align-middle">
                   <form method="POST" action="/shoppingCart/removeItem">
-                    <button class="removeItem btn border-0"
-                      id="item<?= $this->currentOrderItems[$orderItem]->getId() ?>" type=submit name=removeItem
-                      value=<?=$orderItem?>><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                        fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                    <button class="btn border-0" type=submit name=removeItem value=<?=$orderItem?>><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
                         <path
                           d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                         <path
@@ -147,36 +153,14 @@
         </a>
       </div>
       <div class="g-col-3 bg-light text-center" style="row-gap: 0; height: 200px">
-        <div class="border-bottom">
-          <p class="h5">Order summary</p>
-        </div>
-        <div class="grid py-2" style="row-gap: 0;">
-          <div class="g-col-4  text-start">Sub-total(Net)</div>
-          <div class="g-col-6  text-end">&euro;
-            <?= $this->orderTotal - $this->orderVAT?>
-          </div>
-        </div>
-        <div class="grid py-2" style="row-gap: 0;">
-          <div class="g-col-4 text-start">VAT(21%)</div>
-          <div class="g-col-6 text-end">&euro;
-            <?= $this->orderVAT ?>
-          </div>
-        </div>
-        <div class="grid py-2" style="row-gap: 0;">
-          <div class="g-col-4  text-start"><strong>Total:</strong></div>
-          <div class="g-col-6 text-end"><strong>&euro;
-              <?= $this->orderTotal ?>
-            </strong></div>
-        </div>
+      <order-summary-component></order-summary-component>
+
         <form method="" action="/shoppingCart/selectPaymentMethod">
           <input class="rounded-0 py-3 w-100 " type=submit name=action id="checkoutBtn" value="CHECKOUT NOW" />
         </form>
-        <div class="grid">
-          <div class="g-col-2 ">Payment methods</div>
-          <div class="g-col-2 "><img src="https://www.svgrepo.com/show/266085/ideal.svg" width="64" height="64"></div>
-          <div class="g-col-2 "><img src="https://www.svgrepo.com/show/266070/visa.svg" width="64" height="64"></div>
-          <div class="g-col-2 "><img src="https://www.svgrepo.com/show/266087/master-card.svg" width="64" height="64">
-          </div>
+        <div>
+       <payment-methods-component></payment-methods-component>
+        </div>
         </div>
       </div>
     </div>
@@ -185,6 +169,11 @@
     include __DIR__ . '/../footer.php';
     ?>
 </body>
-<script> var host = "<?php echo $hostname; ?>";</script>
-<script src="/scripts/shoppingcart/shoppingcart.js"></script>
+<script> var urlBasePath = "<?php echo  $urlBasePath; ?>";</script>
+<script> var totalPrice = "<?php echo $totalPrice; ?>";</script>
+<script> var totalVAT= "<?php echo $totalVAT; ?>";</script>
+<script src="/scripts/orderItem/orderItem.js"></script>
+<script src="/scripts/orderItem/components/paymentMethods.js"></script>
+<script src="/scripts/orderItem/components/orderSummary.js"></script>
+
 </html>

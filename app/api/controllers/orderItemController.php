@@ -1,14 +1,14 @@
 <?php
-require __DIR__ . '/../../services/shoppingCartService.php';
+require __DIR__ . '/../../services/orderItemService.php';
 require __DIR__ . '/apiController.php';
 
-class ShoppingCartController extends ApiController
+class OrderItemController extends ApiController
 {
     private $shoppingCartService;
 
     public function __construct()
     {
-        $this->shoppingCartService = new ShoppingCartService();
+        $this->shoppingCartService = new OrderItemService();
     }
 
     public function getProductData(){
@@ -18,9 +18,9 @@ class ShoppingCartController extends ApiController
             $event = NULL;
 
             if (!empty($_GET['id'])) {
-                $eventId= htmlspecialchars($_GET['id']);
+                $ticketId= htmlspecialchars($_GET['id']);
 
-                $event = $this->shoppingCartService->getProductData($eventId);
+                $event = $this->shoppingCartService->getProductData($ticketId);
             }
 
             echo Json_encode($event);
@@ -30,6 +30,8 @@ class ShoppingCartController extends ApiController
         }
 
     }
+
+
 
 
 }

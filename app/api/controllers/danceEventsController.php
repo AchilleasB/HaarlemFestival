@@ -120,10 +120,7 @@ class DanceEventsController
                 }
                 
                 // Start of added by Maria
-                // $ticketService = new TicketService();
-                // $previousDanceTicketId = $ticketService->retrievePreviousDanceTicketId();
-                // $danceTicket->setId($previousDanceTicketId);
-                // $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$danceTicket;
+                 $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$danceTicket;
                 // End of added by Maria
             } else {
                 $message = 'The requested amount of tickets is not available for this event';

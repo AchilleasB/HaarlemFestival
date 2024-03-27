@@ -1,10 +1,9 @@
 
 function getAllOrders() {
-
   var res;
 
   $.ajax({
-      url: `http://${host}/api/Order/getAllOrders`,
+      url: `${urlBasePath}api/Order/getAllOrders`,
       type: "GET",
       dataType: "JSON",
       async: false,

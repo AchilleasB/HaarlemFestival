@@ -37,6 +37,6 @@
     <script>
         const imageBasePath = "<?php echo $imageBasePath; ?>";
         const user_id = <?php echo json_encode($user_id) ?>;
-        const urlBasePath = "<?php echo $urlBasePath; ?>";
+        const urlBasePath = "<?php echo 'http://localhost/'; ?>";
     </script>
     <script type="module" src="../scripts/dance/tickets.js"></script>
