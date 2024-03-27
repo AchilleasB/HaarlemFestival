@@ -23,7 +23,7 @@ class HistoryTourController
         if (!isset($_SESSION['user_id'])) {
             echo json_encode(['error' => 'User session not found. Please log in.']);
             //header('Location: /login');
-            exit();
+            //exit();
         }
     }
 
@@ -76,7 +76,7 @@ class HistoryTourController
                     $ticket->setCalcPrice($calc_price); 
     
                     $this->historyTourService->addTicketToCart($ticket);
-                    $this->historyTourService->updateSeats($historyTourID, $requiredSeats);
+                
                     echo json_encode(['message' => 'Ticket generated successfully']);
                 }
     

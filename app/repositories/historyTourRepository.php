@@ -153,7 +153,8 @@ public function getTicketTypePrice($ticketType)
         return null;
     }
 }
-function addTicketToCart($historyTicket){
+function addTicketToCart($historyTicket)
+{
     try {
         $stmt = $this->connection->prepare('INSERT INTO tickets (id, amount, calc_price, history_tour_id, user_id) 
                                             VALUES (:id, :amount, :calc_price, :history_tour_id, :user_id)');
@@ -171,24 +172,6 @@ function addTicketToCart($historyTicket){
         echo 'Error: ' . $e->getMessage();
     }
 }
-public function updateSeats($historyTourId, $seatsToDeduct)
-{
-    try {
-        $sql = "UPDATE history_tours 
-                SET seats = seats - :seatsToDeduct 
-                WHERE id = :historyTourId";
 
-        $statement = $this->connection->prepare($sql);
-        $statement->bindParam(':seatsToDeduct', $seatsToDeduct, PDO::PARAM_INT);
-        $statement->bindParam(':historyTourId', $historyTourId, PDO::PARAM_INT);
-
-        $statement->execute();
-
-        return true;
-    } catch (PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-        return false;
-    }
-}
 }
 ?>

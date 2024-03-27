@@ -31,7 +31,7 @@ class FestivalRepository extends Repository
             $event->setTitle($eventDetails['title']);
             $event->setSubTitle($eventDetails['sub_title']);
             $event->setDescription($eventDetails['description']);
-            $event->setInformation($eventDetails['information']);
+            $event->setInformation($eventDetails['information']);        
 
             return $event;
         } catch (PDOException $e) {
