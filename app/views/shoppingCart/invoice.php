@@ -45,7 +45,7 @@
                 <div>  <strong><?= $eventName ?></strong>-<?= $ticketType?></div>
             
               <?php } 
-              else if ($eventName == ''&& $ticketType != "SINGLE-CONCERT")
+              else if ($eventName == '' && $ticketType != "SINGLE-CONCERT")
               { ?><strong><?= 'Dance!' ?>-<?= $ticketType?></strong><?php }
               
                 else 

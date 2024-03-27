@@ -1,6 +1,10 @@
 <?php
-require __DIR__ . '/../../services/ticketService.php';
-require __DIR__ . '/apiController.php';
+
+
+require_once __DIR__ . '/../../services/ticketService.php';
+
+
+require_once __DIR__ . '/apiController.php';
 
 class TicketController extends ApiController
 {
@@ -13,19 +17,19 @@ class TicketController extends ApiController
           
 
 
-    public function getDanceTicketById(){
+    public function getTicketById(){
 
-        try {
-            $this->sendHeaders();
+         try {
+             $this->sendHeaders();
             $ticket = NULL;
 
             if (!empty($_GET['id'])) {
                 $ticketId= htmlspecialchars($_GET['id']);
-                $ticket = $this->ticketService->getDanceTicketById($ticketId);
+                $ticket = $this->ticketService->getTicketById($ticketId);
 
             }
 
-            echo Json_encode($ticket);
+           echo Json_encode($ticket);
         } catch (InvalidArgumentException | Exception $e) {
             http_response_code(500); // sending bad request error to APi request if something goes wrong
             echo $e->getMessage();
@@ -34,7 +38,7 @@ class TicketController extends ApiController
     }
 
 
-    public function UpdateDanceTicketQuantity()
+    public function UpdateTicketQuantity()
     {
         try {
 
@@ -42,7 +46,7 @@ class TicketController extends ApiController
             $ticketQuantity = htmlspecialchars($_POST['amount']);
            
 
-            $this->ticketService->updateDanceTicketQuantity($orderItemId, $ticketQuantity); 
+            $this->ticketService->updateTicketQuantity($orderItemId, $ticketQuantity); 
 
         } catch (Exception $e) {
             http_response_code(500);
@@ -50,22 +54,6 @@ class TicketController extends ApiController
         }
     }
 
-
-    public function deleteDanceTicket()
-    {  
-        try {
-
-            $ticketId = $_GET['id'];
-            $this->ticketService->deleteDanceTicket($ticketId);
-             
-            echo Json_encode('true');
-            
-        } catch (Exception $e) {
-            http_response_code(500); // sending bad request error to APi request if something goes wrong
-            echo $e->getMessage();
-        }
-
-    }
 
 
     public function UpdateAvailableTicketsForDanceEvent()
@@ -75,7 +63,7 @@ class TicketController extends ApiController
             $eventId = htmlspecialchars($_POST['event_id']);
             $availableTickets = htmlspecialchars($_POST['tickets_available']);
 
-            $this->ticketService->updateAvailableTicketsForDanceEvent($eventId, $availableTickets); 
+            $this->ticketService->updateAvailableDanceTicketsAtCheckout($eventId, $availableTickets); 
 
         } catch (Exception $e) {
             http_response_code(500);
@@ -85,15 +73,15 @@ class TicketController extends ApiController
 
 
 
-    public function getTicketByEvent(){
+
+    public function getTicketAndEventData(){
 
         try {
             $this->sendHeaders();
 
-            if (!empty($_GET['name'] && !empty($_GET['event']))) {
-                $customer_name= htmlspecialchars($_GET['name']);
-                $event= htmlspecialchars($_GET['event']);
-                $ticket = $this->ticketService->getTicketByEvent($customer_name, $event);
+            if (!empty($_GET['id'])) {
+                $id= htmlspecialchars($_GET['id']);
+                $ticket = $this->ticketService->getTicketAndEventData($id);
 
             }
 

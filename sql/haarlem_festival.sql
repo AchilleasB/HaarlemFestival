@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 23, 2024 at 12:40 AM
--- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
--- PHP Version: 8.2.9
+-- Generation Time: Mar 26, 2024 at 08:09 PM
+-- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -124,25 +124,25 @@ CREATE TABLE `dance_events` (
 --
 
 INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, `session`, `tickets_available`, `price`, `type`) VALUES
-(1, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 1350, 75.00, 'SINGLE-CONCERT'),
-(2, 3, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 199, 60.00, 'SINGLE-CONCERT'),
-(3, 4, 'FRIDAY 27 JULY', '23:00', '00:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
-(4, 5, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(5, 6, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(6, 2, 'SATURDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 1798, 110.00, 'SINGLE-CONCERT'),
-(7, 4, 'SATURDAY 28 JULY', '22:00', '23:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
-(8, 1, 'SATURDAY 28 JULY', '21:00', '01:00', 'TIESTOWORLD', 1499, 75.00, 'SINGLE-CONCERT'),
-(9, 3, 'SATURDAY 28 JULY', '23:00', '00:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(10, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 1800, 110.00, 'SINGLE-CONCERT'),
-(11, 4, 'SUNDAY 29 JULY', '19:00', '20:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
-(12, 5, 'SUNDAY 29 JULY', '21:00', '22:30', 'CLUB', 1500, 90.00, 'SINGLE-CONCERT'),
-(13, 3, 'SUNDAY 29 JULY', '18:00', '19:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(14, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 150, 125.00, '1-DAY-PASS'),
-(15, 2, 'SATURDAY 28 JULY', '14:00', '01:00', 'BACK2BACK', 200, 150.00, '1-DAY-PASS'),
-(16, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 200, 150.00, '1-DAY-PASS'),
-(17, 1, 'FRIDAY 27 JULY', '20:00', '23:00', 'BACK2BACK', 148, 250.00, '3-DAY-PASS'),
-(36, 2, 'MONDAY 30 JULY', '13:00', '18:00', 'BACK2BACK', 1798, 500.00, 'SINGLE-CONCERT'),
-(37, 4, 'MONDAY 30 JULY', '20:00', '22:30', 'CLUB', 150, 250.00, 'SINGLE-CONCERT');
+(1, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 1350, '75.00', 'SINGLE-CONCERT'),
+(2, 3, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 199, '60.00', 'SINGLE-CONCERT'),
+(3, 4, 'FRIDAY 27 JULY', '23:00', '00:30', 'CLUB', 300, '60.00', 'SINGLE-CONCERT'),
+(4, 5, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, '60.00', 'SINGLE-CONCERT'),
+(5, 6, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, '60.00', 'SINGLE-CONCERT'),
+(6, 2, 'SATURDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 1798, '110.00', 'SINGLE-CONCERT'),
+(7, 4, 'SATURDAY 28 JULY', '22:00', '23:30', 'CLUB', 300, '60.00', 'SINGLE-CONCERT'),
+(8, 1, 'SATURDAY 28 JULY', '21:00', '01:00', 'TIESTOWORLD', 1499, '75.00', 'SINGLE-CONCERT'),
+(9, 3, 'SATURDAY 28 JULY', '23:00', '00:30', 'CLUB', 200, '60.00', 'SINGLE-CONCERT'),
+(10, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 1800, '110.00', 'SINGLE-CONCERT'),
+(11, 4, 'SUNDAY 29 JULY', '19:00', '20:30', 'CLUB', 300, '60.00', 'SINGLE-CONCERT'),
+(12, 5, 'SUNDAY 29 JULY', '21:00', '22:30', 'CLUB', 1500, '90.00', 'SINGLE-CONCERT'),
+(13, 3, 'SUNDAY 29 JULY', '18:00', '19:30', 'CLUB', 200, '60.00', 'SINGLE-CONCERT'),
+(14, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 150, '125.00', '1-DAY-PASS'),
+(15, 2, 'SATURDAY 28 JULY', '14:00', '01:00', 'BACK2BACK', 200, '150.00', '1-DAY-PASS'),
+(16, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 200, '150.00', '1-DAY-PASS'),
+(17, 1, 'FRIDAY 27 JULY', '20:00', '23:00', 'BACK2BACK', 148, '250.00', '3-DAY-PASS'),
+(36, 2, 'MONDAY 30 JULY', '13:00', '18:00', 'BACK2BACK', 1798, '500.00', 'SINGLE-CONCERT'),
+(37, 4, 'MONDAY 30 JULY', '20:00', '22:30', 'CLUB', 150, '250.00', 'SINGLE-CONCERT');
 
 -- --------------------------------------------------------
 
@@ -174,12 +174,44 @@ INSERT INTO `drinks` (`id`, `price_bottle`) VALUES
 
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `date_time` varchar(50) NOT NULL,
-  `location_id` int(11) NOT NULL,
-  `artist_id` int(11) NOT NULL,
-  `tickets_available` int(11) NOT NULL
+  `description` varchar(10000) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `sub_title` varchar(1000) DEFAULT NULL,
+  `locations` varchar(100) DEFAULT NULL,
+  `schedule` varchar(1000) DEFAULT NULL,
+  `event_image` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `description`, `title`, `sub_title`, `locations`, `schedule`, `event_image`) VALUES
+(1, 'Whether you are a seasoned dancer or just looking to let loose and have a good time, there is something for everyone.', 'DANCE!', 'Lose yourself in DANCE!', NULL, 'Friday - Sunday from 18:00 till 22:20', 1),
+(2, 'Explore the restaurants end enjoy the delights made with extra passion!', 'YUMMIE!', 'Satisfy your apetite!', NULL, 'Friday - Sunday from 18:00 till 22:20', 2),
+(3, 'Take a tour through Haarlem’s historic locations.', 'A STROLL THROUGH HISTORY', 'Visiting Haarlem’s historic landmarks!', NULL, 'Friday - Sunday from 18:00 till 22:20', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events_page`
+--
+
+CREATE TABLE `events_page` (
+  `id` int(11) NOT NULL,
+  `title` varchar(10000) DEFAULT NULL,
+  `sub_title` varchar(1000) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `information` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events_page`
+--
+
+INSERT INTO `events_page` (`id`, `title`, `sub_title`, `description`, `information`) VALUES
+(1, 'A Stroll Through History', 'Visiting Haarlem\'s historical landmarks', 'In this event, we take a walking tour around some of the most historical musems in Haarlem. Participants get to see and learn about the historical sites and how they come to be.<br><br> The tour starts at the Church of St Bavo and ends at Hof van Bakenes. There will be a break in between, at the Jopenkerk where the tourists can enjoy some beer!', '<li>Due to the nature of the walk, participants must be a minimum of 12 years old and no strollers are allowed.</li><li>A giant flag will mark the starting location.</li><li>Groups will consist of 12 participants and 1 tour guide.</li><li>Every participant can enjoy one drink with the ticket!</li>'),
+(2, 'The Festival', 'A Summer to remember', 'Get ready for the summer festival with activities for everyone.\r\n                        From jazz to the latest EDM artists, the festival has something for everyone. Foodies, history\r\n                        lovers and kids too!\r\n                        <br><br>\r\n                        Explore our Jazz, Dance, Yummie, A stroll through history, and The secret of Dr. Teyler!', NULL);
 
 -- --------------------------------------------------------
 
@@ -229,54 +261,55 @@ CREATE TABLE `history_tours` (
   `id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time(5) NOT NULL,
-  `guide` int(50) NOT NULL
+  `guide` int(50) NOT NULL,
+  `seats` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `history_tours`
 --
 
-INSERT INTO `history_tours` (`id`, `date`, `time`, `guide`) VALUES
-(1, '2023-07-26', '10:00:00.00000', 1),
-(2, '2023-07-26', '10:00:00.00000', 4),
-(3, '2023-07-26', '13:00:00.00000', 1),
-(4, '2023-07-26', '13:00:00.00000', 4),
-(5, '2023-07-26', '16:00:00.00000', 1),
-(6, '2023-07-26', '16:00:00.00000', 4),
-(7, '2023-07-27', '10:00:00.00000', 5),
-(8, '2023-07-27', '10:00:00.00000', 2),
-(9, '2023-07-27', '13:00:00.00000', 5),
-(10, '2023-07-27', '13:00:00.00000', 2),
-(11, '2023-07-27', '13:00:00.00000', 7),
-(12, '2023-07-27', '16:00:00.00000', 5),
-(13, '2023-07-27', '16:00:00.00000', 2),
-(14, '2023-07-28', '10:00:00.00000', 1),
-(15, '2023-07-28', '10:00:00.00000', 2),
-(16, '2023-07-28', '10:00:00.00000', 5),
-(17, '2023-07-28', '10:00:00.00000', 4),
-(18, '2023-07-28', '13:00:00.00000', 1),
-(19, '2023-07-28', '13:00:00.00000', 2),
-(20, '2023-07-28', '13:00:00.00000', 5),
-(21, '2023-07-28', '13:00:00.00000', 4),
-(22, '2023-07-28', '13:00:00.00000', 7),
-(23, '2023-07-28', '16:00:00.00000', 1),
-(24, '2023-07-28', '16:00:00.00000', 4),
-(25, '2023-07-28', '16:00:00.00000', 7),
-(26, '2023-07-29', '10:00:00.00000', 1),
-(27, '2023-07-29', '10:00:00.00000', 3),
-(28, '2023-07-29', '10:00:00.00000', 5),
-(29, '2023-07-29', '10:00:00.00000', 6),
-(30, '2023-07-29', '10:00:00.00000', 8),
-(31, '2023-07-29', '13:00:00.00000', 1),
-(32, '2023-07-29', '13:00:00.00000', 2),
-(33, '2023-07-29', '13:00:00.00000', 3),
-(34, '2023-07-29', '13:00:00.00000', 4),
-(35, '2023-07-29', '13:00:00.00000', 5),
-(36, '2023-07-29', '13:00:00.00000', 6),
-(37, '2023-07-29', '13:00:00.00000', 7),
-(38, '2023-07-29', '13:00:00.00000', 8),
-(39, '2023-07-29', '16:00:00.00000', 2),
-(40, '2023-07-29', '16:00:00.00000', 4);
+INSERT INTO `history_tours` (`id`, `date`, `time`, `guide`, `seats`) VALUES
+(1, '2023-07-26', '10:00:00.00000', 1, 12),
+(2, '2023-07-26', '10:00:00.00000', 4, 4),
+(3, '2023-07-26', '13:00:00.00000', 1, 12),
+(4, '2023-07-26', '13:00:00.00000', 4, 12),
+(5, '2023-07-26', '16:00:00.00000', 1, 12),
+(6, '2023-07-26', '16:00:00.00000', 4, 12),
+(7, '2023-07-27', '10:00:00.00000', 5, 12),
+(8, '2023-07-27', '10:00:00.00000', 2, 12),
+(9, '2023-07-27', '13:00:00.00000', 5, 12),
+(10, '2023-07-27', '13:00:00.00000', 2, 12),
+(11, '2023-07-27', '13:00:00.00000', 7, 12),
+(12, '2023-07-27', '16:00:00.00000', 5, 12),
+(13, '2023-07-27', '16:00:00.00000', 2, 12),
+(14, '2023-07-28', '10:00:00.00000', 1, 12),
+(15, '2023-07-28', '10:00:00.00000', 2, 12),
+(16, '2023-07-28', '10:00:00.00000', 5, 12),
+(17, '2023-07-28', '10:00:00.00000', 4, 12),
+(18, '2023-07-28', '13:00:00.00000', 1, 12),
+(19, '2023-07-28', '13:00:00.00000', 2, 12),
+(20, '2023-07-28', '13:00:00.00000', 5, 12),
+(21, '2023-07-28', '13:00:00.00000', 4, 12),
+(22, '2023-07-28', '13:00:00.00000', 7, 12),
+(23, '2023-07-28', '16:00:00.00000', 1, 12),
+(24, '2023-07-28', '16:00:00.00000', 4, 12),
+(25, '2023-07-28', '16:00:00.00000', 7, 12),
+(26, '2023-07-29', '10:00:00.00000', 1, 12),
+(27, '2023-07-29', '10:00:00.00000', 3, 12),
+(28, '2023-07-29', '10:00:00.00000', 5, 12),
+(29, '2023-07-29', '10:00:00.00000', 6, 12),
+(30, '2023-07-29', '10:00:00.00000', 8, 0),
+(31, '2023-07-29', '13:00:00.00000', 1, 0),
+(32, '2023-07-29', '13:00:00.00000', 2, 0),
+(33, '2023-07-29', '13:00:00.00000', 3, 0),
+(34, '2023-07-29', '13:00:00.00000', 4, 0),
+(35, '2023-07-29', '13:00:00.00000', 5, 0),
+(36, '2023-07-29', '13:00:00.00000', 6, 0),
+(37, '2023-07-29', '13:00:00.00000', 7, 0),
+(38, '2023-07-29', '13:00:00.00000', 8, 0),
+(39, '2023-07-29', '16:00:00.00000', 2, 0),
+(40, '2023-07-29', '16:00:00.00000', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -360,21 +393,21 @@ CREATE TABLE `menu_items` (
 --
 
 INSERT INTO `menu_items` (`id`, `name`, `description`, `price_per_portion`, `restaurant_id`) VALUES
-(1, 'Grilled Salmon', 'Fresh salmon with a lemon herb seasoning', 25.00, 1),
-(2, 'Caesar Salad', 'Classic Caesar salad with homemade dressing', 12.00, 1),
-(3, 'Beef Burger', 'Juicy beef burger with cheese and special sauce', 15.00, 1),
-(4, 'Margherita Pizza', 'Classic pizza with tomatoes, mozzarella, and basil', 18.00, 1),
-(5, 'Chocolate Lava Cake', 'Warm cake with a gooey chocolate center', 10.00, 1),
-(6, 'Sushi Platter', 'Assorted nigiri and rolls, serves two', 30.00, 2),
-(7, 'Ramen Bowl', 'Rich broth with noodles, pork, and vegetables', 20.00, 2),
-(8, 'Vegetarian Pasta', 'Pasta with seasonal vegetables in tomato sauce', 16.00, 2),
-(9, 'Tiramisu', 'Classic Italian dessert with coffee and mascarpone', 11.00, 2),
-(10, 'Mediterranean Salad', 'Mixed greens with feta, olives, and vinaigrette', 14.00, 2),
-(11, 'Chardonnay', 'Elegant white wine with notes of apple and oak', 5.00, 1),
+(1, 'Grilled Salmon', 'Fresh salmon with a lemon herb seasoning', '25.00', 1),
+(2, 'Caesar Salad', 'Classic Caesar salad with homemade dressing', '12.00', 1),
+(3, 'Beef Burger', 'Juicy beef burger with cheese and special sauce', '15.00', 1),
+(4, 'Margherita Pizza', 'Classic pizza with tomatoes, mozzarella, and basil', '18.00', 1),
+(5, 'Chocolate Lava Cake', 'Warm cake with a gooey chocolate center', '10.00', 1),
+(6, 'Sushi Platter', 'Assorted nigiri and rolls, serves two', '30.00', 2),
+(7, 'Ramen Bowl', 'Rich broth with noodles, pork, and vegetables', '20.00', 2),
+(8, 'Vegetarian Pasta', 'Pasta with seasonal vegetables in tomato sauce', '16.00', 2),
+(9, 'Tiramisu', 'Classic Italian dessert with coffee and mascarpone', '11.00', 2),
+(10, 'Mediterranean Salad', 'Mixed greens with feta, olives, and vinaigrette', '14.00', 2),
+(11, 'Chardonnay', 'Elegant white wine with notes of apple and oak', '5.00', 1),
 (12, 'Pinot Noir', 'Medium-bodied red wine with flavors of cherry and raspberry', NULL, 1),
-(13, 'Sauvignon Blanc', 'Crisp and refreshing white wine with citrus notes', 8.50, 1),
-(14, 'Cabernet Sauvignon', 'Robust red wine with hints of blackberry and vanilla', 7.00, 2),
-(15, 'Merlot', 'Smooth red wine with soft tannins and plum flavors', 22.20, 2);
+(13, 'Sauvignon Blanc', 'Crisp and refreshing white wine with citrus notes', '8.50', 1),
+(14, 'Cabernet Sauvignon', 'Robust red wine with hints of blackberry and vanilla', '7.00', 2),
+(15, 'Merlot', 'Smooth red wine with soft tannins and plum flavors', '22.20', 2);
 
 -- --------------------------------------------------------
 
@@ -448,24 +481,24 @@ CREATE TABLE `restaurants_cuisines` (
 --
 
 INSERT INTO `restaurants_cuisines` (`restaurant_id`, `cuisine_id`) VALUES
-(2, 1),
-(3, 1),
-(5, 1),
-(6, 1),
 (1, 2),
-(3, 2),
 (1, 3),
+(1, 5),
+(2, 1),
 (2, 3),
+(2, 5),
+(3, 1),
+(3, 2),
 (3, 3),
 (4, 3),
-(5, 3),
-(6, 3),
 (4, 4),
-(1, 5),
-(2, 5),
-(6, 5),
+(4, 7),
+(5, 1),
+(5, 3),
 (5, 6),
-(4, 7);
+(6, 1),
+(6, 3),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -484,22 +517,22 @@ CREATE TABLE `restaurants_sessions` (
 
 INSERT INTO `restaurants_sessions` (`restaurant_id`, `session_id`) VALUES
 (1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(5, 1),
-(6, 1),
 (1, 2),
-(2, 2),
-(3, 2),
-(4, 2),
-(5, 2),
-(6, 2),
 (1, 3),
+(2, 1),
+(2, 2),
 (2, 3),
+(3, 1),
+(3, 2),
 (3, 3),
+(4, 1),
+(4, 2),
 (4, 3),
+(5, 1),
+(5, 2),
 (5, 3),
+(6, 1),
+(6, 2),
 (6, 3);
 
 -- --------------------------------------------------------
@@ -545,11 +578,32 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id`, `calc_price`, `amount`, `dance_event_id`, `history_tour_id`, `reservation_id`, `user_id`, `order_id`) VALUES
-('254d8f2d-02ba-496b-ba5c-58456deb355e', 1000.00, 2, 36, NULL, NULL, 2, NULL),
-('0b9b65c9-2c73-4470-8efe-7e64b566d2b5', 220.00, 2, 6, NULL, NULL, 2, NULL),
-('d029ec15-1352-439d-ba1c-907ab9e60a02', 60.00, 1, 2, NULL, NULL, 2, NULL),
-('9b9c83ff-4c37-490c-9636-d12e5a06b6bc', 75.00, 1, 8, NULL, NULL, 6, NULL),
-('426c623e-8963-4f04-8410-f82e017d1009', 500.00, 2, 17, NULL, NULL, 2, NULL);
+('254d8f2d-02ba-496b-ba5c-58456deb355e', '1000.00', 2, 36, NULL, NULL, 2, NULL),
+('5524381e-3762-4a36-95b5-7bef06d92e83', '120.00', 2, NULL, 2, NULL, 9, NULL),
+('0b9b65c9-2c73-4470-8efe-7e64b566d2b5', '220.00', 2, 6, NULL, NULL, 2, NULL),
+('d029ec15-1352-439d-ba1c-907ab9e60a02', '60.00', 1, 2, NULL, NULL, 2, NULL),
+('9b9c83ff-4c37-490c-9636-d12e5a06b6bc', '75.00', 1, 8, NULL, NULL, 6, NULL),
+('426c623e-8963-4f04-8410-f82e017d1009', '500.00', 2, 17, NULL, NULL, 2, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_types`
+--
+
+CREATE TABLE `ticket_types` (
+  `id` int(11) NOT NULL,
+  `ticket_type` varchar(50) NOT NULL,
+  `price` decimal(11,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ticket_types`
+--
+
+INSERT INTO `ticket_types` (`id`, `ticket_type`, `price`) VALUES
+(1, 'Single', '17.50'),
+(2, 'Family (4p.)', '60.00');
 
 -- --------------------------------------------------------
 
@@ -602,7 +656,8 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`,
 (5, 'Hulk', 'Banner', 'achilleasballanos@outlook.com', '$2y$10$ncp7mP0hjtXyKua87OGQUuFxBmEL9r9PzuLIKAQMj0GhJ//ML.vuC', 'Employee', '25-02-2024'),
 (6, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$FKn5WvU4.YDLV3IjmuATqugZtA1dMBOnqaK/LGXpXKSCsGfFE.CD6', 'Employee', '23-02-2024'),
 (7, 'Tony', 'Stark', 'stark@email.com', '$2y$10$cv1rrTS179h1RsWHGXo4J.ho0UH3C49dpEQdvo2srjwa1zSjU9cP.', 'Customer', '12-02-2024'),
-(8, 'John', 'Doe', 'johndoe@mail.com', '$2y$10$EPBD8eQqFU5H/2IVapkpa.umoHV3f1XwvUKWIWVqN7Bn2VTlGcubG', 'Admin', '04-03-2024');
+(8, 'John', 'Doe', 'johndoe@mail.com', '$2y$10$EPBD8eQqFU5H/2IVapkpa.umoHV3f1XwvUKWIWVqN7Bn2VTlGcubG', 'Admin', '04-03-2024'),
+(9, 'Oliwia', 'Wolska', 'oliwiabckp@gmail.com', '$2y$10$.dMUe51QgOfntTcp2D3vJO0IfEV/mx2po6YfJmbwEmqFoksVjvdje', 'Customer', '26-03-2024');
 
 -- --------------------------------------------------------
 
@@ -663,14 +718,6 @@ ALTER TABLE `dance_events`
 --
 ALTER TABLE `drinks`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `events`
---
-ALTER TABLE `events`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `artist_id` (`artist_id`),
-  ADD KEY `location_id` (`location_id`);
 
 --
 -- Indexes for table `event_artists`
@@ -804,12 +851,6 @@ ALTER TABLE `drinks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `events`
---
-ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `history_tours`
 --
 ALTER TABLE `history_tours`
@@ -855,7 +896,7 @@ ALTER TABLE `tour_guides`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `venues`
@@ -884,13 +925,6 @@ ALTER TABLE `dance_events`
 --
 ALTER TABLE `drinks`
   ADD CONSTRAINT `drinks_ibfk_1` FOREIGN KEY (`id`) REFERENCES `menu_items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `events`
---
-ALTER TABLE `events`
-  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`),
-  ADD CONSTRAINT `events_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 
 --
 -- Constraints for table `event_artists`

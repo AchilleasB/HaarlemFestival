@@ -69,7 +69,7 @@
     ?>
 
     <script>
-        const imageBasePath = "<?php echo $imageBasePath; ?>";
+        const imageBasePath = "<?php echo '/images/'; ?>";
         const urlBasePath = "<?php echo $urlBasePath; ?>";
     </script>
     

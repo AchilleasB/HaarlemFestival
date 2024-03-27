@@ -18,7 +18,7 @@
 <body class="border border-white ">
 <?php
     include __DIR__ . '/../header.php';
-    require __DIR__ . '/../../config/hostnameConfig.php';
+    require __DIR__ . '/../../config/urlconfig.php';
 
     ?>
   <main class="border border-white">
@@ -67,7 +67,7 @@
     include __DIR__ . '/../footer.php';
     ?>
 </body>
-<script> var host = "<?php echo $hostname; ?>";</script>
+<script> var urlBasePath = "<?php echo $urlBasePath; ?>";</script>
 <script src="/scripts/qrCodeChecker/qrCodeChecker.js"></script>
 
 </html>
