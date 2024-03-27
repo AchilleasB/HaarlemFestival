@@ -1,0 +1,4 @@
+<?php
+$urlBasePath="http://localhost";
+
+?>

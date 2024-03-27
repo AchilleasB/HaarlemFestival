@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/repository.php');
+require_once(__DIR__ . '/Repository.php');
 require_once(__DIR__ . '/../models/locations.php');
 
 class LocationRepository extends Repository
@@ -67,58 +67,5 @@ class LocationRepository extends Repository
             return null;
         }
     }
-    public function addLocation($location)
-{
-    try {
-        $stmt = $this->connection->prepare('INSERT INTO locations (location_name, address, location_type, description, links, images) VALUES (:location_name, :address, :location_type, :description, :links, :images)');
-        $stmt->execute([
-            ':location_name' => $location->getLocationName(),
-            ':address' => $location->getAddress(),
-            ':location_type' => $location->getLocationType(),
-            ':description' => $location->getDescription(),
-            ':links' => $location->getLinks(),
-            ':images' => $location->getImages()
-        ]);
-
-        return true;
-
-    } catch (PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-    }
-}
-
-public function updateLocation($location)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE locations SET location_name = :location_name, address = :address, location_type = :location_type, description = :description, links = :links, images = :images WHERE id = :id');
-        $stmt->execute([
-            ':id' => $location->getId(),
-            ':location_name' => $location->getLocationName(),
-            ':address' => $location->getAddress(),
-            ':location_type' => $location->getLocationType(),
-            ':description' => $location->getDescription(),
-            ':links' => $location->getLinks(),
-            ':images' => $location->getImages()
-        ]);
-
-        return true;
-
-    } catch (PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-    }
-}
-
-public function deleteLocation($id)
-{
-    try {
-        $stmt = $this->connection->prepare('DELETE FROM locations WHERE id = :id');
-        $stmt->execute([':id' => $id]);
-
-        return true;
-
-    } catch (PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-    }
-}
     
 }

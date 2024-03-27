@@ -25,10 +25,6 @@ class CmsController extends Controller
     {
         $this->displayView($this);
     }
-    public function historyManagement()
-    {
-        $this->displayView($this);
-    }
 
     public function orderManagement()
     {

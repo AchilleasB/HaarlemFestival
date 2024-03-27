@@ -1,74 +1,67 @@
 <?php
 
- class Location 
+ class Location
 {
     private int $id;
     private string $location_name;
     private string $address;
     private ?string $description;
-    private ?string $link;
-    private ?string $image;
     
-    
-    public function getId(): int
+
+
+    /**
+     * @return int
+     */
+    public function getd(): int
     {
         return $this->id;
     }
+
+    /**
+     * @param int $id
+     */
     public function setId(int $id): void
     {
         $this->id = $id;
     }
-  
-    public function getLocationName(): string
+
+    /**
+     * @return string
+     */
+    public function getName(): string
     {
         return $this->location_name;
     }
 
-    
-    public function setLocationName(string $location_name): void
+    /**
+     * @param string $name
+     */
+    public function setName(string $location_name): void
     {
         $this->location_name = $location_name;
     }
 
-   
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string|null $description
+     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
 
+    /**
+     * @param string|null $address_1
+     */
     public function setAddress(?string $address): void
     {
         $this->address= $address;
     }
-    public function getLinks(): ?string
-    {
-        return $this->link;
-    }
-
-    public function setLinks(?string $link): void
-    {
-        $this->link= $link;
-    }
-    public function getImage(): string
-    {
-        return $this->image;
-    }
-    public function setImage(string $image): void
-    {
-        $this->image = $image;
-    }
-  
 }
-
-   
-
-  

@@ -2,21 +2,13 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    height: 90vh;
-    
+    height: 60vh;
 }
 .gray-bg{
     background: #DADADA;
 }
 .text-red{
     color: #A60303;
-}
-.border-custom{
-    text-align: center; 
-    width: 300px;
-    height: 20px;
-    border-bottom: 3px solid #960808;
-  
 }
 .text-bold{
     font-weight: 600;
@@ -28,10 +20,6 @@
 .no-border th {
     border: none;
 }
-.text-shadow{
-    text-shadow: 1px 1px 2px #600808;
-}
-
 
 
 

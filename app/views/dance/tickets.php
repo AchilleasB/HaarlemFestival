@@ -18,8 +18,8 @@
     include __DIR__ . '/../header.php';
 
     $user_id = $_SESSION['user_id'];
-    require __DIR__ . '/../../config/imgconfig.php';
-    require __DIR__ . '/../../config/urlconfig.php';
+    // require __DIR__ . '/../../config/imgconfig.php';
+    // require __DIR__ . '/../../config/urlconfig.php';
     ?>
     <main>
         <div class="tickets-container">
@@ -35,8 +35,8 @@
     ?>
 
     <script>
-        const imageBasePath = "<?php echo $imageBasePath; ?>";
+        const imageBasePath = "<?php echo '/images/'; ?>";
         const user_id = <?php echo json_encode($user_id) ?>;
-        const urlBasePath = "<?php echo $urlBasePath; ?>";
+        const urlBasePath = "<?php echo 'http://localhost/'; ?>";
     </script>
     <script type="module" src="../scripts/dance/tickets.js"></script>

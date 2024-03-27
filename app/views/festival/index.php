@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +10,13 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../festivalStyle.css">
-    <script src="https://cdn.tiny.cloud/1/dacel3kg9auup3593i648va8wcvi2j7ybudwbv0qmqbz74lc/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
 </head>
 
 <body>
@@ -23,9 +28,9 @@
         <div class="p-5 text-center bg-image header-image"
             style="background-image: url('../../images/festival-image.png');">
             <div class="d-flex justify-content-center align-items-center shadow h-100">
-                <div class = "text-uppercase">
-                    <h1 class="text-white fw-bold display-4 text-shadow"><?php echo $event->getTitle(); ?></h1>
-                    <h4 class="bg-light d-inline-block p-2 shadow-lg"><?php echo $event->getSubTitle(); ?></h4>
+                <div>
+                    <h1 class="text-white fw-bold display-4">THE FESTIVAL</h1>
+                    <h4 class="bg-white d-inline-block p-1">A SUMMER TO REMEMBER</h4>
                 </div>
             </div>
         </div>
@@ -37,9 +42,13 @@
                 <div class="col-md-4">
                     <h3 class="inline-text">The <span class="gold-text">Summer Festival</span></h3>
                     <h5>Fun events for everyone!</h5>
-</div>
+                </div>
                 <div class="col-md-8">
-                    <p class="small text-justify"><?php echo $event->getDescription(); ?>
+                    <p class="small text-justify"> Get ready for the summer festival with activities for everyone.
+                        From jazz to the latest EDM artists, the festival has something for everyone. Foodies, history
+                        lovers and kids too!
+                        <br><br>
+                        Explore our Jazz, Dance, Yummie, A stroll through history, and The secret of Dr. Teyler!
                     </p>
                 </div>
             </div>
@@ -47,67 +56,110 @@
     </section>
 
 
-    <script>
-  tinymce.init({
-    selector: 'textarea',
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' },
-    ],
-    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-  });
-</script>
 
 
-    <?php foreach ($events as $event): ?>
-    <section class="d-flex justify-content-center">
+    <!-- <section class="d-flex justify-content-center">
         <div class="col-6 my-5 border-bottom border-3 pb-5">
             <div class="row">
-                <h2><?php echo $event['title']; ?></h2>
+                <h2>DANCE!</h2>
             </div>
             <div class="row">
                 <div class="col">
-                    <?php 
-                    $imageSrc = !empty($event['event_image']) ? "../../images/history/".$event['event_image'] : "../../images/no-image.jpg"; 
-                    ?>
-                    <img src="<?php echo $imageSrc; ?>" class="img-fluid" style="width: 300px; height: 170px;" alt="Event Image">
+                    <img src="/../images/dance.png" alt="Haarlem" class="img-fluid box-shadow">
                 </div>
                 <div class="col">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#Description_<?php echo $event['id']; ?>">DESCRIPTION</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#Location_<?php echo $event['id']; ?>">LOCATION</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#Schedule_<?php echo $event['id']; ?>">SCHEDULE</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="Description_<?php echo $event['id']; ?>" class="tab-pane fade show active">
-                            <h4 class="pt-3"><?php echo $event['sub_title']; ?></h4>
-                            <p><?php echo $event['description']; ?></p>
-                        </div>
-                        <div id="Location_<?php echo $event['id']; ?>" class="tab-pane fade">
-                            <h5 class="pt-3"><?php echo $event['locations']; ?></h5>
-                        </div>
-                        <div id="Schedule_<?php echo $event['id']; ?>" class="tab-pane fade">
-                            <h5 class="pt-3"><?php echo $event['schedule']; ?></h5>
-                        </div>
+                    <div class="tab text-white">
+                        <button class="tablinks" onclick="openTab(event, 'Description')"
+                            id="defaultOpen">DESCRIPTION</button>
+                        <button class="tablinks" onclick="openTab(event, 'Location')">LOCATION</button>
+                        <button class="tablinks" onclick="openTab(event, 'Schedule')">SCHEDULE</button>
                     </div>
-                    <button class="info-button" href>DISCOVER MORE</button>
-                </div>
-            </div>
-        </div>
-    </section>
-<?php endforeach; ?>
+                    <div id="Description" class="tabcontent">
+                        <h6 class="fw-bold pt-3">Description</h6>
+                        <p>Lorem ipsum dolor sit amet. Et inventore accusamus et ullam ratione sed incidunt quos in vero
+                            omnis et consequatur Quis id esse voluptatem. </p>
+                        <button class="info-button" href>MORE INFO</button>
+                    </div>
 
-    <?php include __DIR__ . '/../footer.php'; ?>
+                    <div id="Location" class="tabcontent">
+                        <h6 class="fw-bold pt-3">Location</h6>
+                        <p></p>
+                    </div>
+
+                    <div id="Schedule" class="tabcontent">
+                        <h6 class="fw-bold pt-3">Simple schedule</h6>
+                        <p></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+-->
+
+
+    <div class="tabs">
+        <div class="tabs__sidebar">
+            <button class="tabs__button" data-for-tab="1">TAB 1</button>
+            <button class="tabs__button" data-for-tab="2">TAB 2</button>
+            <button class="tabs__button" data-for-tab="3">TAB 3</button>
+        </div>
+        <div class="tabs__content" data-tab="1">
+            <p>haha</p>
+        </div>
+        <div class="tabs__content" data-tab="2">
+            <p>kkkkk</p>
+        </div>
+        <div class="tabs__content" data-tab="3">
+            <p>hjkvgh</p>
+        </div>
+    </div>
+
+
+
+    <?php
+    include __DIR__ . '/../footer.php';
+    ?>
+
+
+
+    <script>
+
+        function setupTabs() {
+            document.querySelectorAll(".tabs__button").forEach(button => {
+                button.addEventListener("click", () => {
+                    const sideBar = button.parentElement;
+                    const tabsContainer = sideBar.parentElement;
+                    const tabNumber = button.dataset.forTab;
+                    const tabToActivate = tabsContainer.querySelector(`.tabs__content[data-tab="${tabNumber}"]`);
+
+                    sideBar.querySelectorAll(".tabs__button").forEach(btn => {
+                        btn.classList.remove("tabs__button--active");
+                    });
+                    tabsContainer.querySelectorAll(".tabs__content").forEach(tab => {
+                        tab.classList.remove("tabs__content--active");
+                    });
+
+                    button.classList.add("tabs__button--active");
+                    tabToActivate.classList.add("tabs__content--active");
+                });
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setupTabs();
+
+            document.querySelectorAll(".tabs").forEach(tabsContainer => {
+                tabsContainer.querySelector(".tabs__sidebar .tabs__button").click();
+            });
+        });
+
+
+    </script>
+
 
 
 </body>

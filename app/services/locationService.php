@@ -1,33 +1,58 @@
 <?php
-require_once(__DIR__ . '/../repositories/locationRepository.php');
+require_once(__DIR__ . '/../repositories/LocationRepository.php');
 require_once(__DIR__ . '/../models/locations.php');
 
 class LocationService
 {
     private LocationRepository $locationRepository;
 
+    public function getAll(): array|null
+    {
+        return $this->locationRepository->getAll();
+    }
     public function __construct()
     {
         $this->locationRepository = new LocationRepository();
     }
-    public function getAllLocations()
+
+    public function getLocationById(): Location|null
     {
-        return $this->locationRepository->getAllLocations();
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            return $this->locationRepository->getLocationById($id);
+        } else {
+            return null;
+        }
     }
 
-    public function addLocation($location)
+
+    public function createNewLocation(Location $newLocation)
     {
-        return $this->locationRepository->addLocation($artist);
+        return $this->locationRepository->createNewLocation($newLocation);
     }
 
-    public function updateLocation($location)
+
+
+
+    public function updateLocation(Location $location)
     {
-        return $this->locationRepository->updateLocation($artist);
+
+        $this->locationRepository->updateLocation($location);
     }
 
-    public function deleteLocation($id)
+    public function deleteLocation()
     {
-        return $this->locationRepository->deleteLocation($id);
+        if (isset($_GET['id'])) {
+            $this->locationRepository->deleteLocation($_GET['id']);
+        }
+    }
+    public function getLocationImages()
+    {
+        if (isset($_GET['id'])) {
+            return $this->locationRepository->getLocationImages($_GET['id']);
+        } else {
+            return null;
+        }
     }
 
 }

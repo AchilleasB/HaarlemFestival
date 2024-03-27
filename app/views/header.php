@@ -70,6 +70,18 @@ if (isset($_SESSION['user_firstname'])) {
                                     checker</a>
                             </li>
                         <?php } ?>
+
+                        <li class="nav-item">
+                                <a class="nav-link" href="/personalProgram">
+                                    <img src="/../icons/favorite.svg" class="sw-10 h-10"
+                                        alt="Favorite icon">
+                                  <span class="bg-secondary rounded-circle px-1" style="--bs-bg-opacity: .5;"> 
+                              <?php    if (isset($_SESSION['order_items_data'])){echo count($_SESSION['order_items_data']);}
+                                       else {$_SESSION['order_items_data']=[];} 
+
+                              ?>                                    
+                        </a>
+                        </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/shoppingCart">
                                     <img src="/../icons/shopping-cart.svg" class="shopping-cart-icon w-10 h-10"

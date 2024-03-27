@@ -29,15 +29,14 @@ function displayTicket(ticket){
 
 
 
-function getTicketByEvent($userName, $eventName) {
+function getTicketAndEventData($ticketId) {
 
     var res;
 
     $.ajax({
-        url: `http://${host}/api/Ticket/getTicketByEvent`,
+        url: `${urlBasePath}/api/Ticket/getTicketAndEventData?id=` + $ticketId,
         type: "GET",
         dataType: "JSON",
-        data:{ name: $userName, event: $eventName },
         async: false,
         success: function (jsonStr) {
             res = jsonStr;
@@ -54,9 +53,8 @@ function scan() {
 
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     scanner.addListener('scan', function (content) {
-      var name = content.split("\n")[0].split("Name:")[1];
-      var event = content.split("\n")[1].split("Event:")[1];
-      var ticket = getTicketByEvent(name, event);
+      var ticketId = content.split("TicketId:")[1];
+      var ticket = getTicketAndEventData(ticketId);
        displayTicket(ticket);
     });
     Instascan.Camera.getCameras().then(function (cameras) {
