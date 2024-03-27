@@ -17,5 +17,13 @@ class FestivalService
     {
         return $this->repository->getEventDetails();
     }
+    public function updateEventDescription($eventId, $description)
+    {
+        return $this->repository->updateEventDescription($eventId, $description);
+    }
+    public function updateEventTitle($eventId, $title)
+    {
+        return $this->repository->updateEventTitle($eventId, $title);
+    }
 
 }

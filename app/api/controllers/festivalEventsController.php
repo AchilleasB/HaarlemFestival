@@ -4,7 +4,7 @@ require_once __DIR__ . '/controller.php';
 require_once(__DIR__ . '/../services/festivalService.php');
 require_once(__DIR__ . '/../models/eventPage.php');
 
-class FestivalController extends Controller
+class FestivalController 
 {
     protected $festivalService;
 

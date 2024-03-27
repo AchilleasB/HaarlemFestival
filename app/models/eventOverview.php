@@ -63,7 +63,6 @@ class EventOverview
     {
         return $this->schedule;
     }
-
     
     public function setSchedule(?string $schedule): void
     {

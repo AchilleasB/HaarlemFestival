@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History</title>
+    <title>Festival</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -91,29 +91,7 @@
     </section>
 <?php endforeach; ?>
 
-
-
-<p>July 27, 2023: <br>
-20:00 - 02:00 Nicky Romero / Afrojack<br>
-22:00 - 23:30 Tiesto<br>
-23:00 - 00:30 Hardwell<br>
-22:00 - 23:30 Armin van Buuren<br>
-22:00 - 23:30 Martin Garrix<br>
-<br>
-July 28, 2023:<br>
-14:00 - 23:00 Hardwell / Martin Garrix / Armin van Buuren<br>
-22:00 - 23:30 Afrojack<br>
-21:00 - 01:00 Tiesto<br>
-23:30 - 01:00 Nicky Romero<br>
-<br>
-July 29, 2023:<br>
-14:00 - 23:00 Afrojack / Tiesto / Nicky Romero<br>
-19:00 - 20:30 Armin van Buuren<br>
-21:00 - 22:30 Hardwell<br>
-18:00 - 19:30 Martin Garrix</p>
-
     <?php include __DIR__ . '/../footer.php'; ?>
-
 
 </body>
 
