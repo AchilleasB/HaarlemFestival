@@ -8,25 +8,6 @@ require_once  __DIR__ . '/../repositories/orderItemRepository.php';
 //class that handles updating and deleting various types of tickets
 class TicketRepository extends Repository
 {
-   public function getAllDanceTickets()
-    {
-
-        try {
-
-            $stmt = $this->connection->prepare("SELECT * FROM tickets");
-
-            $stmt->execute();
-
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Ticket');
-            $danceTickets = $stmt->fetchAll();
-
-            return $danceTickets;
-
-        } catch (PDOException $e) {
-            echo $e;
-        }
-    }
-
    
     
     public function getPaidTicketById($id)

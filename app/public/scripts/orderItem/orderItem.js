@@ -3,7 +3,7 @@ function getTicketById($id) {
     var res;
 
     $.ajax({
-        url: `${urlBasePath}/api/Ticket/getTicketById?id=` + $id,
+        url: `${urlBasePath}api/Ticket/getTicketById?id=` + $id,
         type: "GET",
         dataType: "JSON",
         async: false,
@@ -21,7 +21,7 @@ function getEventDataByTicketId($id) {
     var res;
 
     $.ajax({
-        url: `${urlBasePath}/api/OrderItem/getProductData?id=` + $id,
+        url: `${urlBasePath}api/OrderItem/getProductData?id=` + $id,
         type: "GET",
         dataType: "JSON",
         async: false,
@@ -39,7 +39,7 @@ function updateTicketQuantity(orderItemData) {
     
     $.ajax({
         type: "POST",
-        url: `${urlBasePath}/api/Ticket/UpdateTicketQuantity`,
+        url: `${urlBasePath}api/Ticket/UpdateTicketQuantity`,
         data: orderItemData,
         success: function () {
 
@@ -57,7 +57,7 @@ function updateAvailableTicketsForDanceEvent(eventData) {
 
     $.ajax({
         type: "POST",
-        url: `${urlBasePath}/api/Ticket/UpdateAvailableTicketsForDanceEvent`,
+        url: `${urlBasePath}api/Ticket/UpdateAvailableTicketsForDanceEvent`,
         data: eventData,
         success: function () {
             window.location.reload();

@@ -18,11 +18,7 @@ class TicketService
         $this->ticketRepository = new TicketRepository();
     }
 
-    
-    public function getAllDanceTickets()
-    {
-        return $this->ticketRepository->getAllDanceTickets();
-    }
+
 
     public function getPaidTicketById($id)
     {

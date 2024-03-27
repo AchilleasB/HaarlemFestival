@@ -34,7 +34,7 @@ function getTicketAndEventData($ticketId) {
     var res;
 
     $.ajax({
-        url: `${urlBasePath}/api/Ticket/getTicketAndEventData?id=` + $ticketId,
+        url: `${urlBasePath}api/Ticket/getTicketAndEventData?id=` + $ticketId,
         type: "GET",
         dataType: "JSON",
         async: false,
