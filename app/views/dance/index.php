@@ -16,13 +16,13 @@
 <body>
     <?php
     include __DIR__ . '/../header.php';
-    // require __DIR__ . '/../../config/imgconfig.php';
-    // require __DIR__ . '/../../config/urlconfig.php';
+    require __DIR__ . '/../../config/imgconfig.php';
+    require __DIR__ . '/../../config/urlconfig.php';
     ?>
     <main>
         <div class="dance-container">
             <div class="image-container">
-                <img src="<?php echo '/images/'; ?>dance.png" alt="Dance Event" class="dance-image">
+                <img src="<?php echo $imageBasePath; ?>dance.png" alt="Dance Event" class="dance-image">
                 <div class="image-primary-text position-absolute top-0 start-0">
                     <h1 class="text fw-bold">HAARLEM</h1>
                     <h1>FESTIVAL</h1>
@@ -70,7 +70,7 @@
 
     <script>
         const imageBasePath = "<?php echo '/images/'; ?>";
-        const urlBasePath = "<?php echo 'http://localhost/'; ?>";
+        const urlBasePath = "<?php echo $urlBasePath; ?>";
     </script>
     
     <script type="module" src="../scripts/dance/index.js"></script>
