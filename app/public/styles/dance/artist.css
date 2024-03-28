@@ -93,7 +93,7 @@
 .artist-description p,
 .career-hightlight-section p {
     letter-spacing: 0.1em;
-    font-weight: lighter;
+    /* font-weight: lighter; */
 
 }
 
