@@ -72,7 +72,20 @@ class TicketController extends ApiController
     }
 
 
+    public function UpdateAvailableTicketsForTourEvent()
+    {
+        try {
 
+            $eventId = htmlspecialchars($_POST['event_id']);
+            $ticketsToSubtract = htmlspecialchars($_POST['tickets_to_subtract']);
+
+            $this->ticketService->updateAvailableTourTicketsAtCheckout($eventId, $ticketsToSubtract); 
+
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo $e;
+        }
+    }
 
     public function getTicketAndEventData(){
 

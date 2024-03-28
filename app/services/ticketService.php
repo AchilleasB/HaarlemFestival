@@ -2,6 +2,8 @@
 
 require_once  __DIR__ . '/../repositories/danceRepository.php';
 
+require_once  __DIR__ . '/../repositories/historyTourRepository.php';
+
 require_once  __DIR__ . '/../repositories/ticketRepository.php';
 
 
@@ -33,10 +35,7 @@ class TicketService
     }
 
 
-    public function getDanceEventTicketByTicketId($ticketId){
-    return $this->ticketRepository->getDanceEventTicketByTicketId($ticketId);
-    }
-
+   
     public function getTicketAndEventData($ticketId){
         return $this->ticketRepository->getTicketAndEventData($ticketId);
     }
@@ -47,10 +46,23 @@ class TicketService
     }
 
     //Function used to update available tickets at checkout
-    //Allows users to be simultaneously updated with available tickets
+    //Allows users to be simultaneously updated with available dance tickets
     function updateAvailableDanceTicketsAtCheckout($id, $newTicketsAvailable){
         $danceRepository=new DanceRepository();
         $danceRepository->updateTicketsAmount($id, $newTicketsAvailable);
+    }
+
+
+     //Function used to update available tickets at checkout
+    //Allows users to be simultaneously updated with available history tour tickets
+    function updateAvailableTourTicketsAtCheckout($id, $ticketAmountSubtracted){
+        $historyTourRepository=new HistoryTourRepository();
+        $historyTourRepository->updateSeats($id, $ticketAmountSubtracted);
+    }
+
+    public function updateCalculatedPrice($id, $calc_price){
+
+      $this->ticketRepository->updateCalculatedPrice($id, $calc_price);
     }
  
     public function deleteTicket($id) {     

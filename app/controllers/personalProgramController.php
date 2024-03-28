@@ -39,7 +39,6 @@ class PersonalProgramController extends Controller
 
   public function index()
   {   
-    
     require __DIR__ . '/../views/personalProgram/index.php';
 
   }
@@ -79,7 +78,12 @@ class PersonalProgramController extends Controller
         $newTicket->setCalcPrice($ticket->getCalcPrice());
         if ($ticket->getDanceEventId() !==null){
         $newTicket->setDanceEventId($ticket->getDanceEventId());}
+        if ($ticket->getHistoryTourId() !==null){
+          $newTicket->setHistoryTourId($ticket->getHistoryTourId());}
         $newTicket->setUserId($ticket->getUserId());
+        $ticketsPrice=($newTicket->getTicketPrice() * $newTicket->getAmount());
+        $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
+
 
         $_SESSION['order_items_data'][$itemCount] = $newTicket; 
     }
@@ -93,7 +97,7 @@ class PersonalProgramController extends Controller
   {
     foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
       if ($itemCount == $_POST['addToCart'])
-      $_SESSION['selected_items_to_purchase'][$itemCount]=$_SESSION['order_items_data'][$itemCount];
+      $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])]=$item;
     }
     header("location: /personalProgram");
   }

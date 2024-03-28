@@ -69,6 +69,22 @@ function updateAvailableTicketsForDanceEvent(eventData) {
 
 
 
+
+function updateAvailableTicketsForTourEvent(eventData) {
+
+    $.ajax({
+        type: "POST",
+        url: `${urlBasePath}api/Ticket/UpdateAvailableTicketsForTourEvent`,
+        data: eventData,
+        success: function () {
+            window.location.reload();
+        }
+    });    
+
+}
+
+
+
 function setOrderItemsData() {
 
     let btns = document.querySelectorAll('.updateQuantity');
@@ -85,11 +101,25 @@ function setOrderItemsData() {
              var item = selectors[i].querySelectorAll(".quantity");
              var ticketData = getTicketById(orderItemId);
             var eventData = getEventDataByTicketId(orderItemId);
-            calculateTicketQuantities(ticketData, eventData, item[0].value);
+            var updatedQuantity = calculateTicketQuantities(ticketData, eventData, item[0].value);
             updateTicketQuantity(ticketData);
+
             if (ticketData['dance_event_id']!==null){
             eventData.event_id=ticketData['dance_event_id'];
             updateAvailableTicketsForDanceEvent(eventData);}
+            
+            if (ticketData['history_tour_id']!==null){
+                eventData.event_id=ticketData['history_tour_id'];
+                if ((Math.sign(updatedQuantity)) === -1){
+                    eventData.tickets_to_subtract=Math.abs(updatedQuantity);
+                    }
+                    else {
+                        eventData.tickets_to_subtract=-Math.abs(updatedQuantity);
+                }
+                updateAvailableTicketsForTourEvent(eventData);
+                
+            
+            }
            
         });
 
@@ -105,6 +135,7 @@ function calculateTicketQuantities(orderItem, event, input)
         var initialValue = orderItem.amount;
         var updatedQuantity = orderItem.amount - input;
         orderItem.amount = input;
+
 
         if (orderItem.amount > initialValue){
             var availableTickets = event.tickets_available - Math.abs(updatedQuantity);
@@ -123,6 +154,8 @@ function calculateTicketQuantities(orderItem, event, input)
         }
 
 
+return updatedQuantity;
+
 }
 
 
@@ -132,18 +165,24 @@ function calculateTicketQuantities(orderItem, event, input)
 
 
 
-function displayPaidTickets(){
-   
+function displayPaidTickets(){   
    paidTickets.forEach((ticket, i) => {
-
     var eventData = getEventDataByTicketId(ticket.id);
 
-    var day=eventData.date_time.match('[0-9]{1,}');
+    if (ticket['dance_event_id'] != null){
+        var day=eventData.date_time.match('[0-9]{1,}');}
+    else if (ticket['history_tour_id'] != null){
+        var day=eventData.date_time.match('[1-9]{2}|[12]\d|3[01]');
+    }
     
     var time=eventData.date_time.match('[0-9]{2}:[0-9]{2}').toString().split(":");
     time=eventData.date_time.match('[0-9]{2}:[0-9]{2}').toString().split(":")[0];
 
-    var td = document.querySelectorAll(`.hour${time}pm`);
+    if (time <12 ){
+    var td = document.querySelectorAll(`.hour${time}am`);
+    }
+    else 
+    {var td = document.querySelectorAll(`.hour${time}pm`);}
 
 
     if ($(td[0]).find(`.${day}July`).length > 0){
@@ -151,6 +190,8 @@ function displayPaidTickets(){
         $(td[0]).find(`.${day}July`).text(eventData.name);
     
      }
+   
+
    });
 
 

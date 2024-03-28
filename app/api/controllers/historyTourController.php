@@ -75,7 +75,11 @@ class HistoryTourController
                  
                     $ticket->setCalcPrice($calc_price); 
     
-                    $this->historyTourService->addTicketToCart($ticket);
+                        $this->historyTourService->addTicketToCart($ticket);
+                    // Start of added by Maria
+                    $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$ticket;
+                    
+                    // End of added by Maria
                     $this->historyTourService->updateSeats($historyTourID, $requiredSeats);
                     echo json_encode(['message' => 'Ticket generated successfully']);
                 }

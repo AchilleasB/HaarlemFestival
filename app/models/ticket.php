@@ -47,6 +47,13 @@ class Ticket implements JsonSerializable
         $this->calc_price = $calc_price;
     }
 
+
+    public function getTicketPrice(): float
+    {
+        return ($this->calc_price / $this->amount) * $this->amount;
+    }
+
+
     public function getDanceEventId(): ?int
     {
         return $this->dance_event_id;
