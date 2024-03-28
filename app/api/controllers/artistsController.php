@@ -94,13 +94,13 @@ class ArtistsController
             if (isset ($_GET['id'])) {
                 $id = intval($_GET['id']);
 
-                //TODO add a check if the artistInfp record exists otherwise display message 'artist page unavailable'
+                //TODO add a check if the artistInfo record exists otherwise display message 'artist page unavailable'
                 $artistsInfo = $this->artistService->getSingleArtistInfo($id);
 
                 header('Content-Type: application/json');
                 echo json_encode([$artistsInfo]);
             } else {
-                // Retrieve all artists information
+                // Retrieve all artists page information
                 $artistsInfo = $this->artistService->getAllArtistsInfo();
                 header('Content-Type: application/json');
                 echo json_encode($artistsInfo);
@@ -115,7 +115,7 @@ class ArtistsController
             $career_highlight_title = isset ($_POST['career_highlight_title']) ? $_POST['career_highlight_title'] : '';
             $career_highlight_img = isset ($_POST['career_highlight_img']) ? $_POST['career_highlight_img'] : '';
             $career_highlight_text = isset ($_POST['career_highlight_text']) ? $_POST['career_highlight_text'] : '';
-            $latest_releases = isset ($_POST['latest_releases']) ? $_POST['latest_releases'] : '';
+            $latest_releases = isset ($_POST['latest_releases']) ? htmlspecialchars_decode($_POST['latest_releases']) : '';
 
             if (!empty ($_FILES['page_img']['name'])) {
                 $uploadedImage = $_FILES['page_img'];

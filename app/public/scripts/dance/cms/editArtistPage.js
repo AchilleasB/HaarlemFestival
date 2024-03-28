@@ -46,7 +46,7 @@ async function handleEditArtistPageContent(artist) {
                 </div>
                 <div class="mb-3">
                     <label for="latest_releases" class="form-label">Latest Releases</label>
-                    <input class="form-control" class="form-control" id="latest_releases" name="latest_releases" rows="3" required></input>
+                    <textarea class="form-control" class="form-control" id="latest_releases" name="latest_releases" rows="3" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" id="edit-artist-page-button">Add</button>
                 <button type="button" class="btn btn-danger" id="close-artist-page-button">Close</button>
@@ -68,7 +68,8 @@ async function handleEditArtistPageContent(artist) {
         selector: 'textarea',
         plugins: 'advlist autolink lists link image',
         toolbar_mode: 'floating',
-        height: 300
+        height: 300,
+        encoding: 'raw'
     });
 
     const editArtistPageButton = document.getElementById('edit-artist-page-button');
@@ -107,9 +108,11 @@ async function updateTextAreaValues() {
     const descriptionTextArea = tinymce.get('description');
     const careerHighlightTitleTextArea = tinymce.get('career_highlight_title');
     const careerHighlightTextTextArea = tinymce.get('career_highlight_text');
+    const latestReleasesTextArea = tinymce.get('latest_releases');
 
     // Update textarea values with TinyMCE content
     document.getElementById('description').value = descriptionTextArea.getContent();
     document.getElementById('career_highlight_title').value = careerHighlightTitleTextArea.getContent();
     document.getElementById('career_highlight_text').value = careerHighlightTextTextArea.getContent();
+    document.getElementById('latest_releases').value = latestReleasesTextArea.getContent();
 }

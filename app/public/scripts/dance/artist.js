@@ -1,8 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', async function () {
     const artist = await getArtistInfoFromAPI();
-
-
+    
     const artistPageImgContainer = document.getElementById('artistPageImg');
     const artistImgElement = document.createElement('img');
     artistImgElement.src = imageBasePath + artist.page_img;
