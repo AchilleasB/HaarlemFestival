@@ -63,7 +63,11 @@ class OrderItemService
     
         foreach ($orderItems as $itemCount=>$orderItem) {
 
-            $productPrice = $productData[$itemCount]['Event']->getTicketPrice();
+            if ($productData[$itemCount]['Event']->getTicketPrice())
+            {   $productPrice = $productData[$itemCount]['Event']->getTicketPrice();}
+            else {
+                $productPrice = $orderItems[$itemCount]->getTicketPrice();
+            }
             $productQuantity = $orderItem->getAmount();
             $productTotalPrice = $productPrice * $productQuantity;
             $orderTotal += $productTotalPrice;
@@ -81,7 +85,12 @@ class OrderItemService
     
         foreach ($orderItems as $itemCount=>$orderItem) {
 
-            $productPrice = $productData[$itemCount]['Event']->getTicketPrice();
+            
+            if ($productData[$itemCount]['Event']->getTicketPrice())
+            {   $productPrice = $productData[$itemCount]['Event']->getTicketPrice();}
+            else {
+                $productPrice = $orderItems[$itemCount]->getTicketPrice();
+            }
             $productQuantity = $orderItem->getAmount();
             $productTotalVAT = $productPrice * $productQuantity * $productVAT;
             $orderVAT += $productTotalVAT;
@@ -128,7 +137,6 @@ public function createPdf($html, $pdfPath){
         $ticketAmount=$orderItems[$item]->amount;
         $event = $products[$item]['Event'];
         $eventName = $event->getName();
-        $ticketType = $products[$item]['Event']->getTicketType();
         $dateTime = $event->getDateTime();
         $ticketCount = $ticketsCount++;
         $qrCodeId = bin2hex(random_bytes(50));

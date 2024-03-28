@@ -53,7 +53,10 @@ $eventDataTable = $shoppingCartRepository->getEventDataTable($ticketId);
 if($eventDataTable["table"]=="dance_events"){
     $ticket = $this->getDanceEventTicketByTicketId($ticketId);
 }
-
+if($eventDataTable["table"]=="history_tours")
+{
+    $ticket = $this->getTourEventTicketByTicketId($ticketId);
+}
 return $ticket;
 
 }
@@ -84,6 +87,28 @@ return $ticket;
     }
 
 
+    function getTourEventTicketByTicketId($ticketId)
+    {
+        try {
+            $query = "SELECT users.firstname, users.lastname, history_tours.date, history_tours.time AS start_time  FROM tickets
+            LEFT JOIN users ON tickets.user_id = users.id  
+            LEFT JOIN history_tours ON tickets.history_tour_id = history_tours.id                                             
+            WHERE tickets.id = :id;";
+
+            $stmt = $this->connection->prepare($query);
+            $stmt->bindParam(':id', $ticketId);            
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
+            $row['name']="A STROLL THROUGH HISTORY";
+            return $row;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+
 
 
 function updateTicketQuantity($orderItemId, $ticketQuantity)
@@ -91,6 +116,14 @@ function updateTicketQuantity($orderItemId, $ticketQuantity)
     $query = $this->connection->prepare("UPDATE tickets SET amount=:amount WHERE id=:id");
     $query->bindParam(":id", $orderItemId);
     $query->bindParam(":amount", $ticketQuantity);
+    $query->execute();
+}
+
+function updateCalculatedPrice($id, $calc_price){
+
+    $query = $this->connection->prepare("UPDATE tickets SET calc_price=:calc_price WHERE id=:id");
+    $query->bindParam(":id", $id);
+    $query->bindParam(":calc_price", $calc_price);
     $query->execute();
 }
 

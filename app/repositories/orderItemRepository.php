@@ -26,7 +26,7 @@ try{
         $eventTableData = [ "table" => "dance_events", "event_id" => $result['dance_event_id']];
     }
     else if($result['history_tour_id'] != NULL){
-        $eventTableData = "history_tours";
+        $eventTableData = [ "table" => "history_tours", "event_id" => $result['history_tour_id']];
     }
 
     return $eventTableData;
@@ -44,6 +44,9 @@ function getProductData($ticketId){
 
     if ($eventDataTable["table"] == "dance_events"){
         $res = $this->getDanceEventData($eventDataTable["event_id"]);
+    }
+    if ($eventDataTable["table"] == "history_tours"){
+        $res = $this->getTourEventData($eventDataTable["event_id"]);
     }
 
     return $res;
@@ -77,6 +80,30 @@ function getDanceEventData($eventId)
 
 }
 
+
+function getTourEventData($eventId)
+{
+    try {
+        $stmt = $this->connection->prepare("SELECT history_tours.date, history_tours.time, history_tours.seats
+                                                FROM history_tours
+                                                WHERE history_tours.id = :id;"
+
+                                                );
+        $stmt->bindParam(':id', $eventId);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $eventData = $this->createTourEventDataInstance($result);
+        
+        
+        return $eventData;
+
+    } catch (PDOException $e) {
+        echo $e->getMessage() . $e->getLine();
+    }
+
+}
+
 private function createDanceEventDataInstance($result): EventData
 { 
     try{
@@ -93,9 +120,34 @@ private function createDanceEventDataInstance($result): EventData
             $eventData->setArtistImage($result['artist_image']);}
             else {
                 $eventData->setArtistImage('../images/dance.png');}
+        $eventData->setHistoryTourImage(NULL);
         $eventData->setTicketType($result['type']);
         $eventData->setLocationName($result['name']);
         $eventData->setLocationAddress($result['address']);
+
+
+        return $eventData;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+
+}
+
+
+private function createTourEventDataInstance($result): EventData
+{ 
+    try{
+
+        $eventData = new EventData();
+        $eventData->setDateTime("{$result['date']} {$result['time']}");
+        $eventData->setTicketsAvailable($result['seats']);
+        $eventData->setTicketPrice(NULL);
+        $eventData->setName("A STROLL THROUGH HISTORY");
+        $eventData->setArtistImage(NULL);
+        $eventData->setHistoryTourImage('../images/history-image.png');
+        $eventData->setTicketType(NULL);
+        $eventData->setLocationName(NULL);
+        $eventData->setLocationAddress(NULL);
 
 
         return $eventData;

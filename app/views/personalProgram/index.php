@@ -238,13 +238,31 @@
               <tr class="product bg-white">
                 <?php $product = $this->products[$orderItem]['Event']->getName();
                  $orderItemId = $this->currentOrderItems[$orderItem]->getId();
-                $eventImage = $this->products[$orderItem]['Event']->getArtistImage();
-                 $locationName = $this->products[$orderItem]['Event']->getLocationName();
-                $locationAddress = $this->products[$orderItem]['Event']->getLocationAddress(); 
+
+                 if ($eventImage = $this->products[$orderItem]['Event']->getArtistImage() != NULL){
+                  $eventImage = $this->products[$orderItem]['Event']->getArtistImage();}
+                else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL){
+                  $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();}
+
                 $datetime = $this->products[$orderItem]['Event']->getDateTime();
+
+                  $locationName = $this->products[$orderItem]['Event']->getLocationName();
+
+                $locationAddress = $this->products[$orderItem]['Event']->getLocationAddress();
+                
                 $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
-                $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
+
+                if ( $this->products[$orderItem]['Event']->getTicketPrice()){
+                $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();}
+                else
+                {
+                  $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice();
+                }
+
+                $pricePerItem = $ticketPrice * $ticketAmount;
+
                 $ticketsAvailableForEvent = $this->products[$orderItem]['Event']->getTicketsAvailable();
+
                 $totalPrice = $this->orderTotal;
                 $totalVAT = $this->orderVAT;?>
 
@@ -286,7 +304,7 @@
                 <td class="col-md-2 align-middle">
                   <ul class="list-group ">
                     <li class="list-group-item border-0">
-                      <?php  if ($locationName != "") { ?>
+                      <?php  if ($locationName != "" AND $locationAddress !=NULL) { ?>
                     <li class="list-group-item border-0 pt-5">
                       <strong>
                         <?= $locationName ?>
@@ -294,7 +312,7 @@
                       <?= $locationAddress ?>
                     </li>
                     <?php }
-                    else { ?>
+                    else if ($locationName != NULL){ ?>
                     <li class="list-group-item border-0 pt-5">
                       <strong>
                         <?= $locationName ?>
@@ -329,7 +347,8 @@
                 </td>
                 <td class="align-middle">
                   &euro;
-                  <?= $ticketPrice * $ticketAmount ?>
+                  <?= $pricePerItem ?>
+
                 </td>
                 <td class="align-middle">
                   <form method="POST" action="/personalProgram/addToCart">

@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../models/ticket.php';
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/userService.php';
+require_once __DIR__ . '/../services/ticketService.php';
 require_once __DIR__ . '/../services/orderService.php';
 require_once __DIR__ . '/../services/orderItemService.php';
 
@@ -11,6 +12,7 @@ class ShoppingCartController extends Controller
 {
   private $shoppingCartService;
   private $userService;
+  private $ticketService;
   private $orderService;
   private $user;
   private $currentOrder;
@@ -28,6 +30,7 @@ class ShoppingCartController extends Controller
   {
     require_once __DIR__ . '/../config/mollieConfig.php';
     $this->userService = new UserService();
+    $this->ticketService = new TicketService();
     $this->orderService = new OrderService();
     $this->shoppingCartService = new OrderItemService();
     $this->user = $this->userService->getUserByEmail($_SESSION['user_email']);
@@ -65,10 +68,10 @@ class ShoppingCartController extends Controller
 
   public function removeItem()
   {
-    foreach ($_SESSION['selected_items_to_purchase'] as $itemCount => $item) {
-      if ($itemCount == $_POST['removeItem'])
-        array_splice($_SESSION['selected_items_to_purchase'], $itemCount, 1);
-    }
+    foreach ($_SESSION['selected_items_to_purchase'] as $itemCount=>$item) {
+      if ($itemCount == $_POST['removeItem']){
+      array_splice($_SESSION['selected_items_to_purchase'], $itemCount, 1);
+    }}
     header("location: /shoppingCart");
   }
 
@@ -84,7 +87,12 @@ class ShoppingCartController extends Controller
         $newTicket->setCalcPrice($ticket->getCalcPrice());
         if ($ticket->getDanceEventId() !==null){
         $newTicket->setDanceEventId($ticket->getDanceEventId());}
+        if ($ticket->getHistoryTourId() !==null){
+          $newTicket->setHistoryTourId($ticket->getHistoryTourId());}
         $newTicket->setUserId($ticket->getUserId());
+        $ticketsPrice=($newTicket->getTicketPrice() * $newTicket->getAmount());
+        $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
+
 
         $_SESSION['selected_items_to_purchase'][$itemCount] = $newTicket; 
     }

@@ -61,12 +61,27 @@
         <ul class="list-group">
           <?php foreach ($this->products as $orderItem=>$i) {
                $product = $this->products[$orderItem]['Event']->getName();
-                $eventImage = $this->products[$orderItem]['Event']->getArtistImage();
+
+               if ($eventImage = $this->products[$orderItem]['Event']->getArtistImage() != NULL){
+                $eventImage = $this->products[$orderItem]['Event']->getArtistImage();}
+              else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL){
+                $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();}
+
                 $datetime = $this->products[$orderItem]['Event']->getDateTime();
+
                 $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
-                $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
+
+                if ( $this->products[$orderItem]['Event']->getTicketPrice()){
+                  $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();}
+                  else
+                  {
+                    $ticketPrice = $this->currentOrderItems[$orderItem]->getCalcPrice() / $this->currentOrderItems[$orderItem]->getAmount();
+                  }
+                
                 $totalPrice = $this->orderTotal;
+
                 $totalVAT = $this->orderVAT;?>
+
           <li class="list-group-item border-0 ">
             <div class="grid ">
               <div class="g-col-2"><img src="/images/<?= $eventImage ?>"
@@ -76,7 +91,7 @@
                 <ul class="list-group">
                   <li class="list-group-item border-0 p-0">
                     <strong>
-                      <?= $datetime ?>
+                      <?= $product ?>
                     </strong>
                   </li>
                   <li class="list-group-item border-0 p-0 pb-2">

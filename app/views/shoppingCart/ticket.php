@@ -17,8 +17,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                         <ul style="list-style-type:none; padding-left:0px;">
         <li class="list-group-item border-0 p-0">
  <strong><?= $eventName ?></strong>
-  <?php  if ($ticketType != "SINGLE-CONCERT") { ?>
-<strong><?= $ticketType ?> <?php }?>
+
   </li>
 <li><?=$dateTime?></li>
         <li class="list-group-item border-0 p-0 pb-2">
