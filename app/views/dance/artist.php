@@ -43,8 +43,7 @@
                 <div class="description-title">
                     <h2>WHO IS
                         <strong>
-                            <?php echo $_SESSION['artist_name'] ?>
-                            ?
+                            <?php echo $_SESSION['artist_name'] ?>?
                         </strong>
                     </h2>
                 </div>
