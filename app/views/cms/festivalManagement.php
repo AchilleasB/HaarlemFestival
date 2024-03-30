@@ -12,46 +12,52 @@
     <link rel="stylesheet" href="../styles/cms.css">
     <link rel="stylesheet" href="../styles/main.css">
     <script src="https://cdn.tiny.cloud/1/dacel3kg9auup3593i648va8wcvi2j7ybudwbv0qmqbz74lc/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#description',
-            plugins: 'autolink lists link',
-            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link',
-            height: 300
-        });
-    </script>
-      <script>
-        tinymce.init({
-            selector: '#title',
-            plugins: 'autolink lists link',
-            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link',
-            height: 300
-        });
-    </script>
 </head>
 <body>
     <?php
     include __DIR__ . '/../header.php';
     ?>
 
-<div class="container">
-        <h1>Edit Event Description</h1>
-        <form action="/cms/updateEventDescription" method="post">
-            <textarea id="description" name="description" required><?php echo $event->getDescription(); ?></textarea><br><br>
-            <input type="hidden" name="event_id" value="<?php echo $event->getId(); ?>">
-            <input type="submit" value="Save" class="btn btn-primary">
-        </form>
-    </div>
-    <div class="container">
-        <h1>Edit Event Title</h1>
-        <form action="/cms/updateEventTitle" method="post">
-            <textarea id="title" name="title" required><?php echo $event->getTitle(); ?></textarea><br><br>
-            <input type="hidden" name="event_id" value="<?php echo $event->getId(); ?>"> 
-            <input type="submit" value="Save" class="btn btn-primary">
-        </form>
-    </div>
+<div id="editFormsContainer" class="container m-5">
+        <div class="btn-group" role="group" aria-label="Edit Options">
+            <input type="radio" class="btn-check" name="editOption" id="editEvent" autocomplete="off" value="event" checked>
+            <label class="btn btn-outline-primary" for="editEvent">Edit Event</label>
 
+            <input type="radio" class="btn-check" name="editOption" id="editOverview" autocomplete="off" value="overview">
+            <label class="btn btn-outline-primary" for="editOverview">Edit Events Overview</label>
+        </div>
+
+        <div id="editEventContainer" class="edit-form-container">
+            <?php renderEditForm("Edit Event Title", "title", $event->getTitle(), $event->getId()); ?>
+            <?php renderEditForm("Edit Event Sub Title", "subTitle", $event->getSubTitle(), $event->getId()); ?>
+            <?php renderEditForm("Edit Event Description", "description", $event->getDescription(), $event->getId()); ?>
+        </div>
+
+        <div id="editOverviewContainer" class="edit-form-container" style="display: none;">
+            <?php foreach ($events as $event): ?>
+                <?php renderEditForm("Edit Event Title Overview", "titleOverview", $event->getTitle(), $event->getId()); ?>
+                <?php renderEditForm("Edit Event Description Overview", "descriptionOverview", $event->getDescription(), $event->getId()); ?>
+                <?php renderEditForm("Edit Event Schedule Overview", "schedule", $event->getSchedule(), $event->getId()); ?>
+                <?php renderEditForm("Edit Event Location Overview: " . $event->getTitle(), "location", $event->getLocations(), $event->getId()); ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
    <?php
     include __DIR__ . '/../footer.php';
     ?>
+       <script src="/../scripts/festival/festivalCms.js"></script>
+ 
 </body>  
+
+<?php
+function renderEditForm($title, $name, $value, $eventId) {
+    echo '<div class="container">';
+    echo '<h2 class = "text-center p-4">' . $title . '</h2>';
+    echo '<form action="/cms/updateEvent' . ucfirst($name) . '" method="post">';
+    echo '<textarea id="' . $name . '" name="' . $name . '" class="tinymce-field" required>' . $value . '</textarea><br><br>';
+    echo '<input type="hidden" name="event_id" value="' . $eventId . '">';
+    echo '<input type="submit" value="Save" class="btn btn-primary">';
+    echo '</form>';
+    echo '</div>';
+}
+?>

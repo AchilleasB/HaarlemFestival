@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../festivalStyle.css">
     <link rel="stylesheet" href="../styles/main.css">
     <script src="https://cdn.tiny.cloud/1/dacel3kg9auup3593i648va8wcvi2j7ybudwbv0qmqbz74lc/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -26,7 +27,7 @@
             <div class="d-flex justify-content-center align-items-center shadow h-100">
                 <div class = "text-uppercase">
                     <h1 class="text-white fw-bold display-4 text-shadow"><?php echo $event->getTitle(); ?></h1>
-                    <h4 class="bg-light d-inline-block p-2 shadow-lg"><?php echo $event->getSubTitle(); ?></h4>
+                    <h4 class="d-inline-block shadow-lg"><?php echo $event->getSubTitle(); ?></h4>
                 </div>
             </div>
         </div>
@@ -49,16 +50,16 @@
 
     <?php foreach ($events as $event): ?>
     <section class="d-flex justify-content-center">
-        <div class="col-6 my-5 border-bottom border-3 pb-5">
-            <div class="row">
-                <h2><?php echo $event->getTitle(); ?></h2>
+        <div class="col-6 my-4 border-bottom border-3 pb-4">
+            <div class="row text-uppercase">
+                <h2><i class="bi bi-bookmark-star-fill"></i><?php echo $event->getTitle(); ?></h2>
             </div>
             <div class="row">
                 <div class="col">
                     <?php 
                     $imageSrc = !empty($event->getImage()) ? "../../images/".$event->getImage() : "../../images/no-image.jpg"; 
                     ?>
-                    <img src="<?php echo $imageSrc; ?>" class="img-fluid" style="width: 300px; height: 170px;" alt="Event Image">
+                    <img src="<?php echo $imageSrc; ?>" class="img-fluid box-shadow" style="width: 300px; height: 170px;" alt="Event Image">
                 </div>
                 <div class="col">
                     <ul class="nav nav-tabs">
@@ -84,7 +85,7 @@
                             <h5 class="pt-3"><?php echo $event->getSchedule(); ?></h5>
                         </div>
                     </div>
-                    <button class="info-button" href>DISCOVER MORE</button>
+                    <a href="<?php echo $event->getButton(); ?>" class="info-button">DISCOVER MORE</a>
                 </div>
             </div>
         </div>

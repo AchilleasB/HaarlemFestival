@@ -9,6 +9,7 @@ class EventOverview
     private ?string $locations;
     private ?string $schedule;
     private ?string $image;
+    private ?string $button;
 
     public function getId(): int
     {
@@ -76,4 +77,13 @@ class EventOverview
     {
         $this->image = $image;
     }
+    public function getButton(): ?string
+    {
+        return $this->button;
+    }
+    public function setButton(?string $button): void
+    {
+        $this->button = $button;
+    }
+    
 }

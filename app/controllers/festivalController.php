@@ -20,6 +20,7 @@ class FestivalController extends Controller
         require(__DIR__ . '/../views/festival/index.php');
 
     }
+ 
 
 
 }

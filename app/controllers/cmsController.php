@@ -3,14 +3,18 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/orderService.php';
 require_once __DIR__ . '/../services/festivalService.php';
-
+require_once __DIR__ . '/../services/eventPageService.php';
+require_once __DIR__ . '/../repositories/eventPageRepository.php';
+require_once(__DIR__ . '/../models/eventPage.php');
 
 class CmsController extends Controller
 {
     protected $festivalService;
+    protected $eventPageService;
 
     public function __construct() {
         $this->festivalService = new FestivalService();
+        $this->eventPageService = new EventPageService(new EventPageRepository());
     }
     public function index()
     {
@@ -25,8 +29,13 @@ class CmsController extends Controller
     {
         $festivalService = new FestivalService();
         $event = $festivalService->getEventDetails();
+        $events = $festivalService->getAllEvents();
 
         require_once(__DIR__ . '/../views/cms/festivalManagement.php');
+    }
+    public function eventManagement()
+    {
+        require_once(__DIR__ . '/../views/cms/eventManagement.php');
     }
     public function danceManagement()
     {
@@ -54,46 +63,78 @@ class CmsController extends Controller
         $this->displayOrders($this, $data);
 
     }
+  
+    public function updateEventTitle()
+    {
+        $this->updateEventField('title');
+    }
+
+    public function updateEventSubTitle()
+    {
+        $this->updateEventField('subTitle');
+    }
+
     public function updateEventDescription()
     {
+        $this->updateEventField('description');
+    }
+
+    public function updateEventTitleOverview()
+    {
+        $this->updateEventField('titleOverview');
+    }
+
+    public function updateEventDescriptionOverview()
+    {
+        $this->updateEventField('descriptionOverview');
+    }
+
+    public function updateEventSchedule()
+    {
+        $this->updateEventField('schedule');
+    }
+
+    public function updateEventLocation()
+    {
+        $this->updateEventField('location');
+    }
+
+    public function updateEventField($field)
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
             $eventId = $_POST['event_id'];
-            $description = $_POST['description'];
+            $value = $_POST[$field];
 
-            $festivalService = new FestivalService();
-
-            $success = $festivalService->updateEventDescription($eventId, $description);
+            $methodName = 'updateEvent' . ucfirst($field);
+            $success = $this->festivalService->$methodName($eventId, $value);
 
             if ($success) {
                 header("Location: /cms/festivalManagement");
                 exit();
             } else {
-                echo "Failed to update event description.";
+                echo "Failed to update event $field.";
+                
             }
-        } else {  
+        } else {
             echo "Invalid request method.";
         }
     }
-    public function updateEventTitle()
+    public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
-            $eventId = $_POST['event_id'];
-            $title = $_POST['title'];
+            $eventPage = new EventPage();
+            $eventPage->setTitle($_POST['title']);
+            $eventPage->setSubTitle($_POST['subtitle']);
+            $eventPage->setDescription($_POST['description']);
+            $eventPage->setInformation($_POST['information']);
 
-            $festivalService = new FestivalService();
-
-            $success = $festivalService->updateEventTitle($eventId, $title);
-
+            $success = $this->eventPageService->createEventPage($eventPage);
             if ($success) {
-                header("Location: /cms/festivalManagement");
+                header("Location: /cms/eventManagement");
                 exit();
             } else {
-                echo "Failed to update event title.";
+                echo "Failed to create event page.";
             }
-        } else {  
-            echo "Invalid request method.";
         }
     }
 }
