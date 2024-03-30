@@ -171,7 +171,7 @@
             </div>
             <div class="row mb-5">
                 <div class="col-md-12 text-center">
-                    <button class="btn btn-custom" onclick="window.location.href='/yummy/reservation'">Reserve</button>
+                    <button class="btn btn-custom" onclick="window.location.href='/yummy/reservationForm'">Reserve</button>
                 </div>
             </div>
         </div>

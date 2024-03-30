@@ -140,6 +140,28 @@ class RestaurantRepository extends Repository
         }
     }
 
+    public function getSeatsById($restaurantId)
+    {
+        try {
+            $stmt = $this->connection->prepare("
+            SELECT 
+                number_of_seats
+            FROM 
+                restaurants
+            WHERE 
+                id = ?
+            LIMIT 1");
+            $stmt->execute([$restaurantId]);
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data['number_of_seats'];
+
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
+        }
+    }
+
     public function getRestaurantDetailedInfoById($restaurantId)
     {
         try {
