@@ -23,7 +23,7 @@ class HistoryTourController
         if (!isset($_SESSION['user_id'])) {
             echo json_encode(['error' => 'User session not found. Please log in.']);
             //header('Location: /login');
-            exit();
+            //exit();
         }
     }
 

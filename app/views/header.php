@@ -17,6 +17,7 @@ if (isset($_SESSION['user_firstname'])) {
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="nav-pages ms-auto">
                 <ul class="navbar-nav">
+                    
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">
                             <img src="/../icons/home.svg" class="home-icon w-10 h-10" alt="Home icon">
@@ -42,6 +43,7 @@ if (isset($_SESSION['user_firstname'])) {
                             <img src="/../icons/human.svg" class="human-icon w-10 h-10" alt="Human icon">
                             Festival</a>
                     </li>
+                    
                 </ul>
             </div>
             <div class="nav-user ms-auto">

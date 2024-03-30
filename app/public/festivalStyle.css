@@ -21,10 +21,13 @@
   
 
   .info-button{
+    
     background-color: #A60303;
     color: white;
+    padding: 5px 10px;
     border: inherit;
     font-weight: lighter;
+    text-decoration: none;
   }
   .info-button:hover {
     background-color: #600808;
@@ -52,6 +55,10 @@
 .nav-tabs .nav-link:hover {
   background-color: #600808;
   color: white; 
+}
+.custom-tinymce {
+  max-width: 50%; 
+  margin: 0 auto; 
 }
 
 

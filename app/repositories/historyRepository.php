@@ -59,7 +59,7 @@ class HistoryRepository extends Repository
             $statement->execute();
             $eventDetails = $statement->fetch(PDO::FETCH_ASSOC);
 
-            $event = new Event();
+            $event = new EventPage();
             $event->setId($eventDetails['id']);
             $event->setTitle($eventDetails['title']);
             $event->setSubTitle($eventDetails['sub_title']);
