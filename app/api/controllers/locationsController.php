@@ -29,8 +29,9 @@ class LocationController
 
             if (!empty($_FILES['images']['location_name'])) {
                 $uploadedImage = $_FILES['images'];
-                $artist_image = 'locations/' . basename($uploadedImage['location_name']);
-                $destinationFile = $_SERVER['DOCUMENT_ROOT'] . '/images/' . $images;
+                $location_name = 'locations/' . basename($uploadedImage['location_name']);
+                $image = isset($_POST['images']) ? htmlspecialchars($_POST['images']) : '';
+                $destinationFile = $_SERVER['DOCUMENT_ROOT'] . '/images/' . $image;
                 move_uploaded_file($uploadedImage['tmp_name'], $destinationFile);
             }
 
@@ -39,13 +40,13 @@ class LocationController
             $location->setLocationName(htmlspecialchars($location_name));
             $location->setAddress(htmlspecialchars($address));
             $location->setDescription(htmlspecialchars($description));
-            $location->setLinks(htmlspecialchars($links);
-            $location->setImages(htmlspecialchars($image);
+            $location->setLinks(htmlspecialchars($links));
+            $location->setImage(htmlspecialchars($image));
            
 
             if ($id === 0) {
 
-                if ($this->locationService->addLocations($location)) {
+                if ($this->locationService->addLocation($location)) {
                     $message = 'Location ' . $location->getLocationName() . ' added successfully';
                 } else {
                     $message = 'An error occurred while adding' . $location->getLocationName();
@@ -53,7 +54,7 @@ class LocationController
             } else {
 
                 if ($this->locationService->updateLocation($location)) {
-                    $message = 'Location ' . $artist->getLocationName() . ' updated successfully';
+                    $message = 'Location ' . $location->getLocationName() . ' updated successfully';
                 } else {
                     $message = 'An error occurred while updating locations' . $location->getLocationName();
                 }
@@ -74,7 +75,7 @@ class LocationController
                 echo json_encode('Invalid JSON');
             }
 
-            if ($this->location->deleteLocation($object->id)) {
+            if ($this->locationService->deleteLocation($object->id)) {
                 $imagePath = $_SERVER['DOCUMENT_ROOT'] . '/images/' . $object->image;
                 if (file_exists($imagePath) && is_file($imagePath)) {
                     unlink($imagePath);

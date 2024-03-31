@@ -11,6 +11,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/cms.css">
     <link rel="stylesheet" href="../styles/main.css">
+    <script src="https://cdn.tiny.cloud/1/eylabv55n6evd0l1k7ysc9l0521t7y4tlzqyq5tll9p3plav/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
 </head>
 
 <body>
@@ -71,3 +73,5 @@
     <script src="/../scripts/dance/cms/deleteEvent.js"></script>
     <script src="/../scripts/dance/cms/deleteArtist.js"></script>
     <script src="/../scripts/dance/cms/deleteVenue.js"></script>
+    <script src="/../scripts/dance/cms/editArtistPage.js"></script>
+    <script src="/../scripts/dance/cms/deleteArtistPage.js"></script>
