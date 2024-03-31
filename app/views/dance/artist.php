@@ -29,9 +29,8 @@
             <div class="image-container">
                 <div id="artistPageImg"></div>
                 <div class="primary-text ">
-                    <h1 class="artist-name">
-                        <?php echo $_SESSION['artist_name'] ?>
-                    </h1>
+                    <span class="artist-name" id="artistName">
+                    </span>
                     <h1 class="dance-text">AT DANCE!</h1>
                 </div>
                 <div class="image-buttons">
@@ -40,12 +39,7 @@
                 </div>
             </div>
             <div class="artist-description">
-                <div class="description-title">
-                    <h2>WHO IS
-                        <strong>
-                            <?php echo $_SESSION['artist_name'] ?>?
-                        </strong>
-                    </h2>
+                <div class="description-title" id="artistDescriptionTitle">
                 </div>
                 <div id="artistDescription"></div>
             </div>
@@ -63,11 +57,7 @@
                 </div>
             </div>
             <div class="artist-appearances-section">
-                <div id="appearances-title">
-                    <h2><strong>
-                            <?php echo $_SESSION['artist_name'] ?> APPEARANCES
-                        </strong></h2>
-                    <h3>AT DANCE!</h3>
+                <div class="appearances-title" id="artistAppearancesTitle">
                 </div>
                 <div id="artistAppearances">
                 </div>

@@ -103,7 +103,6 @@ function createItemLabel(itemType) {
         itemLabel.innerHTML = `
             <div class="labels-container">
                 <div class="row">
-                    <div class="col-sm-6 col-md-8 text-center">
                         <div class="row d-flex align-items-center border-botttom">
                             <div class="col">
                                 <div class="item-data-label border-bottom"><em>Date</em></div>
@@ -127,7 +126,6 @@ function createItemLabel(itemType) {
                                 <div class="item-data-label border-bottom"><em>Price</em></div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         `;
@@ -184,7 +182,6 @@ function createItemElement(item, itemType) {
     if (itemType === "danceEvents") {
         itemData = `
             <div class="row border-bottom">
-                <div class="col-6 col-md-8 text-center">
                     <div class="row d-flex align-items-center">
                         <div class="col">
                             <span class="item-data-value">${item.date}</span>
@@ -208,7 +205,6 @@ function createItemElement(item, itemType) {
                             <span class="item-data-value">${item.price}</span>
                         </div>                        
                     </div>
-                </div>
                 <div class="col-6 col-md-4 d-flex align-items-center mt-3 mb-3 ">
                     ${htmlGenerateButtons()}
                 </div>
@@ -260,7 +256,7 @@ function createItemElement(item, itemType) {
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-md-4 d-flex mb-3">
+                <div class="col-6 col-md-4 d-flex mb-3 pt-5">
                     ${htmlGenerateButtons()}
                 </div>
             </div>
