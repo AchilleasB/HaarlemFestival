@@ -17,11 +17,10 @@ if (isset($_SESSION['user_firstname'])) {
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="nav-pages ms-auto">
                 <ul class="navbar-nav">
-                    
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">
-                            <img src="/../icons/home.svg" class="home-icon w-10 h-10" alt="Home icon">
-                            Home</a>
+                <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/festival">
+                            <img src="/../icons/human.svg" class="human-icon w-10 h-10" alt="Human icon">
+                            Festival</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/history">
@@ -38,12 +37,6 @@ if (isset($_SESSION['user_firstname'])) {
                             <img src="/../icons/music.svg" class="music-icon w-10 h-10" alt="Music icon">
                             Dance</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/festival">
-                            <img src="/../icons/human.svg" class="human-icon w-10 h-10" alt="Human icon">
-                            Festival</a>
-                    </li>
-                    
                 </ul>
             </div>
             <div class="nav-user ms-auto">
@@ -88,7 +81,7 @@ if (isset($_SESSION['user_firstname'])) {
                                 <a class="nav-link" href="/shoppingCart">
                                     <img src="/../icons/shopping-cart.svg" class="shopping-cart-icon w-10 h-10"
                                         alt="Shopping cart icon">
-                                    Shopping cart
+                                    Cart
                                     <?php if (!isset($_SESSION['order_items_data'])) { 
                                         $_SESSION['order_items_data'] = []; } 
                                     ?>
