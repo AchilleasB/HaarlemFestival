@@ -9,6 +9,7 @@ class ArtistInfo implements JsonSerializable
     private $career_highlight_img;
     private $career_highlight_text;
     private $latest_releases;
+    private $artist_name;
 
     public function getArtistId(): int
     {
@@ -80,6 +81,15 @@ class ArtistInfo implements JsonSerializable
         $this->latest_releases = $latest_releases;
     }
 
+    public function getArtistName(): string
+    {
+        return $this->artist_name;
+    }
+
+    public function setArtistName(string $artist_name): void
+    {
+        $this->artist_name = $artist_name;
+    }
 
     public function jsonSerialize(): mixed
     {
@@ -90,7 +100,8 @@ class ArtistInfo implements JsonSerializable
             'career_highlight_title' => $this->career_highlight_title,
             'career_highlight_img' => $this->career_highlight_img,
             'career_highlight_text' => $this->career_highlight_text,
-            'latest_releases' => $this->latest_releases
+            'latest_releases' => $this->latest_releases,
+            'artist_name' => $this->artist_name
         ];
     }
 }

@@ -37,7 +37,10 @@ class ArtistService
 
     public function getSingleArtistInfo($id)
     {
-        return $this->artistRepository->getSingleArtistInfo($id);
+        $artistInfo = $this->artistRepository->getSingleArtistInfo($id);
+        $artist = $this->artistRepository->getArtistById($id);
+        $artistInfo->setArtistName($artist->getName());
+        return $artistInfo;
     }
 
     public function getAllArtistsInfo()

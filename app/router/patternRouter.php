@@ -12,7 +12,7 @@ class PatternRouter
         }
 
         // set default controller/method
-        $defaultcontroller = 'home';
+        $defaultcontroller = 'festival';
         $defaultmethod = 'index';
 
         $uri = $this->stripParameters($uri);
