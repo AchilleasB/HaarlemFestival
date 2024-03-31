@@ -119,7 +119,7 @@ class CmsController extends Controller
             echo "Invalid request method.";
         }
     }
-    public function create()
+    public function createEventPage()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $eventPage = new EventPage();
@@ -134,6 +134,39 @@ class CmsController extends Controller
                 exit();
             } else {
                 echo "Failed to create event page.";
+            }
+        }
+    }
+    public function updateEventPage()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $eventPage = new EventPage();
+            $eventPage->setId($_POST['event_id']);
+            $eventPage->setTitle($_POST['title']);
+            $eventPage->setSubTitle($_POST['subtitle']);
+            $eventPage->setDescription($_POST['description']);
+            $eventPage->setInformation($_POST['information']);
+
+            $success = $this->eventPageService->updateEventPage($eventPage);
+            if ($success) {
+                header("Location: /cms/eventManagement");
+                exit();
+            } else {
+                echo "Failed to update event page.";
+            }
+        }
+    }
+    public function deleteEventPage()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $eventId = $_POST['event_id'];
+
+            $success = $this->eventPageService->deleteEventPage($eventId);
+            if ($success) {
+                header("Location: /cms/eventManagement");
+                exit();
+            } else {
+                echo "Failed to delete event page.";
             }
         }
     }

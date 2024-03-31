@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festival Content Management</title>
+    <title>Event Content Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
@@ -17,8 +17,18 @@
     <?php
     include __DIR__ . '/../header.php';
     ?>
+<div class="btn-group p-5" role="group" aria-label="Page Actions">
+  <input type="radio" class="btn-check" name="pageAction" id="addPage" autocomplete="off" checked>
+  <label class="btn btn-outline-primary" for="addPage">Add Page</label>
 
-<form action="/cms/create" method="post">
+  <input type="radio" class="btn-check" name="pageAction" id="editPage" autocomplete="off">
+  <label class="btn btn-outline-primary" for="editPage">Edit Page</label>
+
+  <input type="radio" class="btn-check" name="pageAction" id="deletePage" autocomplete="off">
+  <label class="btn btn-outline-primary" for="deletePage">Delete Page</label>
+</div>
+
+<form action="/cms/createEventPage" method="post">
     <label for="title">Title:</label>
     <input type="text" id="title" name="title" required><br><br>
 
