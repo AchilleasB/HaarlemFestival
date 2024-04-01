@@ -88,7 +88,7 @@ class ArtistRepository extends Repository
         }
     }
 
-    public function getArtistInfo($id)
+    public function getSingleArtistInfo($id)
     {
         try {
             $stmt = $this->connection->prepare('SELECT *
@@ -105,7 +105,23 @@ class ArtistRepository extends Repository
         }
     }
 
-    function getArtistDanceAppearances($id){
+    public function getAllArtistsInfo()
+    {
+        try {
+            $stmt = $this->connection->prepare('SELECT * FROM artists_info');
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'ArtistInfo');
+            $artistsInfo = $stmt->fetchAll();
+
+            return $artistsInfo;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function getArtistDanceAppearances($id){
         try {
             $stmt = $this->connection->prepare('SELECT dance_events.date AS event_date, 
                                                         dance_events.start_time AS event_start_time, 
@@ -130,6 +146,85 @@ class ArtistRepository extends Repository
     
             return $appearances;
     
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function createArtistPage($artistInfo){
+        try {
+            $stmt = $this->connection->prepare('INSERT INTO artists_info (artist_id, description, page_img, career_highlight_title, career_highlight_img, career_highlight_text, latest_releases) 
+                                                VALUES (:artist_id, :description, :page_img, :career_highlight_title, :career_highlight_img, :career_highlight_text, :latest_releases)');
+            $stmt->execute([
+                ':artist_id' => $artistInfo->getArtistId(),
+                ':description' => $artistInfo->getDescription(),
+                ':page_img' => $artistInfo->getPageImg(),
+                ':career_highlight_title' => $artistInfo->getCareerHighlightTitle(),
+                ':career_highlight_img' => $artistInfo->getCareerHighlightImg(),
+                ':career_highlight_text' => $artistInfo->getCareerHighlightText(),
+                ':latest_releases' => $artistInfo->getLatestReleases()
+            ]);
+
+            return true;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }   
+
+    public function updateArtistPage($artistInfo){
+        try {
+            $stmt = $this->connection->prepare('UPDATE artists_info 
+                                                SET description = :description, 
+                                                    page_img = :page_img, 
+                                                    career_highlight_title = :career_highlight_title, 
+                                                    career_highlight_img = :career_highlight_img, 
+                                                    career_highlight_text = :career_highlight_text, 
+                                                    latest_releases = :latest_releases 
+                                                WHERE artist_id = :artist_id');
+            $stmt->execute([
+                ':artist_id' => $artistInfo->getArtistId(),
+                ':description' => $artistInfo->getDescription(),
+                ':page_img' => $artistInfo->getPageImg(),
+                ':career_highlight_title' => $artistInfo->getCareerHighlightTitle(),
+                ':career_highlight_img' => $artistInfo->getCareerHighlightImg(),
+                ':career_highlight_text' => $artistInfo->getCareerHighlightText(),
+                ':latest_releases' => $artistInfo->getLatestReleases()
+            ]);
+
+            return true;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function deleteArtistPage($id){
+        try {
+            $stmt = $this->connection->prepare('DELETE FROM artists_info WHERE artist_id = :id');
+            $stmt->execute([':id' => $id]);
+
+            return true;
+
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function artistPageExists($id){
+        try {
+            $stmt = $this->connection->prepare('SELECT * FROM artists_info WHERE artist_id = :id');
+            $stmt->execute([':id' => $id]);
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'ArtistInfo');
+            $artistInfo = $stmt->fetch();
+
+            if($artistInfo){
+                return true;
+            } else {
+                return false;
+            }
+
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }

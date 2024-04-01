@@ -17,12 +17,12 @@ class LocationService
 
     public function addLocation($location)
     {
-        return $this->locationRepository->addLocation($artist);
+        return $this->locationRepository->addLocation($location);
     }
 
     public function updateLocation($location)
     {
-        return $this->locationRepository->updateLocation($artist);
+        return $this->locationRepository->updateLocation($location);
     }
 
     public function deleteLocation($id)

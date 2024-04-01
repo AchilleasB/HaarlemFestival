@@ -13,7 +13,7 @@ class MailService
     function __construct()
     {
         require_once __DIR__ . '/../config/mailconfig.php';
-        $this->apiKey = $apiKey;
+        $this->apiKey = $apiKey; // defined in mailconfig.php
         $this->userRepository = new UserRepository();
     }
 

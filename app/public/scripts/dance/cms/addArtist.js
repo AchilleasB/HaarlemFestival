@@ -52,7 +52,6 @@ function htmlAddArtistForm() {
             <label for="image" class="form-label">Upload Image</label>
             <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
         </div>
-        
         <button type="submit" class="btn btn-primary" id="save-artist-button">Save</button>
         <button type="submit" class="btn btn-danger" id="close-artist-form">Close</button>
     </form>

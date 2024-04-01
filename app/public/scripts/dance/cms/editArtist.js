@@ -1,5 +1,5 @@
 function handleEditArtist(artist) {
-    const editArtistContainerId = `edit-artist-container-${artist.id}`;
+    const editArtistContainerId = `handle-artist-container-${artist.id}`;
     const editArtistContainer = document.getElementById(editArtistContainerId);
 
     editArtistContainer.innerHTML = `
