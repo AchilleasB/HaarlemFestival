@@ -38,5 +38,15 @@ class ReservationService
     {
         return $this->reservationRepository->deactivateReservation($reservationId);
     }
+
+    public function addReservationToCart($reservation)
+    {
+        return $this->reservationRepository->addReservationToCart($reservation);
+    }
+
+    public function getLastReservationByRestaurantAndSessionAndUser($restaurantId, $sessionId, $userId)
+    {
+        return $this->reservationRepository->getLastReservationByRestaurantAndSessionAndUser($restaurantId, $sessionId, $userId);
+    }
 }
 ?>

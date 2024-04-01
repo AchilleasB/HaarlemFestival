@@ -18,24 +18,34 @@ class RestaurantController extends ApiController
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
-            $queryParams = $_GET;
-            if (isset($queryParams['id'])) {
-                $id = $queryParams['id'];
-                $this->handleGetRequest($this->restaurantService, 'getRestaurantDetailedInfoById', $id);
-            } else {
-                $this->handleGetAllRequest($this->restaurantService, 'getAllRestaurantsBaseInfo');
-            }
-            break;
-            case 'POST':
-                $body = file_get_contents('php://input');
-                $object = json_decode($body);
-
-                if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
-                    header('Content-Type: application/json');
-                    echo json_encode('Invalid JSON');
+                $queryParams = $_GET;
+                if (isset($queryParams['id'])) {
+                    $id = $queryParams['id'];
+                    $this->handleGetRequest($this->restaurantService, 'getRestaurantDetailedInfoById', $id);
+                } else {
+                    $this->handleGetAllRequest($this->restaurantService, 'getAllRestaurantsBaseInfo');
                 }
+                break;
+            case 'POST':
+                // $id = isset($_POST['id']) ? htmlspecialchars($_POST['id']) : 0;
+                // $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+                // $banner = isset($_POST['restaurant_image']) ? htmlspecialchars($_POST['restaurant_image']) : '';
+                // $location = isset($_POST['location']) ? htmlspecialchars($_POST['location']) : '';
 
-                $this->restaurantService->addRestaurant($object);
+                
+
+                // if (!empty($_FILES['image']['name'])) {
+                //     $uploadedImage = $_FILES['image'];
+                //     $banner = 'yummy/' . basename($uploadedImage['name']);
+                //     $destinationFile = $_SERVER['DOCUMENT_ROOT'] . '/images/yummy' . $banner;
+                //     move_uploaded_file($uploadedImage['tmp_name'], $destinationFile);
+                // }
+
+                // $restaurant = new RestaurantDetailed();
+                // $restaurant->setId($id);
+                // $restaurant->setName($name);
+                // $restaurant->setLocation($address);
+                // $restaurant->setBanner($banner);
                 break;
             case 'PUT':
                 //$this->handlePutRequest($this->restaurantService, 'updateRestaurant', 'getRestaurantDetailedInfoById', ['start_date', 'end_date']);
