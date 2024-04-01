@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../repository.php';
-require_once __DIR__ . '/../../models/yummy/session.php';
+require_once(__DIR__ . '/../repository.php');
+require_once(__DIR__ . '/../../models/yummy/session.php');
 
 class SessionRepository extends Repository
 {
@@ -11,17 +11,50 @@ class SessionRepository extends Repository
             $stmt = $this->connection->prepare('SELECT * FROM sessions');
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Session');
-            $sessions = $stmt->fetchAll();
+            $sessionData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $sessions = [];
+            foreach ($sessionData as $data) {
+                $startDate = new DateTime($data['start_date']);
+                $endDate = new DateTime($data['end_date']);
+                $session = new Session($startDate, $endDate);
+                $session->setId($data['id']);
+                $sessions[] = $session;
+            }
 
             return $sessions;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error fetching sessions', $e->getCode(), $e);
         }
     }
 
-    public function fetchSessionsForRestaurant($restaurantId): array {
+    public function getSessionById($sessionId): Session {
+        try {
+            $stmt = $this->connection->prepare("
+                SELECT id, start_date, end_date
+                FROM sessions
+                WHERE id = ?
+            ");
+            $stmt->execute([$sessionId]);
+    
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$data) {
+                throw new RepositoryException('No session found for ID ' . $sessionId, 404);
+            }
+            
+            $startDate = new DateTime($data['start_date']);
+            $endDate = new DateTime($data['end_date']);
+            $session = new Session($startDate, $endDate);
+            $session->setId($data['id']);
+    
+            return $session;
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching session by ID', $e->getCode(), $e);
+        }
+    }
+
+    public function getSessionsByRestaurantId($restaurantId): array {
         $sessions = [];
         try {
             $stmt = $this->connection->prepare("
@@ -32,17 +65,24 @@ class SessionRepository extends Repository
             ");
             $stmt->execute([$restaurantId]);
     
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $sessions[] = new Session(
-                    $row['id'],
-                    new DateTime($row['start_date']),
-                    new DateTime($row['end_date'])
-                );
+            $sessionData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $sessions = [];
+            foreach ($sessionData as $data) {
+                // Convert start_date and end_date to DateTime objects
+                $startDate = new DateTime($data['start_date']);
+                $endDate = new DateTime($data['end_date']);
+            
+                // Pass DateTime objects to Session constructor
+                $session = new Session($startDate, $endDate);
+                $session->setId($data['id']);
+                $sessions[] = $session;
             }
+    
+            return $sessions;
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error fetching sessions', $e->getCode(), $e);
         }
-        return $sessions;
     }
 
     public function addSession($session)
@@ -57,37 +97,37 @@ class SessionRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error adding session', $e->getCode(), $e);
         }
     }
 
     public function updateSession($session)
     {
         try {
-            $stmt = $this->connection->prepare('UPDATE sessions SET start_date = :start_date, end_date = :end_date WHERE id = :id');
+            $stmt = $this->connection->prepare('UPDATE sessions SET start_date = ?, end_date = ? WHERE id = ?');
             $stmt->execute([
-                ':id' => $session->getId(),
-                ':start_date' => $session->getStartDate()->format('Y-m-d H:i:s'),
-                ':end_date' => $session->getEndDate()->format('Y-m-d H:i:s'),
+                $session->getStartDate()->format('Y-m-d H:i:s'),
+                $session->getEndDate()->format('Y-m-d H:i:s'),
+                $session->getId(),
             ]);
 
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error updating session', $e->getCode(), $e);
         }
     }
 
-    public function deleteSession($id)
+    public function deleteSession($sessionId)
     {
         try {
             $stmt = $this->connection->prepare('DELETE FROM sessions WHERE id = :id');
-            $stmt->execute([':id' => $id]);
+            $stmt->execute([':id' => $sessionId]);
 
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error deleting session', $e->getCode(), $e);
         }
     }
 }

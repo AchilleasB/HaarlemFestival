@@ -1,11 +1,24 @@
 <?php
 
-class MenuItem
+class MenuItem implements JsonSerializable
 {
     private int $id;
     private string $name;
     private string $description;
-    private string $price_per_portion;
+    private ?string $price_per_portion;
+
+    /**
+     * MenuItem constructor.
+     * @param string $name
+     * @param string $description
+     * @param string|null $price_per_portion
+     */
+    public function __construct(string $name, string $description, ?string $price_per_portion)
+    {
+        $this->name = $name;
+        $this->description = $description;
+        $this->price_per_portion = $price_per_portion;
+    }
 
     public function getId(): int
     {
@@ -37,13 +50,23 @@ class MenuItem
         $this->description = $description;
     }
 
-    public function getPricePerPortion(): string
+    public function getPricePerPortion(): ?string
     {
         return $this->price_per_portion;
     }
 
-    public function setPricePerPortion(string $price_per_portion): void
+    public function setPricePerPortion(?string $price_per_portion): void
     {
         $this->price_per_portion = $price_per_portion;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'pricePerPortion' => $this->getPricePerPortion()
+        ];
     }
 } 

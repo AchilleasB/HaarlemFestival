@@ -1,9 +1,18 @@
 <?php
 
-class Cuisine
+class Cuisine implements JsonSerializable
 {
     private int $id;
     private string $name;
+
+    /**
+     * Cuisine constructor.
+     * @param string $name
+     */
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
 
     public function getId(): int
     {
@@ -23,5 +32,12 @@ class Cuisine
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function jsonSerialize(): mixed {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName()
+        ];
     }
 }

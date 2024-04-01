@@ -27,7 +27,7 @@
                 <a href="/cms/festivalManagement" class="cms-btn d-inline-block">Festival</a>
                 <a href="/cms/historyManagement" class="cms-btn d-inline-block">History</a>
                 <a href="/cms/danceManagement" class="cms-btn d-inline-block">Dance</a>
-                <a href="yummie" class="cms-btn d-inline-block">Yummie</a>
+                <a href="/cms/yummyManagement" class="cms-btn d-inline-block">Yummy</a>
                 <a href="/cms/userManagement" class="cms-btn d-inline-block">Users</a>
                 <a href="/cms/orderManagement" class="cms-btn d-inline-block">Orders</a>
 

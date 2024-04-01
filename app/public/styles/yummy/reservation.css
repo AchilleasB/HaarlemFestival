@@ -1,0 +1,20 @@
+.reservation-restaurant {
+    background-color: #c7a5a3;
+}
+
+.reservantion-name {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #555555;
+    font-style: italic;
+}
+
+.tiny-warning {
+    font-size: 12px; /* Adjust the font size to your preference */
+}
+
+.tiny-warning i {
+    margin-right: 5px; /* Add some space between the icon and the text */
+    vertical-align: middle; /* Align the icon vertically with the text */
+}
