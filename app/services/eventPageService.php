@@ -8,6 +8,10 @@ class EventPageService
     {     
             $this->repository = new EventPageRepository();
     }
+    public function getAllEvents()
+    {
+        return $this->repository->getAllEvents();
+    }
     public function createEventPage(EventPage $eventPage)
     {
         return $this->repository->createEventPage($eventPage);

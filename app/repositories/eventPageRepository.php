@@ -3,6 +3,14 @@ require_once(__DIR__ . '/../models/eventPage.php');
 
 class EventPageRepository extends Repository
 { 
+    public function getAllEvents()
+    {
+        $sql = "SELECT * FROM events_page";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        $eventPages = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $eventPages;
+    }
 
     public function createEventPage(EventPage $eventPage)
     {
@@ -23,24 +31,46 @@ class EventPageRepository extends Repository
         }
     }
     public function updateEventPage(EventPage $eventPage)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE events_page SET title = :title, sub_title = :sub_title, description = :description, information = :information WHERE id = :id');
-        $stmt->execute([
-            ':id' => $eventPage->getId(),
-            ':title' => $eventPage->getTitle(),
-            ':sub_title' => $eventPage->getSubTitle(),
-            ':description' => $eventPage->getDescription(),
-            ':information' => $eventPage->getInformation()
-        ]);
-
-        return true;
-    } catch (PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-        return false;
+    {
+        try {
+            $query = 'UPDATE events_page SET ';
+            $params = [];
+            
+            if ($eventPage->getTitle()) {
+                $query .= 'title = :title, ';
+                $params[':title'] = $eventPage->getTitle();
+            }
+    
+            if ($eventPage->getSubTitle()) {
+                $query .= 'sub_title = :sub_title, ';
+                $params[':sub_title'] = $eventPage->getSubTitle();
+            }
+    
+            if ($eventPage->getDescription()) {
+                $query .= 'description = :description, ';
+                $params[':description'] = $eventPage->getDescription();
+            }
+    
+            if ($eventPage->getInformation()) {
+                $query .= 'information = :information, ';
+                $params[':information'] = $eventPage->getInformation();
+            }
+    
+            $query = rtrim($query, ', ');
+    
+            $query .= ' WHERE id = :id';
+            $params[':id'] = $eventPage->getId();
+    
+            $stmt = $this->connection->prepare($query);
+            $stmt->execute($params);
+    
+            return true;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+            return false;
+        }
     }
-}
-
+    
 public function deleteEventPage($eventId)
 {
     try {

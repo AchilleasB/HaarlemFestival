@@ -35,6 +35,7 @@ class CmsController extends Controller
     }
     public function eventManagement()
     {
+        $eventPages = $this->eventPageService->getAllEvents();
         require_once(__DIR__ . '/../views/cms/eventManagement.php');
     }
     public function danceManagement()
@@ -119,24 +120,44 @@ class CmsController extends Controller
             echo "Invalid request method.";
         }
     }
+    
     public function createEventPage()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $eventPage = new EventPage();
-            $eventPage->setTitle($_POST['title']);
-            $eventPage->setSubTitle($_POST['subtitle']);
-            $eventPage->setDescription($_POST['description']);
-            $eventPage->setInformation($_POST['information']);
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $eventPage = new EventPage();
+        $eventPage->setTitle($_POST['title']);
+        $eventPage->setSubTitle($_POST['subtitle']);
+        $eventPage->setDescription($_POST['description']);
+        $eventPage->setInformation($_POST['information']);
 
-            $success = $this->eventPageService->createEventPage($eventPage);
-            if ($success) {
-                header("Location: /cms/eventManagement");
-                exit();
-            } else {
-                echo "Failed to create event page.";
+        $success = $this->eventPageService->createEventPage($eventPage);
+        if ($success) {
+            $eventPhp = "<?php\n";
+            $eventPhp .= "\$pageTitle = '{$eventPage->getTitle()}';\n";
+            $eventPhp .= "require_once(__DIR__ . '/../../views/header.php');\n";
+            $eventPhp .= "?>\n";
+            $eventPhp .= "<h1><?php echo \$pageTitle; ?></h1>\n";
+            $eventPhp .= "<h2>{$eventPage->getSubTitle()}</h2>\n";
+            $eventPhp .= "<p>{$eventPage->getDescription()}</p>\n";
+            $eventPhp .= "<p>{$eventPage->getInformation()}</p>\n";
+            $eventPhp .= "<?php require_once(__DIR__ . '/../../views/footer.php'); ?>\n";
+
+            $directory = __DIR__ . '/../views/customPage/';
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
             }
+            $eventFilename = $directory . $eventPage->getTitle() . '.php';
+
+            file_put_contents($eventFilename, $eventPhp);
+
+            header("Location: $eventFilename");
+            exit();
+        } else {
+            echo "Failed to create event page.";
         }
     }
+}
+
     public function updateEventPage()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -156,10 +177,11 @@ class CmsController extends Controller
             }
         }
     }
+
     public function deleteEventPage()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $eventId = $_POST['event_id'];
+            $eventId = $_POST['id'];
 
             $success = $this->eventPageService->deleteEventPage($eventId);
             if ($success) {
