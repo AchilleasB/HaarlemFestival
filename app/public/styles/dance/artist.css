@@ -24,10 +24,20 @@
     width: 60%;
 }
 
-.primary-text .artist-name {
+#artistName {
     font-size: 4em;
     letter-spacing: 0.3em;
     color: #ffffff;
+    font-weight: bolder;
+}
+
+#artistDescriptionTitle {
+    font-size: 1.5em;
+    letter-spacing: 0.2em;
+    margin-bottom: 1em;
+}
+
+.description-name {
     font-weight: bolder;
 }
 
@@ -93,7 +103,6 @@
 .artist-description p,
 .career-hightlight-section p {
     letter-spacing: 0.1em;
-    /* font-weight: lighter; */
 
 }
 
@@ -138,8 +147,7 @@
 }
 
 
-.latest-realeases-container h2,
-.artist-appearances-container h2 {
+.latest-realeases-container h2 {
     margin-bottom: 1em;
     letter-spacing: 0.5em;
     font-size: 2em;
@@ -147,27 +155,21 @@
     font-weight: bolder;
 }
 
-/* .latest-realeases-container .spotify-songs {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 2em;
-} */
-
-.artist-description h3,
-.artist-appearances-container h3 {
-    margin-bottom: 1em;
-    letter-spacing: 0.5em;
-    font-size: 1.5em;
-    font-weight: lighter;
-}
-
-#appearances-title {
+#artistAppearancesTitle {
     width: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: 4em auto 2em auto;
+    margin: 4em auto 1em auto;
+}
+
+#artistAppearancesTitle h2 {
+    letter-spacing: 0.3em;
+    font-weight: bolder;
+}
+
+#artistAppearancesTitle h3 {
+    letter-spacing: 0.2em;
+    font-weight: light;
 }
 
 .artistAppearancesContainer {
@@ -186,7 +188,7 @@
 .artistAppearancesContainer .danceEventDate {
     padding: .3em;
     font-weight: bolder;
-    font-size: 1.5em;
+    font-size: 1.3em;
     border-bottom: #000000 3px solid;
     width: 80%;
     text-align: center;

@@ -132,25 +132,20 @@
 
 }
 
-.venues-container {
-    padding: 20px;
-    margin: 1.2em 0 2em 0;
-}
-
 .dance-event-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 10px;
+    border-radius: .6em;
+    margin: .6em;
     overflow: hidden;
 }
 
 .event-time {
     background-color: #000;
-    padding: 10px;
+    padding: .6em;
     margin: auto;
 }
 
@@ -234,7 +229,8 @@
     margin: .6em;
     padding: .6em;
     overflow: hidden;
-    /* width: calc(30% - .3em); */
+    height: fit-content;
+
 }
 
 .venue-image {
@@ -246,11 +242,15 @@
 .venue-card-name {
     font-size: 1em;
     max-height: 2em;
+    display: flex;
+    justify-content: center;
 }
 
 .venue-address {
     padding: .3em;
     font-size: .9em;
+    display: flex;
+    justify-content: center;
 }
 
 /* schedule section styles */
@@ -260,6 +260,7 @@
     justify-content: center;
     align-items: flex-start;
     padding: 1.2em;
+    height: fit-content;
 }
 
 .date-schedule-card {
@@ -268,8 +269,8 @@
 
 .schedule-date {
     font-size: 1.2em;
-    height: 2.5em;
-    padding: .5em;
+    height: fit-content;
+    padding: 1em;
     margin: 0 1.2em 1.2em 0;
     background-color: white;
     color: black;
@@ -280,9 +281,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    height: 3em;
     margin: 1em 0 0 0;
-    font-size: 1em;
+    font-size: .9em;
 }
 
 .schedule-venue {
@@ -341,23 +342,17 @@
         flex-direction: column;
     }
 
-
-    .venues-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .dance-event-card {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-
+    .dance-event-card,
+    .venue-card,
     .artist-card {
         width: 100%;
     }
 
+    .venue-card-name, 
+    .venue-address {
+        font-size: .8em;
 
+    }
 }
 
 @media screen and (max-width: 690px) {
@@ -391,6 +386,12 @@
 
     .text {
         letter-spacing: 1.2em;
+    }
+
+    .venues-container {
+        display: flex;
+        flex-direction: column;
+        font-size: .8em;
     }
 
 }

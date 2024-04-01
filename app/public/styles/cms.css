@@ -10,22 +10,24 @@
 
 .cms-container {
     padding: 1em;
-    height: 50vh;
+    height: 75vh;
     width: 75%;
     margin: 3em auto 3em auto;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .cms-buttons-container {
-    margin-top: 2em;
+    margin-top: 1em;
+    padding: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
 .cms-btn {
     padding: 1em 1em;
-    margin: auto;
+    margin: .4em .4em;
     border: none;
     border-radius: 5px;
     background-color: #e86e6e;
@@ -74,7 +76,7 @@
 }
 
 .items-list {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 1em;
@@ -82,6 +84,19 @@
     color: #000;
     border-radius: .3em;
 }
+
+.item-list .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+
+/* .item-data-label,
+.item-data-value {
+    width: fit-content;
+    margin: 0 .2em;
+} */
 
 .message-container {
     position: fixed;
