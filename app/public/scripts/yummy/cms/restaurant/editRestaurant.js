@@ -8,13 +8,16 @@ async function handleEditRestaurant(restaurantId) {
             <form id="edit-restaurant-form" style="margin-top: 6px">
                 <h3>Edit Restaurant's Information</h3>
                 <div class="mb-3">
+                    <input type="hidden" id="id" name="id" rows="3" value="${restaurantDetailed.id}"></input>
+                </div>
+                <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" id="edit-restaurant-name" name="${restaurantDetailed.name}" value="${restaurantDetailed.name}" class="form-control" required>
+                    <input type="text" id="name" name="${restaurantDetailed.name}" value="${restaurantDetailed.name}" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="restaurant-banner" class="form-label">Upload Restaurant Banner</label>
                     <input type="file" class="form-control" id="restaurant-banner" name="restaurant-banner" accept="image/*" required>
-                    <input type="hidden" id="restaurant-banner" name="restaurant-banner" value="${restaurantDetailed.banner}">
+                    <input type="hidden" id="banner" name="restaurant-banner" value="${restaurantDetailed.banner}">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
@@ -27,8 +30,12 @@ async function handleEditRestaurant(restaurantId) {
                     </select>
                 </div>
                 <div class="mb-3">
+                    <label for="seats" class="form-label">Seats</label>
+                    <input type="number" id="seats" name="${restaurantDetailed.numberOfSeats}" value="${restaurantDetailed.numberOfSeats}" class="form-control" required>
+                </div>
+                <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
-                    <input type="text" id="edit-restaurant-location" name="${restaurantDetailed.location}" value="${restaurantDetailed.location}" class="form-control" required>
+                    <input type="text" id="location" name="${restaurantDetailed.location}" value="${restaurantDetailed.location}" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary" id="update-restaurant-button">Update</button>
                 <button type="submit" class="btn btn-danger" id="close-restaurant-button">Close</button>
@@ -52,7 +59,7 @@ async function handleEditRestaurant(restaurantId) {
 
     updateRestaurantButton.addEventListener("click", function (e) {
         e.preventDefault();
-        updateCuisineData(restaurant);
+        updateRestaurantData(restaurantDetailed);
         editRestaurantContainer.innerHTML = null;
     });
 
@@ -75,4 +82,22 @@ async function fetchRestaurantDetailed(restaurantId) {
     console.log(data);
 
     return data;
+}
+
+async function updateRestaurantData(restaurant) {
+    const formData = new FormData(document.getElementById('edit-restaurant-form'));
+
+    const response = await fetch(`/api/restaurant?id=${restaurant.id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: formData
+    });
+    
+    const data = await response.json();
+    displayMessage(data.message, 3000);
+
+    itemsListContainer.innerHTML = "";
+    loadItems(restaurantAPIendpoint, "restaurant");
 }

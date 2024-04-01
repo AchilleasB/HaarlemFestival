@@ -5,6 +5,8 @@ use FontLib\Table\Type\head;
 require_once(__DIR__ . '/controller.php');
 require_once(__DIR__ . '/../services/yummy/restaurantService.php');
 require_once(__DIR__ . '/../services/yummy/reservationService.php');
+require_once(__DIR__ . '/../models/ticket.php');
+require_once(__DIR__ . '/../services/ticketService.php');
 
 class YummyController extends Controller
 {
@@ -23,7 +25,7 @@ class YummyController extends Controller
         $restaurantsRecommended = $this->restaurantService->getAllRestaurantsRecommended();
 
         $data = [
-            'restaurants' => $restaurants, 
+            'restaurants' => $restaurants,
             'restaurantsRecommended' => $restaurantsRecommended
         ];
 
@@ -31,7 +33,8 @@ class YummyController extends Controller
         $this->displayYummyView($this, $data);
     }
 
-    public function restaurant() {
+    public function restaurant()
+    {
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $id = $_GET['id'];
             try {
@@ -44,8 +47,9 @@ class YummyController extends Controller
             $this->handleError("No ID provided for the restaurant.");
         }
     }
-    
-    public function reservationForm() {
+
+    public function reservationForm()
+    {
         $id = $_SESSION['restaurant_id'];
         try {
             $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
@@ -59,7 +63,9 @@ class YummyController extends Controller
         }
     }
 
-    public function reservation() {if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    public function reservation()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $reservation = new Reservation(
                 $_SESSION['restaurant_id'],
                 $_POST['session_id'],
@@ -72,6 +78,20 @@ class YummyController extends Controller
             );
             try {
                 $this->reservationService->addReservation($reservation);
+                $reservation = $this->reservationService->getLastReservationByRestaurantAndSessionAndUser(
+                    $reservation->getRestaurantId(),
+                    $reservation->getSessionId(),
+                    $reservation->getUserId()
+                );
+
+                $price = $reservation->getNumberOfPeople() * 10;
+                $reservationTicket = new Ticket();
+                $reservationTicket->setAmount($reservation->getNumberOfPeople());
+                $reservationTicket->setReservationId($reservation->getId());
+                $reservationTicket->setUserId($reservation->getUserId());
+                $reservationTicket->setCalcPrice($price);
+                $this->reservationService->addReservationToCart($reservationTicket);
+
                 header('Location: /yummy/restaurant?id=' . $_SESSION['restaurant_id']);
             } catch (RepositoryException $e) {
                 //$this->handleException($e);
@@ -80,8 +100,9 @@ class YummyController extends Controller
             echo "This is not a POST request";
         }
     }
-    
-    private function displayRestaurant($restaurant) {
+
+    private function displayRestaurant($restaurant)
+    {
         $directory = substr(get_class($this), 0, -10);
         $view = debug_backtrace()[1]['function'];
 
