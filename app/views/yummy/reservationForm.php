@@ -130,7 +130,7 @@
                             <p class="small-message mb-2">* Fields are required</p>
                             <p class="reservation-fee-message my-4"><i class="fa-regular fa-credit-card card-icon"></i>&euro;10 fee for reservation will be
                                 added per person.</p>
-                            <button id="add-to-cart-button" type="submit" class="btn btn-custom" onclick="redirectToRestaurant('<?php echo htmlspecialchars($restaurant->getId()); ?>')">Add to cart</button>
+                            <button id="add-to-cart-button" type="submit" class="btn btn-custom">Add to cart</button>
                         </div>
                     </form>
                 </div>

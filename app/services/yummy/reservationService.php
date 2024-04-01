@@ -28,5 +28,15 @@ class ReservationService
         
         return $number_of_seats - $reserved_seats;
     }
+
+    public function activateReservation($reservationId)
+    {
+        return $this->reservationRepository->activateReservation($reservationId);
+    }
+
+    public function deactivateReservation($reservationId)
+    {
+        return $this->reservationRepository->deactivateReservation($reservationId);
+    }
 }
 ?>

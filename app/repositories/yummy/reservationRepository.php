@@ -37,4 +37,24 @@ class ReservationRepository extends Repository {
         }
     }
 
+    public function activateReservation($reservationId) {
+        try {
+            $stmt = $this->connection->prepare('UPDATE reservations SET is_active = 1 WHERE id = ?');
+            $stmt->execute([$reservationId]);
+
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error activating reservation', $e->getCode(), $e);
+        }
+    }
+
+    public function deactivateReservation($reservationId) {
+        try {
+            $stmt = $this->connection->prepare('UPDATE reservations SET is_active = 0 WHERE id = ?');
+            $stmt->execute([$reservationId]);
+
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error deactivating reservation', $e->getCode(), $e);
+        }
+    }
+
 }

@@ -1,5 +1,7 @@
 <?php
 
+use FontLib\Table\Type\head;
+
 require_once(__DIR__ . '/controller.php');
 require_once(__DIR__ . '/../services/yummy/restaurantService.php');
 require_once(__DIR__ . '/../services/yummy/reservationService.php');
@@ -70,9 +72,9 @@ class YummyController extends Controller
             );
             try {
                 $this->reservationService->addReservation($reservation);
+                header('Location: /yummy/restaurant?id=' . $_SESSION['restaurant_id']);
             } catch (RepositoryException $e) {
                 //$this->handleException($e);
-                echo "problem";
             }
         } else {
             echo "This is not a POST request";
