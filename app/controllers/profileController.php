@@ -131,4 +131,9 @@ class ProfileController extends Controller
         }
 
     }
+
+    public function personalProgram()
+    {
+        $this->displayView($this);
+    }
 }

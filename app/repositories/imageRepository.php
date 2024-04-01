@@ -1,8 +1,6 @@
 <?php
 
-require __DIR__ . '/../repository.php';
-
-class RestaurantImageRepository extends Repository
+class ImageRepository extends Repository
 {
     public function getImagesByRestaurantId($restaurantId)
     {
@@ -13,11 +11,11 @@ class RestaurantImageRepository extends Repository
             return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error fetching images', $e->getCode(), $e);
         }
     }
 
-    public function addImage($restaurantId, $imagePath)
+    public function addImageToRestaurant($restaurantId, $imagePath)
     {
         try {
             $stmt = $this->connection->prepare('INSERT INTO images (image, restaurant_id) VALUES (:image, :restaurant_id)');
@@ -29,7 +27,23 @@ class RestaurantImageRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error adding image', $e->getCode(), $e);
+        }
+    }
+
+    public function deleteImageFromRestaurant($restaurantId, $imageName)
+    {
+        try {
+            $stmt = $this->connection->prepare('DELETE FROM images WHERE restaurant_id = :restaurant_id AND image = :image');
+            $stmt->execute([
+                ':restaurant_id' => $restaurantId,
+                ':image' => $imageName
+            ]);
+
+            return true;
+
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error deleting image', $e->getCode(), $e);
         }
     }
 
@@ -42,7 +56,7 @@ class RestaurantImageRepository extends Repository
             return true;
 
         } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new RepositoryException('Error deleting image', $e->getCode(), $e);
         }
     }
 }

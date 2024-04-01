@@ -192,5 +192,9 @@ class CmsController extends Controller
             }
         }
     }
-}
 
+    public function yummyManagement()
+    {
+        $this->displayView($this);
+    }
+}

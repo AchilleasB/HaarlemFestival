@@ -324,33 +324,37 @@ INSERT INTO `history_tours` (`id`, `date`, `time`, `guide`, `seats`) VALUES
 
 CREATE TABLE `images` (
   `id` int(11) NOT NULL,
-  `image` varchar(100) NOT NULL
+  `image` varchar(100) NOT NULL,
+  `restaurant_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `images`
 --
 
-INSERT INTO `images` (`id`, `image`) VALUES
-(1, 'stbavo.png'),
-(2, 'grotemarkt.png'),
-(3, 'dehallen.png'),
-(4, 'proveniershof.png'),
-(5, 'jopenkerk.png'),
-(6, 'waalsekerk.png'),
-(7, 'molenadreiaan.png'),
-(8, 'amsterdamsepoort.png'),
-(9, 'hofvanbakenes.png'),
-(10, 'ratatouille-banner.png'),
-(11, 'restaurant-ml-banner.png'),
-(12, 'restaurant-fris-banner.png'),
-(13, 'specktakel-banner.png'),
-(14, 'grand-cafe-brinkman-banner.png'),
-(15, 'urban-frenchy-bistro-toujours-banner.png'),
-(16, 'festival-image.png'),
-(17, 'history-image.png'),
-(18, 'dance.png'),
-(19, 'yummy.png');
+INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
+(1, 'stbavo.png', NULL),
+(2, 'grotemarkt.png', NULL),
+(3, 'dehallen.png', NULL),
+(4, 'proveniershof.png', NULL),
+(5, 'jopenkerk.png', NULL),
+(6, 'waalsekerk.png', NULL),
+(7, 'molenadreiaan.png', NULL),
+(8, 'amsterdamsepoort.png', NULL),
+(9, 'hofvanbakenes.png', NULL),
+(10, 'ratatouille-banner.png', NULL),
+(11, 'restaurant-ml-banner.png', NULL),
+(12, 'restaurant-fris-banner.png', NULL),
+(13, 'specktakel-banner.png', NULL),
+(14, 'grand-cafe-brinkman-banner.png', NULL),
+(15, 'urban-frenchy-bistro-toujours-banner.png', NULL),
+(16, 'restaurant-ml-1.png', 2),
+(17, 'restaurant-ml-2.png', 2),
+(18, 'restaurant-ml-3.png', 2),
+(19, 'ratatouille-1.png', 1),
+(20, 'ratatouille-2.png', 1),
+(21, 'ratatouille-3.png', 1),
+(22, 'ratatouille-1.png', 4);
 
 -- --------------------------------------------------------
 
@@ -448,6 +452,46 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reservations`
+--
+
+CREATE TABLE `reservations` (
+  `id` int(11) NOT NULL,
+  `restaurant_id` int(11) DEFAULT NULL,
+  `session_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `number_of_people` int(11) NOT NULL,
+  `mobile_number` varchar(200) NOT NULL,
+  `remark` varchar(1000) DEFAULT NULL,
+  `is_active` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reservations`
+--
+
+INSERT INTO `reservations` (`id`, `restaurant_id`, `session_id`, `user_id`, `number_of_people`, `mobile_number`, `remark`, `is_active`) VALUES
+(2, 2, 1, 8, 1, 'dadadada', '', 0),
+(3, 1, 2, 2, 4, '132432', 'asdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasd', 0),
+(4, 2, 1, 8, 1, '12312321321', '1', 0),
+(5, 2, 1, 8, 1, '235464321', 'd', 0),
+(6, 2, 4, 8, 1, '1234564321', 'd', 0),
+(7, 2, 4, 8, 1, '1234564321', 'd', 0),
+(8, 2, 2, 8, 1, '12354223145', 'a', 0),
+(9, 2, 2, 8, 1, '12354223145', 'a', 0),
+(10, 2, 4, 8, 1, '21313213', 'dsad', 0),
+(11, 2, 4, 8, 1, '21313213', 'dsad', 0),
+(16, 2, 1, 8, 1, '1231321313', '', 0),
+(17, 2, 1, 8, 1, '23543213', '1', 0),
+(18, 2, 1, 8, 1, '12331231', '', 0),
+(19, 2, 1, 8, 1, '123213213213', 'dsadas', 0),
+(20, 2, 1, 8, 1, '123213213213', 'dsadas', 0),
+(21, 2, 1, 8, 1, '+359885790202', '123131', 0),
+(22, 2, 1, 8, 1, '12314141', 'a', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `restaurants`
 --
 
@@ -527,22 +571,17 @@ CREATE TABLE `restaurants_sessions` (
 INSERT INTO `restaurants_sessions` (`restaurant_id`, `session_id`) VALUES
 (1, 1),
 (1, 2),
-(1, 3),
-(2, 1),
 (2, 2),
-(2, 3),
-(3, 1),
 (3, 2),
-(3, 3),
-(4, 1),
 (4, 2),
-(4, 3),
-(5, 1),
 (5, 2),
-(5, 3),
-(6, 1),
 (6, 2),
-(6, 3);
+(1, 4),
+(2, 4),
+(3, 4),
+(4, 4),
+(5, 4),
+(6, 4);
 
 -- --------------------------------------------------------
 
@@ -561,9 +600,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `start_date`, `end_date`) VALUES
-(1, '2024-03-05 18:00:00', '2024-03-05 19:30:00'),
+(1, '2024-02-28 18:00:00', '2024-03-05 19:30:00'),
 (2, '2024-03-05 19:30:00', '2024-03-05 21:00:00'),
-(3, '2024-03-05 21:00:00', '2024-03-05 22:30:00');
+(4, '2024-03-05 21:00:00', '2024-03-25 22:30:00');
 
 -- --------------------------------------------------------
 
@@ -753,7 +792,8 @@ ALTER TABLE `history_tours`
 -- Indexes for table `images`
 --
 ALTER TABLE `images`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `locations`
@@ -781,6 +821,14 @@ ALTER TABLE `orders`
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_user_token` (`user_id`,`token`);
+
+--
+-- Indexes for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reservations_ibfk_1` (`restaurant_id`),
+  ADD KEY `session_id` (`session_id`);
 
 --
 -- Indexes for table `restaurants`
@@ -851,7 +899,7 @@ ALTER TABLE `artists`
 -- AUTO_INCREMENT for table `cuisines`
 --
 ALTER TABLE `cuisines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `dance_events`
@@ -881,7 +929,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -906,6 +954,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `password_reset_tokens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tour_guides`
@@ -961,6 +1015,12 @@ ALTER TABLE `history_tours`
   ADD CONSTRAINT `guide` FOREIGN KEY (`guide`) REFERENCES `tour_guides` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `images`
+--
+ALTER TABLE `images`
+  ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `locations`
 --
 ALTER TABLE `locations`
@@ -977,6 +1037,13 @@ ALTER TABLE `menu_items`
 --
 ALTER TABLE `password_reset_tokens`
   ADD CONSTRAINT `password_reset_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `restaurants`
