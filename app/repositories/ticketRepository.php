@@ -57,6 +57,10 @@ if($eventDataTable["table"]=="history_tours")
 {
     $ticket = $this->getTourEventTicketByTicketId($ticketId);
 }
+if($eventDataTable["table"]=="reservations")
+{
+    $ticket = $this->getYummyEventTicketByTicketId($ticketId);
+}
 return $ticket;
 
 }
@@ -90,7 +94,7 @@ return $ticket;
     function getTourEventTicketByTicketId($ticketId)
     {
         try {
-            $query = "SELECT users.firstname, users.lastname, history_tours.date, history_tours.time AS start_time  FROM tickets
+            $query = "SELECT users.firstname, users.lastname, history_tours.date, DATE_FORMAT(history_tours.time,  '%H:%i') AS start_time  FROM tickets
             LEFT JOIN users ON tickets.user_id = users.id  
             LEFT JOIN history_tours ON tickets.history_tour_id = history_tours.id                                             
             WHERE tickets.id = :id;";
@@ -107,6 +111,31 @@ return $ticket;
             echo $e;
         }
     }
+
+
+    function getYummyEventTicketByTicketId($ticketId)
+    {
+        try {
+            $query = "SELECT users.firstname, users.lastname, restaurants.name, DATE_FORMAT(sessions.start_date,  '%d-%m-%Y' ) AS date, DATE_FORMAT(sessions.start_date,  '%H:%i' ) AS start_time  FROM tickets
+            LEFT JOIN users ON tickets.user_id = users.id  
+            LEFT JOIN reservations ON tickets.reservation_id = reservations.id  
+            LEFT JOIN restaurants ON reservations.restaurant_id = restaurants.id
+            LEFT JOIN restaurants_sessions ON reservations.session_id = restaurants_sessions.session_id
+            LEFT JOIN haarlem_festival.sessions ON restaurants_sessions.session_id = sessions.id                                         
+            WHERE tickets.id = :id;";
+
+            $stmt = $this->connection->prepare($query);
+            $stmt->bindParam(':id', $ticketId);            
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
+            return $row;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
 
 
 
