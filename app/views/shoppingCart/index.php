@@ -140,7 +140,7 @@
                 </td>
                 <td class="align-middle">
                   &euro;
-                  <?= $ticketPrice * $ticketAmount ?>
+                  <?= $pricePerItem; ?>
                 </td>
                 <td class="align-middle">
                   <form method="POST" action="/shoppingCart/removeItem">

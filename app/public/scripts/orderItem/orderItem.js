@@ -106,8 +106,7 @@ function getRestaurantIdByName(eventData) {
         url: `${urlBasePath}api/Restaurant/GetRestaurantIdByName`,
         data: eventData,
         success: function (jsonStr) {
-            var eventId = JSON.parse(jsonStr);     
-            res = eventId.id;
+            res= JSON.parse(jsonStr).id;
         }
     });    
 

@@ -85,8 +85,13 @@ class PersonalProgramController extends Controller
           if ($ticket->getReservationId() !==null){
             $newTicket->setReservationId($ticket->getReservationId());}
         $newTicket->setUserId($ticket->getUserId());
-        $ticketsPrice=($newTicket->getTicketPrice() * $newTicket->getAmount());
-        $newTicket->setCalcPrice($ticketsPrice);
+  
+       if ( $this->products[$itemCount]['Event']->getTicketPrice()){
+        $ticketsPrice = $this->products[$itemCount]['Event']->getTicketPrice() * $newTicket->getAmount();}
+        else
+        {
+          $ticketsPrice = $this->currentOrderItems[$itemCount]->getTicketPrice() *  $newTicket->getAmount();
+        }
         $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
 
 
