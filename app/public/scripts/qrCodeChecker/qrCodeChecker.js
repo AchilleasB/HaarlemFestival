@@ -15,7 +15,13 @@ function displayTicket(ticket){
             $(firstname).html(ticket.firstname);
             $(lastname).html(ticket.lastname);
             $(event).html(ticket.name);
+            if(ticket.date != null){
             $(datetime).html(`${ticket.date} ${ticket.start_time}`);
+            }
+            else 
+            {
+              $(datetime).html(`${ticket.start_time}`);
+            }
             $(ticketData).show();
 
         }
