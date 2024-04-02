@@ -63,21 +63,20 @@ class RestaurantService {
         return $restaurantDetailedInfo;
     }
 
-    public function addRestaurant($restaurant) {
-        return $this->restaurantRepository->addRestaurant($restaurant);
+    public function addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner) {
+        return $this->restaurantRepository->addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner);
     }
 
-    // public function updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $banner) {
-    //     $restaurant = new RestaurantBase();
-    //     $restaurant->setId($id);
-    //     $restaurant->setName($name);
-    //     $restaurant->setNumberOfStars($numberOfStars);
-    //     $restaurant->setBanner($banner);
+    public function updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $banner, $isRecommended) {
         
-    //     return $this->restaurantRepository->updateRestaurant($restaurant);
-    // }
+        return $this->restaurantRepository->updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $banner, $isRecommended);
+    }
 
     public function deleteRestaurant($restaurantId) {
         return $this->restaurantRepository->deleteRestaurant($restaurantId);
+    }
+
+    public function getBannerById($restaurantId) {
+        return $this->restaurantRepository->getBannerById($restaurantId);
     }
 }

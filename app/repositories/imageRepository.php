@@ -9,7 +9,6 @@ class ImageRepository extends Repository
             $stmt->execute([':restaurant_id' => $restaurantId]);
 
             return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching images', $e->getCode(), $e);
         }
@@ -25,6 +24,20 @@ class ImageRepository extends Repository
             ]);
 
             return true;
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error adding image', $e->getCode(), $e);
+        }
+    }
+
+    public function addImage($imagePath)
+    {
+        try {
+            $stmt = $this->connection->prepare('INSERT INTO images (image) VALUES (:image)');
+            $stmt->execute([':image' => $imagePath]);
+
+            $lastInsertedId = $this->connection->lastInsertId();
+
+            return $lastInsertedId;
 
         } catch (PDOException $e) {
             throw new RepositoryException('Error adding image', $e->getCode(), $e);
@@ -41,7 +54,6 @@ class ImageRepository extends Repository
             ]);
 
             return true;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error deleting image', $e->getCode(), $e);
         }
@@ -54,7 +66,6 @@ class ImageRepository extends Repository
             $stmt->execute([':id' => $id]);
 
             return true;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error deleting image', $e->getCode(), $e);
         }

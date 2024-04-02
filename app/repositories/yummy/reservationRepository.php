@@ -26,7 +26,13 @@ class ReservationRepository extends Repository {
 
     public function getLastReservationByRestaurantAndSessionAndUser($restaurantId, $sessionId, $userId) {
         try {
-            $stmt = $this->connection->prepare('SELECT * FROM reservations WHERE restaurant_id = ? AND session_id = ? AND user_id = ? LIMIT 1;');
+            $stmt = $this->connection->prepare('SELECT number_of_people AS reserved_seats 
+                                                FROM reservations 
+                                                WHERE session_id = ? 
+                                                AND restaurant_id = ? 
+                                                AND user_id = ?
+                                                ORDER BY id DESC
+                                                LIMIT 1');
             $stmt->execute([$restaurantId, $sessionId, $userId]);
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);

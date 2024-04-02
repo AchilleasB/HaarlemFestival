@@ -8,20 +8,30 @@ async function handleEditRestaurant(restaurantId) {
             <form id="edit-restaurant-form" style="margin-top: 6px">
                 <h3>Edit Restaurant's Information</h3>
                 <div class="mb-3">
+                    <label for="is_recommended" class="form-label">Recommended?</label>
+                    <div>
+                        <input type="radio" id="is_recommended_true" name="is_recommended" value="true" required>
+                        <label for="is_recommended_true">Yes</label>
+                        <input type="radio" id="is_recommended_false" name="is_recommended" value="false" required>
+                        <label for="is_recommended_false">No</label>
+                    </div>
+                </div>
+                <div class="mb-3">
                     <input type="hidden" id="id" name="id" rows="3" value="${restaurantDetailed.id}"></input>
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" id="name" name="${restaurantDetailed.name}" value="${restaurantDetailed.name}" class="form-control" required>
+                    <input type="text" id="name" name="name" value="${restaurantDetailed.name}" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="restaurant-banner" class="form-label">Upload Restaurant Banner</label>
-                    <input type="file" class="form-control" id="restaurant-banner" name="restaurant-banner" accept="image/*" required>
-                    <input type="hidden" id="banner" name="restaurant-banner" value="${restaurantDetailed.banner}">
+                    <input type="file" class="form-control" id="restaurant-banner-file" name="restaurant-banner" accept="image/png" required>
+                    <input type="hidden" id="current-banner" name="current-banner" value="${restaurantDetailed.banner}">
+                    <img id="banner-preview" src="/../images/yummy/banners/${restaurantDetailed.banner}" alt="Image of ${restaurantDetailed.name}" style="max-width: 100px; height: auto;">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <input class="form-control" id="description" name="description" value="${restaurantDetailed.description}" required>
+                    <textarea id="description" name="description" rows="5" class="form-control" required>${restaurantDetailed.description}</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="stars" class="form-label">Stars</label>
@@ -31,17 +41,23 @@ async function handleEditRestaurant(restaurantId) {
                 </div>
                 <div class="mb-3">
                     <label for="seats" class="form-label">Seats</label>
-                    <input type="number" id="seats" name="${restaurantDetailed.numberOfSeats}" value="${restaurantDetailed.numberOfSeats}" class="form-control" required>
+                    <input type="number" id="seats" name="seats" value="${restaurantDetailed.numberOfSeats}" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
-                    <input type="text" id="location" name="${restaurantDetailed.location}" value="${restaurantDetailed.location}" class="form-control" required>
+                    <input type="text" id="location" name="location" value="${restaurantDetailed.location}" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary" id="update-restaurant-button">Update</button>
                 <button type="submit" class="btn btn-danger" id="close-restaurant-button">Close</button>
-        </form>
+            </form>
         </div>
     </div>`;
+
+    if (restaurantDetailed.isRecommended) {
+        document.getElementById('is_recommended_true').checked = true;
+    } else {
+        document.getElementById('is_recommended_false').checked = true;
+    }
 
     // Generate options for stars and append to the select element
     const starsSelect = document.getElementById('stars');
@@ -59,8 +75,14 @@ async function handleEditRestaurant(restaurantId) {
 
     updateRestaurantButton.addEventListener("click", function (e) {
         e.preventDefault();
-        updateRestaurantData(restaurantDetailed);
-        editRestaurantContainer.innerHTML = null;
+        const form = document.getElementById('edit-restaurant-form');
+        //if (form.checkValidity()) {
+            updateRestaurantData();
+            editRestaurantContainer.innerHTML = null;
+        //} else {
+        //    alert("Please fill in all required fields.");
+        //}
+        
     });
 
     const closeEventFormButton = document.getElementById("close-restaurant-button");
@@ -68,6 +90,23 @@ async function handleEditRestaurant(restaurantId) {
     closeEventFormButton.addEventListener("click", function () {
         editRestaurantContainer.innerHTML = null;
     });
+
+    const fileInput = document.getElementById('restaurant-banner-file');
+    const bannerPreview = document.getElementById('banner-preview');
+
+    fileInput.addEventListener('change', function (event) {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                bannerPreview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+
 }
 
 async function fetchRestaurantDetailed(restaurantId) {
@@ -77,27 +116,30 @@ async function fetchRestaurantDetailed(restaurantId) {
             "Content-Type": "application/json"
         }
     });
-    
+
+    // const responseData = await response.text(); // Get response body as text
+    // console.log(responseData); // Log response body
     const data = await response.json();
     console.log(data);
 
     return data;
 }
 
-async function updateRestaurantData(restaurant) {
+async function updateRestaurantData() {
     const formData = new FormData(document.getElementById('edit-restaurant-form'));
 
-    const response = await fetch(`/api/restaurant?id=${restaurant.id}`, {
+    const response = await fetch(restaurantAPIendpoint, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
         body: formData
     });
-    
-    const data = await response.json();
-    displayMessage(data.message, 3000);
+
+    const text = await response.text();
+    console.log('Raw response:', text);
+
+    //const data = await response.json();
 
     itemsListContainer.innerHTML = "";
     loadItems(restaurantAPIendpoint, "restaurant");
+
+    //location.reload();
 }

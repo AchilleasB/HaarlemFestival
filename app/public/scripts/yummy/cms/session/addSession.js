@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (event.target === addSessionButton) {
             htmlAddSessionForm();
 
-            const saveCuisine = document.getElementById('save-session-button');
-            saveCuisine.addEventListener('click', function (e) {
+            const saveSession = document.getElementById('save-session-button');
+            saveSession.addEventListener('click', function (e) {
                 e.preventDefault();
                 postSessionRequest();
                 addItemFormContainer.innerHTML = '';

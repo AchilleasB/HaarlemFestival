@@ -23,9 +23,11 @@ function generateButton(buttonText, identifier) {
 // Function to generate button based on initially selected radio button
 function generateButtonOnLoad() {
     var selectedRadio = document.querySelector('.btn-check:checked');
-    var labelText = document.querySelector('label[for="' + selectedRadio.id + '"]')
-        .textContent.slice(0, -1);
-    generateButton("Add " + labelText.toLowerCase());
+    var labelText = document.querySelector('label[for="' + selectedRadio.id + '"]').textContent.slice(0, -1);
+    // Extract the identifier from the radio button's id or another attribute
+    var identifier = selectedRadio.id.replace("-radio-btn", "");
+    // Now call generateButton with both the button text and the identifier
+    generateButton("Add " + labelText.toLowerCase(), identifier.toLowerCase());
 }
 
 // Event listener for radio buttons

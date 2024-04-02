@@ -128,7 +128,7 @@ class RestaurantRepository extends Repository
 
             $restaurants = [];
             foreach ($restaurantsData as $data) {
-                $restaurant = new RestaurantDetailed($data['name'], $data['number_of_stars'], $data['banner'], [], $data['description'], $data['location'], $data['number_of_seats'], [], [], []);
+                $restaurant = new RestaurantDetailed($data['name'], $data['number_of_stars'], $data['banner'], [], $data['description'], $data['location'], $data['number_of_seats'], [], [], [], $data['is_recommended']);
                 $restaurant->setId($data['id']);
                 $restaurants[] = $restaurant;
             }
@@ -162,6 +162,28 @@ class RestaurantRepository extends Repository
         }
     }
 
+    public function getBannerById($restaurantId)
+    {
+        try {
+            $stmt = $this->connection->prepare("
+            SELECT 
+                banner
+            FROM 
+                restaurants
+            WHERE 
+                id = ?
+            LIMIT 1");
+            $stmt->execute([$restaurantId]);
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data['banner'];
+
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
+        }
+    }
+
     public function getRestaurantDetailedInfoById($restaurantId)
     {
         try {
@@ -172,7 +194,8 @@ class RestaurantRepository extends Repository
                     r.number_of_stars,
                     r.number_of_seats,
                     r.description,
-                    r.location, 
+                    r.location,
+                    r.is_recommended, 
                     i.image AS banner
                 FROM 
                     restaurants r
@@ -196,7 +219,8 @@ class RestaurantRepository extends Repository
                 $data['number_of_seats'], 
                 [], 
                 [], 
-                []
+                [],
+                $data['is_recommended']
             );
             $restaurant->setId($data['id']);
 
@@ -208,17 +232,17 @@ class RestaurantRepository extends Repository
     }
 
 
-    public function addRestaurant($restaurant)
+    public function addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner)
     {
         try {
             $stmt = $this->connection->prepare('INSERT INTO restaurants (name, location, description, number_of_seats, number_of_stars, banner) VALUES (:name, :location, :description, :number_of_seats, :number_of_stars, :banner)');
             $stmt->execute([
-                ':name' => $restaurant->getName(),
-                ':location' => $restaurant->getLocation(),
-                ':description' => $restaurant->getDescription(),
-                ':number_of_seats' => $restaurant->getNumberOfSeats(),
-                ':number_of_stars' => $restaurant->getNumberOfStars(),
-                ':banner' => $restaurant->getBanner()
+                ':name' => $name,
+                ':location' => $location,
+                ':description' => $description,
+                ':number_of_seats' => $numberOfSeats,
+                ':number_of_stars' => $numberOfStars,
+                ':banner' => $banner
             ]);
 
             return true;
@@ -228,18 +252,19 @@ class RestaurantRepository extends Repository
         }
     }
 
-    public function updateRestaurant($restaurant)
+    public function updateRestaurant($id, $name, $location, $description, $number_of_seats, $number_of_stars, $banner, $isRecommended)
     {
         try {
-            $stmt = $this->connection->prepare('UPDATE restaurants SET name = :name, location = :location, description = :description, number_of_seats = :number_of_seats, number_of_stars = :number_of_stars, banner = :banner WHERE id = :id');
+            $stmt = $this->connection->prepare('UPDATE restaurants SET name = :name, location = :location, description = :description, number_of_seats = :number_of_seats, number_of_stars = :number_of_stars, banner = :banner, is_recommended = :is_recommended WHERE id = :id');
             $stmt->execute([
-                ':id' => $restaurant->getId(),
-                ':name' => $restaurant->getName(),
-                ':location' => $restaurant->getLocation(),
-                ':description' => $restaurant->getDescription(),
-                ':number_of_seats' => $restaurant->getNumberOfSeats(),
-                ':number_of_stars' => $restaurant->getNumberOfStars(),
-                ':banner' => $restaurant->getBanner()
+                ':id' => $id,
+                ':name' => $name,
+                ':location' => $location,
+                ':description' => $description,
+                ':number_of_seats' => $number_of_seats,
+                ':number_of_stars' => $number_of_stars,
+                ':banner' => $banner,
+                ':is_recommended' => $isRecommended ? 1 : 0
             ]);
 
             return true;
