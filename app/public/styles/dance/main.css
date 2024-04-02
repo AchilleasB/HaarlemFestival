@@ -12,11 +12,17 @@
 .dance-image {
     width: 100%;
     height: 100%;
-    margin-top: 3em;
+    margin-top: 2em;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .image-primary-text {
-    margin-top: 7em;
+    position: absolute;
     margin-left: 2em;
     letter-spacing: 1em;
 }
@@ -26,16 +32,16 @@
 }
 
 .image-secondary-text {
+    position: absolute;
     margin-top: 20em;
-    margin-right: 2em;
     letter-spacing: 0.7em;
-    font-size: 1.5em;
+    font-size: 1em;
     color: #000000;
     font-weight: bolder;
     padding: 1em;
 }
 
-.image-secondary-text h1 {
+.image-secondary-text h2 {
     background-color: #ffffff;
     padding: .2em;
     font-weight: bold;
@@ -45,7 +51,6 @@
     width: 100%;
     height: 4em;
     letter-spacing: 0.7em;
-    margin-top: 1em;
     border: none;
     color: #ffffff;
     font-size: large;
@@ -113,7 +118,7 @@
     letter-spacing: 0.7em;
     border: none;
     color: #ffffff;
-    background-color: #C63C3C; 
+    background-color: #C63C3C;
     font-size: larger;
 }
 
@@ -127,25 +132,20 @@
 
 }
 
-.venues-container {
-    padding: 20px;
-    margin: 1.2em 0 2em 0;
-}
-
 .dance-event-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 10px;
+    border-radius: .6em;
+    margin: .6em;
     overflow: hidden;
 }
 
 .event-time {
     background-color: #000;
-    padding: 10px;
+    padding: .6em;
     margin: auto;
 }
 
@@ -227,9 +227,10 @@
     align-items: center;
     border: 1px solid #ddd;
     margin: .6em;
-    padding: .6em;   
+    padding: .6em;
     overflow: hidden;
-    /* width: calc(30% - .3em); */
+    height: fit-content;
+
 }
 
 .venue-image {
@@ -237,14 +238,19 @@
     height: 75%;
     object-fit: cover;
 }
+
 .venue-card-name {
     font-size: 1em;
     max-height: 2em;
+    display: flex;
+    justify-content: center;
 }
 
 .venue-address {
     padding: .3em;
     font-size: .9em;
+    display: flex;
+    justify-content: center;
 }
 
 /* schedule section styles */
@@ -254,6 +260,7 @@
     justify-content: center;
     align-items: flex-start;
     padding: 1.2em;
+    height: fit-content;
 }
 
 .date-schedule-card {
@@ -262,8 +269,8 @@
 
 .schedule-date {
     font-size: 1.2em;
-    height: 2.5em;
-    padding: .5em;
+    height: fit-content;
+    padding: 1em;
     margin: 0 1.2em 1.2em 0;
     background-color: white;
     color: black;
@@ -274,9 +281,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    height: 3em;
     margin: 1em 0 0 0;
-    font-size: 1em;
+    font-size: .9em;
 }
 
 .schedule-venue {
@@ -298,10 +305,11 @@
 
 @media screen and (max-width: 990px) {
     .image-primary-text {
-        margin-top: 20em;
-        margin-left: 5%;
+        margin-top: 2em;
+        margin-left: 2em;
         letter-spacing: 1em;
         font-size: 1.2em;
+        background-color: #00000020;
     }
 
     .image-primary-text h1 {
@@ -309,19 +317,13 @@
     }
 
     .image-secondary-text {
-        margin-top: 10em;
-        margin-left: 12em;
-        letter-spacing: 0.3em;
-        font-size: 1em;
-
-    }
-
-    .image-secondary-text button {
-        border: none;
-        color: #ffffff;
-        height: 4em;
+        position: absolute;
+        margin-top: 15em;
         letter-spacing: 0.5em;
-        margin-top: 1em;
+        font-size: 1em;
+        color: #000000;
+        font-weight: bolder;
+        padding: .8em;
     }
 
     .text {
@@ -340,22 +342,56 @@
         flex-direction: column;
     }
 
-    
-
-    .venues-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .dance-event-card {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-
+    .dance-event-card,
+    .venue-card,
     .artist-card {
         width: 100%;
     }
 
+    .venue-card-name, 
+    .venue-address {
+        font-size: .8em;
+
+    }
+}
+
+@media screen and (max-width: 690px) {
+    .image-primary-text {
+        margin-top: 2em;
+        margin-left: 2em;
+        letter-spacing: 1em;
+        font-size: 1.2em;
+        background-color: #00000020;
+    }
+
+    .image-primary-text h1 {
+        font-size: 2em;
+    }
+
+    .image-secondary-text {
+        margin-top: 1em;
+        margin-left: 1.2em;
+        letter-spacing: 0.3em;
+        font-size: 1em;
+
+    }
+
+    .image-secondary-text button {
+        border: none;
+        color: #ffffff;
+        height: 4em;
+        letter-spacing: 0.5em;
+        margin-top: 1em;
+    }
+
+    .text {
+        letter-spacing: 1.2em;
+    }
+
+    .venues-container {
+        display: flex;
+        flex-direction: column;
+        font-size: .8em;
+    }
 
 }

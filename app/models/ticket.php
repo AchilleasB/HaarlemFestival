@@ -1,5 +1,3 @@
-
-
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 use Ramsey\Uuid\Uuid;
@@ -48,6 +46,15 @@ class Ticket implements JsonSerializable
     {
         $this->calc_price = $calc_price;
     }
+
+
+    //Getter used to retrieve the ticket price for complex event tables
+    //Used when one table is composed of more tables and they are not joined due to database design 
+    public function getTicketPrice(): float
+    {
+        return fdiv($this->calc_price, $this->amount) * $this->amount;
+    }
+
 
     public function getDanceEventId(): ?int
     {

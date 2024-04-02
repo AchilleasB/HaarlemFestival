@@ -79,4 +79,14 @@ class RestaurantService {
     public function getBannerById($restaurantId) {
         return $this->restaurantRepository->getBannerById($restaurantId);
     }
+
+    public function updateSeats($id, $newSeatsAvailable){
+        return $this->restaurantRepository->updateSeats($id, $newSeatsAvailable);
+    }
+
+    public function getRestaurantIdByName($name){
+
+        return $this->restaurantRepository->getRestaurantIdByName($name);
+
+    }
 }

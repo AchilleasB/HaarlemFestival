@@ -35,15 +35,44 @@ class ArtistService
         return $this->artistRepository->deleteArtist($id);
     }
 
-    public function getArtistInfo($id)
+    public function getSingleArtistInfo($id)
     {
-        return $this->artistRepository->getArtistInfo($id);
+        $artistInfo = $this->artistRepository->getSingleArtistInfo($id);
+        $artist = $this->artistRepository->getArtistById($id);
+        $artistInfo->setArtistName($artist->getName());
+        return $artistInfo;
     }
 
-    
+    public function getAllArtistsInfo()
+    {
+        return  $this->artistRepository->getAllArtistsInfo();
+        
+    }
+
     function getArtistDanceAppearances($id)
     {
         return  $this->artistRepository->getArtistDanceAppearances($id);
         
     }
+
+    public function createArtistPage($artistInfo)
+    {
+        return $this->artistRepository->createArtistPage($artistInfo);
+    }
+
+    public function updateArtistPageContent($artistInfo)
+    {
+        return $this->artistRepository->updateArtistPage($artistInfo);
+    }
+
+    public function deleteArtistPage($id)
+    {
+        return $this->artistRepository->deleteArtistPage($id);
+    }
+
+    public function artistPageExists($id)
+    {
+        return $this->artistRepository->artistPageExists($id);
+    }
+
 }

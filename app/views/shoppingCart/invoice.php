@@ -21,7 +21,7 @@
         <div>To:
           <?= $user->getFirstname() . $user->getLastName() ?>
         </div>
-        <div>User address</div>
+        <div>Email address: <?= $user->getEmail() ?></div>
         <div class="table-responsive pt-5">
           <h5>Your items</h5>
           <table id="orderItemsTable" style="text-align:center">
@@ -35,21 +35,16 @@
             <tbody>
               <?php foreach ($products as $orderItem=>$i) { 
                       $eventName =  $products[$orderItem]['Event']->getName();
+
                       $ticketAmount = $orderItems[$orderItem]->amount;
-                      $ticketPrice = $products[$orderItem]['Event']->getTicketPrice();
-                      $ticketType = $products[$orderItem]['Event']->getTicketType();
+
+                        $pricePerItem = $orderItems[$orderItem]->calc_price;
+
                       ?>
                 <tr class="product">
                 <td class="col-md-4">
-                  <?php if ($eventName != '' && $ticketType != "SINGLE-CONCERT"){ ?>
-                <div>  <strong><?= $eventName ?></strong>-<?= $ticketType?></div>
-            
-              <?php } 
-              else if ($eventName == ''&& $ticketType != "SINGLE-CONCERT")
-              { ?><strong><?= 'Dance!' ?>-<?= $ticketType?></strong><?php }
-              
-                else 
-              { ?><strong><?= $eventName ?></strong><?php } ?>
+                  
+                <strong><?= $eventName ?></strong>
                 </td>
                 <td class="align-middle">
                   <div>
@@ -58,7 +53,7 @@
                 </td>
                 <td class="align-middle">
                   &euro;
-                  <?= $ticketPrice * $ticketAmount?>
+                  <?= $pricePerItem?>
                 </td>
                 </tr>
                 <?php } ?>

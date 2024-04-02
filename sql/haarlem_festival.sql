@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 30, 2024 at 10:33 AM
--- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
--- PHP Version: 8.2.17
+-- Generation Time: Apr 02, 2024 at 12:07 AM
+-- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -70,12 +70,15 @@ CREATE TABLE `artists_info` (
 --
 
 INSERT INTO `artists_info` (`artist_id`, `description`, `page_img`, `career_highlight_title`, `career_highlight_img`, `career_highlight_text`, `latest_releases`) VALUES
-(1, '<p>Robbert van de Corput, known professionally as Hardwell, is a Dutch DJ and music producer from Breda. He was voted the world\'s number-one DJ by DJ Mag in 2013 and again in 2014. In 2020, he was ranked at number 43 in the top 100 DJs poll by DJ Mag.</p>', 'artists/hardwell_page.png', '<h1>THE BEGINNINGS</h1>', 'artists/hardwell_highlight.png', '<p>HARDWELL started by producing remixes and uploading them to the Internet. At the age of 14, he was offered a record deal with the Digidance record label. Three weeks later, he made a first official release with the two-disc-record \"Bubbling Beats 1\" which he followed with a Netherlands tour.</p>', '<div class=\"spotify-song\"><iframe style=\"border-radius:12px\"\r\n                        src=\"https://open.spotify.com/embed/track/2meQ2wSIBU8OQDKlJcJk5j?utm_source=generator \"\r\n                        width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\n                        allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\n                        loading=\"lazy\"></iframe>\r\n                </div>\r\n                <div class=\"spotify-song\"><iframe style=\"border radius:12px\"\r\n                        src=\"https://open.spotify.com/embed/track/6L5xbckRDXIf5K1pwTaGkD?utm_source=generator\"\r\n                        width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\n                        allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\n                        loading=\"lazy\"></iframe>\r\n                </div>\r\n                <div class=\"spotify-song\">\r\n                    <iframe style=\"border-radius:12px\"\r\n                        src=\"https://open.spotify.com/embed/track/2Q5l502BJ5lvjZFGmnRQ5B?utm_source=generator\"\r\n                        width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\n                        allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\n                        loading=\"lazy\"></iframe>\r\n                </div>'),
-(2, '<p>Armin van Buuren is a Dutch DJ and record producer from Leiden, South Holland. Since 2001, he has hosted A State of Trance (ASOT), a weekly radio show, which is broadcast to nearly 40 million listeners in 84 countries on over 100 FM radio stations. He has been ranked the number one DJ by DJ Mag a record of five times, four years in a row.</p>', 'artists/armin_van_buuren_page.png', '<h1>THE PERFECTIONIST</h1>', 'artists/armin_van_buuren_highlight.png', '<p>DJ and producer Armin van Buuren is a born perfectionist. His five-time number-one position in the critically acclaimed DJ Mag Top 100 DJs Poll has been the result of his loyalty to fans and his creativity in the studio.</p>', '<div class=\"spotify-song\">\r\n                        <iframe style=\"border-radius:12px\"\r\n                            src=\"https://open.spotify.com/embed/track/57nKL06bKwjaM5Y0aMtY9v?utm_source=generator\"\r\n                            width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\n                            allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\n                            loading=\"lazy\"></iframe>\r\n                    </div>\r\n                    <div class=\"spotify-song\">\r\n                        <iframe style=\"border-radius:12px\"\r\n                            src=\"https://open.spotify.com/embed/track/1q3qh7hEJrPmPH7uOteYSr?utm_source=generator\"\r\n                            width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\n                            allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\n                            loading=\"lazy\"></iframe>\r\n                    </div>\r\n                    <div class=\"spotify-song\">\r\n                        <iframe style=\"border-radius:12px\"\r\n                            src=\"https://open.spotify.com/embed/track/08yyvtQ8CNRH6Ogpj60p0n?utm_source=generator\"\r\n                            width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\n                            allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\n                            loading=\"lazy\"></iframe>\r\n                    </div>'),
-(3, '<p>\r\nMartin Garrix, also known as Ytram and GRX, is a Dutch DJ and record producer, who was <strong>ranked number one on DJ Mag\'s Top 100 DJs</strong> list <strong>for three consecutive years—2016, 2017, and 2018.</strong> He is best known for his singles <strong>\'Animals\'</strong>, <strong>\'In the Name of Love\'</strong>, and <strong>\'Scared to Be Lonely\'</strong>.\r\n  </p>', 'artists/martin_garrix_page.png', '<h1>THE BREAKTHROUGH</h1>', 'artists/martin_garrix_highlight.png', '<p>\r\nGarrix gained fame through his solo release, <strong>\"Animals\"</strong>, which was released on 16 June 2013. <strong>The single became a hit in several countries in Europe.</strong> This allowed Garrix to become the <strong>youngest person to reach number one on Beatport.</strong>\r\n</p>', '<div class=\"spotify-song\">\r\n        <iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4Wu62DoQg1ECGlDKDfo30R?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n    </div>\r\n    <div class=\"spotify-song\">\r\n        <iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/6LHXb1sGs72iTmpSr0603b?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n    </div>\r\n    <div class=\"spotify-song\">\r\n        <iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/0lqgo6rIBS0nVsvppZC3Ay?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n    </div>'),
-(4, '<p>Tijs Michiel Verwest born 17 January 1969, known professionally as Tiesto, is a Dutch DJ and record producer. <strong>He was voted \'The Greatest DJ of All Time\'</strong> by Mix magazine in a 2010/2011 poll amongst fans. In 2013, he was voted by DJ Mag readers as the \'best DJ of the last 20 years\'. <strong>He is also regarded by many as the \'Godfather of EDM\'.</strong></p>', 'artists/tiesto_page.png', '<h1>THE GODFATHER<h1>', 'artists/tiesto_highlight.png', '<p>In 2001, Tiesto released his first solo album  \'In My Memory\' which gave him several major hits that launched his career. As his popularity rose in the early 2000s <strong>he became the first DJ to perform to a large crowd without any other DJs or opening acts. He was crowned the “World’s No.1 DJ” 3 consecutive times by DJ Magazine</strong> from 2002 through 2004.</p>', '<div class=\"spotify-song\"><iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4EmH2iRucAgCOnhuJRotUi?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe></div>\r\n<div class=\"spotify-song\"><iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4UkUxO2WlKLc0Q1iEutGGh?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe></div><div class=\"spotify-song\"><iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/1SBfaO3swtjh8dV07MExuP?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe></div>'),
-(5, '<p>Nick Rotteveel born January 6 1989, professionally known as Nicky Romero or Monocule, is a Dutch DJ, record producer and remixer from Amerongen, Utrecht Province. He has worked with, and received support from DJs, such as Tiesto, Fedde le Grand, Sander van Doorn, David Guetta, Calvin Harris, Armand van Helden, Avicii and Hardwell. He currently ranks at number 20 on DJ Mag\'s annual Top 100 DJs poll. He is known for his viral hit song \'Toulouse\'.</p>', 'artists/nicky_romero_page.png', '<h1>THE MONOCULE</h1>', 'artists/nicky_romero_highlight.png', '<p>In 2009, Nicky remixed tracks that increased his profile and the Ministry of Sound contacted him to do some remixes on their label. In 2010 Nicky Romero came up with a new track called \"My Friend\". The track has been played by DJs and record producers such as Tiesto, Axwell, Fedde Le Grand, Sander van Doorn and many more.</p>', '<div class=\"spotify-song\">\r\n                        <iframe style=\"border-radius:12px\"\r\n                            src=\"https://open.spotify.com/embed/track/5yPEJ4UF90Km4KmLl2h4EE?utm_source=generator\"\r\n                            width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\n                       allow=\"autoplay;     clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\n                            loading=\"lazy\"></iframe>\r\n                    </div>\r\n                    <div class=\"spotify-song\">\r\n                        <iframe style=\"border-radius:12px\"\r\n                            src=\"https://open.spotify.com/embed/track/6Wq9mMoP3u5DUoTF45Ov7u?utm_source=generator\"\r\n                            width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\n                       allow=\"autoplay;     clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\n                            loading=\"lazy\"></iframe>\r\n                    </div>\r\n                    <div class=\"spotify-song\">\r\n                        <iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/2UMDjpShbeQoON9Dn7ONMK?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n                    </div>'),
-(6, '<p>Nick Leonardus van de Wall born 9 September 1987, better known as Afrojack, is a Dutch DJ, music producer and remixer. In 2007, he founded the record label Wall Recordings; his debut album Forget the World was released in 2014. Afrojack regularly features as one of the ten best artists in the Top 100 DJs published by DJ Mag.</p>', 'artists/afrojack_page.png', '<h1>THE ENTREPRENEUR</h1>', 'artists/afrojack_highlight.png', '<p>At the age of 14, Van de Wall started DJing at local pubs and clubs and earning additional income by designing websites for fellow musicians. In 2007, he released \"In Your Face\", the first recording under the Afrojack name. He received international success with the song \"Take Over Control\" featuring Eva Simons, which charted in 10 countries.</p>', '<div class=\"spotify-song\">\r\n     <iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4YMebDlcRphWajZhJAWPg0?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"false\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\">\r\n       </iframe>\r\n</div>\r\n<div class=\"spotify-song\">\r\n    <iframe style=\"border-radius:12px\"                            src=\"https://open.spotify.com/embed/track/7b5FO1uKhuJE0ZUJPKLWtI?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"false\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\">\r\n    </iframe>\r\n</div>\r\n<div class=\"spotify-song\">\r\n   <iframe style=\"border-radius:12px\"                            src=\"https://open.spotify.com/embed/track/5j1XuqSJqLDRceRqMjcUhT?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"false\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\">\r\n    </iframe>\r\n</div>');
+(1, '<p>Robbert van de Corput, known professionally as Hardwell, is a Dutch DJ and music producer from Breda. <strong>He was voted the world\'s number-one DJ by DJ Mag in 2013 and again in 2014.</strong> In 2020, he was ranked at number 43 in the top 100 DJs poll by DJ Mag.</p>', 'artists/hardwell_page.png', '<h1>THE BEGINNINGS</h1>', 'artists/hardwell_highlight.png', '<p>HARDWELL started by producing remixes and uploading them to the Internet. <strong>At the age of 14, he was offered a record deal with the Digidance record label.</strong> Three weeks later, he made a first official release with the two-disc-record \"Bubbling Beats 1\" which he followed with a Netherlands tour.</p>', '<div>\r\n<iframe style=\"border-radius:12px\"            src=\"https://open.spotify.com/embed/track/2meQ2wSIBU8OQDKlJcJk5j?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"\r\nallow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n<iframe style=\"border radius:12px\" src=\"https://open.spotify.com/embed/track/6L5xbckRDXIf5K1pwTaGkD?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\nloading=\"lazy\"></iframe>\r\n<iframe style=\"border-radius:12px\"\r\nsrc=\"https://open.spotify.com/embed/track/2Q5l502BJ5lvjZFGmnRQ5B?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\"\r\nloading=\"lazy\"></iframe>\r\n</div>'),
+(2, '<p>Armin van Buuren is a Dutch DJ and record producer from Leiden, South Holland. Since 2001, he has hosted A State of Trance (ASOT), a weekly radio show, which is broadcast to nearly 40 million listeners in 84 countries on over 100 FM radio stations. <strong>He has been ranked the number one DJ by DJ Mag a record of five times, four years in a row.</strong></p>', 'artists/armin_van_buuren_page.png', '<h1>THE PERFECTIONIST</h1>', 'artists/armin_van_buuren_highlight.png', '<p>DJ and producer Armin van Buuren is a born perfectionist. His <strong>five-time number-one position in the critically acclaimed DJ Mag Top 100 DJs Poll</strong> has been the result of his loyalty to fans and his creativity in the studio.</p>', '<div>\r\n<iframe style=\"border-radius:12px\"\r\nsrc=\"https://open.spotify.com/embed/track/57nKL06bKwjaM5Y0aMtY9v?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"                            allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n<iframe style=\"border-radius:12px\"                            src=\"https://open.spotify.com/embed/track/1q3qh7hEJrPmPH7uOteYSr?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"                            allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\">\r\n</iframe>\r\n<iframe style=\"border-radius:12px\"                           src=\"https://open.spotify.com/embed/track/08yyvtQ8CNRH6Ogpj60p0n?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\"                           allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n </div>'),
+(3, '<p>\r\nMartin Garrix, also known as Ytram and GRX, is a Dutch DJ and record producer, who was <strong>ranked number one on DJ Mag\'s Top 100 DJs</strong> list <strong>for three consecutive years—2016, 2017, and 2018.</strong> He is best known for his singles <strong>\'Animals\'</strong>, <strong>\'In the Name of Love\'</strong>, and <strong>\'Scared to Be Lonely\'</strong>.\r\n  </p>', 'artists/martin_garrix_page.png', '<h1>THE BREAKTHROUGH</h1>', 'artists/martin_garrix_highlight.png', '<p>\r\nGarrix gained fame through his solo release, <strong>\"Animals\"</strong>, which was released on 16 June 2013. <strong>The single became a hit in several countries in Europe.</strong> This allowed Garrix to become the <strong>youngest person to reach number one on Beatport.</strong>\r\n</p>', '<div>\r\n<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4Wu62DoQg1ECGlDKDfo30R?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/6LHXb1sGs72iTmpSr0603b?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/0lqgo6rIBS0nVsvppZC3Ay?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n</div>'),
+(4, '<p>Tijs Michiel Verwest born 17 January 1969, known professionally as Tiesto, is a Dutch DJ and record producer. <strong>He was voted \'The Greatest DJ of All Time\'</strong> by Mix magazine in a 2010/2011 poll amongst fans. In 2013, he was voted by DJ Mag readers as the \'best DJ of the last 20 years\'. <strong>He is also regarded by many as the \'Godfather of EDM\'.</strong></p>', 'artists/tiesto_page.png', '<h1>THE GODFATHER<h1>', 'artists/tiesto_highlight.png', '<p>In 2001, Tiesto released his first solo album  \'In My Memory\' which gave him several major hits that launched his career. As his popularity rose in the early 2000s <strong>he became the first DJ to perform to a large crowd without any other DJs or opening acts. He was crowned the “World’s No.1 DJ” 3 consecutive times by DJ Magazine</strong> from 2002 through 2004.</p>', '<div><iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4EmH2iRucAgCOnhuJRotUi?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4UkUxO2WlKLc0Q1iEutGGh?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/1SBfaO3swtjh8dV07MExuP?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe></div>'),
+(5, '<p>Nick Rotteveel born January 6 1989, professionally known as Nicky Romero or Monocule, is a Dutch DJ, <strong>record producer and remixer</strong> from Amerongen, Utrecht Province. He has worked with and received support from DJs, such as Tiesto, Fedde le Grand, Sander van Doorn, David Guetta, Calvin Harris, Armand van Helden, Avicii and Hardwell. <strong>He currently ranks at number 20 on DJ Mag\'s annual Top 100 DJs poll.</strong> He is known for his viral hit song \'Toulouse\'.</p>', 'artists/nicky_romero_page.png', '<h1>THE MONOCULE</h1>', 'artists/nicky_romero_highlight.png', '<p><strong>In 2009, Nicky remixed tracks that increased his profile and the Ministry of Sound contacted him to do some remixes on their label.</strong> In 2010 Nicky Romero came up with a new track called \"My Friend\". The track has been played by DJs and record producers such as Tiesto, Axwell, Fedde Le Grand, Sander van Doorn and many more.</p>', '<div>\r\n<iframe style=\"border-radius:12px\"                            src=\"https://open.spotify.com/embed/track/5yPEJ4UF90Km4KmLl2h4EE?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay;     clipboard-write; encrypted-media; fullscreen; picture-in-picture\"                            loading=\"lazy\"></iframe>\r\n<iframe style=\"border-radius:12px\"                            src=\"https://open.spotify.com/embed/track/6Wq9mMoP3u5DUoTF45Ov7u?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"true\" allow=\"autoplay;     clipboard-write; encrypted-media; fullscreen; picture-in-picture\"                            loading=\"lazy\"></iframe>\r\n<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/2UMDjpShbeQoON9Dn7ONMK?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\r\n</div>'),
+(6, '<p>Nick Leonardus van de Wall born 9 September 1987, better known as Afrojack, is a Dutch DJ, music producer and remixer. In 2007, he founded the record label Wall Recordings; his debut album Forget the World was released in 2014. <strong>Afrojack regularly features as one of the ten best artists in the Top 100 DJs published by DJ Mag.</strong></p>', 'artists/afrojack_page.png', '<h1>THE ENTREPRENEUR</h1>', 'artists/afrojack_highlight.png', '<p>At the age of 14, Van de Wall started DJing at local pubs and clubs and earning additional income by designing websites for fellow musicians. In 2007, he released \"In Your Face\", the first recording under the Afrojack name. <strong>He received international success with the song \"Take Over Control\" featuring Eva Simons, which charted in 10 countries.</strong></p>', '<div>\r\n<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4YMebDlcRphWajZhJAWPg0?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"false\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\">\r\n</iframe>\r\n<iframe style=\"border-radius:12px\"                            src=\"https://open.spotify.com/embed/track/7b5FO1uKhuJE0ZUJPKLWtI?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"false\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\">\r\n</iframe>\r\n<iframe style=\"border-radius:12px\"                            src=\"https://open.spotify.com/embed/track/5j1XuqSJqLDRceRqMjcUhT?utm_source=generator\" width=\"100%\" height=\"252\" frameBorder=\"0\" allowfullscreen=\"false\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\">\r\n</iframe>\r\n</div>'),
+(28, '<p>Odin is a widely revered god in Germanic paganism. <strong>Norse mythology associates him with wisdom, healing, death, royalty, the gallows, knowledge, war, battle, victory, sorcery, poetry, frenzy, and the runic alphabet, and depicts him as the husband of the goddess Frigg.</strong></p>', 'artists/odin_page.png', '<h1>THE NORSE GOD</h1>', 'artists/odin_highlight.png', '<p>The god Odin has been a source of inspiration for artists working in fine art, literature, and music.</p>', '<div><iframe style=\"border-radius: 12px;\" src=\"https://open.spotify.com/embed/track/6Z5rBmAtaA29iD0H0LGKn7?utm_source=generator\" width=\"100%\" height=\"252\" frameborder=\"0\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" allowfullscreen=\"allowfullscreen\" loading=\"lazy\"></iframe></div>\r\n<div><iframe style=\"border-radius: 12px;\" src=\"https://open.spotify.com/embed/track/587nP9FS8o0p70Z3JS9Uem?utm_source=generator\" width=\"100%\" height=\"252\" frameborder=\"0\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" allowfullscreen=\"allowfullscreen\" loading=\"lazy\"></iframe></div>'),
+(29, '<p><strong>Zeus</strong> is the sky and thunder god in ancient Greek religion and mythology, who <strong>rules as king of the gods on Mount Olympus</strong>. His name is cognate with the first syllable of his Roman equivalent Jupiter.</p>', 'artists/zeus_page.png', '<h1>SKY FATHER</h1>', 'artists/zeus_highlight.png', '<p><strong>Zeus was also infamous for his erotic escapades</strong>. These resulted in many divine and heroic offspring, including Apollo, Artemis, Hermes, Persephone, Dionysus, Perseus, Heracles, Helen of Troy, Minos, and the Muses.</p>', '<div><iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/24NClHvlj1c93I80wKRQFe?utm_source=generator\" width=\"100%\" height=\"352\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe><iframe style=\"border-radius: 12px;\" src=\"https://open.spotify.com/embed/track/57bgtoPSgt236HzfBOd8kj?utm_source=generator\" width=\"100%\" height=\"252\" frameborder=\"\" allowfullscreen=\"allowfullscreen\" loading=\"lazy\"></iframe></div>'),
+(30, '<p><strong>Athena</strong> is an ancient Greek goddess associated with wisdom, warfare, and handicraft. <strong>Athena was regarded as the patron and protectress of various cities across Greece</strong>, particularly the city of Athens, from which she most likely received her name.</p>', 'artists/athena_page.png', '<h1>THE OWL</h1>', 'artists/athena_highlight.png', '<p><strong>Athena was believed to have been born from the forehead of her father Zeus.</strong></p>', '<div><iframe style=\"border-radius: 12px;\" src=\"https://open.spotify.com/embed/track/4ZyE9TB38tLADzmv1OImVU?utm_source=generator\" width=\"100%\" height=\"252\" frameborder=\"0\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" allowfullscreen=\"allowfullscreen\" loading=\"lazy\"></iframe> <iframe style=\"border-radius: 12px;\" src=\"https://open.spotify.com/embed/track/7gwo88n3Asm5Kg7UTdWeF5?utm_source=generator\" width=\"100%\" height=\"252\" frameborder=\"0\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" allowfullscreen=\"allowfullscreen\" loading=\"lazy\"></iframe></div>');
 
 -- --------------------------------------------------------
 
@@ -125,8 +128,8 @@ CREATE TABLE `dance_events` (
 
 INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, `session`, `tickets_available`, `price`, `type`) VALUES
 (1, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 1350, 75.00, 'SINGLE-CONCERT'),
-(2, 3, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 199, 60.00, 'SINGLE-CONCERT'),
-(3, 4, 'FRIDAY 27 JULY', '23:00', '00:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
+(2, 3, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 197, 60.00, 'SINGLE-CONCERT'),
+(3, 4, 'FRIDAY 27 JULY', '23:00', '00:30', 'CLUB', 299, 60.00, 'SINGLE-CONCERT'),
 (4, 5, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
 (5, 6, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
 (6, 2, 'SATURDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 1798, 110.00, 'SINGLE-CONCERT'),
@@ -174,12 +177,46 @@ INSERT INTO `drinks` (`id`, `price_bottle`) VALUES
 
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `date_time` varchar(50) NOT NULL,
-  `location_id` int(11) NOT NULL,
-  `artist_id` int(11) NOT NULL,
-  `tickets_available` int(11) NOT NULL
+  `description` varchar(10000) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `sub_title` varchar(1000) DEFAULT NULL,
+  `locations` varchar(100) DEFAULT NULL,
+  `schedule` varchar(1000) DEFAULT NULL,
+  `event_image` int(11) DEFAULT NULL,
+  `button_path` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `description`, `title`, `sub_title`, `locations`, `schedule`, `event_image`, `button_path`) VALUES
+(1, '<p><span style=\"font-size: 10pt;\">Whether you are a seasoned dancer or just looking to let loose and have a good time, there is something for everyone.</span></p>', 'DANCE!', 'Lose yourself in DANCE!', NULL, 'Friday - Sunday from 18:00 till 22:20', 23, '/dance'),
+(2, '<p><span style=\"font-size: 10pt;\">Explore the restaurants end enjoy the delights made with extra passion!</span></p>', 'YUMMIE!', 'Satisfy your apetite!', NULL, 'Friday - Sunday from 18:00 till 22:20', 24, '/yummy'),
+(3, '<p><span style=\"font-size: 10pt;\">Take a tour through Haarlem&rsquo;s historic locations.</span></p>', 'A STROLL THROUGH HISTORY', 'Visiting Haarlem’s historic landmarks!', NULL, 'Friday - Sunday from 18:00 till 22:20', 25, '/history');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events_page`
+--
+
+CREATE TABLE `events_page` (
+  `id` int(11) NOT NULL,
+  `title` varchar(10000) DEFAULT NULL,
+  `sub_title` varchar(1000) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `information` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events_page`
+--
+
+INSERT INTO `events_page` (`id`, `title`, `sub_title`, `description`, `information`) VALUES
+(1, 'A Stroll Through History', 'Visiting Haarlem\'s historical landmarks', 'In this event, we take a walking tour around some of the most historical musems in Haarlem. Participants get to see and learn about the historical sites and how they come to be.<br><br> The tour starts at the Church of St Bavo and ends at Hof van Bakenes. There will be a break in between, at the Jopenkerk where the tourists can enjoy some beer!', '<li>Due to the nature of the walk, participants must be a minimum of 12 years old and no strollers are allowed.</li><li>A giant flag will mark the starting location.</li><li>Groups will consist of 12 participants and 1 tour guide.</li><li>Every participant can enjoy one drink with the ticket!</li>'),
+(2, 'The Festival', '<p><span style=\"background-color: #ecf0f1;\">&nbsp;A Summer to remember&nbsp;</span></p>', 'Get ready for the summer festival with activities for everyone.\r\n                        From jazz to the latest EDM artists, the festival has something for everyone. Foodies, history\r\n                        lovers and kids too!\r\n                        <br><br>\r\n                        Explore our Jazz, Dance, Yummie, A stroll through history, and The secret of Dr. Teyler!', NULL),
+(3, 'lalala', 'cwcew', '<p>cewfew</p>', '<p>cwel</p>');
 
 -- --------------------------------------------------------
 
@@ -229,54 +266,55 @@ CREATE TABLE `history_tours` (
   `id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time(5) NOT NULL,
-  `guide` int(50) NOT NULL
+  `guide` int(50) NOT NULL,
+  `seats` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `history_tours`
 --
 
-INSERT INTO `history_tours` (`id`, `date`, `time`, `guide`) VALUES
-(1, '2023-07-26', '10:00:00.00000', 1),
-(2, '2023-07-26', '10:00:00.00000', 4),
-(3, '2023-07-26', '13:00:00.00000', 1),
-(4, '2023-07-26', '13:00:00.00000', 4),
-(5, '2023-07-26', '16:00:00.00000', 1),
-(6, '2023-07-26', '16:00:00.00000', 4),
-(7, '2023-07-27', '10:00:00.00000', 5),
-(8, '2023-07-27', '10:00:00.00000', 2),
-(9, '2023-07-27', '13:00:00.00000', 5),
-(10, '2023-07-27', '13:00:00.00000', 2),
-(11, '2023-07-27', '13:00:00.00000', 7),
-(12, '2023-07-27', '16:00:00.00000', 5),
-(13, '2023-07-27', '16:00:00.00000', 2),
-(14, '2023-07-28', '10:00:00.00000', 1),
-(15, '2023-07-28', '10:00:00.00000', 2),
-(16, '2023-07-28', '10:00:00.00000', 5),
-(17, '2023-07-28', '10:00:00.00000', 4),
-(18, '2023-07-28', '13:00:00.00000', 1),
-(19, '2023-07-28', '13:00:00.00000', 2),
-(20, '2023-07-28', '13:00:00.00000', 5),
-(21, '2023-07-28', '13:00:00.00000', 4),
-(22, '2023-07-28', '13:00:00.00000', 7),
-(23, '2023-07-28', '16:00:00.00000', 1),
-(24, '2023-07-28', '16:00:00.00000', 4),
-(25, '2023-07-28', '16:00:00.00000', 7),
-(26, '2023-07-29', '10:00:00.00000', 1),
-(27, '2023-07-29', '10:00:00.00000', 3),
-(28, '2023-07-29', '10:00:00.00000', 5),
-(29, '2023-07-29', '10:00:00.00000', 6),
-(30, '2023-07-29', '10:00:00.00000', 8),
-(31, '2023-07-29', '13:00:00.00000', 1),
-(32, '2023-07-29', '13:00:00.00000', 2),
-(33, '2023-07-29', '13:00:00.00000', 3),
-(34, '2023-07-29', '13:00:00.00000', 4),
-(35, '2023-07-29', '13:00:00.00000', 5),
-(36, '2023-07-29', '13:00:00.00000', 6),
-(37, '2023-07-29', '13:00:00.00000', 7),
-(38, '2023-07-29', '13:00:00.00000', 8),
-(39, '2023-07-29', '16:00:00.00000', 2),
-(40, '2023-07-29', '16:00:00.00000', 4);
+INSERT INTO `history_tours` (`id`, `date`, `time`, `guide`, `seats`) VALUES
+(1, '2023-07-26', '10:00:00.00000', 1, 11),
+(2, '2023-07-26', '10:00:00.00000', 4, 4),
+(3, '2023-07-26', '13:00:00.00000', 1, 12),
+(4, '2023-07-26', '13:00:00.00000', 4, 12),
+(5, '2023-07-26', '16:00:00.00000', 1, 12),
+(6, '2023-07-26', '16:00:00.00000', 4, 12),
+(7, '2023-07-27', '10:00:00.00000', 5, 12),
+(8, '2023-07-27', '10:00:00.00000', 2, 12),
+(9, '2023-07-27', '13:00:00.00000', 5, 12),
+(10, '2023-07-27', '13:00:00.00000', 2, 12),
+(11, '2023-07-27', '13:00:00.00000', 7, 12),
+(12, '2023-07-27', '16:00:00.00000', 5, 12),
+(13, '2023-07-27', '16:00:00.00000', 2, 12),
+(14, '2023-07-28', '10:00:00.00000', 1, 12),
+(15, '2023-07-28', '10:00:00.00000', 2, 12),
+(16, '2023-07-28', '10:00:00.00000', 5, 12),
+(17, '2023-07-28', '10:00:00.00000', 4, 12),
+(18, '2023-07-28', '13:00:00.00000', 1, 12),
+(19, '2023-07-28', '13:00:00.00000', 2, 12),
+(20, '2023-07-28', '13:00:00.00000', 5, 12),
+(21, '2023-07-28', '13:00:00.00000', 4, 12),
+(22, '2023-07-28', '13:00:00.00000', 7, 12),
+(23, '2023-07-28', '16:00:00.00000', 1, 12),
+(24, '2023-07-28', '16:00:00.00000', 4, 12),
+(25, '2023-07-28', '16:00:00.00000', 7, 12),
+(26, '2023-07-29', '10:00:00.00000', 1, 12),
+(27, '2023-07-29', '10:00:00.00000', 3, 12),
+(28, '2023-07-29', '10:00:00.00000', 5, 12),
+(29, '2023-07-29', '10:00:00.00000', 6, 12),
+(30, '2023-07-29', '10:00:00.00000', 8, 0),
+(31, '2023-07-29', '13:00:00.00000', 1, 0),
+(32, '2023-07-29', '13:00:00.00000', 2, 0),
+(33, '2023-07-29', '13:00:00.00000', 3, 0),
+(34, '2023-07-29', '13:00:00.00000', 4, 0),
+(35, '2023-07-29', '13:00:00.00000', 5, 0),
+(36, '2023-07-29', '13:00:00.00000', 6, 0),
+(37, '2023-07-29', '13:00:00.00000', 7, 0),
+(38, '2023-07-29', '13:00:00.00000', 8, 0),
+(39, '2023-07-29', '16:00:00.00000', 2, 0),
+(40, '2023-07-29', '16:00:00.00000', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -316,7 +354,10 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (19, 'ratatouille-1.png', 1),
 (20, 'ratatouille-2.png', 1),
 (21, 'ratatouille-3.png', 1),
-(22, 'ratatouille-1.png', 4);
+(22, 'ratatouille-1.png', 4),
+(23, 'dance.png', NULL),
+(24, 'yummy.png', NULL),
+(25, 'history-image.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -397,6 +438,14 @@ CREATE TABLE `orders` (
   `total_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `date_time`, `payment_status`, `total_price`) VALUES
+(1, '2024-04-01 22:47:26', 'paid', 50.00),
+(2, '2024-04-01 23:38:48', 'paid', 87.50);
+
 -- --------------------------------------------------------
 
 --
@@ -449,7 +498,14 @@ INSERT INTO `reservations` (`id`, `restaurant_id`, `session_id`, `user_id`, `num
 (19, 2, 1, 8, 1, '123213213213', 'dsadas', 0),
 (20, 2, 1, 8, 1, '123213213213', 'dsadas', 0),
 (21, 2, 1, 8, 1, '+359885790202', '123131', 0),
-(22, 2, 1, 8, 1, '12314141', 'a', 0);
+(22, 2, 1, 8, 1, '12314141', 'a', 0),
+(23, 1, 1, 10, 1, '4514521321233', 'bjbjknj', 0),
+(24, 1, 1, 10, 1, '13514541545454155', 'knlnlkjnklnkl', 0),
+(25, 1, 1, 10, 1, '151651561', 'kbofmbmkbfm', 0),
+(26, 1, 1, 10, 1, '51564156415416', 'mplmklmkl', 0),
+(27, 1, 1, 10, 1, '4564156456', 'codskl5vDF', 0),
+(28, 6, 2, 10, 1, '51151561465', 'njnjn', 0),
+(29, 1, 1, 10, 1, '5151116211515', 'jnjnk', 0);
 
 -- --------------------------------------------------------
 
@@ -473,12 +529,12 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `name`, `location`, `description`, `number_of_seats`, `number_of_stars`, `banner`, `is_recommended`) VALUES
-(1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 52, '4', 10, 1),
+(1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 41, '4', 10, 1),
 (2, 'Restaurant ML', 'Kleine Houtstraat 70, 2011 DR Haarlem, Nederland', 'Still at a top level but also with a more lower price, Toujours wins the top for the the best restaurant in terms of price-quality. For an intimate, cozy and beautiful dinner with friends or family, take a seat in our beautiful restaurant area. With radiant daylight thanks to the domes on our roof. Which provide a magical beautiful light in the evening, when dining under the starry sky comes very close.', 60, '4', 11, 0),
 (3, 'Restaurant Fris', 'Twijnderslaan 7, 2012 BG Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 45, '4', 12, 0),
 (4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 13, 0),
 (5, 'Grand Cafe Brinkman', 'Grote Markt 13, 2011 RC Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 100, '3', 14, 0),
-(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 48, '3', 15, 1);
+(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 44, '3', 15, 1);
 
 -- --------------------------------------------------------
 
@@ -496,24 +552,24 @@ CREATE TABLE `restaurants_cuisines` (
 --
 
 INSERT INTO `restaurants_cuisines` (`restaurant_id`, `cuisine_id`) VALUES
-(2, 1),
-(3, 1),
-(5, 1),
-(6, 1),
 (1, 2),
-(3, 2),
 (1, 3),
+(1, 5),
+(2, 1),
 (2, 3),
+(2, 5),
+(3, 1),
+(3, 2),
 (3, 3),
 (4, 3),
-(5, 3),
-(6, 3),
 (4, 4),
-(1, 5),
-(2, 5),
-(6, 5),
+(4, 7),
+(5, 1),
+(5, 3),
 (5, 6),
-(4, 7);
+(6, 1),
+(6, 3),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -532,22 +588,17 @@ CREATE TABLE `restaurants_sessions` (
 
 INSERT INTO `restaurants_sessions` (`restaurant_id`, `session_id`) VALUES
 (1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(5, 1),
-(6, 1),
 (1, 2),
-(2, 2),
-(3, 2),
-(4, 2),
-(5, 2),
-(6, 2),
 (1, 4),
+(2, 2),
 (2, 4),
+(3, 2),
 (3, 4),
+(4, 2),
 (4, 4),
+(5, 2),
 (5, 4),
+(6, 2),
 (6, 4);
 
 -- --------------------------------------------------------
@@ -594,10 +645,36 @@ CREATE TABLE `tickets` (
 
 INSERT INTO `tickets` (`id`, `calc_price`, `amount`, `dance_event_id`, `history_tour_id`, `reservation_id`, `user_id`, `order_id`) VALUES
 ('254d8f2d-02ba-496b-ba5c-58456deb355e', 1000.00, 2, 36, NULL, NULL, 2, NULL),
+('5524381e-3762-4a36-95b5-7bef06d92e83', 120.00, 2, NULL, 2, NULL, 9, NULL),
 ('0b9b65c9-2c73-4470-8efe-7e64b566d2b5', 220.00, 2, 6, NULL, NULL, 2, NULL),
+('81642e06-018c-48c3-b422-8ab5fe4ade3a', 10.00, 1, NULL, NULL, 23, 10, 2),
+('187900b5-6761-4dd1-b9f1-8ef25e103e04', 60.00, 1, 3, NULL, NULL, 10, 2),
 ('d029ec15-1352-439d-ba1c-907ab9e60a02', 60.00, 1, 2, NULL, NULL, 2, NULL),
+('bafe9fc3-d6b6-4f61-a23c-9f369604fa44', 120.00, 2, 2, NULL, NULL, 10, NULL),
+('eb07ebad-d4c6-462e-9e35-b2aa31289207', 40.00, 4, NULL, NULL, 28, 10, NULL),
 ('9b9c83ff-4c37-490c-9636-d12e5a06b6bc', 75.00, 1, 8, NULL, NULL, 6, NULL),
+('586bd32c-3ca4-49e7-8ca2-f3ef13b7a5ff', 17.50, 1, NULL, 1, NULL, 10, 2),
 ('426c623e-8963-4f04-8410-f82e017d1009', 500.00, 2, 17, NULL, NULL, 2, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_types`
+--
+
+CREATE TABLE `ticket_types` (
+  `id` int(11) NOT NULL,
+  `ticket_type` varchar(50) NOT NULL,
+  `price` decimal(11,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ticket_types`
+--
+
+INSERT INTO `ticket_types` (`id`, `ticket_type`, `price`) VALUES
+(1, 'Single', 17.50),
+(2, 'Family (4p.)', 60.00);
 
 -- --------------------------------------------------------
 
@@ -650,7 +727,9 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`,
 (5, 'Hulk', 'Banner', 'achilleasballanos@outlook.com', '$2y$10$ncp7mP0hjtXyKua87OGQUuFxBmEL9r9PzuLIKAQMj0GhJ//ML.vuC', 'Employee', '25-02-2024'),
 (6, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$FKn5WvU4.YDLV3IjmuATqugZtA1dMBOnqaK/LGXpXKSCsGfFE.CD6', 'Employee', '23-02-2024'),
 (7, 'Tony', 'Stark', 'stark@email.com', '$2y$10$cv1rrTS179h1RsWHGXo4J.ho0UH3C49dpEQdvo2srjwa1zSjU9cP.', 'Customer', '12-02-2024'),
-(8, 'John', 'Doe', 'johndoe@mail.com', '$2y$10$EPBD8eQqFU5H/2IVapkpa.umoHV3f1XwvUKWIWVqN7Bn2VTlGcubG', 'Admin', '04-03-2024');
+(8, 'John', 'Doe', 'johndoe@mail.com', '$2y$10$EPBD8eQqFU5H/2IVapkpa.umoHV3f1XwvUKWIWVqN7Bn2VTlGcubG', 'Admin', '04-03-2024'),
+(9, 'Oliwia', 'Wolska', 'oliwiabckp@gmail.com', '$2y$10$.dMUe51QgOfntTcp2D3vJO0IfEV/mx2po6YfJmbwEmqFoksVjvdje', 'Admin', '26-03-2024'),
+(10, 'newuser', 'blahblah', 'iuma710@outlook.com', '$2y$10$46OOEuYfPiigCH5Of0wbJO1fFG5HcEjmhFRk76QJ62XqYQNlM366W', 'Admin', '01-04-2024');
 
 -- --------------------------------------------------------
 
@@ -716,9 +795,13 @@ ALTER TABLE `drinks`
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `artist_id` (`artist_id`),
-  ADD KEY `location_id` (`location_id`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `events_page`
+--
+ALTER TABLE `events_page`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `event_artists`
@@ -864,7 +947,13 @@ ALTER TABLE `drinks`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `events_page`
+--
+ALTER TABLE `events_page`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `history_tours`
@@ -876,7 +965,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -894,7 +983,7 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `password_reset_tokens`
@@ -906,7 +995,7 @@ ALTER TABLE `password_reset_tokens`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tour_guides`
@@ -918,7 +1007,7 @@ ALTER TABLE `tour_guides`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `venues`
@@ -947,13 +1036,6 @@ ALTER TABLE `dance_events`
 --
 ALTER TABLE `drinks`
   ADD CONSTRAINT `drinks_ibfk_1` FOREIGN KEY (`id`) REFERENCES `menu_items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `events`
---
-ALTER TABLE `events`
-  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`),
-  ADD CONSTRAINT `events_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 
 --
 -- Constraints for table `event_artists`

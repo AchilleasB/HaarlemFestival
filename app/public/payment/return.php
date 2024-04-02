@@ -41,8 +41,12 @@
   $tickets = $shoppingCartService->createTicketPdf($user, $orderItems, $products);
   $mailService->sendTicketsMail($userEmail, $tickets);
 
+  foreach($orderItems as $item){
+   
+    $ticketService->updateTicketOrder($item->id, $order->getId());
+  } 
 
-
+  
 header('Location: /shoppingCart/displayOrderConfirmation');
 
  } 

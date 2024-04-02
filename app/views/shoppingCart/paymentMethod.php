@@ -20,27 +20,10 @@
   
     <div class="grid pt-5 h-auto" style="--bs-columns: 10; --bs-gap: 1rem;">
       <div class="g-col-6 px-2">
-        <div class="border-bottom">
-          <p class="h5">Contact information</p>
-        </div>
-        <div class="grid py-2 px-2 " style="row-gap: 0;">
-          <div class="g-col-2  text-start"><strong>First name:</strong></div>
-          <div class="g-col-2  text-start"><strong>
-              <?= $this->user->getFirstname() ?>
-            </strong></div>
-        </div>
-        <div class="grid py-2 px-2" style="row-gap: 0;">
-          <div class="g-col-2  text-start"><strong>Last name:</strong></div>
-          <div class="g-col-2  text-start"><strong>
-              <?= $this->user->getLastname()?>
-            </strong></div>
-        </div>
-        <div class="grid py-2 px-2" style="row-gap: 0;">
-          <div class="g-col-2  text-start"><strong>Email:</strong></div>
-          <div class="g-col-2  text-start"><strong>
-              <?= $this->user->getEmail()?>
-            </strong></div>
-        </div>
+      <?php $user=$this->user; ?>
+
+      <contact-information-component></contact-information-component>
+
         <form method="POST" action="/shoppingCart/confirmPurchase">
           <div class="border-bottom">
             <p class="h5 pt-5 ">Please select a payment method</p>
@@ -73,32 +56,58 @@
           <div class="h5 g-col-6 text-end "><a href="/shoppingCart" class="text-decoration-none  text-dark">Edit</a>
           </div>
         </div>
-        
+
+       
         <ul class="list-group">
-          <?php foreach ($this->products as $orderItem=>$i) {?>
+          <?php foreach ($this->products as $orderItem=>$i) {
+               $product = $this->products[$orderItem]['Event']->getName();
+
+               if ($eventImage = $this->products[$orderItem]['Event']->getArtistImage() != NULL){
+                $eventImage = $this->products[$orderItem]['Event']->getArtistImage();}
+              else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL){
+                $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();}
+                
+                else if ($eventImage = $this->products[$orderItem]['Event']->getYummyEventImage() != NULL){
+                  $eventImage = $this->products[$orderItem]['Event']->getYummyEventImage();}
+
+                $datetime = $this->products[$orderItem]['Event']->getDateTime();
+
+                $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
+
+                if ( $this->products[$orderItem]['Event']->getTicketPrice()){
+                  $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();}
+                  else
+                  {
+                    $ticketPrice = $this->currentOrderItems[$orderItem]->getCalcPrice() / $this->currentOrderItems[$orderItem]->getAmount();
+                  }
+                
+                $totalPrice = $this->orderTotal;
+
+                $totalVAT = $this->orderVAT;?>
+
           <li class="list-group-item border-0 ">
             <div class="grid ">
-              <div class="g-col-2"><img src="/images/<?= $this->products[$orderItem]['Event']->getArtistImage()?>"
+              <div class="g-col-2"><img src="/images/<?= $eventImage ?>"
                   class="img-fluid rounded-0 " alt="...">
               </div>
               <div class="g-col-6 text-start align-middle">
                 <ul class="list-group">
                   <li class="list-group-item border-0 p-0">
                     <strong>
-                      <?= $this->products[$orderItem]['Event']->getName()?>
+                      <?= $product ?>
                     </strong>
                   </li>
                   <li class="list-group-item border-0 p-0 pb-2">
-                    <?= $this->products[$orderItem]['Event']->getDateTime()?>
+                    <?= $datetime ?>
                   </li>
                   <li class="list-group-item border-0 p-0">
                     <strong> &euro;
-                      <?= $this->products[$orderItem]['Event']->getTicketPrice() * $this->currentOrderItems[$orderItem]->getAmount() ?>
+                      <?= $ticketPrice * $ticketAmount ?>
                     </strong>
                   </li>
                   <li class="list-group-item border-0 p-0">
                     Qty:
-                    <?= $this->currentOrderItems[$orderItem]->getAmount()?>
+                    <?= $ticketAmount?>
                   </li>
                 </ul>
               </div>
@@ -106,27 +115,7 @@
           </li>
           <?php }?>
         </ul>
-        <div class="border-bottom">
-          <p class="h5">Order summary</p>
-        </div>
-        <div class="grid py-2" style="row-gap: 0;">
-          <div class="g-col-4  text-start">Sub-total(Net)</div>
-          <div class="g-col-6  text-end">&euro;
-            <?= $this->orderTotal - $this->orderVAT?>
-          </div>
-        </div>
-        <div class="grid py-2" style="row-gap: 0;">
-          <div class="g-col-4 text-start">VAT(21%)</div>
-          <div class="g-col-6 text-end">&euro;
-            <?= $this->orderVAT ?>
-          </div>
-        </div>
-        <div class="grid py-2 border-bottom" style="row-gap: 0;">
-          <div class="g-col-4  text-start"><strong>Total:</strong></div>
-          <div class="g-col-6 text-end"><strong>&euro;
-              <?= $this->orderTotal ?>
-            </strong></div>
-        </div>
+        <order-summary-component></order-summary-component>
         
       </div>
     </div>
@@ -135,4 +124,10 @@
     include __DIR__ . '/../footer.php';
     ?>
 </body>
+<script>var user = <?php echo json_encode($user); ?>;</script>
+<script> var totalPrice = "<?php echo $totalPrice; ?>";</script>
+<script> var totalVAT= "<?php echo $totalVAT; ?>";</script>
+<script src="/scripts/orderItem/components/contactInformation.js"></script>
+<script src="/scripts/orderItem/components/orderSummary.js"></script>
+
 </html>

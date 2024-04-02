@@ -175,7 +175,6 @@ function htmlArtistImage(artist) {
     artistLink.addEventListener('click', function(event) {
         event.preventDefault();
         // Redirect to the artist page
-        console.log("Redirecting to:", artistLink.href);
         window.location.href = artistLink.href;
     });
 

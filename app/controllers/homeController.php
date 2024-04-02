@@ -2,8 +2,9 @@
 
 require_once __DIR__ . '/controller.php';
 
+
 class HomeController extends Controller
-{
+{  private $userService;
 
     function __construct()
     {
@@ -12,4 +13,5 @@ class HomeController extends Controller
     {
         $this->displayView($this);
     }
+
 }

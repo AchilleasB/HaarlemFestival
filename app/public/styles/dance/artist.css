@@ -19,15 +19,25 @@
     position: absolute;
     top: 10%;
     left: 5%;
-    background-color: #00000040;
+    background-color: #00000030;
     padding: 1em;
-    width: 40%;
+    width: 60%;
 }
 
-.primary-text .artist-name {
-    font-size: 5em;
+#artistName {
+    font-size: 4em;
     letter-spacing: 0.3em;
     color: #ffffff;
+    font-weight: bolder;
+}
+
+#artistDescriptionTitle {
+    font-size: 1.5em;
+    letter-spacing: 0.2em;
+    margin-bottom: 1em;
+}
+
+.description-name {
     font-weight: bolder;
 }
 
@@ -93,7 +103,6 @@
 .artist-description p,
 .career-hightlight-section p {
     letter-spacing: 0.1em;
-    font-weight: lighter;
 
 }
 
@@ -138,8 +147,7 @@
 }
 
 
-.latest-realeases-container h2,
-.artist-appearances-container h2 {
+.latest-realeases-container h2 {
     margin-bottom: 1em;
     letter-spacing: 0.5em;
     font-size: 2em;
@@ -147,51 +155,40 @@
     font-weight: bolder;
 }
 
-/* .latest-realeases-container .spotify-songs {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 2em;
-} */
-
-.artist-description h3,
-.artist-appearances-container h3 {
-    margin-bottom: 1em;
-    letter-spacing: 0.5em;
-    font-size: 1.5em;
-    font-weight: lighter;
-}
-
-#appearances-title {
+#artistAppearancesTitle {
     width: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: 5em auto;
+    margin: 4em auto 1em auto;
+}
+
+#artistAppearancesTitle h2 {
+    letter-spacing: 0.3em;
+    font-weight: bolder;
+}
+
+#artistAppearancesTitle h3 {
+    letter-spacing: 0.2em;
+    font-weight: light;
 }
 
 .artistAppearancesContainer {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 2em;
     justify-content: center;
 }
 
 .artistAppearancesContainer .danceEventCard {
-    width: calc(30% - 1em);
-    margin-bottom: 2em;
-    margin: auto;
-    box-sizing: border-box;
-    align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    width: calc(33.33%);
+    align-items: center;
 }
 
 .artistAppearancesContainer .danceEventDate {
     padding: .3em;
     font-weight: bolder;
-    font-size: 1.5em;
+    font-size: 1.3em;
     border-bottom: #000000 3px solid;
     width: 80%;
     text-align: center;
@@ -199,8 +196,8 @@
 
 .artistAppearancesContainer .venueImg {
     object-fit: cover;
-    width: 90%;
-    height: 90%;
+    width: 75%;
+    height: 55%;
 }
 
 .artistAppearancesContainer .danceEventTime {
@@ -233,8 +230,20 @@
         font-size: .6em;
     }
 
+    .primary-text {
+        width: 40%;
+    }
+    
+    .primary-text .artist-name {
+        font-size: 2.5em;
+    }
+    
+    .primary-text .dance-text {
+        font-size: 1em;
+    }
+
     .artistAppearancesContainer .danceEventCard {
-        width: 20%;
+        width: 33.33%;
         margin-bottom: 2em;
         margin: auto;
         display: flex;
@@ -247,8 +256,8 @@
     }
 
     .artistAppearancesContainer .venueImg {
-        width: 80%;
-        height: 80%;
+        width: 70%;
+        height: 70%;
     }
 
     .artistAppearancesContainer .danceEventTime {
@@ -257,6 +266,7 @@
         border-bottom: #000000 3px solid;
         width: 60%;
         text-align: center;
+        font-size: 1em;
     }
 
     .artistAppearancesContainer .danceEventVenue {

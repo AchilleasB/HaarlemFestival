@@ -150,7 +150,7 @@ function htmlDisplayTicket(event, eventType) {
 }
 
 async function handleAddToCart(event_id, amount) {
-    const response = await fetch(urlBasePath + 'api/danceEvents/generateTicket', {
+    const response = await fetch(urlBasePath + 'api/danceEvents/tickets', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

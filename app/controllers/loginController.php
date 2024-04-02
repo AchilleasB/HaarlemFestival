@@ -49,7 +49,7 @@ class LoginController extends Controller
                     $_SESSION['user_role'] = $user->getRole();
                     $_SESSION['user_registration_date'] = $user->getRegistrationDate();
 
-                    header('Location: /home');
+                    header('Location: /festival');
                     exit();
 
                 } else {
@@ -64,7 +64,7 @@ class LoginController extends Controller
     public function logout()
     {
         session_destroy();
-        header('Location: /home');
+        header('Location: /festival');
         exit();
     }
 

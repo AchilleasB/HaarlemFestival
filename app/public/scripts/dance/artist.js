@@ -1,13 +1,25 @@
 
 document.addEventListener('DOMContentLoaded', async function () {
     const artist = await getArtistInfoFromAPI();
-
-
+    console.log(artist.artist_name);
+    
     const artistPageImgContainer = document.getElementById('artistPageImg');
     const artistImgElement = document.createElement('img');
     artistImgElement.src = imageBasePath + artist.page_img;
     artistImgElement.alt = artistName;
     artistPageImgContainer.appendChild(artistImgElement);
+
+    const artistNameElement = document.getElementById('artistName');
+    artistNameElement.innerHTML = artist.artist_name.toUpperCase();
+
+    const artistDescriptionTitle = document.getElementById('artistDescriptionTitle');
+    const introText = document.createElement('span');
+    introText.innerHTML = 'WHO IS '
+    const descriptionArtistName = document.createElement('span');
+    descriptionArtistName.classList.add('description-name');
+    descriptionArtistName.innerHTML = artist.artist_name.toUpperCase() + '?';
+    artistDescriptionTitle.appendChild(introText);
+    artistDescriptionTitle.appendChild(descriptionArtistName);
 
     const artistDescriptionElement = document.getElementById('artistDescription');
     artistDescriptionElement.innerHTML = artist.description.toUpperCase();
@@ -27,10 +39,18 @@ document.addEventListener('DOMContentLoaded', async function () {
     const artistLatestReleases = document.getElementById('artistLatestReleases');
     artistLatestReleases.innerHTML = artist.latest_releases;
 
+    const artistAppearancesTitle = document.getElementById('artistAppearancesTitle');
+    const appearancesNameText = document.createElement('h2');
+    appearancesNameText.innerHTML = artist.artist_name.toUpperCase() + ' APPEARANCES'
+    const appearancesDanceText = document.createElement('h3');
+    appearancesDanceText.innerHTML = 'AT DANCE!'
+    artistAppearancesTitle.appendChild(appearancesNameText);
+    artistAppearancesTitle.appendChild(appearancesDanceText);
+
     const artistAppearances = document.getElementById('artistAppearances');
     const danceEventsForArtist = await getDanceEventsForArtist(artist.artist_id);
     const artistAppearanceCards = displayAppearances(danceEventsForArtist);
-    // console.log(artist.artist_id);
+    console.log(artist.artist_id);
     artistAppearances.appendChild(artistAppearanceCards);
 });
 

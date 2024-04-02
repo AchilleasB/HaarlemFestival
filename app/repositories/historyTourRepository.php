@@ -153,7 +153,8 @@ public function getTicketTypePrice($ticketType)
         return null;
     }
 }
-function addTicketToCart($historyTicket){
+function addTicketToCart($historyTicket)
+{
     try {
         $stmt = $this->connection->prepare('INSERT INTO tickets (id, amount, calc_price, history_tour_id, user_id) 
                                             VALUES (:id, :amount, :calc_price, :history_tour_id, :user_id)');
@@ -171,6 +172,8 @@ function addTicketToCart($historyTicket){
         echo 'Error: ' . $e->getMessage();
     }
 }
+
+
 public function updateSeats($historyTourId, $seatsToDeduct)
 {
     try {
@@ -190,5 +193,6 @@ public function updateSeats($historyTourId, $seatsToDeduct)
         return false;
     }
 }
+
 }
 ?>

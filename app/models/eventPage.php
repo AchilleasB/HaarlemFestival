@@ -1,6 +1,6 @@
 <?php
 
-class Event
+class EventPage
 {
     private $id;
     private $title;

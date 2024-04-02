@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         addArtistFormContainer.innerHTML = null;
         addVenueFormContainer.innerHTML = null;
     });
-    
+
     artistsRadioButton.addEventListener("click", function () {
         loadItems(artistsAPIendpoint, "artists");
         htmlAddArtistButton();
@@ -103,7 +103,6 @@ function createItemLabel(itemType) {
         itemLabel.innerHTML = `
             <div class="labels-container">
                 <div class="row">
-                    <div class="col-sm-6 col-md-8 text-center">
                         <div class="row d-flex align-items-center border-botttom">
                             <div class="col">
                                 <div class="item-data-label border-bottom"><em>Date</em></div>
@@ -127,7 +126,6 @@ function createItemLabel(itemType) {
                                 <div class="item-data-label border-bottom"><em>Price</em></div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         `;
@@ -184,7 +182,6 @@ function createItemElement(item, itemType) {
     if (itemType === "danceEvents") {
         itemData = `
             <div class="row border-bottom">
-                <div class="col-6 col-md-8 text-center">
                     <div class="row d-flex align-items-center">
                         <div class="col">
                             <span class="item-data-value">${item.date}</span>
@@ -208,7 +205,6 @@ function createItemElement(item, itemType) {
                             <span class="item-data-value">${item.price}</span>
                         </div>                        
                     </div>
-                </div>
                 <div class="col-6 col-md-4 d-flex align-items-center mt-3 mb-3 ">
                     ${htmlGenerateButtons()}
                 </div>
@@ -235,8 +231,13 @@ function createItemElement(item, itemType) {
                 <div class="col-6 col-md-4 d-flex mb-3 pt-5">
                     ${htmlGenerateButtons()}
                 </div>
+                <div class="col-sm-6">
+                </div>
+                <div class="col-6 d-flex mb-3">
+                    ${htmlArtistPageButtons()}
+                </div>
             </div>
-            <div class="edit-artist-container" id="edit-artist-container-${item.id}">
+            <div class="handle-artist-container" id="handle-artist-container-${item.id}">
             </div> 
         `;
     } else if (itemType === "venues") {
@@ -271,14 +272,14 @@ function createItemElement(item, itemType) {
     const editButton = itemElement.querySelector(".edit-item-button");
 
     editButton.addEventListener("click", function () {
-        
+
         if (itemType === "danceEvents") {
             handleEditDanceEvent(item);
         } else if (itemType === "artists") {
             handleEditArtist(item);
         } else if (itemType === "venues") {
             handleEditVenue(item);
-        }        
+        }
     });
 
     const deleteButton = itemElement.querySelector(".delete-item-button");
@@ -297,6 +298,21 @@ function createItemElement(item, itemType) {
             handleDeleteVenue(item);
         }
     });
+
+    if (itemType === "artists") {
+        const editArtistPageButton = itemElement.querySelector(".edit-page-button");
+        editArtistPageButton.addEventListener("click", function () {
+            handleEditArtistPageContent(item);
+        });
+    
+        const deleteArtistPageButton = itemElement.querySelector(".delete-page-button");
+        deleteArtistPageButton.addEventListener("click", function () {
+            const userConfirmation = confirm("Are you sure you want to delete this page?");
+            if (!userConfirmation) return;
+            handleDeleteArtistPage(item);
+        });
+    }
+    
 
     return itemElement;
 }
@@ -318,7 +334,25 @@ function htmlGenerateButtons() {
     `;
 }
 
-function displayMessage(message, duration){
+function htmlArtistPageButtons() {
+    return `
+        <div class="row">
+            <div class="col">
+                <span class="item-data-value">
+                    <button class="btn btn-outline-success edit-page-button">Edit page content</button>
+                </span>
+            </div>
+            <div class="col">
+                <span class="item-data-value">
+                    <button class="btn btn-outline-dark delete-page-button">Delete page</button>
+                </span>
+            </div>
+        </div>
+    `;
+
+}
+
+function displayMessage(message, duration) {
     const messageContainer = document.createElement("div");
     messageContainer.className = "message-container";
     messageContainer.innerText = message;
