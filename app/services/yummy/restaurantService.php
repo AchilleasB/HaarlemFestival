@@ -80,4 +80,16 @@ class RestaurantService {
     public function deleteRestaurant($restaurantId) {
         return $this->restaurantRepository->deleteRestaurant($restaurantId);
     }
+
+    public function updateSeats($id, $newSeatsAvailable){
+
+        return $this->restaurantRepository->updateSeats($id, $newSeatsAvailable);
+        
+    }
+
+    public function getRestaurantIdByName($name){
+
+        return $this->restaurantRepository->getRestaurantIdByName($name);
+
+    }
 }

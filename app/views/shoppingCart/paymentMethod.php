@@ -66,6 +66,9 @@
                 $eventImage = $this->products[$orderItem]['Event']->getArtistImage();}
               else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL){
                 $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();}
+                
+                else if ($eventImage = $this->products[$orderItem]['Event']->getYummyEventImage() != NULL){
+                  $eventImage = $this->products[$orderItem]['Event']->getYummyEventImage();}
 
                 $datetime = $this->products[$orderItem]['Event']->getDateTime();
 

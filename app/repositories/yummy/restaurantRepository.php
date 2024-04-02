@@ -261,4 +261,28 @@ class RestaurantRepository extends Repository
             throw new RepositoryException('Error deleting restaurant', $e->getCode(), $e);
         }
     }
+
+    public function updateSeats($id, $newSeatsAvailable)
+    {
+        $query = $this->connection->prepare("UPDATE restaurants SET number_of_seats=:number_of_seats WHERE id=:id");
+        $query->bindParam(":id", $id);
+        $query->bindParam(":number_of_seats", $newSeatsAvailable);
+        $query->execute();
+
+    }
+
+
+    public function getRestaurantIdByName($name)
+    {
+
+        $query = $this->connection->prepare("SELECT id FROM restaurants WHERE name=:name ");
+        $query->bindParam(":name", $name);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $query->fetch();
+        return $row;
+
+    }
+
 }

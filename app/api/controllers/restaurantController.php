@@ -60,4 +60,20 @@ class RestaurantController extends ApiController
                 break;
         }
     }
+
+
+    public function GetRestaurantIdByName()
+    {
+        try {
+
+           $res = $this->restaurantService->getRestaurantIdByName($_GET['name']);
+
+          echo json_encode($res);
+
+
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo $e;
+        }
+    }
 }

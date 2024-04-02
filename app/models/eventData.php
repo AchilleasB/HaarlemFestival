@@ -19,6 +19,8 @@ class EventData implements \JsonSerializable
 
     private ?string $history_tour_image;
 
+    private ?string $yummy_event_image;
+
     private ?string $ticket_type;
 
     private ?string $location_name;
@@ -139,6 +141,23 @@ public function setHistoryTourImage(?string $history_tour_image): void
 {
     $this->history_tour_image = $history_tour_image;
 }
+
+
+/**
+ * @return string
+ */
+public function getYummyEventImage(): ?string
+{
+    return $this->yummy_event_image;
+}
+
+
+
+public function setYummyEventImage(?string $yummy_event_image): void
+{
+    $this->yummy_event_image = $yummy_event_image;
+}
+
 
 
 /**

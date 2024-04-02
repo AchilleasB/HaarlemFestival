@@ -87,6 +87,21 @@ class TicketController extends ApiController
         }
     }
 
+    public function UpdateAvailableReservationsForYummyEvent()
+    {
+        try {
+
+            $eventId = htmlspecialchars($_POST['event_id']);
+            $availableReservations = htmlspecialchars($_POST['tickets_available']);
+
+            $this->ticketService->updateAvailableReservationsAtCheckout($eventId, $availableReservations);
+
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo $e;
+        }
+    }
+
     public function getTicketAndEventData(){
 
         try {
