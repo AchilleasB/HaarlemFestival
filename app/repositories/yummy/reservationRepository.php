@@ -56,6 +56,7 @@ class ReservationRepository extends Repository {
     public function activateReservation($reservationId) {
         try {
             $stmt = $this->connection->prepare('UPDATE reservations SET is_active = 1 WHERE id = ?');
+            $stmt->bindParam(":id", $reservationId);
             $stmt->execute([$reservationId]);
 
         } catch (PDOException $e) {
@@ -89,5 +90,30 @@ class ReservationRepository extends Repository {
             throw new RepositoryException('Error adding reservation to cart', $e->getCode(), $e);
         }
     }
+
+    public function getReservationIdByTicketId($ticketId)
+    {
+
+        try {
+
+            $query = $this->connection->prepare("SELECT reservation_id FROM  tickets WHERE id=:id ");
+            $query->bindParam(":id", $ticketId);
+            $query->execute();
+
+            $query->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $query->fetch();
+            return $row['reservation_id'];
+
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
+
+
+
+    }
+
+
+
+
 
 }

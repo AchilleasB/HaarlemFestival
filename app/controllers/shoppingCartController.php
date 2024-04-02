@@ -110,7 +110,6 @@ class ShoppingCartController extends Controller
   }
 
 
-
   public function selectPaymentMethod()
   {
     if ($this->orderTotal > 0) {
