@@ -133,13 +133,10 @@ async function updateRestaurantData() {
         body: formData
     });
 
-    const text = await response.text();
-    console.log('Raw response:', text);
-
-    //const data = await response.json();
+    const data = await response.json();
 
     itemsListContainer.innerHTML = "";
     loadItems(restaurantAPIendpoint, "restaurant");
 
-    //location.reload();
+    location.reload();
 }
