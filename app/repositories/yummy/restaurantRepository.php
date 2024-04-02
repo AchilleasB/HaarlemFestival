@@ -274,6 +274,7 @@ class RestaurantRepository extends Repository
 
     public function getRestaurantIdByName($name)
     {
+        try{
 
         $query = $this->connection->prepare("SELECT id FROM restaurants WHERE name=:name ");
         $query->bindParam(":name", $name);
@@ -281,7 +282,11 @@ class RestaurantRepository extends Repository
 
         $query->setFetchMode(PDO::FETCH_ASSOC);
         $row = $query->fetch();
-        return $row;
+        return $row['id'];
+    } catch (PDOException $e) {
+        echo $e->getMessage() . $e->getLine();
+    }
+
 
     }
 

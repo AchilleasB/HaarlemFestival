@@ -22,8 +22,9 @@ class OrderRepository extends Repository
 
         return $invoice;
     } catch (PDOException $e) {
-        echo $e;
+        echo $e->getMessage() . $e->getLine();
     }
+
 }
 
 
@@ -43,8 +44,9 @@ class OrderRepository extends Repository
             return $order;
 
         } catch (PDOException $e) {
-            echo $e;
+            echo $e->getMessage() . $e->getLine();
         }
+    
     }
     
     public function retrievePreviousOrder()
@@ -56,13 +58,15 @@ class OrderRepository extends Repository
             return $previousOrder;
 
         } catch (PDOException $e) {
-            echo $e;
+            echo $e->getMessage() . $e->getLine();
         }
+    
     }
 
 
     public function retrievePreviousOrderId()
     {
+        try{
         $previousOrder = $this->retrievePreviousOrder();
         if ($previousOrder  != NULL) {
             $previousOrderId = $previousOrder->getId();
@@ -70,6 +74,10 @@ class OrderRepository extends Repository
             $previousOrderId = 0;
         }
         return $previousOrderId;
+    } catch (PDOException $e) {
+        echo $e->getMessage() . $e->getLine();
+    }
+
     }
    
 
@@ -85,16 +93,20 @@ class OrderRepository extends Repository
                 return $order;
     
 
-} catch (Exception $exp) {
+            } catch (PDOException $e) {
+                echo $e->getMessage() . $e->getLine();
+            }
+        
 
-echo $exp;
-}}
+
+}
 
 
 
 
 public function addOrder($id, $payment_status, $total_price)
 {
+    try{
     $stmt = $this->connection->prepare("INSERT INTO orders(id, date_time, payment_status, total_price)VALUES(:id, :date_time, :payment_status, :total_price)");
     $now = date("Y-m-d H:i:s"); 
     $stmt->bindParam(':id', $id);
@@ -107,6 +119,10 @@ public function addOrder($id, $payment_status, $total_price)
     $orderId= $this->connection->lastInsertId();
 
     return $this->getOne($orderId);
+} catch (PDOException $e) {
+    echo $e->getMessage() . $e->getLine();
+}
+
 
 }
 
@@ -116,10 +132,15 @@ public function addOrder($id, $payment_status, $total_price)
 
 function updateOrder($orderId, $paymentStatus)
 {
+    try{
     $query = $this->connection->prepare("UPDATE orders SET payment_status=:payment_status WHERE id=:id");
     $query->bindParam(":id", $orderId);
     $query->bindParam(":payment_status", $paymentStatus);
     $query->execute();
+} catch (PDOException $e) {
+    echo $e->getMessage() . $e->getLine();
+}
+
 }
 
 

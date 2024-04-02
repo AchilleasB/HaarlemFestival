@@ -162,9 +162,10 @@ private function createDanceEventDataInstance($result): EventData
 
 
         return $eventData;
-    } catch (Exception $e) {
-        echo $e->getMessage();
+    } catch (PDOException $e) {
+        echo $e->getMessage() . $e->getLine();
     }
+
 
 }
 
@@ -187,9 +188,10 @@ private function createTourEventDataInstance($result): EventData
 
 
         return $eventData;
-    } catch (Exception $e) {
-        echo $e->getMessage();
+    } catch (PDOException $e) {
+        echo $e->getMessage() . $e->getLine();
     }
+
 
 }
 
@@ -212,9 +214,10 @@ private function createYummyEventDataInstance($result): EventData
 
 
         return $eventData;
-    } catch (Exception $e) {
-        echo $e->getMessage();
+    } catch (PDOException $e) {
+        echo $e->getMessage() . $e->getLine();
     }
+
 
 }
 

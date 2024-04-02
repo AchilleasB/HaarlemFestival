@@ -66,9 +66,9 @@ class RestaurantController extends ApiController
     {
         try {
 
-           $res = $this->restaurantService->getRestaurantIdByName($_GET['name']);
+            $res = $this->restaurantService->getRestaurantIdByName($_GET['name']);
 
-          echo json_encode($res);
+            echo json_encode($res);
 
 
         } catch (Exception $e) {

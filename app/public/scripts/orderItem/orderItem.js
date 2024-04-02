@@ -106,7 +106,7 @@ function getRestaurantIdByName(eventData) {
         url: `${urlBasePath}api/Restaurant/GetRestaurantIdByName`,
         data: eventData,
         success: function (jsonStr) {
-            res= JSON.parse(jsonStr).id;
+            res=jsonStr;
         }
     });    
 
@@ -155,13 +155,15 @@ function setOrderItemsData() {
             if (ticketData['reservation_id']!==null){
                 var restaurantId=getRestaurantIdByName(eventData);
                 eventData.event_id=restaurantId;
-                updateAvailableReservationsForYummyEvent(eventData);}
+                updateAvailableReservationsForYummyEvent(eventData);
+            }
            
         });
 
     }); 
 
 }
+
 
 
 function calculateTicketQuantities(orderItem, event, input)
@@ -229,8 +231,6 @@ function displayPaidTickets(){
 
 
 }
-
-
 
  setOrderItemsData();
  displayPaidTickets();

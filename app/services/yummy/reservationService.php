@@ -48,5 +48,6 @@ class ReservationService
     {
         return $this->reservationRepository->getLastReservationByRestaurantAndSessionAndUser($restaurantId, $sessionId, $userId);
     }
+
 }
 ?>
