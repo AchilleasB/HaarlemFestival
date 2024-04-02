@@ -89,8 +89,16 @@ class ShoppingCartController extends Controller
         $newTicket->setDanceEventId($ticket->getDanceEventId());}
         if ($ticket->getHistoryTourId() !==null){
           $newTicket->setHistoryTourId($ticket->getHistoryTourId());}
+          if ($ticket->getReservationId() !==null){
+            $newTicket->setReservationId($ticket->getReservationId());}
         $newTicket->setUserId($ticket->getUserId());
-        $ticketsPrice=($newTicket->getTicketPrice() * $newTicket->getAmount());
+        
+       if ( $this->products[$itemCount]['Event']->getTicketPrice()){
+        $ticketsPrice = $this->products[$itemCount]['Event']->getTicketPrice() * $newTicket->getAmount();}
+        else
+        {
+          $ticketsPrice = $this->currentOrderItems[$itemCount]->getTicketPrice() *  $newTicket->getAmount();
+        }
         $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
 
 
@@ -129,7 +137,7 @@ class ShoppingCartController extends Controller
       }
     } else {
 
-      require '../views/shoppingbasket/paymentMethod.php';
+      require '../views/shoppingCart/paymentMethod.php';
       echo "<p style='padding-left:12px;'>Select payment method</p> ";
 
 

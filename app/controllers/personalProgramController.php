@@ -67,6 +67,8 @@ class PersonalProgramController extends Controller
   }
 
 
+
+  
   public function updateTicketQuantity()
   {
     foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
@@ -80,8 +82,16 @@ class PersonalProgramController extends Controller
         $newTicket->setDanceEventId($ticket->getDanceEventId());}
         if ($ticket->getHistoryTourId() !==null){
           $newTicket->setHistoryTourId($ticket->getHistoryTourId());}
+          if ($ticket->getReservationId() !==null){
+            $newTicket->setReservationId($ticket->getReservationId());}
         $newTicket->setUserId($ticket->getUserId());
-        $ticketsPrice=($newTicket->getTicketPrice() * $newTicket->getAmount());
+  
+       if ( $this->products[$itemCount]['Event']->getTicketPrice()){
+        $ticketsPrice = $this->products[$itemCount]['Event']->getTicketPrice() * $newTicket->getAmount();}
+        else
+        {
+          $ticketsPrice = $this->currentOrderItems[$itemCount]->getTicketPrice() *  $newTicket->getAmount();
+        }
         $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
 
 
@@ -95,6 +105,9 @@ class PersonalProgramController extends Controller
 
   public function addToCart()
   {
+    if (!isset($_SESSION['selected_items_to_purchase'])){
+      $_SESSION['selected_items_to_purchase']=[];
+    }
     foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
       if ($itemCount == $_POST['addToCart'])
       $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])]=$item;

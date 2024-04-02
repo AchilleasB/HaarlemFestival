@@ -46,6 +46,9 @@
                 else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL){
                   $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();}
 
+                  else if ($eventImage = $this->products[$orderItem]['Event']->getYummyEventImage() != NULL){
+                    $eventImage = $this->products[$orderItem]['Event']->getYummyEventImage();}
+
                  $locationName = $this->products[$orderItem]['Event']->getLocationName();
 
                 $locationAddress = $this->products[$orderItem]['Event']->getLocationAddress(); 
@@ -137,7 +140,7 @@
                 </td>
                 <td class="align-middle">
                   &euro;
-                  <?= $ticketPrice * $ticketAmount ?>
+                  <?= $pricePerItem; ?>
                 </td>
                 <td class="align-middle">
                   <form method="POST" action="/shoppingCart/removeItem">

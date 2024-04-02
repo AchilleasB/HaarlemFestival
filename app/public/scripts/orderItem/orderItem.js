@@ -84,7 +84,38 @@ function updateAvailableTicketsForTourEvent(eventData) {
 }
 
 
+function updateAvailableReservationsForYummyEvent(eventData) {
+    $.ajax({
+        type: "POST",
+        url: `${urlBasePath}api/Ticket/UpdateAvailableReservationsForYummyEvent`,
+        data: eventData,
+        success: function () {
+            window.location.reload();
+        }
+    });    
 
+}
+
+
+function getRestaurantIdByName(eventData) {
+
+    var res;
+    $.ajax({
+        type: "GET",
+        async:false,
+        url: `${urlBasePath}api/Restaurant/GetRestaurantIdByName`,
+        data: eventData,
+        success: function (jsonStr) {
+            res= JSON.parse(jsonStr).id;
+        }
+    });    
+
+    return res;
+}
+
+
+//Function that handles update available tickets for various events
+//Handles the update based on the various sql queries used for update 
 function setOrderItemsData() {
 
     let btns = document.querySelectorAll('.updateQuantity');
@@ -108,6 +139,7 @@ function setOrderItemsData() {
             eventData.event_id=ticketData['dance_event_id'];
             updateAvailableTicketsForDanceEvent(eventData);}
             
+
             if (ticketData['history_tour_id']!==null){
                 eventData.event_id=ticketData['history_tour_id'];
                 if ((Math.sign(updatedQuantity)) === -1){
@@ -118,8 +150,12 @@ function setOrderItemsData() {
                 }
                 updateAvailableTicketsForTourEvent(eventData);
                 
-            
             }
+
+            if (ticketData['reservation_id']!==null){
+                var restaurantId=getRestaurantIdByName(eventData);
+                eventData.event_id=restaurantId;
+                updateAvailableReservationsForYummyEvent(eventData);}
            
         });
 
@@ -130,12 +166,9 @@ function setOrderItemsData() {
 
 function calculateTicketQuantities(orderItem, event, input)
 {
-       
-
         var initialValue = orderItem.amount;
         var updatedQuantity = orderItem.amount - input;
         orderItem.amount = input;
-
 
         if (orderItem.amount > initialValue){
             var availableTickets = event.tickets_available - Math.abs(updatedQuantity);

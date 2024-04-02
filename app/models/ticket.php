@@ -48,9 +48,11 @@ class Ticket implements JsonSerializable
     }
 
 
+    //Getter used to retrieve the ticket price for complex event tables
+    //Used when one table is composed of more tables and they are not joined due to database design 
     public function getTicketPrice(): float
     {
-        return ($this->calc_price / $this->amount) * $this->amount;
+        return fdiv($this->calc_price, $this->amount) * $this->amount;
     }
 
 

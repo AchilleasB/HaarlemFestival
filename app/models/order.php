@@ -66,7 +66,7 @@ public function setPaymentStatus(string $payment_status)
 /**
  * @return float
  */
-public function getTotalPrice(): int
+public function getTotalPrice(): float
 {
     return $this->total_price;
 }

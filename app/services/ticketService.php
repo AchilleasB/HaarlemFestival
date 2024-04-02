@@ -4,6 +4,8 @@ require_once  __DIR__ . '/../repositories/danceRepository.php';
 
 require_once  __DIR__ . '/../repositories/historyTourRepository.php';
 
+require_once  __DIR__ . '/../repositories/yummy/restaurantRepository.php';
+
 require_once  __DIR__ . '/../repositories/ticketRepository.php';
 
 
@@ -47,7 +49,7 @@ class TicketService
 
     //Function used to update available tickets at checkout
     //Allows users to be simultaneously updated with available dance tickets
-    function updateAvailableDanceTicketsAtCheckout($id, $newTicketsAvailable){
+    public function updateAvailableDanceTicketsAtCheckout($id, $newTicketsAvailable){
         $danceRepository=new DanceRepository();
         $danceRepository->updateTicketsAmount($id, $newTicketsAvailable);
     }
@@ -55,11 +57,18 @@ class TicketService
 
      //Function used to update available tickets at checkout
     //Allows users to be simultaneously updated with available history tour tickets
-    function updateAvailableTourTicketsAtCheckout($id, $ticketAmountSubtracted){
+   public function updateAvailableTourTicketsAtCheckout($id, $ticketAmountSubtracted){
         $historyTourRepository=new HistoryTourRepository();
         $historyTourRepository->updateSeats($id, $ticketAmountSubtracted);
     }
 
+       //Function used to update available reservations at checkout
+    //Allows users to be simultaneously updated with available reservations
+   public function updateAvailableReservationsAtCheckout($id, $newSeatsAvailable){
+        $restaurantRepository=new RestaurantRepository();
+        $restaurantRepository->updateSeats($id, $newSeatsAvailable);
+    }
+ 
     public function updateCalculatedPrice($id, $calc_price){
 
       $this->ticketRepository->updateCalculatedPrice($id, $calc_price);

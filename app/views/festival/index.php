@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col">
                     <?php 
-                    $imageSrc = !empty($event->getImage()) ? "../../images/".$event->getImage() : "../../images/no-image.jpg"; 
+                    $imageSrc = !empty($event->getImage()) ? "/../images/".$event->getImage() : "../../images/no-image.jpg"; 
                     ?>
                     <img src="<?php echo $imageSrc; ?>" class="img-fluid box-shadow" style="width: 300px; height: 170px;" alt="Event Image">
                 </div>
