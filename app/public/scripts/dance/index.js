@@ -230,7 +230,6 @@ async function displayVenues() {
 function renderVenueCard(venue) {
     const venueCard = document.createElement('div');
     venueCard.classList.add('venue-card');
-    venueCard.style.width = '25%';
     const venueImage = htmlVenueImage(venue);
     const venueName = htmlVenue(venue);
     const venueAddress = htmlVenueAddress(venue);
