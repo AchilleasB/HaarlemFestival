@@ -1,4 +1,3 @@
-
 <?php
 
 use FontLib\Table\Type\head;
@@ -53,16 +52,21 @@ class YummyController extends Controller
 
     public function reservationForm()
     {
-        $id = $_SESSION['restaurant_id'];
-        try {
-            $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
-            $data = [
-                'restaurant' => $restaurant,
-                'availability' => $restaurant->getNumberOfSeats() - $this->reservationService->getAvailability(1, $id)
-            ];
-            $this->displayYummyView($this, $data);
-        } catch (RepositoryException $e) {
-            $this->handleException($e);
+        if (isset($_SESSION['user_role'])) {
+            $id = $_SESSION['restaurant_id'];
+            try {
+                $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
+                $data = [
+                    'restaurant' => $restaurant,
+                    'availability' => $restaurant->getNumberOfSeats() - $this->reservationService->getAvailability(1, $id)
+                ];
+                $this->displayYummyView($this, $data);
+            } catch (RepositoryException $e) {
+                $this->handleException($e);
+            }
+        } else {
+            header('Location: /login');
+            exit();
         }
     }
 
@@ -96,6 +100,9 @@ class YummyController extends Controller
                 $reservationTicket->setCalcPrice($price);
                 $this->reservationService->addReservationToCart($reservationTicket);
 
+                // Start of added by Maria
+                $_SESSION['order_items_data'][count($_SESSION['order_items_data'])] = $reservationTicket;
+                // End of added by Maria
 
                 header('Location: /yummy/restaurant?id=' . $_SESSION['restaurant_id']);
             } catch (RepositoryException $e) {

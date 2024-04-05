@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . '/repository.php');
+
 class ImageRepository extends Repository
 {
     public function getImagesByRestaurantId($restaurantId)
@@ -38,7 +40,6 @@ class ImageRepository extends Repository
             $lastInsertedId = $this->connection->lastInsertId();
 
             return $lastInsertedId;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error adding image', $e->getCode(), $e);
         }

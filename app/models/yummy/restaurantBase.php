@@ -65,12 +65,13 @@ class RestaurantBase implements JsonSerializable
 
     public function getCuisines(): array
     {
-        $cuisineNames = [];
         foreach ($this->cuisines as $cuisine) {
-            $cuisineNames[] = $cuisine->getName();
+            $cuisinesData[] = [
+                'id' => $cuisine->getId(),
+                'name' => $cuisine->getName()
+            ];
         }
-
-        return $cuisineNames;
+        return $cuisinesData;
     }
 
     public function setCuisines(array $cuisines): void

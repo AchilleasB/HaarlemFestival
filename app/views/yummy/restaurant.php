@@ -35,7 +35,7 @@
                     <ul>
                         <?php foreach ($restaurant->getCuisines() as $cuisine) : ?>
                             <li>
-                                <?php echo htmlspecialchars($cuisine); ?>
+                                <?php echo htmlspecialchars($cuisine['name']); ?>
                             </li>
                         <?php endforeach; ?>
                     </ul>

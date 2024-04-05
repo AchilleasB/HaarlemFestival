@@ -33,7 +33,7 @@ async function handleEditCuisine(cuisine) {
 }
 
 async function updateCuisineData(cuisine) {
-    const response = await fetch(`/api/cuisine?id=${cuisine.id}`, {
+    const response = await fetch(`${cuisineAPIendpoint}?id=${encodeURIComponent(cuisine.id)}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

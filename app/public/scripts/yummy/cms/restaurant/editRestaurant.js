@@ -1,7 +1,21 @@
 async function handleEditRestaurant(restaurantId) {
     const restaurantDetailed = await fetchRestaurantDetailed(restaurantId);
-
     const editRestaurantContainer = document.getElementById(`edit-restaurant-container-${restaurantId}`);
+
+    const cuisines = await fetch(cuisineAPIendpoint);
+    const cuisinesData = await cuisines.json();
+
+    const sessions = await fetch(sessionAPIendpoint);
+    const sessionsData = await sessions.json();
+
+    // Populate form with restaurant details
+    populateFormWithRestaurantDetails(editRestaurantContainer, restaurantDetailed, cuisinesData, sessionsData);
+
+    // Setup event listeners for form interactions
+    setupFormEventListeners(editRestaurantContainer, restaurantId, restaurantDetailed);
+}
+
+function populateFormWithRestaurantDetails(editRestaurantContainer, restaurantDetailed, cuisinesData, sessionsData) {
     editRestaurantContainer.innerHTML = `
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -25,7 +39,7 @@ async function handleEditRestaurant(restaurantId) {
                 </div>
                 <div class="mb-3">
                     <label for="restaurant-banner" class="form-label">Upload Restaurant Banner</label>
-                    <input type="file" class="form-control" id="restaurant-banner-file" name="restaurant-banner" accept="image/png" required>
+                    <input type="file" class="form-control" id="restaurant-banner-file" name="restaurant-banner" accept="image/png">
                     <input type="hidden" id="current-banner" name="current-banner" value="${restaurantDetailed.banner}">
                     <img id="banner-preview" src="/../images/yummy/banners/${restaurantDetailed.banner}" alt="Image of ${restaurantDetailed.name}" style="max-width: 100px; height: auto;">
                 </div>
@@ -36,61 +50,76 @@ async function handleEditRestaurant(restaurantId) {
                 <div class="mb-3">
                     <label for="stars" class="form-label">Stars</label>
                     <select class="form-select" id="stars" name="stars" required>
-                        <option value="">Select Stars</option>
+                        ${generateStarOptions(restaurantDetailed.numberOfStars)}
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="seats" class="form-label">Seats</label>
-                    <input type="number" id="seats" name="seats" value="${restaurantDetailed.numberOfSeats}" class="form-control" required>
+                    <input type="number" id="seats" min="1" name="seats" value="${restaurantDetailed.numberOfSeats}" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
                     <input type="text" id="location" name="location" value="${restaurantDetailed.location}" class="form-control" required>
                 </div>
+                <div class="mb-3">
+                    <label for="cuisines" class="form-label">Cuisines (min. 1)</label>
+                    ${generateCuisineCheckboxes(cuisinesData, restaurantDetailed.cuisines)}
+                </div>
+                <div class="mb-3">
+                    <label for="sessions" class="form-label">Sessions (min. 1)</label>
+                    ${generateSessionCheckboxes(sessionsData, restaurantDetailed.sessions)}
+                </div>
                 <button type="submit" class="btn btn-primary" id="update-restaurant-button">Update</button>
-                <button type="submit" class="btn btn-danger" id="close-restaurant-button">Close</button>
+                <button type="button" class="btn btn-danger" id="close-restaurant-button">Close</button>
             </form>
         </div>
     </div>`;
 
+    // Set the recommended status
     if (restaurantDetailed.isRecommended) {
         document.getElementById('is_recommended_true').checked = true;
     } else {
         document.getElementById('is_recommended_false').checked = true;
     }
+}
 
-    // Generate options for stars and append to the select element
-    const starsSelect = document.getElementById('stars');
+function generateStarOptions(numberOfStars) {
+    let optionsHtml = '<option value="">Select Stars</option>'; // Default prompt option
+
     for (let i = 1; i <= 5; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = `${i} Star${i !== 1 ? 's' : ''}`;
-        if (restaurantDetailed.numberOfStars === i) {
-            option.selected = true;
-        }
-        starsSelect.appendChild(option);
+        // Check if the current iteration matches the restaurant's star rating
+        const isSelected = i === numberOfStars ? 'selected' : '';
+        optionsHtml += `<option value="${i}" ${isSelected}>${i} Star${i !== 1 ? 's' : ''} </option>`;
     }
 
-    const updateRestaurantButton = document.getElementById("update-restaurant-button");
+    return optionsHtml;
+}
 
+function setupFormEventListeners(editRestaurantContainer, restaurantId, restaurantDetailed) {
+    // Update button
+    const updateRestaurantButton = document.getElementById("update-restaurant-button");
     updateRestaurantButton.addEventListener("click", function (e) {
         e.preventDefault();
         const form = document.getElementById('edit-restaurant-form');
-        //if (form.checkValidity()) {
+        if (form.checkValidity() && validateCheckkboxes()) {
             updateRestaurantData();
-            editRestaurantContainer.innerHTML = null;
-        //} else {
-        //    alert("Please fill in all required fields.");
-        //}
-        
+            editRestaurantContainer.innerHTML = '';
+        } else {
+            alert("Please fill in all fields.");
+        }
     });
 
+    // Close button
     const closeEventFormButton = document.getElementById("close-restaurant-button");
-
     closeEventFormButton.addEventListener("click", function () {
-        editRestaurantContainer.innerHTML = null;
+        editRestaurantContainer.innerHTML = '';
     });
 
+    // File input for banner preview
+    setupFilePreview();
+}
+
+function setupFilePreview() {
     const fileInput = document.getElementById('restaurant-banner-file');
     const bannerPreview = document.getElementById('banner-preview');
 
@@ -106,21 +135,16 @@ async function handleEditRestaurant(restaurantId) {
             reader.readAsDataURL(file);
         }
     });
-
 }
 
 async function fetchRestaurantDetailed(restaurantId) {
-    const response = await fetch(`/api/restaurant?id=${restaurantId}`, {
+    const response = await fetch(`${restaurantAPIendpoint}?id=${encodeURIComponent(restaurantId)}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
     });
-
-    // const responseData = await response.text(); // Get response body as text
-    // console.log(responseData); // Log response body
     const data = await response.json();
-    console.log(data);
 
     return data;
 }

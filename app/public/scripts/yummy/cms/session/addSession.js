@@ -10,8 +10,21 @@ document.addEventListener('DOMContentLoaded', function () {
             const saveSession = document.getElementById('save-session-button');
             saveSession.addEventListener('click', function (e) {
                 e.preventDefault();
-                postSessionRequest();
-                addItemFormContainer.innerHTML = '';
+                const form = document.getElementById('add-session-form');
+                const startDateInput = document.getElementById('start-date').value;
+                const endDateInput = document.getElementById('end-date').value;
+            
+                const startDate = new Date(startDateInput);
+                const endDate = new Date(endDateInput);
+            
+                if (form.checkValidity() && endDate > startDate) {
+                    postSessionRequest();
+                    addItemFormContainer.innerHTML = '';
+                } else if (endDate <= startDate) {
+                    alert("End time must be after start time.");
+                } else {
+                    alert("Please fill in all fields.");
+                }
             });
 
             const closeAddCuisineForm = document.getElementById('close-session-form');
@@ -55,6 +68,6 @@ function htmlAddSessionForm() {
             <input type="datetime-local" class="form-control" id="end-date" name="end" required>
         </div>
         <button type="submit" class="btn btn-primary" id="save-session-button">Save</button>
-        <button type="submit" class="btn btn-danger" id="close-session-form">Close</button>
+        <button type="button" class="btn btn-danger" id="close-session-form">Close</button>
     </form>`;
 }

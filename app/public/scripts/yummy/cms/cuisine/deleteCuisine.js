@@ -1,5 +1,5 @@
 async function handleDeleteCuisine(cuisineId) {
-    const response = await fetch(`/api/cuisine?id=${cuisineId}`, {
+    const response = await fetch(`${cuisineAPIendpoint}?id=${encodeURIComponent(cuisineId)}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"

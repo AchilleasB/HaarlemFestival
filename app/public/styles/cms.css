@@ -115,6 +115,7 @@
     .header {
         font-size: 1.5em;
     }
+
     .cms-btn {
         font-size: 1.2em;
         margin-top: 1em;
@@ -126,4 +127,39 @@
         justify-content: center;
         align-items: center;
     }
+}
+
+.inactive-row {
+    background-color: #c4c4c4;
+}
+
+.reservantion-unchangeable {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #555555;
+    font-style: italic;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-row {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.button-col {
+    flex: 1;
+    padding: 0 5px;
+}
+
+.button-col>.item-data-value>.btn {
+    width: 100px;
+}
+
+.manage-gallery-button, .manage-menu-button {
+    height: 60px;
 }
