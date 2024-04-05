@@ -135,6 +135,7 @@
                     <?php } 
                   else {?>
                     <div> Sold out</div>
+                    <div>You can't purchase more tickets than the quantity selected</div>
                     <?php }?>
                 </td>
                 <td class="align-middle">
