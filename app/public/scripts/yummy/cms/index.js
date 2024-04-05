@@ -2,6 +2,7 @@ const restaurantAPIendpoint = "http://localhost/api/restaurant";
 const sessionAPIendpoint = "http://localhost/api/session";
 const cuisineAPIendpoint = "http://localhost/api/cuisine";
 const reservationAPIendpoint = "http://localhost/api/reservation";
+const galleryAPIendpoint = "http://localhost/api/gallery";
 
 const itemsListContainer = document.getElementById("items-list");
 const restaurantRadioButton = document.getElementById("restaurant-radio-btn");
@@ -13,13 +14,13 @@ const addItemFormContainer = document.getElementById("add-item-form-container");
 
 // Function to generate dynamic button
 function generateButton(buttonText, identifier) {
-    var button = document.createElement("button");
+    const button = document.createElement("button");
     button.textContent = buttonText;
-    button.className = "btn btn-outline-success btn-lg";
     button.classList.add("btn", "btn-outline-success", "btn-lg");
-    button.id = "add-" + identifier + "-button";
-    document.getElementById("dynamic-add-button-container").innerHTML = '';
-    document.getElementById("dynamic-add-button-container").appendChild(button);
+    button.id = `add-${identifier}-button`;
+    const container = document.getElementById("dynamic-add-button-container");
+    container.innerHTML = '';
+    container.appendChild(button);
 }
 
 // Function to generate button based on initially selected radio button
@@ -199,6 +200,8 @@ function createItemCard(item, itemType) {
 
     const deleteButton = itemCard.querySelector(".delete-item-button");
     const activationButton = itemCard.querySelector(".activation-item-button");
+    const manageGalleryButton = itemCard.querySelector(".manage-gallery-button");
+    const manageMenuButton = itemCard.querySelector(".manage-menu-button");
 
     if (deleteButton) {
         deleteButton.addEventListener("click", function () {
@@ -225,37 +228,73 @@ function createItemCard(item, itemType) {
         });
     }
 
+    if (manageGalleryButton) {
+        manageGalleryButton.addEventListener("click", function () {
+            handleManageGallery(item.id);
+        });
+    }
+
+    if (manageMenuButton) {
+        manageMenuButton.addEventListener("click", function () {
+            handleManageMenu(item.id);
+        });
+    }
+
     return itemCard;
 }
 
 function htmlGenerateButtons(itemType, isActive) {
-    let buttonsHtml = `
-    <div class="row">
-        <div class="col">
-            <span class="item-data-value">
-                <button class="btn btn-outline-primary edit-item-button">Edit</button>
-            </span>
-        </div>`;
+    let buttonsHtml = `<div class="button-container">`;
 
     if (itemType === "reservation") {
         const actionText = isActive ? "Deactivate" : "Activate";
         const buttonClass = isActive ? "btn-outline-warning" : "btn-outline-success";
         buttonsHtml += `
-        <div class="col">
-            <span class="item-data-value">
-                <button class="btn ${buttonClass} activation-item-button" style="width: 100px; text-align: center;">${actionText}</button>
-            </span>
+        <div class="button-row">
+            <div class="button-col">
+                <span class="item-data-value">
+                    <button class="btn btn-outline-primary edit-item-button" style="width: 100%;">Update</button>
+                </span>
+            </div>
+            <div class="button-col">
+                <span class="item-data-value">
+                    <button class="btn ${buttonClass} activation-item-button" style=style="width: 100px; text-align: center;">${actionText}</button>
+                </span>
+            </div>
         </div>`;
     } else {
         buttonsHtml += `
-        <div class="col">
-            <span class="item-data-value">
-                <button class="btn btn-outline-danger delete-item-button" style="width: 100px; text-align: center;">Delete</button>
-            </span>
+        <div class="button-row">
+            <div class="button-col">
+                <span class="item-data-value">
+                    <button class="btn btn-outline-primary edit-item-button" style="width: 100%;">Edit</button>
+                </span>
+            </div>
+            <div class="button-col">
+                <span class="item-data-value">
+                    <button class="btn btn-outline-danger delete-item-button" style="width: 100%;">Delete</button>
+                </span>
+            </div>
         </div>`;
+
+        if (itemType === "restaurant") {
+            buttonsHtml += `
+            <div class="button-row">
+                <div class="button-col">
+                    <span class="item-data-value">
+                        <button class="btn btn-outline-info manage-gallery-button" style="width: 100%;">Manage gallery</button>
+                    </span>
+                </div>
+                <div class="button-col">
+                    <span class="item-data-value">
+                        <button class="btn btn-outline-info manage-menu-button" style="width: 100%;">Manage menu</button>
+                    </span>
+                </div>
+            </div>`;
+        }
     }
 
-    buttonsHtml += '</div>';
+    buttonsHtml += `</div>`;
 
     return buttonsHtml;
 }

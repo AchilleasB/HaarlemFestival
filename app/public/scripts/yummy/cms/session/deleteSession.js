@@ -5,7 +5,7 @@ async function handleDeleteSession(sessionId) {
         const userConfirmation = confirm(`WARNING! Deleting this session will also deactivate ${reservationsData.numberOfReservations} reservations for ${reservationsData.numberOfPeople} people in ${reservationsData.numberOfRestaurants} restaurants.`);
     if (!userConfirmation) return;
     }
-    const response = await fetch(`/api/session?id=${sessionId}`, {
+    const response = await fetch(`${sessionAPIendpoint}?id=${encodeURIComponent(sessionId)}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"

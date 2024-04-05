@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 02, 2024 at 12:07 AM
--- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
--- PHP Version: 8.1.17
+-- Generation Time: Apr 05, 2024 at 03:04 PM
+-- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
+-- PHP Version: 8.2.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -343,9 +343,7 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (8, 'amsterdamsepoort.png', NULL),
 (9, 'hofvanbakenes.png', NULL),
 (10, 'ratatouille-banner.png', NULL),
-(11, 'restaurant-ml-banner.png', NULL),
 (12, 'restaurant-fris-banner.png', NULL),
-(13, 'specktakel-banner.png', NULL),
 (14, 'grand-cafe-brinkman-banner.png', NULL),
 (15, 'urban-frenchy-bistro-toujours-banner.png', NULL),
 (16, 'restaurant-ml-1.png', 2),
@@ -357,7 +355,13 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (22, 'ratatouille-1.png', 4),
 (23, 'dance.png', NULL),
 (24, 'yummy.png', NULL),
-(25, 'history-image.png', NULL);
+(25, 'history-image.png', NULL),
+(27, 'da-banner.png', NULL),
+(29, 'specktakel-banner.png', NULL),
+(30, 'test-banner.png', NULL),
+(31, 'restaurant-ml-banner.png', NULL),
+(32, 'test-banner.png', NULL),
+(33, 'manol-draganov-banner.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -470,7 +474,7 @@ CREATE TABLE `reservations` (
   `id` int(11) NOT NULL,
   `restaurant_id` int(11) DEFAULT NULL,
   `session_id` int(11) DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `number_of_people` int(11) NOT NULL,
   `mobile_number` varchar(200) NOT NULL,
   `remark` varchar(1000) DEFAULT NULL,
@@ -482,30 +486,12 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `restaurant_id`, `session_id`, `user_id`, `number_of_people`, `mobile_number`, `remark`, `is_active`) VALUES
-(2, 2, 1, 8, 1, 'dadadada', '', 0),
-(3, 1, 2, 2, 4, '132432', 'asdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasdasdsadasdsa dhjasdashdjahdjhasdsaddgadgasjdgsajdgasjdgsajdsgajdgasjdsagdjadgajdgasjgasjgdasjdgasjasd', 0),
-(4, 2, 1, 8, 1, '12312321321', '1', 0),
-(5, 2, 1, 8, 1, '235464321', 'd', 0),
-(6, 2, 4, 8, 1, '1234564321', 'd', 0),
-(7, 2, 4, 8, 1, '1234564321', 'd', 0),
-(8, 2, 2, 8, 1, '12354223145', 'a', 0),
-(9, 2, 2, 8, 1, '12354223145', 'a', 0),
-(10, 2, 4, 8, 1, '21313213', 'dsad', 0),
-(11, 2, 4, 8, 1, '21313213', 'dsad', 0),
-(16, 2, 1, 8, 1, '1231321313', '', 0),
-(17, 2, 1, 8, 1, '23543213', '1', 0),
-(18, 2, 1, 8, 1, '12331231', '', 0),
-(19, 2, 1, 8, 1, '123213213213', 'dsadas', 0),
-(20, 2, 1, 8, 1, '123213213213', 'dsadas', 0),
-(21, 2, 1, 8, 1, '+359885790202', '123131', 0),
-(22, 2, 1, 8, 1, '12314141', 'a', 0),
-(23, 1, 1, 10, 1, '4514521321233', 'bjbjknj', 0),
-(24, 1, 1, 10, 1, '13514541545454155', 'knlnlkjnklnkl', 0),
-(25, 1, 1, 10, 1, '151651561', 'kbofmbmkbfm', 0),
-(26, 1, 1, 10, 1, '51564156415416', 'mplmklmkl', 0),
-(27, 1, 1, 10, 1, '4564156456', 'codskl5vDF', 0),
+(27, 1, 1, 10, 41, '4564156456', 'codskl5vDF', 1),
 (28, 6, 2, 10, 1, '51151561465', 'njnjn', 0),
-(29, 1, 1, 10, 1, '5151116211515', 'jnjnk', 0);
+(29, 1, 1, 10, 1, '5151116211515', 'jnjnk', 0),
+(30, 5, NULL, 5, 4, '1231312321321', NULL, 0),
+(31, 2, NULL, 8, 14, '1231421414', NULL, 0),
+(32, NULL, NULL, 9, 3, '0885790202', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -520,8 +506,8 @@ CREATE TABLE `restaurants` (
   `description` text NOT NULL,
   `number_of_seats` int(11) NOT NULL DEFAULT 50,
   `number_of_stars` enum('1','2','3','4','5') NOT NULL,
-  `banner` int(11) NOT NULL,
-  `is_recommended` tinyint(4) NOT NULL
+  `banner` int(11) DEFAULT NULL,
+  `is_recommended` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -529,10 +515,10 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `name`, `location`, `description`, `number_of_seats`, `number_of_stars`, `banner`, `is_recommended`) VALUES
-(1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 41, '4', 10, 1),
-(2, 'Restaurant ML', 'Kleine Houtstraat 70, 2011 DR Haarlem, Nederland', 'Still at a top level but also with a more lower price, Toujours wins the top for the the best restaurant in terms of price-quality. For an intimate, cozy and beautiful dinner with friends or family, take a seat in our beautiful restaurant area. With radiant daylight thanks to the domes on our roof. Which provide a magical beautiful light in the evening, when dining under the starry sky comes very close.', 60, '4', 11, 0),
+(1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 33, '4', 10, 1),
+(2, 'Restaurant ML', 'Kleine Houtstraat 70, 2011 DR Haarlem, Nederland', 'Still at a top level but also with a more lower price, Toujours wins the top for the the best restaurant in terms of price-quality. For an intimate, cozy and beautiful dinner with friends or family, take a seat in our beautiful restaurant area. With radiant daylight thanks to the domes on our roof. Which provide a magical beautiful light in the evening, when dining under the starry sky comes very close.', 59, '2', 31, 1),
 (3, 'Restaurant Fris', 'Twijnderslaan 7, 2012 BG Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 45, '4', 12, 0),
-(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 13, 0),
+(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 29, 1),
 (5, 'Grand Cafe Brinkman', 'Grote Markt 13, 2011 RC Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 100, '3', 14, 0),
 (6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 44, '3', 15, 1);
 
@@ -552,24 +538,23 @@ CREATE TABLE `restaurants_cuisines` (
 --
 
 INSERT INTO `restaurants_cuisines` (`restaurant_id`, `cuisine_id`) VALUES
+(1, 1),
+(2, 1),
+(5, 1),
+(6, 1),
 (1, 2),
 (1, 3),
-(1, 5),
-(2, 1),
-(2, 3),
-(2, 5),
-(3, 1),
-(3, 2),
-(3, 3),
 (4, 3),
-(4, 4),
-(4, 7),
-(5, 1),
 (5, 3),
-(5, 6),
-(6, 1),
 (6, 3),
-(6, 5);
+(4, 4),
+(1, 5),
+(2, 5),
+(3, 5),
+(6, 5),
+(5, 6),
+(1, 7),
+(4, 7);
 
 -- --------------------------------------------------------
 
@@ -588,17 +573,15 @@ CREATE TABLE `restaurants_sessions` (
 
 INSERT INTO `restaurants_sessions` (`restaurant_id`, `session_id`) VALUES
 (1, 1),
-(1, 2),
-(1, 4),
+(2, 1),
+(3, 1),
 (2, 2),
-(2, 4),
-(3, 2),
-(3, 4),
 (4, 2),
-(4, 4),
 (5, 2),
-(5, 4),
 (6, 2),
+(2, 4),
+(4, 4),
+(5, 4),
 (6, 4);
 
 -- --------------------------------------------------------
@@ -618,7 +601,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `start_date`, `end_date`) VALUES
-(1, '2024-02-28 18:00:00', '2024-03-05 19:30:00'),
+(1, '2024-02-28 18:00:00', '2023-02-09 19:30:00'),
 (2, '2024-03-05 19:30:00', '2024-03-05 21:00:00'),
 (4, '2024-03-05 21:00:00', '2024-03-25 22:30:00');
 
@@ -858,7 +841,8 @@ ALTER TABLE `password_reset_tokens`
 ALTER TABLE `reservations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `reservations_ibfk_1` (`restaurant_id`),
-  ADD KEY `session_id` (`session_id`);
+  ADD KEY `session_id` (`session_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `restaurants`
@@ -929,7 +913,7 @@ ALTER TABLE `artists`
 -- AUTO_INCREMENT for table `cuisines`
 --
 ALTER TABLE `cuisines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `dance_events`
@@ -965,7 +949,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -995,7 +979,19 @@ ALTER TABLE `password_reset_tokens`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `restaurants`
+--
+ALTER TABLE `restaurants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `sessions`
+--
+ALTER TABLE `sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tour_guides`
@@ -1079,13 +1075,14 @@ ALTER TABLE `password_reset_tokens`
 --
 ALTER TABLE `reservations`
   ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `reservations_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`banner`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`banner`) REFERENCES `images` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `restaurants_cuisines`

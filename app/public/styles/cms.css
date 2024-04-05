@@ -140,3 +140,26 @@
     color: #555555;
     font-style: italic;
 }
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-row {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.button-col {
+    flex: 1;
+    padding: 0 5px;
+}
+
+.button-col>.item-data-value>.btn {
+    width: 100px;
+}
+
+.manage-gallery-button, .manage-menu-button {
+    height: 60px;
+}

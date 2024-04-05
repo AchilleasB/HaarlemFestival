@@ -138,7 +138,7 @@ function setupFilePreview() {
 }
 
 async function fetchRestaurantDetailed(restaurantId) {
-    const response = await fetch(`/api/restaurant?id=${restaurantId}`, {
+    const response = await fetch(`${restaurantAPIendpoint}?id=${encodeURIComponent(restaurantId)}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"

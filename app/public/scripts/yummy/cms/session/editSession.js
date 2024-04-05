@@ -48,7 +48,7 @@ async function handleEditSession(session) {
 
 async function updateSessionData(session) {
 
-    const response = await fetch(`/api/session`, {
+    const response = await fetch(sessionAPIendpoint, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
