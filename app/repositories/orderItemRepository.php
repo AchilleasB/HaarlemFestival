@@ -90,7 +90,7 @@ function getDanceEventData($eventId)
 function getTourEventData($eventId)
 {
     try {
-        $stmt = $this->connection->prepare("SELECT history_tours.date, history_tours.time, history_tours.seats
+        $stmt = $this->connection->prepare("SELECT DAYNAME(history_tours.date) AS weekday, DAY(history_tours.date) as day, MONTHNAME(history_tours.date) AS month, TIME_FORMAT(history_tours.time, '%H:%i') AS time, history_tours.seats
                                                 FROM history_tours
                                                 WHERE history_tours.id = :id;"
 
@@ -115,7 +115,7 @@ function getTourEventData($eventId)
 function getYummyEventData($eventId)
 {
     try {
-        $stmt = $this->connection->prepare("SELECT reservations.number_of_people, restaurants.name, restaurants.location, restaurants.number_of_seats, sessions.start_date
+        $stmt = $this->connection->prepare("SELECT reservations.number_of_people, restaurants.name, restaurants.location, restaurants.number_of_seats, DAYNAME(sessions.start_date) AS weekday, DAY(sessions.start_date) as day, MONTHNAME(sessions.start_date) AS month, TIME_FORMAT(sessions.start_date, '%H:%i') AS time
                                                 FROM reservations
                                                 LEFT JOIN restaurants ON reservations.restaurant_id = restaurants.id
                                                 LEFT JOIN restaurants_sessions ON reservations.session_id = restaurants_sessions.session_id
@@ -175,7 +175,7 @@ private function createTourEventDataInstance($result): EventData
     try{
 
         $eventData = new EventData();
-        $eventData->setDateTime("{$result['date']} {$result['time']}");
+        $eventData->setDateTime("{$result['weekday']} {$result['day']} {$result['month']} {$result['time']}");
         $eventData->setTicketsAvailable($result['seats']);
         $eventData->setTicketPrice(NULL);
         $eventData->setName("A STROLL THROUGH HISTORY");
@@ -201,7 +201,7 @@ private function createYummyEventDataInstance($result): EventData
     try{
 
         $eventData = new EventData();
-        $eventData->setDateTime("{$result['start_date']}");
+        $eventData->setDateTime("{$result['weekday']} {$result['day']} {$result['month']} {$result['time']}");
         $eventData->setTicketsAvailable($result['number_of_seats']);
         $eventData->setTicketPrice(10.00);
         $eventData->setName($result['name']);

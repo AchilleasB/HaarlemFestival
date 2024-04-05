@@ -194,5 +194,24 @@ public function updateSeats($historyTourId, $seatsToDeduct)
     }
 }
 
+
+//added by Maria
+//used because from the personal program and shopping cart the available tickets are checked by event id prior to update
+public function updateSeatsWithNewAvailableSeats($id, $newSeatsAvailable)
+{
+    try{
+
+    $query = $this->connection->prepare("UPDATE history_tours SET seats=:seats WHERE id=:id");
+    $query->bindParam(":id", $id);
+    $query->bindParam(":seats", $newSeatsAvailable);
+    $query->execute();
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+}
+
+//end of added by Maria
+
+
 }
 ?>

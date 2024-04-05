@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
-use Ramsey\Uuid\Uuid;
+//require_once __DIR__ . '/../vendor/autoload.php';
+//use Ramsey\Uuid\Uuid;
 
 class Ticket implements JsonSerializable
 {
@@ -14,7 +14,7 @@ class Ticket implements JsonSerializable
     private ?int $order_id = null;
 
     public function __construct() {
-        $this->id = Uuid::uuid4()->toString();
+        //$this->id = Uuid::uuid4()->toString();
     }
 
     public function getId(): string

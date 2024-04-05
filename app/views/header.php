@@ -77,7 +77,8 @@ if (isset($_SESSION['user_firstname'])) {
                                         alt="Favorite icon">
                                   <span class="bg-secondary rounded-circle px-1" style="--bs-bg-opacity: .5;"> 
                               <?php    if (isset($_SESSION['order_items_data'])){echo count($_SESSION['order_items_data']);}
-                                       else {$_SESSION['order_items_data']=[];} 
+                                       else {$_SESSION['order_items_data']=[];
+                                             echo 0;} 
 
                               ?>                                    
                         </a>

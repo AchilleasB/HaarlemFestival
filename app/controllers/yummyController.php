@@ -8,6 +8,8 @@ require_once(__DIR__ . '/../services/yummy/restaurantService.php');
 require_once(__DIR__ . '/../services/yummy/reservationService.php');
 require_once(__DIR__ . '/../models/ticket.php');
 require_once(__DIR__ . '/../services/ticketService.php');
+require_once __DIR__ . '/../vendor/autoload.php';
+use Ramsey\Uuid\Uuid;
 
 class YummyController extends Controller
 {
@@ -87,6 +89,7 @@ class YummyController extends Controller
 
                 $price = $reservation->getNumberOfPeople() * 10;
                 $reservationTicket = new Ticket();
+                $reservationTicket->setId(Uuid::uuid4()->toString());
                 $reservationTicket->setAmount($reservation->getNumberOfPeople());
                 $reservationTicket->setReservationId($reservation->getId());
                 $reservationTicket->setUserId($reservation->getUserId());
