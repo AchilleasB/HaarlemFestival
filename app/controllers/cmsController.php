@@ -195,6 +195,11 @@ class CmsController extends Controller
 
     public function yummyManagement()
     {
-        $this->displayView($this);
+        if (isset($_SESSION['user_role'])) {
+            $this->displayView($this);
+        } else {
+            header('Location: /login');
+            exit();
+        }
     }
 }

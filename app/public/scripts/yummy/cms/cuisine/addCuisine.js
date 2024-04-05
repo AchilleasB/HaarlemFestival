@@ -10,8 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const saveCuisine = document.getElementById('save-cuisine-button');
             saveCuisine.addEventListener('click', function (e) {
                 e.preventDefault();
-                postCuisineRequest();
-                addItemFormContainer.innerHTML = '';
+                const form = document.getElementById('add-cuisine-form');
+                if (form.checkValidity()) {
+                    postCuisineRequest();
+                    addItemFormContainer.innerHTML = '';
+                } else {
+                    alert("Please fill in all fields.");
+                }
             });
 
             const closeAddCuisineForm = document.getElementById('close-cuisine-form');

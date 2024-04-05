@@ -21,19 +21,7 @@ class SessionController extends ApiController
                 $this->handleGetAllRequest($this->sessionService, 'getAllSessions');
                 break;
             case 'POST':
-                $body = file_get_contents('php://input');
-                $object = json_decode($body);
-
-                if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
-                    header('Content-Type: application/json');
-                    echo json_encode('Invalid JSON');
-                }
-
-                $startDate = DateTime::createFromFormat('Y-m-d\TH:i', $object->start_date);
-                $endDate = DateTime::createFromFormat('Y-m-d\TH:i', $object->end_date);
-                $session = new Session($startDate, $endDate);
-                $this->sessionService->addSession($session);
-                echo json_encode(["message" => "Session added successfully"]);
+                $this->handlePostSessionsRequest();
                 break;
             case 'PUT':
                 $this->handlePutSessionRequest();
@@ -63,5 +51,22 @@ class SessionController extends ApiController
         $this->sessionService->updateSession($session);
 
         echo json_encode(["message" => "Session updated successfully"]);
+    }
+
+    private function handlePostSessionsRequest()
+    {
+        $body = file_get_contents('php://input');
+        $object = json_decode($body);
+
+        if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
+            header('Content-Type: application/json');
+            echo json_encode('Invalid JSON');
+        }
+
+        $startDate = DateTime::createFromFormat('Y-m-d\TH:i', $object->start_date);
+        $endDate = DateTime::createFromFormat('Y-m-d\TH:i', $object->end_date);
+        $session = new Session($startDate, $endDate);
+        $this->sessionService->addSession($session);
+        echo json_encode(["message" => "Session added successfully"]);
     }
 }

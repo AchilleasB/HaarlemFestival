@@ -4,6 +4,8 @@ require_once(__DIR__ . '/../../repositories/yummy/restaurantRepository.php');
 require_once(__DIR__ . '/../../repositories/yummy/cuisineRepository.php');
 require_once(__DIR__ . '/../../repositories/yummy/menuRepository.php');
 require_once(__DIR__ . '/../../repositories/yummy/sessionRepository.php');
+require_once(__DIR__ . '/../../repositories/yummy/restaurantCuisineRepository.php');
+require_once(__DIR__ . '/../../repositories/yummy/restaurantSessionRepository.php');
 require_once(__DIR__ . '/../../repositories/imageRepository.php');
 
 class RestaurantService {
@@ -12,6 +14,8 @@ class RestaurantService {
     private $menuRepository;
     private $imageRepository;
     private $sessionRepository;
+    private $restaurantCuisineRepository;
+    private $restaurantSessionRepository;
 
     public function __construct() {
         $this->restaurantRepository = new RestaurantRepository();
@@ -19,6 +23,8 @@ class RestaurantService {
         $this->menuRepository = new MenuRepository();
         $this->imageRepository = new ImageRepository();
         $this->sessionRepository = new SessionRepository();
+        $this->restaurantCuisineRepository = new RestaurantCuisineRepository();
+        $this->restaurantSessionRepository = new RestaurantSessionRepository();
     }
     
     public function getAllRestaurantsBaseInfo() {
@@ -63,12 +69,25 @@ class RestaurantService {
         return $restaurantDetailedInfo;
     }
 
-    public function addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner) {
-        return $this->restaurantRepository->addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner);
+    public function addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner, $isRecommended, $cuisines, $sessions) {
+        $restaurantId = $this->restaurantRepository->addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner, $isRecommended);
+        foreach ($cuisines as $cuisine) {
+           $this->restaurantCuisineRepository->addRestaurantCuisineRelation($restaurantId, $cuisine);
+        }
+        foreach ($sessions as $session) {
+            $this->restaurantSessionRepository->addRestaurantSessionRelation($restaurantId, $session);
+        }
     }
 
-    public function updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $banner, $isRecommended) {
-        
+    public function updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $banner, $isRecommended, $cuisines, $sessions) {
+        $this->restaurantCuisineRepository->deleteRestaurantCuisineRelation($id);
+        $this->restaurantSessionRepository->deleteRestaurantSessionRelation($id);
+        foreach ($cuisines as $cuisine) {
+            $this->restaurantCuisineRepository->addRestaurantCuisineRelation($id, $cuisine);
+         }
+         foreach ($sessions as $session) {
+             $this->restaurantSessionRepository->addRestaurantSessionRelation($id, $session);
+         }
         return $this->restaurantRepository->updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $banner, $isRecommended);
     }
 

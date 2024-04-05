@@ -38,11 +38,13 @@ class RestaurantController extends ApiController
                 $location = isset($_POST['location']) ? htmlspecialchars($_POST['location']) : '';
                 $fileInfo = isset($_FILES['restaurant-banner']) ? $_FILES['restaurant-banner'] : null;
                 $isRecommended = isset($_POST['is_recommended']) ? ($_POST['is_recommended'] === 'true' ? true : false) : false;
+                $cuisines = isset($_POST['cuisine']) ? array_map('htmlspecialchars', $_POST['cuisine']) : [];
+                $sessions = isset($_POST['session']) ? array_map('htmlspecialchars', $_POST['session']) : [];
 
                 if ($id === 0) {
-                    $this->handleAddRestaurant($restaurantName, $location, $description, $seats, $stars, $fileInfo);
+                    $this->handleAddRestaurant($restaurantName, $location, $description, $seats, $stars, $fileInfo, $isRecommended, $cuisines, $sessions);
                 } else {
-                    $this->handleUpdateRestaurant($id, $restaurantName, $location, $description, $seats, $stars, $fileInfo, $isRecommended);
+                    $this->handleUpdateRestaurant($id, $restaurantName, $location, $description, $seats, $stars, $fileInfo, $isRecommended, $cuisines, $sessions);
                 }
                 break;
             case 'DELETE':
@@ -56,19 +58,19 @@ class RestaurantController extends ApiController
         }
     }
 
-    private function handleAddRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $fileInfo)
+    private function handleAddRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $fileInfo, $isRecommended, $cuisines, $sessions)
     {
         $bannerId = null;
         if ($fileInfo !== null && $fileInfo['error'] === 0) {
             $this->handleBannerUpload($fileInfo, $name);
             $bannerId = $this->imageService->addRestaurantBannerToDatabase($name);
         }
-        $this->restaurantService->addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $bannerId);
+        $this->restaurantService->addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $bannerId, $isRecommended, $cuisines, $sessions);
 
         echo json_encode(["message" => "Restaurant added successfully"]);
     }
 
-    private function handleUpdateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $fileInfo, $isRecommended)
+    private function handleUpdateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $fileInfo, $isRecommended, $cuisines, $sessions)
     {
         $bannerId = null;
         if ($fileInfo !== null && $fileInfo['error'] === UPLOAD_ERR_NO_FILE) {
@@ -80,7 +82,7 @@ class RestaurantController extends ApiController
             $this->handleBannerUpload($fileInfo, $name);
             $bannerId = $this->imageService->addRestaurantBannerToDatabase($name);
         }
-        $this->restaurantService->updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $bannerId, $isRecommended);
+        $this->restaurantService->updateRestaurant($id, $name, $location, $description, $numberOfSeats, $numberOfStars, $bannerId, $isRecommended, $cuisines, $sessions);
 
         echo json_encode(["message" => "Restaurant updated successfully"]);
     }
@@ -90,7 +92,7 @@ class RestaurantController extends ApiController
         $result = $this->imageService->uploadRestaurantBannerToDirectory($fileInfo, $restaurantName);
         if (!$result) {
             throw new Exception('Failed to upload banner');
-        } 
+        }
     }
 
     private function handleCurrentBannerDeletion($restaurantId)
@@ -101,7 +103,6 @@ class RestaurantController extends ApiController
 
         //Delete from database
         $this->imageService->deleteRestaurantBannerFromDatabase($restaurantId);
-
     }
 
     public function GetRestaurantIdByName()
@@ -111,8 +112,6 @@ class RestaurantController extends ApiController
             $res = $this->restaurantService->getRestaurantIdByName($_GET['name']);
 
             echo json_encode($res);
-
-
         } catch (Exception $e) {
             http_response_code(500);
             echo $e;

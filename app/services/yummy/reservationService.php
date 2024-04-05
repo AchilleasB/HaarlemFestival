@@ -25,9 +25,17 @@ class ReservationService
     {
         $number_of_seats = $this->restaurantRepository->getSeatsById($restaurantId);
         $reserved_seats = $this->reservationRepository->getReservedSeatsForSessionAndRestaurant($sessionId, $restaurantId);
-        
-        return $number_of_seats - $reserved_seats;
+
+        $availability = $number_of_seats - $reserved_seats;
+
+        // Check if availability is less than 0, then set it to 0
+        if ($availability < 0) {
+            $availability = 0;
+        }
+
+        return $availability;
     }
+
 
     public function activateReservation($reservationId)
     {
@@ -49,5 +57,23 @@ class ReservationService
         return $this->reservationRepository->getLastReservationByRestaurantAndSessionAndUser($restaurantId, $sessionId, $userId);
     }
 
+    public function getReservationWaningDataBySessionId($sessionId)
+    {
+        return $this->reservationRepository->getReservationWaningDataBySessionId($sessionId);
+    }
+
+    public function getAllReservations()
+    {
+        return $this->reservationRepository->getAllReservationsPrettyData();
+    }
+
+    public function UpdateReservation($id, $numberOfPeople, $mobileNumber, $remark)
+    {
+        return $this->reservationRepository->UpdateReservation($id, $numberOfPeople, $mobileNumber, $remark);
+    }
+
+    public function getActiveStatusByReservationId($reservationId)
+    {
+        return $this->reservationRepository->getActiveStatusByReservationId($reservationId);
+    }
 }
-?>

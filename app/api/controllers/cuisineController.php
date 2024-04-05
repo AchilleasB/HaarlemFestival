@@ -21,17 +21,7 @@ class CuisineController extends ApiController
                 $this->handleGetAllRequest($this->cuisineService, 'getAllCuisines');
                 break;
             case 'POST':
-                $body = file_get_contents('php://input');
-                $object = json_decode($body);
-
-                if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
-                    header('Content-Type: application/json');
-                    echo json_encode('Invalid JSON');
-                }
-                
-                $cuisine = new Cuisine($object->name);
-                $this->cuisineService->addCuisine($cuisine);
-                echo json_encode(["message" => "Cuisine added successfully"]);
+                $this->handlePostCuisineRequest();
                 break;
             case 'PUT':
                 $this->handlePutRequest($this->cuisineService, 'updateCuisine', 'getCuisineById', ['name']);
@@ -45,5 +35,20 @@ class CuisineController extends ApiController
                 echo json_encode(["error" => "Unsupported request method"]);
                 break;
         }
+    }
+
+    private function handlePostCuisineRequest()
+    {
+        $body = file_get_contents('php://input');
+        $object = json_decode($body);
+
+        if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
+            header('Content-Type: application/json');
+            echo json_encode('Invalid JSON');
+        }
+
+        $cuisine = new Cuisine($object->name);
+        $this->cuisineService->addCuisine($cuisine);
+        echo json_encode(["message" => "Cuisine added successfully"]);
     }
 }

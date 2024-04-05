@@ -74,3 +74,6 @@
     <script src="/../scripts/yummy/cms/restaurant/deleteRestaurant.js"></script>
     <script src="/../scripts/yummy/cms/restaurant/editRestaurant.js"></script>
     <script src="/../scripts/yummy/cms/restaurant/addRestaurant.js"></script>
+
+    <script src="/../scripts/yummy/cms/reservation/activationReservation.js"></script>
+    <script src="/../scripts/yummy/cms/reservation/editReservation.js"></script>
