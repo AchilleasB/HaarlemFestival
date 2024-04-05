@@ -275,6 +275,7 @@ class ShoppingCartController extends Controller
 
     $_SESSION['selected_items_to_purchase'] = [];
 
+
     require_once __DIR__ . "/../views/shoppingCart/confirmedOrder.php";
   }
 

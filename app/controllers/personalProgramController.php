@@ -49,9 +49,10 @@ class PersonalProgramController extends Controller
     if (!isset($_SESSION['order_items_data'])) {
       $_SESSION['order_items_data'] = [];
     }
-    $orderItems = unserialize(serialize($_SESSION['order_items_data']));
+    $orderItems = $this->ticketService->getUnpaidTickets($this->user->getId());
+    $_SESSION['order_items_data']=$orderItems;
 
-    return $orderItems;
+    return unserialize(serialize($orderItems));
 
   }
 
@@ -139,8 +140,6 @@ class PersonalProgramController extends Controller
 
 
   }
-
-
 
 
 
