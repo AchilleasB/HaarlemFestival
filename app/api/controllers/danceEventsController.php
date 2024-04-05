@@ -122,9 +122,6 @@ class DanceEventsController
                     $message = 'An error occurred while adding ticket(s) to cart';
                 }
                 
-                // Start of added by Maria
-                 $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$danceTicket;
-                // End of added by Maria
             } else {
                 $message = 'The requested amount of tickets is not available for this event';
             }
