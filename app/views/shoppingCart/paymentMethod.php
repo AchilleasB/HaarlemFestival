@@ -12,11 +12,11 @@
   <script src="http://code.jquery.com/jquery-migrate-1.1.1.js"></script>
   <link rel="stylesheet" href="../styles/main.css">
 </head>
-<body class="border border-white ">
+<body>
 <?php
     include __DIR__ . '/../header.php';
     ?>
-  <main class="border border-white">
+  <main>
   
     <div class="grid pt-5 h-auto" style="--bs-columns: 10; --bs-gap: 1rem;">
       <div class="g-col-6 px-2">
@@ -60,30 +60,29 @@
        
         <ul class="list-group">
           <?php foreach ($this->products as $orderItem=>$i) {
-               $product = $this->products[$orderItem]['Event']->getName();
+            $product = $this->products[$orderItem]['Event']->getName();
 
-               if ($eventImage = $this->products[$orderItem]['Event']->getArtistImage() != NULL){
-                $eventImage = $this->products[$orderItem]['Event']->getArtistImage();}
-              else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL){
-                $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();}
-                
-                else if ($eventImage = $this->products[$orderItem]['Event']->getYummyEventImage() != NULL){
-                  $eventImage = $this->products[$orderItem]['Event']->getYummyEventImage();}
+            if ($eventImage = $this->products[$orderItem]['Event']->getArtistImage() != NULL) {
+              $eventImage = $this->products[$orderItem]['Event']->getArtistImage();
+            } else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL) {
+              $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();
+            } else if ($eventImage = $this->products[$orderItem]['Event']->getYummyEventImage() != NULL) {
+              $eventImage = $this->products[$orderItem]['Event']->getYummyEventImage();
+            }
 
-                $datetime = $this->products[$orderItem]['Event']->getDateTime();
+            $datetime = $this->products[$orderItem]['Event']->getDateTime();
 
-                $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
+            $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
 
-                if ( $this->products[$orderItem]['Event']->getTicketPrice()){
-                  $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();}
-                  else
-                  {
-                    $ticketPrice = $this->currentOrderItems[$orderItem]->getCalcPrice() / $this->currentOrderItems[$orderItem]->getAmount();
-                  }
-                
-                $totalPrice = $this->orderTotal;
+            if ($this->products[$orderItem]['Event']->getTicketPrice()) {
+              $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
+            } else {
+              $ticketPrice = $this->currentOrderItems[$orderItem]->getCalcPrice() / $this->currentOrderItems[$orderItem]->getAmount();
+            }
 
-                $totalVAT = $this->orderVAT;?>
+            $totalPrice = $this->orderTotal;
+
+            $totalVAT = $this->orderVAT; ?>
 
           <li class="list-group-item border-0 ">
             <div class="grid ">

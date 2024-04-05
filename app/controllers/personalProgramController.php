@@ -22,7 +22,7 @@ class PersonalProgramController extends Controller
 
 
   function __construct()
-  {   
+  {
     $this->userService = new UserService();
     $this->ticketService = new TicketService();
     $this->orderItemService = new OrderItemService();
@@ -30,15 +30,15 @@ class PersonalProgramController extends Controller
     $this->currentOrderItems = $this->getItems();
     $this->products = $this->orderItemService->getProducts($this->currentOrderItems);
     $this->orderTotal = $this->orderItemService->calculateOrderTotal($this->currentOrderItems, $this->products);
-    $this->orderVAT= $this->orderItemService->calculateOrderVAT($this->currentOrderItems, $this->products);
+    $this->orderVAT = $this->orderItemService->calculateOrderVAT($this->currentOrderItems, $this->products);
     $this->paidTickets = $this->getPaidTickets();
-    
+
 
   }
 
 
   public function index()
-  {   
+  {
     require __DIR__ . '/../views/personalProgram/index.php';
 
   }
@@ -46,8 +46,8 @@ class PersonalProgramController extends Controller
   //retrieve only the tickets which are added by the user in the present session
   public function getItems()
   {
-    if (!isset($_SESSION['order_items_data'])){
-      $_SESSION['order_items_data']=[];
+    if (!isset($_SESSION['order_items_data'])) {
+      $_SESSION['order_items_data'] = [];
     }
     $orderItems = unserialize(serialize($_SESSION['order_items_data']));
 
@@ -58,86 +58,84 @@ class PersonalProgramController extends Controller
 
   public function removeItem()
   {
-    foreach ($_SESSION['order_items_data'] as $itemCount=>$item) {
-      if ($itemCount == $_POST['removeItem']){
-      $this->ticketService->deleteTicket($this->currentOrderItems[$itemCount]->getId());
-      array_splice($_SESSION['order_items_data'], $itemCount, 1);
-    }}
+    foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
+      if ($itemCount == $_POST['removeItem']) {
+        $this->ticketService->deleteTicket($this->currentOrderItems[$itemCount]->getId());
+        array_splice($_SESSION['order_items_data'], $itemCount, 1);
+      }
+    }
     header("location: /personalProgram");
   }
 
 
 
-  
+
   public function updateTicketQuantity()
   {
     foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
-      if ($itemCount == $_POST['update']){
+      if ($itemCount == $_POST['update']) {
         $ticket = $this->currentOrderItems[$itemCount];
-         $newTicket = new Ticket();
-         $newTicket->setId($ticket->getId());
+        $newTicket = new Ticket();
+        $newTicket->setId($ticket->getId());
         $newTicket->setAmount($_POST['quantity']);
         $newTicket->setCalcPrice($ticket->getCalcPrice());
-        if ($ticket->getDanceEventId() !==null){
-        $newTicket->setDanceEventId($ticket->getDanceEventId());}
-        if ($ticket->getHistoryTourId() !==null){
-          $newTicket->setHistoryTourId($ticket->getHistoryTourId());}
-          if ($ticket->getReservationId() !==null){
-            $newTicket->setReservationId($ticket->getReservationId());}
+        if ($ticket->getDanceEventId() !== null) {
+          $newTicket->setDanceEventId($ticket->getDanceEventId());
+        }
+        if ($ticket->getHistoryTourId() !== null) {
+          $newTicket->setHistoryTourId($ticket->getHistoryTourId());
+        }
+        if ($ticket->getReservationId() !== null) {
+          $newTicket->setReservationId($ticket->getReservationId());
+        }
         $newTicket->setUserId($ticket->getUserId());
-  
-       if ( $this->products[$itemCount]['Event']->getTicketPrice()){
-        $ticketsPrice = $this->products[$itemCount]['Event']->getTicketPrice() * $newTicket->getAmount();}
-        else
-        {
-          $ticketsPrice = $this->currentOrderItems[$itemCount]->getTicketPrice() *  $newTicket->getAmount();
+
+        if ($this->products[$itemCount]['Event']->getTicketPrice()) {
+          $ticketsPrice = $this->products[$itemCount]['Event']->getTicketPrice() * $newTicket->getAmount();
+        } else {
+          $ticketsPrice = $this->currentOrderItems[$itemCount]->getTicketPrice() * $newTicket->getAmount();
         }
         $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
 
 
-        $_SESSION['order_items_data'][$itemCount] = $newTicket; 
+        $_SESSION['order_items_data'][$itemCount] = $newTicket;
+      }
     }
-  }
-  header("location: /personalProgram");
+    header("location: /personalProgram");
 
   }
 
 
   public function addToCart()
   {
-    if (!isset($_SESSION['selected_items_to_purchase'])){
-      $_SESSION['selected_items_to_purchase']=[];
+    if (!isset($_SESSION['selected_items_to_purchase'])) {
+      $_SESSION['selected_items_to_purchase'] = [];
     }
     foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
       if ($itemCount == $_POST['addToCart'])
-      $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])]=$item;
+        $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])] = $item;
     }
     header("location: /personalProgram");
   }
 
 
-  
+
   public function addAllToCart()
   {
-    
-      $_SESSION['selected_items_to_purchase']=$_SESSION['order_items_data'];
-    
+
+    $_SESSION['selected_items_to_purchase'] = $_SESSION['order_items_data'];
+
     header("location: /personalProgram");
   }
 
-  public function getPaidTickets(){
-
-    $paidTickets=[];
-
-    foreach ($this->currentOrderItems as $orderItem=>$item) {
-      
-      $ticket=$this->ticketService->getPaidTicketById($item->getId());
-      $paidTickets[$orderItem]=$ticket;
+  public function getPaidTickets()
+  {
 
 
-      }
+      $paidTickets= $this->ticketService->getPaidTickets($this->user->getId());
 
-      return $paidTickets;
+
+    return $paidTickets;
 
 
   }
@@ -146,7 +144,9 @@ class PersonalProgramController extends Controller
 
 
 
-  
+
+
+
 }
 
 ?>

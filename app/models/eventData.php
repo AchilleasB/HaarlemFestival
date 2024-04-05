@@ -52,13 +52,8 @@ public function setDateTime(string $value )
    $day = next($dateTimeData);
    $month = next($dateTimeData);
    $time = next($dateTimeData);
+   $dateTimeString = "{$dayOfWeek} {$day} {$month} {$time}";
 
-   if ($dayOfWeek AND $day AND $month AND $time ){
-   $dateTimeString = "{$dayOfWeek} {$day} {$month} {$time}";}
-   else 
-   {$dateTimeString = reset($dateTimeData) . " " . date("H:i", strtotime(next($dateTimeData)));
-    
-   }
     $this->date_time = $dateTimeString;
 }  
 

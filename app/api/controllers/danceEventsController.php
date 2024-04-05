@@ -3,7 +3,8 @@ require __DIR__ . '/../../services/danceService.php';
 require_once __DIR__ . '/../../models/dance.php';
 require_once __DIR__ . '/../../models/ticket.php';
 require_once __DIR__ . '/../../services/ticketService.php';
-
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Ramsey\Uuid\Uuid;
 
 class DanceEventsController
 {
@@ -100,6 +101,8 @@ class DanceEventsController
             }
 
             $danceTicket = new Ticket();
+
+            $danceTicket->setId(Uuid::uuid4()->toString());
             $danceTicket->setAmount($object->amount);
             $danceTicket->setDanceEventId($object->event_id);
             $danceTicket->setUserId($object->user_id);

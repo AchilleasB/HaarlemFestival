@@ -289,28 +289,34 @@ class RestaurantRepository extends Repository
 
     public function updateSeats($id, $newSeatsAvailable)
     {
-        $query = $this->connection->prepare("UPDATE restaurants SET number_of_seats=:number_of_seats WHERE id=:id");
-        $query->bindParam(":id", $id);
-        $query->bindParam(":number_of_seats", $newSeatsAvailable);
-        $query->execute();
+        try {
+
+            $query = $this->connection->prepare("UPDATE restaurants SET number_of_seats=:number_of_seats WHERE id=:id");
+            $query->bindParam(":id", $id);
+            $query->bindParam(":number_of_seats", $newSeatsAvailable);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
+
 
     }
 
 
     public function getRestaurantIdByName($name)
     {
-        try{
+        try {
 
-        $query = $this->connection->prepare("SELECT id FROM restaurants WHERE name=:name ");
-        $query->bindParam(":name", $name);
-        $query->execute();
+            $query = $this->connection->prepare("SELECT id FROM restaurants WHERE name=:name ");
+            $query->bindParam(":name", $name);
+            $query->execute();
 
-        $query->setFetchMode(PDO::FETCH_ASSOC);
-        $row = $query->fetch();
-        return $row['id'];
-    } catch (PDOException $e) {
-        echo $e->getMessage() . $e->getLine();
-    }
+            $query->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $query->fetch();
+            return $row['id'];
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
 
 
     }

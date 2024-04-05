@@ -2,6 +2,9 @@
 
 require_once(__DIR__ . '/../../services/historyTourService.php');
 require_once __DIR__ . '/../../models/ticket.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Ramsey\Uuid\Uuid;
+
 
 class HistoryTourController 
 {
@@ -65,6 +68,7 @@ class HistoryTourController
                 } else {
                     
                     $ticket = new Ticket();
+                    $ticket->setId( Uuid::uuid4()->toString());
                     $ticket->setAmount($quantity);
                     
                     $ticket->setHistoryTourId($historyTourID); 

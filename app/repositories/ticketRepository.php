@@ -1,37 +1,38 @@
 <?php
 
-require_once __DIR__ .'/../models/ticket.php';
+require_once __DIR__ . '/../models/ticket.php';
 
-require_once  __DIR__ . '/../repositories/orderItemRepository.php';
+require_once __DIR__ . '/../repositories/orderItemRepository.php';
 
-require_once  __DIR__ . '/../repositories/yummy/reservationRepository.php';
+require_once __DIR__ . '/../repositories/yummy/reservationRepository.php';
 
 
 
 //class that handles updating and deleting various types of tickets
 class TicketRepository extends Repository
 {
-   
-    
-    public function getPaidTicketById($id)
+
+
+    public function getPaidTickets($userId)
     {
 
         try {
 
-            $stmt= $this->connection->prepare("SELECT * FROM tickets WHERE order_id IS NOT NULL AND id=:id");
-            $stmt->bindParam(':id', $id);
+            $stmt = $this->connection->prepare("SELECT * FROM tickets WHERE order_id IS NOT NULL and user_id=:user_id");
+            $stmt->bindParam(':user_id', $userId);
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $row = $stmt->fetch();
-            return $row;
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Ticket');
+            $tickets = $stmt->fetchAll();
+
+            return $tickets;
         } catch (PDOException $e) {
             echo $e->getMessage() . $e->getLine();
         }
-    
+
 
     }
-   
+
 
     function getTicketById($id)
     {
@@ -47,28 +48,27 @@ class TicketRepository extends Repository
         } catch (PDOException $e) {
             echo $e->getMessage() . $e->getLine();
         }
-    
+
     }
 
 
 
-function getTicketAndEventData($ticketId){
-$shoppingCartRepository = new OrderItemRepository();
-$eventDataTable = $shoppingCartRepository->getEventDataTable($ticketId);
-if($eventDataTable["table"]=="dance_events"){
-    $ticket = $this->getDanceEventTicketByTicketId($ticketId);
-}
-if($eventDataTable["table"]=="history_tours")
-{
-    $ticket = $this->getTourEventTicketByTicketId($ticketId);
-}
-if($eventDataTable["table"]=="reservations")
-{
-    $ticket = $this->getYummyEventTicketByTicketId($ticketId);
-}
-return $ticket;
+    function getTicketAndEventData($ticketId)
+    {
+        $shoppingCartRepository = new OrderItemRepository();
+        $eventDataTable = $shoppingCartRepository->getEventDataTable($ticketId);
+        if ($eventDataTable["table"] == "dance_events") {
+            $ticket = $this->getDanceEventTicketByTicketId($ticketId);
+        }
+        if ($eventDataTable["table"] == "history_tours") {
+            $ticket = $this->getTourEventTicketByTicketId($ticketId);
+        }
+        if ($eventDataTable["table"] == "reservations") {
+            $ticket = $this->getYummyEventTicketByTicketId($ticketId);
+        }
+        return $ticket;
 
-}
+    }
 
 
     function getDanceEventTicketByTicketId($ticketId)
@@ -84,7 +84,7 @@ return $ticket;
                         WHERE tickets.id = :id;";
 
             $stmt = $this->connection->prepare($query);
-            $stmt->bindParam(':id', $ticketId);            
+            $stmt->bindParam(':id', $ticketId);
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -93,7 +93,7 @@ return $ticket;
         } catch (PDOException $e) {
             echo $e->getMessage() . $e->getLine();
         }
-    
+
     }
 
 
@@ -106,17 +106,17 @@ return $ticket;
             WHERE tickets.id = :id;";
 
             $stmt = $this->connection->prepare($query);
-            $stmt->bindParam(':id', $ticketId);            
+            $stmt->bindParam(':id', $ticketId);
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $row = $stmt->fetch();
-            $row['name']="A STROLL THROUGH HISTORY";
+            $row['name'] = "A STROLL THROUGH HISTORY";
             return $row;
         } catch (PDOException $e) {
             echo $e->getMessage() . $e->getLine();
         }
-    
+
     }
 
 
@@ -132,7 +132,7 @@ return $ticket;
             WHERE tickets.id = :id;";
 
             $stmt = $this->connection->prepare($query);
-            $stmt->bindParam(':id', $ticketId);            
+            $stmt->bindParam(':id', $ticketId);
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -147,75 +147,76 @@ return $ticket;
 
 
 
-function updateTicketQuantity($orderItemId, $ticketQuantity)
-{
-    try {
-    $query = $this->connection->prepare("UPDATE tickets SET amount=:amount WHERE id=:id");
-    $query->bindParam(":id", $orderItemId);
-    $query->bindParam(":amount", $ticketQuantity);
-    $query->execute();
-    
-    } catch (PDOException $e) {
-        echo $e->getMessage() . $e->getLine();
+    function updateTicketQuantity($orderItemId, $ticketQuantity)
+    {
+        try {
+            $query = $this->connection->prepare("UPDATE tickets SET amount=:amount WHERE id=:id");
+            $query->bindParam(":id", $orderItemId);
+            $query->bindParam(":amount", $ticketQuantity);
+            $query->execute();
+
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
+
     }
 
-}
+    function updateCalculatedPrice($id, $calc_price)
+    {
 
-function updateCalculatedPrice($id, $calc_price){
+        try {
+            $query = $this->connection->prepare("UPDATE tickets SET calc_price=:calc_price WHERE id=:id");
+            $query->bindParam(":id", $id);
+            $query->bindParam(":calc_price", $calc_price);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
 
-    try {
-    $query = $this->connection->prepare("UPDATE tickets SET calc_price=:calc_price WHERE id=:id");
-    $query->bindParam(":id", $id);
-    $query->bindParam(":calc_price", $calc_price);
-    $query->execute();
-} catch (PDOException $e) {
-    echo $e->getMessage() . $e->getLine();
-}
-
-}
-
-
-
-function deleteTicket($id)
-{
-    try {
-        $stmt = $this->connection->prepare("DELETE FROM tickets WHERE id=:id");
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-
-    } catch (PDOException $e) {
-        echo $e;
     }
-}
 
 
 
-function updateTicketOrder($id, $order_id)
-{
-    try{
-    $reservationRepository = new ReservationRepository();
-    $reservationId=$reservationRepository->getReservationIdByTicketId($id);
-    if ($reservationId != NULL){
-        $reservationRepository->activateReservation($reservationId);
+    function deleteTicket($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM tickets WHERE id=:id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+        } catch (PDOException $e) {
+            echo $e;
+        }
     }
-      
-    $query = $this->connection->prepare("UPDATE tickets SET order_id=:order_id WHERE id=:id");
-    $query->bindParam(":id", $id);
-    $query->bindParam(":order_id", $order_id);
-    $query->execute();
-} catch (PDOException $e) {
-    echo $e->getMessage() . $e->getLine();
-}
 
 
 
-}
+    function updateTicketOrder($id, $order_id)
+    {
+        try {
+            $reservationRepository = new ReservationRepository();
+            $reservationId = $reservationRepository->getReservationIdByTicketId($id);
+            if ($reservationId != NULL) {
+                $reservationRepository->activateReservation($reservationId);
+            }
+
+            $query = $this->connection->prepare("UPDATE tickets SET order_id=:order_id WHERE id=:id");
+            $query->bindParam(":id", $id);
+            $query->bindParam(":order_id", $order_id);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
+
+
+
+    }
 
 
 
 
 
-   
+
 
 }
 

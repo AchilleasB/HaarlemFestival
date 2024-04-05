@@ -12,13 +12,13 @@
   <script src="http://code.jquery.com/jquery-migrate-1.1.1.js"></script>
   <link rel="stylesheet" href="../styles/main.css">
 </head>
-<body class="border border-white ">
+<body>
   <?php
     include __DIR__ . '/../header.php';
     require __DIR__ . '/../../config/urlconfig.php';
 
     ?>
-  <main class="border border-white " style="margin-bottom:100px;">
+  <main style="margin-bottom:100px;">
 
   <?php $paidTickets=$this->paidTickets;?>
     <div class="grid pt-5" style="--bs-columns: 10; --bs-gap: 1rem;">
@@ -381,7 +381,7 @@
           </h5>
         </div>
         <?php } ?>
-        <a href="/">
+        <a href="/festival">
           <button class="rounded-0 px-5 py-2 mt-5" type=submit name=browse id="browse">Continue
             browsing</button>
         </a>
