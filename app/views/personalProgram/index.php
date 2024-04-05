@@ -264,8 +264,6 @@
 
                 $pricePerItem = $ticketPrice * $ticketAmount;
 
-                $ticketsAvailableForEvent = $this->products[$orderItem]['Event']->getTicketsAvailable();
-
                 $totalPrice = $this->orderTotal;
                 $totalVAT = $this->orderVAT;?>
 
@@ -339,15 +337,6 @@
                       value=<?=$orderItem?>>Save</button>
                     
                     </form>
-                    <?php  if ($ticketsAvailableForEvent > 0) {?>
-                    <div>Only
-                      <?= $ticketsAvailableForEvent ?> left
-                    </div>
-                    <?php } 
-                  else {?>
-                    <div> Sold out</div>
-                    <div>You can't purchase more tickets than the quantity selected</div>
-                    <?php }?>
                 </td>
                 <td class="align-middle">
                   &euro;
@@ -400,6 +389,8 @@
 <script> var totalVAT= "<?php echo $totalVAT; ?>";</script>
 <script>var paidTickets = <?php echo json_encode($paidTickets); ?>;</script>
 
-<script src="/scripts/orderItem/orderItem.js"></script>
+<script src="/scripts/orderItem/personalProgram.js"></script>
+
+
 
 </html>
