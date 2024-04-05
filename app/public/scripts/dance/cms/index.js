@@ -265,7 +265,7 @@ function createItemElement(item, itemType) {
         `;
     }
 
-    // line 262 : each edit container is given a unique id
+    // line 263 : each edit container is given a unique id
 
     itemElement.innerHTML = itemData;
 
