@@ -1,4 +1,5 @@
 
+
 //added asynchronous ticket data retrieval since the script is updating html content
 async function getTicketById(id) {
 
@@ -48,8 +49,6 @@ function updateTicketQuantity(orderItemData) {
 
 
 }
-
-
 
 //reload available dance tickets data asynchronously so the changes can be loaded without scrolling the page backward
 
@@ -105,8 +104,7 @@ function updateAvailableReservationsForYummyEvent(eventData) {
 
 
 
-//Function that handles update available tickets for various events
-//Handles the update based on the various sql queries used for update 
+//Function that handles update ticket amount and available tickets prior to checkout
 function setOrderItemsData() {
 
     let btns = document.querySelectorAll('.updateQuantity');
@@ -178,39 +176,5 @@ function calculateTicketQuantities(orderItem, event, input) {
 
 
 
-
-
-
-
-
-function displayPaidTickets() {
-
-    paidTickets.forEach(async (ticket, i) => {
-        var eventData = await getEventDataByTicketId(ticket.id);
-
-        var day = eventData.date_time.match('[1-9]{2}|[12]\d|3[01]');
-
-        var time = eventData.date_time.match('[0-9]{2}:[0-9]{2}').toString().split(":");
-        time = eventData.date_time.match('[0-9]{2}:[0-9]{2}').toString().split(":")[0];
-
-        if (time < 12) {
-            var td = document.querySelectorAll(`.hour${time}am`);
-        }
-        else { var td = document.querySelectorAll(`.hour${time}pm`); }
-
-
-        if ($(td[0]).find(`.${day}July`).length > 0) {
-
-            $(td[0]).find(`.${day}July`).text(eventData.name);
-
-        }
-
-
-    });
-
-
-}
-
 setOrderItemsData();
-displayPaidTickets();
 
