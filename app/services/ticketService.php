@@ -29,6 +29,13 @@ class TicketService
         return $this->ticketRepository->getPaidTickets($id);
     }
 
+    public function getUnpaidTickets($id)
+    {
+        return $this->ticketRepository->getUnpaidTickets($id);
+    }
+
+
+
 
 
     public function getTicketById($id)

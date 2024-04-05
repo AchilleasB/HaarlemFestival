@@ -34,6 +34,28 @@ class TicketRepository extends Repository
     }
 
 
+    public function getUnpaidTickets($userId)
+    {
+
+        try {
+
+            $stmt = $this->connection->prepare("SELECT * FROM tickets WHERE order_id IS NULL and user_id=:user_id");
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Ticket');
+            $tickets = $stmt->fetchAll();
+
+            return $tickets;
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
+
+
+    }
+
+
+
     function getTicketById($id)
     {
         try {
