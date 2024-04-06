@@ -3,8 +3,8 @@ function handleEditVenue(venue) {
     const editVenueContainer = document.getElementById(editVenueContainerId);
 
     editVenueContainer.innerHTML = `
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row justify-content-center border-bottom">
+        <div class="col-md-8 mb-3">
             <form id="edit-venue-form" style="margin-top:6px">
                 <h3>Edit ${venue.name}'s Information</h3>
                 <div class="mb-3">
@@ -45,8 +45,16 @@ function handleEditVenue(venue) {
 }
 
 async function updateVenueData() {
-    const formData = new FormData(document.getElementById('edit-venue-form'));
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    const image = document.getElementById("image");
 
+    if (name === "" || address === "" || !image.files[0]) {
+        displayMessage("Please fill in all fields", 3000);
+        return;
+    }
+
+    const formData = new FormData(document.getElementById('edit-venue-form'));
     const response = await fetch(`/api/venues`, {
         method: 'POST',
         body: formData
@@ -57,4 +65,5 @@ async function updateVenueData() {
     itemsListContainer.innerHTML = '';
     loadItems(venuesAPIendpoint, 'venues');
 }
+
 

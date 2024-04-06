@@ -24,7 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function saveVenueDataToDatabase() {
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    const image = document.getElementById("image");
 
+    if (name === "" || address === "" || !image.files[0]) {
+        displayMessage("Please fill in all fields", 3000);
+        return;
+    }
+    
     const formData = new FormData(document.getElementById("add-venue-form"));
     const response = await fetch(venuesAPIendpoint, {
         method: "POST",
