@@ -211,6 +211,20 @@ class TicketRepository extends Repository
         }
     }
 
+    function updateTicketUserId($ticketId, $userId)
+    {
+
+        try {
+            $query = $this->connection->prepare("UPDATE tickets SET user_id=:user_id WHERE id=:id");
+            $query->bindParam(":id", $ticketId);
+            $query->bindParam(":user_id", $userId);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
+
+    }
+
 
 
     function updateTicketOrder($id, $order_id)

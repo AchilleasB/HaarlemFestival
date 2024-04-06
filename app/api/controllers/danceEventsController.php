@@ -112,7 +112,9 @@ class DanceEventsController
             $danceTicket->setId(Uuid::uuid4()->toString());
             $danceTicket->setAmount($object->amount);
             $danceTicket->setDanceEventId($object->event_id);
-            $danceTicket->setUserId($object->user_id);
+            if ($object->user_id != NULL){
+            $danceTicket->setUserId($object->user_id);}
+            else {$danceTicket->setUserId(NULL);}
 
             $event_price = $this->danceService->getDanceEventPrice($object->event_id);
             $calc_price = $event_price * $object->amount;
@@ -124,6 +126,17 @@ class DanceEventsController
             } elseif ($this->danceService->checkTicketAvailability($danceTicket)) {
                 if($this->danceService->addTicketToCart($danceTicket)){
                     $message = 'Ticket(s) added to cart successfully';
+
+                    //added by Maria to enable adding dance tickets to shopping cart by visitor
+
+                    if(!isset($_SESSION['user_id'])){
+                        if (!isset($_SESSION['selected_items_to_purchase'])){
+                            $_SESSION['selected_items_to_purchase']=[];
+                        }
+                        $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])]=$danceTicket;
+
+                    }
+                    //end of added by Maria
                 } else {
                     $message = 'An error occurred while adding ticket(s) to cart';
                 }

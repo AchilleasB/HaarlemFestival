@@ -5,6 +5,8 @@ require_once __DIR__ . '/../services/userService.php';
 require_once __DIR__ . '/../services/ticketService.php';
 require_once __DIR__ . '/../services/orderService.php';
 require_once __DIR__ . '/../services/orderItemService.php';
+require_once __DIR__ . '/../services/yummy/reservationService.php';
+
 
 
 
@@ -33,7 +35,7 @@ class ShoppingCartController extends Controller
     $this->ticketService = new TicketService();
     $this->orderService = new OrderService();
     $this->shoppingCartService = new OrderItemService();
-    $this->user = $this->userService->getUserByEmail($_SESSION['user_email']);
+    $this->user = $this->userService->getUserByEmail($this->getRegisteredUserEmail());
     $this->currentOrderItems = $this->getItems();
     $this->products = $this->shoppingCartService->getProducts($this->currentOrderItems);
     $this->orderTotal = $this->shoppingCartService->calculateOrderTotal($this->currentOrderItems, $this->products);
@@ -52,6 +54,17 @@ class ShoppingCartController extends Controller
 
   }
 
+
+  public function getRegisteredUserEmail(){
+    $userEmail=NULL;
+    if(isset($_SESSION['user_email']) && ($_SESSION['user_email'] != NULL)){
+      $userEmail = $_SESSION['user_email'];
+    }
+     return $userEmail;
+   
+  }
+
+
   //retrieve only the tickets which are added by the user in the present session
   public function getItems()
   {
@@ -60,6 +73,7 @@ class ShoppingCartController extends Controller
       $_SESSION['selected_items_to_purchase'] = [];
     }
     $orderItems = unserialize(serialize($_SESSION['selected_items_to_purchase']));
+    
 
     return $orderItems;
 
@@ -115,18 +129,28 @@ class ShoppingCartController extends Controller
 
   public function selectPaymentMethod()
   {
+   
     if ($this->orderTotal > 0) {
+      if ($this->user != NULL){
       require '../views/shoppingCart/paymentMethod.php';
+      }
+      else {
+      
+        header("location: /registration");
+       
+      }
+     
     } else {
       header("location: /shoppingCart");
     }
 
+  
   }
+
+
 
   public function confirmPurchase()
   {
-
-
 
     if (isset($_POST["paymentMethod"])) {
       if ($_POST["paymentMethod"] == "ideal") {
@@ -136,11 +160,11 @@ class ShoppingCartController extends Controller
       } else if ($_POST["paymentMethod"] == "visa" || $_POST["paymentMethod"] == "mastercard") {
         $this->processCreditcardPayment($this->currentOrder);
       }
+
+    
     } else {
 
-      require '../views/shoppingCart/paymentMethod.php';
       echo "<p style='padding-left:12px;'>Select payment method</p> ";
-
 
     }
   }

@@ -4,6 +4,8 @@ require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/userService.php';
 require_once __DIR__ . '/../services/orderItemService.php';
 require_once __DIR__ . '/../services/ticketService.php';
+require_once __DIR__ . '/../services/yummy/reservationService.php';
+
 
 
 
@@ -43,12 +45,12 @@ class PersonalProgramController extends Controller
 
   }
 
-  //retrieve only the tickets which are added by the user in the present session
   public function getItems()
   {
     if (!isset($_SESSION['order_items_data'])) {
       $_SESSION['order_items_data'] = [];
     }
+    $this->setOrderItemsUserId();
     $orderItems = $this->ticketService->getUnpaidTickets($this->user->getId());
     $_SESSION['order_items_data']=$orderItems;
 
@@ -56,6 +58,18 @@ class PersonalProgramController extends Controller
 
   }
 
+
+  public function setOrderItemsUserId(){
+
+       $orderItems = unserialize(serialize($_SESSION['selected_items_to_purchase']));
+       foreach($orderItems as $item){
+        $this->ticketService->updateTicketUserId($item->getId(), $this->user->getId());
+        if ($item->getReservationId() != NULL){
+            $reservationService= new ReservationService();
+            $reservationService->setUserIdToReservation($item->getReservationId(), $this->user->getId());
+        }
+      }
+  }
 
   public function removeItem()
   {
@@ -131,7 +145,6 @@ class PersonalProgramController extends Controller
 
   public function getPaidTickets()
   {
-
 
       $paidTickets= $this->ticketService->getPaidTickets($this->user->getId());
 

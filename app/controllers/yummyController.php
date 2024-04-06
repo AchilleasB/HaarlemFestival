@@ -104,9 +104,16 @@ class YummyController extends Controller
                 $reservationTicket->setCalcPrice($price);
                 $this->reservationService->addReservationToCart($reservationTicket);
 
-                // Start of added by Maria
-                $_SESSION['order_items_data'][count($_SESSION['order_items_data'])] = $reservationTicket;
-                // End of added by Maria
+                  //added by Maria to enable adding dance tickets to shopping cart by visitor
+
+                  if(!isset($_SESSION['user_id'])){
+                    if (!isset($_SESSION['selected_items_to_purchase'])){
+                        $_SESSION['selected_items_to_purchase']=[];
+                    }
+                    $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])]=$reservationTicket;
+
+                }
+                //end of added by Maria
 
                 header('Location: /yummy/restaurant?id=' . $_SESSION['restaurant_id']);
             } catch (RepositoryException $e) {

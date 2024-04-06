@@ -4,6 +4,7 @@ require_once __DIR__ . '/controller.php';
 require __DIR__ . '/../models/user.php';
 require __DIR__ . '/../services/userService.php';
 
+
 class RegistrationController extends Controller
 {
     private $userService;
@@ -47,12 +48,28 @@ class RegistrationController extends Controller
                     $_SESSION['successMessage'] = "You have successfully registered!\nYou can now log in.";
                     sleep(1);
 
+                    //added by Maria to enable keeping user data if the user registers at checkout
+
+                    if (isset($_SESSION['selected_items_to_purchase'])){
+                        $user=$this->userService->getUserByEmail($email);
+                        $_SESSION['user_id']=$user->getId();
+                        $_SESSION['user_firstname']=$user->getFirstName();
+                        $_SESSION['user_lastname']=$user->getLastName();
+                        $_SESSION['user_email']=$user->getEmail();
+                        $_SESSION['user_role']=$user->getRole();
+                        header("location: /shoppingCart");
+                    }
+                    //end of added by Maria
+                    else{
                     header('Location: /login');
-                    exit;
+                    exit;}
                 }
                 header('Refresh: 2; URL=/registration');
                 return;
             }
         }
     }
+
+
+
 }
