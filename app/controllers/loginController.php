@@ -49,9 +49,9 @@ class LoginController extends Controller
                     $_SESSION['user_role'] = $user->getRole();
                     $_SESSION['user_registration_date'] = $user->getRegistrationDate();
 
-                    header('Location: /festival');
+                    $redirectUrl = isset($_GET['redirect']) ? urldecode($_GET['redirect']) : '/festival';
+                    header('Location: ' . $redirectUrl);
                     exit();
-
                 } else {
                     $_SESSION['errorMessage'] = 'Invalid password.';
                 }
@@ -67,5 +67,4 @@ class LoginController extends Controller
         header('Location: /festival');
         exit();
     }
-
 }

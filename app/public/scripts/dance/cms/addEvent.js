@@ -53,7 +53,7 @@ async function saveEventToDatabase() {
     });
 
     const data = await response.json();
-    displayMessage(data.message);
+    displayMessage(data.message, 3000);
     itemsListContainer.innerHTML = '';
     loadItems(danceEventsAPIendpoint, 'danceEvents');
 }
