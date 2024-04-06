@@ -19,15 +19,22 @@ class DanceController extends Controller
     public function artist()
     {
         if (isset($_GET['id'])) {
-            $_SESSION['artist_id'] = $_GET['id'];
-            $artist = $this->artistService->getArtistById($_SESSION['artist_id']);
+            $artistId = $_GET['id'];
+            $_SESSION['artist_id'] = $artistId;
 
-            $_SESSION['artist_name'] = $artist->getName();
-            $_SESSION['artist_genre'] = $artist->getGenre();
-            $_SESSION['artist_image'] = $artist->getArtistImage();
+            if ($this->artistService->artistPageExists($artistId)) {
+                $artist = $this->artistService->getArtistById($_SESSION['artist_id']);
 
-            $this->displayView($this);
+                $_SESSION['artist_name'] = $artist->getName();
+                $_SESSION['artist_genre'] = $artist->getGenre();
+                $_SESSION['artist_image'] = $artist->getArtistImage();
 
+                $this->displayView($this);
+            }
+            else {
+                require __DIR__ . "../../views/errors/404.php";
+            }
+            
         } else {
             header('Location: /dance');
             exit();

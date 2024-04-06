@@ -13,8 +13,8 @@ async function handleEditDanceEvent(event) {
     const editEventContainer = document.getElementById(editEventContainerId);
 
     editEventContainer.innerHTML = `
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row justify-content-center border-bottom">
+        <div class="col-md-8 mb-3">
             <form id="edit-event-form" style="margin-top:6px">
                 <h3>Edit events's Information</h3>
                 <div class="mb-3">
@@ -95,23 +95,34 @@ async function updateEventData(event) {
         selectedArtists = $newArtists
     }
 
+    const id = event.id;
+    const date = document.getElementById('edit-event-date').value;
+    const start_time = document.getElementById('edit-event-start-time').value;
+    const end_time = document.getElementById('edit-event-end-time').value;
+    const session = document.getElementById('edit-event-session').value;
+    const tickets_available = document.getElementById('edit-event-tickets').value;
+    const price = document.getElementById('edit-event-price').value;
+    const venue_id = parseInt(document.getElementById('venue').value);
+    const type = document.getElementById('type').value;
+    const artists = selectedArtists.map(artist => parseInt(artist));
+    const venue_name = document.getElementById('venue').options[document.getElementById('venue').selectedIndex].text
+
+    if (!date || !start_time || !end_time || !session ||
+        isNaN(tickets_available) || isNaN(price)
+    ) {
+        displayMessage('Please fill in all fields', 3000);
+        return;
+    }
+
     const response = await fetch(`/api/danceEvents`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            id: event.id,
-            date: document.getElementById('edit-event-date').value,
-            start_time: document.getElementById('edit-event-start-time').value,
-            end_time: document.getElementById('edit-event-end-time').value,
-            session: document.getElementById('edit-event-session').value,
-            tickets_available: document.getElementById('edit-event-tickets').value,
-            price: document.getElementById('edit-event-price').value,
-            venue_id: parseInt(document.getElementById('venue').value),
-            type: document.getElementById('type').value,
-            artists: selectedArtists.map(artist => parseInt(artist)),
-            venue_name: document.getElementById('venue').options[document.getElementById('venue').selectedIndex].text
+            id, date, start_time, end_time, session,
+            tickets_available, price, venue_id, type,
+            artists, venue_name
         })
     });
 

@@ -32,7 +32,22 @@ class DanceEventsController
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-            $this->handleDanceEventRequest('delete');
+            $body = file_get_contents('php://input');
+            $object = json_decode($body);
+
+            if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
+                header('Content-Type: application/json');
+                echo json_encode('Invalid JSON');
+            }
+
+            if ($this->danceService->deleteDanceEvent($object->id)) {
+                $message = 'Dance event was deleted successfully';
+            } else {
+                $message = 'An error occurred while deleting the dance event';
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode(['message' => $message, 'danceEvent' => $object]);
         }
     }
 
@@ -76,14 +91,6 @@ class DanceEventsController
             }
         }
 
-        if ($request_type === 'delete') {
-            if ($this->danceService->deleteDanceEvent($object->id)) {
-                $message = 'Dance event was deleted successfully';
-            } else {
-                $message = 'An error occurred while deleting the dance event';
-            }
-        }
-
         header('Content-Type: application/json');
         echo json_encode(['message' => $message, 'danceEvent' => $object]);
     }
@@ -120,7 +127,7 @@ class DanceEventsController
                 } else {
                     $message = 'An error occurred while adding ticket(s) to cart';
                 }
-                
+
             } else {
                 $message = 'The requested amount of tickets is not available for this event';
             }
