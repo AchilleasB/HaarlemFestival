@@ -295,7 +295,7 @@ function renderDateSchedule(danceEvents, date) {
 
         const artists = document.createElement('div');
         artists.classList.add('schedule-artists');
-        artists.innerHTML = event.artists.map(artist => artist.name).join('/ ');
+        artists.innerHTML = event.artists.map(artist => artist.name).join(' / ');
 
         const venue = document.createElement('div');
         venue.classList.add('schedule-venue');

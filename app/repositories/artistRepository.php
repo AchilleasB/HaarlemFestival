@@ -41,11 +41,10 @@ class ArtistRepository extends Repository
     public function addArtist($artist)
     {
         try {
-            $stmt = $this->connection->prepare('INSERT INTO artists (name, genre, description, artist_image) VALUES (:name, :genre, :description, :artist_image)');
+            $stmt = $this->connection->prepare('INSERT INTO artists (name, genre, artist_image) VALUES (:name, :genre, :artist_image)');
             $stmt->execute([
                 ':name' => $artist->getName(),
                 ':genre' => $artist->getGenre(),
-                ':description' => $artist->getDescription(),
                 ':artist_image' => $artist->getArtistImage()
             ]);
 
@@ -59,12 +58,11 @@ class ArtistRepository extends Repository
     public function updateArtist($artist)
     {
         try {
-            $stmt = $this->connection->prepare('UPDATE artists SET name = :name, genre = :genre, description = :description, artist_image = :artist_image WHERE id = :id');
+            $stmt = $this->connection->prepare('UPDATE artists SET name = :name, genre = :genre, artist_image = :artist_image WHERE id = :id');
             $stmt->execute([
                 ':id' => $artist->getId(),
                 ':name' => $artist->getName(),
                 ':genre' => $artist->getGenre(),
-                ':description' => $artist->getDescription(),
                 ':artist_image' => $artist->getArtistImage()
             ]);
 
