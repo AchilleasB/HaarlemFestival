@@ -93,6 +93,11 @@ class TicketService
     }
 
 
+    function updateTicketUserId($ticketId, $userId)
+    {
+        return $this->ticketRepository->updateTicketUserId($ticketId, $userId);
+    }
+    
     function updateTicketOrder($id, $order_id)
     {
 

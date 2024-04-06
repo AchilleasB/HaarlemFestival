@@ -294,10 +294,7 @@
                             <?= $product ?>
                           </strong>
                         </li>
-                        <li class="list-group-item border-0 pt-5">
-                          <span class=" text-decoration-underline"> <a href="" class="text-dark"> Click here for event
-                              details</a> </span>
-                        </li>
+                        
                       </ul>
                     </div>
                   </div>

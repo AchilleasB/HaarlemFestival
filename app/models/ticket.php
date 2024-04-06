@@ -10,7 +10,7 @@ class Ticket implements JsonSerializable
     private ?int $dance_event_id = null;
     private ?int $history_tour_id = null;
     private ?int $reservation_id = null;
-    private ?int $user_id;
+    private ?int $user_id = null;
     private ?int $order_id = null;
 
     public function __construct() {
@@ -101,7 +101,7 @@ class Ticket implements JsonSerializable
         return $this->order_id;
     }
 
-    public function setOrderId(int $order_id): void
+    public function setOrderId(?int $order_id): void
     {
         $this->order_id = $order_id;
     }

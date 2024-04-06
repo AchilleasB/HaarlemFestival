@@ -3,7 +3,6 @@
 if (isset($_SESSION['user_firstname'])) {
     $username = $_SESSION['user_firstname'];
 }
-
 ?>
 
 <!-- navbar -->
@@ -63,37 +62,41 @@ if (isset($_SESSION['user_firstname'])) {
                                 <a class="nav-link" href="/qrCodeChecker"><i class="fa-solid fa-clipboard"></i> QR code
                                     checker</a>
                             </li>
+
                         <?php } ?>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/personalProgram">
+                                    <img src="/../icons/favorite.svg" class="sw-10 h-10"
+                                        alt="Favorite icon">
+                                  <span class="bg-secondary rounded-circle px-1" style="--bs-bg-opacity: .5;"> 
+                              <?php    if (isset($_SESSION['order_items_data'])){echo count($_SESSION['order_items_data']);}
+                                       else if(!isset($_SESSION['order_items_data']) && isset($_SESSION['selected_items_to_purchase'])){echo count($_SESSION['selected_items_to_purchase']);}
+                                       else {$_SESSION['order_items_data']=[];
+                                             echo 0;} 
+
+                              ?>                                    
+                        </a>
+                        </li>
+                        <?php }?>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/personalProgram">
-                                <img src="/../icons/favorite.svg" class="sw-10 h-10" alt="Favorite icon">
-                                <span class="bg-secondary rounded-circle px-1" style="--bs-bg-opacity: .5;">
-                                    <?php if (isset($_SESSION['order_items_data'])) {
-                                        echo count($_SESSION['order_items_data']);
-                                    } else {
-                                        $_SESSION['order_items_data'] = [];
-                                        echo 0;
-                                    }
-
+                                <a class="nav-link" href="/shoppingCart">
+                                    <img src="/../icons/shopping-cart.svg" class="shopping-cart-icon w-10 h-10"
+                                        alt="Shopping cart icon">
+                                    Shopping cart
+                                    <?php if (!isset($_SESSION['order_items_data'])) { 
+                                        $_SESSION['order_items_data'] = []; } 
                                     ?>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/shoppingCart">
-                                <img src="/../icons/shopping-cart.svg" class="shopping-cart-icon w-10 h-10" alt="Shopping cart icon">
-                                Shopping cart
-                                <?php if (!isset($_SESSION['order_items_data'])) {
-                                    $_SESSION['order_items_data'] = [];
-                                }
-                                ?>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                            
+                            <?php if (isset($username)) { ?>
+
                         <li class="nav-item">
                             <a class="nav-link" href="/login/logout"><i class="fa-solid fa-right-from-bracket"></i> Log
                                 out</a>
                         </li>
-                    <?php } ?>
+                        <?php }?>
                 </ul>
             </div>
         </div>
