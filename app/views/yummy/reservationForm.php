@@ -30,14 +30,17 @@
                 <div class="reservation-row px-5 py-3 rounded">
                     <h1 class="text-center mb-4">Reservation form</h1>
                     <form id="reservation-form" action="/yummy/reservation" method="POST">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <p class="reservantion-name">
-                                <?php echo htmlspecialchars($_SESSION['user_firstname'] . ' ' . $_SESSION['user_lastname']); ?>
-                            </p>
-                            <p class="tiny-warning"><i class="fas fa-exclamation-circle"></i> For the safety of our
-                                customers, reservation can be made only on the account holder's name.</p>
-                        </div>
+                        <?php if (!is_null($user)) : ?>
+                            <!-- Render user name -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <p class="reservantion-name">
+                                    <?php echo htmlspecialchars($user->getLastname() . ' ' . $user->getFirstname()); ?>
+                                </p>
+                                <p class="tiny-warning"><i class="fas fa-exclamation-circle"></i> For the safety of our
+                                    customers, reservation can be made only on the account holder's name.</p>
+                            </div>
+                        <?php endif; ?>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone number<span class="asterisk-symbol">*</span></label>
                             <input type="tel" class="form-control" id="phone" name="phone" required>
