@@ -18,6 +18,11 @@ class EventPage
         $this->id = $id;
     }
 
+    public function getTitleHumanFriendly()
+    {
+        return $this->makeHumanFriendly($this->title);
+    }
+
     public function getTitle()
     {
         return $this->title;
@@ -25,7 +30,7 @@ class EventPage
 
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = $this->makeUrlFriendly($title);
     }
 
     public function getSubTitle()
@@ -56,5 +61,22 @@ class EventPage
     public function setInformation($information)
     {
         $this->information = $information;
+    }
+
+    private function makeUrlFriendly($title) {
+        $title = trim($title);
+        $title = str_replace(' ', '-', $title);
+        $title = strtolower($title);
+        
+        $title = preg_replace('/[^a-z0-9-]/', '', $title);
+        
+        return $title;
+    }
+
+    private function makeHumanFriendly($title) {
+        $title = str_replace('-', ' ', $title);
+        $title = ucwords($title);
+    
+        return $title;
     }
 }
