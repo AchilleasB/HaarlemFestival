@@ -132,7 +132,7 @@ class CmsController extends Controller
             $success = $this->eventPageService->createEventPage($eventPage);
             if ($success) {
                 $eventPhp = "<?php\n";
-                $eventPhp .= "\$pageTitle = '{$eventPage->getTitle()}';\n";
+                $eventPhp .= "\$pageTitle = '{$eventPage->getTitleHumanFriendly()}';\n";
                 $eventPhp .= "require_once(__DIR__ . '/../../views/header.php');\n";
                 $eventPhp .= "echo '<link rel=\"stylesheet\" href=\"../../styles/main.css\">';\n";
                 $eventPhp .= "echo '<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65\" crossorigin=\"anonymous\">';\n";
