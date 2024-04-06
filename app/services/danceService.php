@@ -94,16 +94,4 @@ class DanceService
         }
     }
 
-
-
-    function updateAvailableTickets($danceTicket){
-        $id = $danceTicket->getDanceEventId();
-        $danceTicketsAvailable = $this->danceRepository->ticketsAvailable($id);
-        $newTicketAmount = $danceTicketsAvailable - $danceTicket->getAmount();
-        return $this->danceRepository->updateTicketsAmount($id, $newTicketAmount);
-    }
-
-
-  
-
 }
