@@ -5,7 +5,7 @@ class Reservation implements JsonSerializable
     private int $id;
     private int $restaurantId;
     private int $sessionId;
-    private int $userId;
+    private ?int $userId;
     private int $numberOfPeople;
     private string $mobileNumber;
     private ?string $remark;
@@ -15,7 +15,7 @@ class Reservation implements JsonSerializable
      * Reservation constructor.
      * @param int $restaurantId
      * @param int $sessionId
-     * @param int $userId
+     * @param int|null $userId
      * @param int $numberOfPeople
      * @param string $mobileNumber
      * @param string|null $remark
@@ -24,7 +24,7 @@ class Reservation implements JsonSerializable
     public function __construct(
         int $restaurantId,
         int $sessionId,
-        int $userId,
+        ?int $userId,
         int $numberOfPeople,
         string $mobileNumber,
         ?string $remark,
@@ -69,12 +69,12 @@ class Reservation implements JsonSerializable
         $this->sessionId = $sessionId;
     }
 
-    public function getUserId(): int
+    public function getUserId(): ?int
     {
         return $this->userId;
     }
 
-    public function setUserId(int $userId): void
+    public function setUserId(?int $userId): void
     {
         $this->userId = $userId;
     }

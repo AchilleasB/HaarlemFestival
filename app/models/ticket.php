@@ -91,7 +91,7 @@ class Ticket implements JsonSerializable
         return $this->user_id;
     }
 
-    public function setUserId(int $user_id): void
+    public function setUserId(?int $user_id): void
     {
         $this->user_id = $user_id;
     }

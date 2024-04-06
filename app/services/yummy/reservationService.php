@@ -52,11 +52,6 @@ class ReservationService
         return $this->reservationRepository->addReservationToCart($reservation);
     }
 
-    public function getLastReservationByRestaurantAndSessionAndUser($restaurantId, $sessionId, $userId)
-    {
-        return $this->reservationRepository->getLastReservationByRestaurantAndSessionAndUser($restaurantId, $sessionId, $userId);
-    }
-
     public function getReservationWaningDataBySessionId($sessionId)
     {
         return $this->reservationRepository->getReservationWaningDataBySessionId($sessionId);
@@ -75,5 +70,15 @@ class ReservationService
     public function getActiveStatusByReservationId($reservationId)
     {
         return $this->reservationRepository->getActiveStatusByReservationId($reservationId);
+    }
+
+    public function setUserIdToReservation($reservationId, $userId)
+    {
+        return $this->reservationRepository->setUserIdToReservation($reservationId, $userId);
+    }
+
+    public function getReservationById($reservationId)
+    {
+        return $this->reservationRepository->getReservationById($reservationId);
     }
 }

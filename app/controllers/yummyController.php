@@ -5,20 +5,24 @@ use FontLib\Table\Type\head;
 require_once(__DIR__ . '/controller.php');
 require_once(__DIR__ . '/../services/yummy/restaurantService.php');
 require_once(__DIR__ . '/../services/yummy/reservationService.php');
+require_once(__DIR__ . '/../services/userService.php');
 require_once(__DIR__ . '/../models/ticket.php');
 require_once(__DIR__ . '/../services/ticketService.php');
 require_once __DIR__ . '/../vendor/autoload.php';
+
 use Ramsey\Uuid\Uuid;
 
 class YummyController extends Controller
 {
     private $restaurantService;
     private $reservationService;
+    private $userService;
 
     public function __construct()
     {
         $this->restaurantService = new RestaurantService();
         $this->reservationService = new ReservationService();
+        $this->userService = new UserService();
     }
 
     public function index()
@@ -32,7 +36,7 @@ class YummyController extends Controller
         ];
 
 
-        $this->displayYummyView($this, $data);
+        $this->displayViewWithDataSet($this, $data);
     }
 
     public function restaurant()
@@ -52,22 +56,26 @@ class YummyController extends Controller
 
     public function reservationForm()
     {
-        if (isset($_SESSION['user_role'])) {
-            $id = $_SESSION['restaurant_id'];
-            try {
-                $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
-                $data = [
-                    'restaurant' => $restaurant,
-                    'availability' => $restaurant->getNumberOfSeats() - $this->reservationService->getAvailability(1, $id)
-                ];
-                $this->displayYummyView($this, $data);
-            } catch (RepositoryException $e) {
-                $this->handleException($e);
+        // if (isset($_SESSION['user_role'])) {
+        $id = $_SESSION['restaurant_id'];
+        try {
+            $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
+            $user = null;
+            if (isset($_SESSION['user_id'])) {
+                $user = $this->userService->getUserById($_SESSION['user_id']);
             }
-        } else {
-            header('Location: /login?redirect=' . urlencode($_SERVER['REQUEST_URI']));
-            exit();
+            $data = [
+                'restaurant' => $restaurant,
+                'user' => $user
+            ];
+            $this->displayViewWithDataSet($this, $data);
+        } catch (RepositoryException $e) {
+            $this->handleException($e);
         }
+        // } else {
+        //     header('Location: /login?redirect=' . urlencode($_SERVER['REQUEST_URI']));
+        //     exit();
+        // }
     }
 
     public function reservation()
@@ -76,7 +84,7 @@ class YummyController extends Controller
             $reservation = new Reservation(
                 $_SESSION['restaurant_id'],
                 $_POST['session_id'],
-                $_SESSION['user_id'],
+                isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null,
                 $_POST['guests'],
                 $_POST['phone'],
                 $_POST['remark'],
@@ -84,12 +92,8 @@ class YummyController extends Controller
                 false
             );
             try {
-                $this->reservationService->addReservation($reservation);
-                $reservation = $this->reservationService->getLastReservationByRestaurantAndSessionAndUser(
-                    $reservation->getRestaurantId(),
-                    $reservation->getSessionId(),
-                    $reservation->getUserId()
-                );
+                $reservationId = $this->reservationService->addReservation($reservation);
+                $reservation = $this->reservationService->getReservationById($reservationId);
 
                 $price = $reservation->getNumberOfPeople() * 10;
                 $reservationTicket = new Ticket();

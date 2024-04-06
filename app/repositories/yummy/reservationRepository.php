@@ -22,23 +22,12 @@ class ReservationRepository extends Repository
                 $reservation->getRemark(),
                 $reservation->getIsActive() ? 1 : 0
             ]);
+
+            $lastInsertedId = $this->connection->lastInsertId();
+
+            return $lastInsertedId;
         } catch (PDOException $e) {
             throw new RepositoryException('Error adding reservation', $e->getCode(), $e);
-        }
-    }
-
-    public function getLastReservationByRestaurantAndSessionAndUser($restaurantId, $sessionId, $userId)
-    {
-        try {
-            $stmt = $this->connection->prepare('SELECT * FROM reservations WHERE restaurant_id = ? AND session_id = ? AND user_id = ? ORDER BY ID DESC LIMIT 1;');
-            $stmt->execute([$restaurantId, $sessionId, $userId]);
-
-            $data = $stmt->fetch(PDO::FETCH_ASSOC);
-            $reservation = new Reservation($data['restaurant_id'], $data['session_id'], $data['user_id'], $data['number_of_people'], $data['mobile_number'], $data['remark'], $data['is_active']);
-            $reservation->setId($data['id']);
-            return $reservation;
-        } catch (PDOException $e) {
-            throw new RepositoryException('Error fetching last reservation', $e->getCode(), $e);
         }
     }
 
@@ -214,6 +203,31 @@ class ReservationRepository extends Repository
             return $data['is_active'];
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching active status by reservation id', $e->getCode(), $e);
+        }
+    }
+
+    public function setUserIdToReservation($reservationId, $userId)
+    {
+        try {
+            $stmt = $this->connection->prepare('UPDATE reservations SET user_id = ? WHERE id = ?');
+            $stmt->execute([$userId, $reservationId]);
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error setting user id to reservation', $e->getCode(), $e);
+        }
+    }
+
+    public function getReservationById($reservationId)
+    {
+        try {
+            $stmt = $this->connection->prepare('SELECT * FROM reservations WHERE id = ?');
+            $stmt->execute([$reservationId]);
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            $reservation = new Reservation($data['restaurant_id'], $data['session_id'], $data['user_id'], $data['number_of_people'], $data['mobile_number'], $data['remark'], $data['is_active']);
+            $reservation->setId($data['id']);
+            return $reservation;
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching reservation by ID', $e->getCode(), $e);
         }
     }
 }
