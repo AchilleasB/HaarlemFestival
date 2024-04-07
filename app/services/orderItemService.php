@@ -71,7 +71,7 @@ class OrderItemService
             if ($productData[$itemCount]['Event']->getTicketPrice()) {
                 $productPrice = $productData[$itemCount]['Event']->getTicketPrice();
             } else {
-                $productPrice = $orderItems[$itemCount]->getTicketPrice();
+                $productPrice = $orderItems[$itemCount]->getTicketPrice($orderItems[$itemCount]->getAmount());
             }
             $productQuantity = $orderItem->getAmount();
             $productTotalPrice = $productPrice * $productQuantity;
@@ -94,7 +94,7 @@ class OrderItemService
             if ($productData[$itemCount]['Event']->getTicketPrice()) {
                 $productPrice = $productData[$itemCount]['Event']->getTicketPrice();
             } else {
-                $productPrice = $orderItems[$itemCount]->getTicketPrice();
+                $productPrice = $orderItems[$itemCount]->getTicketPrice($orderItems[$itemCount]->getAmount());
             }
             $productQuantity = $orderItem->getAmount();
             $productTotalVAT = $productPrice * $productQuantity * $productVAT;

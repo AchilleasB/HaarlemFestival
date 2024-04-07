@@ -60,7 +60,7 @@
                 if ($this->products[$orderItem]['Event']->getTicketPrice()) {
                   $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
                 } else {
-                  $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice();
+                  $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice($ticketAmount);
                 }
 
                 $pricePerItem = $ticketPrice * $ticketAmount;

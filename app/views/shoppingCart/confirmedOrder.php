@@ -22,14 +22,14 @@
             <div>
                 <h5><strong>The tickets should arrive in a few minutes in your email.</strong></h5>
             </div>
-            <form method="" action="">
+            <form method="" action="/personalProgram">
                 <input class="rounded-0 py-3 px-5" type=submit name=action id="checkoutBtn"
                     value="See your personal program" />
             </form>
             <div>
                 <h5><strong>or</strong></h5>
             </div>
-            <form method="" action="">
+            <form method="" action="/festival">
                 <input class="rounded-0 py-3 px-5" type=submit name=action id="checkoutBtn"
                     value="Return to the events" />
             </form>

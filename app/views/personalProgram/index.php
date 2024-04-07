@@ -24,11 +24,7 @@
     <div class="grid pt-5" style="--bs-columns: 10; --bs-gap: 1rem;">
       <div class="g-col-12">
         <h1>Your personal program</h1>
-        <div class="grid py-2 pb-5" style="row-gap: 0;">
-    <div class="g-col-2">Share your personal program</div>
-    <div class="g-col-8"><img class="pr-2" src="/../icons/facebook.svg"><img class="px-2" src="/../icons/instagram.svg"><img class="px-2" src="/../icons/twitter.svg"></div>
-
-  </div>
+     
 
   <h2 class="text-center">July</h2>
 
@@ -259,7 +255,7 @@
                 $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();}
                 else
                 {
-                  $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice();
+                  $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice($ticketAmount);
                 }
 
                 $pricePerItem = $ticketPrice * $ticketAmount;
