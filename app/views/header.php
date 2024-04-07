@@ -66,15 +66,8 @@ if (isset($_SESSION['user_firstname'])) {
                         <?php } ?>
                         <li class="nav-item">
                                 <a class="nav-link" href="/personalProgram">
-                                    <img src="/../icons/favorite.svg" class="sw-10 h-10"
-                                        alt="Favorite icon">
-                                  <span class="bg-secondary rounded-circle px-1" style="--bs-bg-opacity: .5;"> 
-                              <?php    if (isset($_SESSION['order_items_data'])){echo count($_SESSION['order_items_data']);}
-                                       else if(!isset($_SESSION['order_items_data']) && isset($_SESSION['selected_items_to_purchase'])){echo count($_SESSION['selected_items_to_purchase']);}
-                                       else {$_SESSION['order_items_data']=[];
-                                             echo 0;} 
-
-                              ?>                                    
+                                    <img src="/../icons/favorite.svg" class="sw-10 h-10 px-2"
+                                        alt="Favorite icon">Favorite
                         </a>
                         </li>
                         <?php }?>

@@ -47,9 +47,14 @@ class PersonalProgramController extends Controller
 
   public function getItems()
   {
+
     if (!isset($_SESSION['order_items_data'])) {
       $_SESSION['order_items_data'] = [];
     }
+    if (!isset($_SESSION['selected_items_to_purchase'])) {
+      $_SESSION['selected_items_to_purchase'] = [];
+    }
+
     $this->setOrderItemsUserId();
     $orderItems = $this->ticketService->getUnpaidTickets($this->user->getId());
     $_SESSION['order_items_data']=$orderItems;
@@ -123,9 +128,6 @@ class PersonalProgramController extends Controller
 
   public function addToCart()
   {
-    if (!isset($_SESSION['selected_items_to_purchase'])) {
-      $_SESSION['selected_items_to_purchase'] = [];
-    }
     foreach ($_SESSION['order_items_data'] as $itemCount => $item) {
       if ($itemCount == $_POST['addToCart'])
         $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])] = $item;
