@@ -196,7 +196,7 @@ public function updateSeats($historyTourId, $seatsToDeduct)
 
 
 //added by Maria
-//used because from the personal program and shopping cart the available tickets are checked by event id prior to update
+//used because from the shopping cart the available tickets are checked by event id prior to update
 public function updateSeatsWithNewAvailableSeats($id, $newSeatsAvailable)
 {
     try{

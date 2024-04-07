@@ -113,7 +113,7 @@ class PersonalProgramController extends Controller
         if ($this->products[$itemCount]['Event']->getTicketPrice()) {
           $ticketsPrice = $this->products[$itemCount]['Event']->getTicketPrice() * $newTicket->getAmount();
         } else {
-          $ticketsPrice = $this->currentOrderItems[$itemCount]->getTicketPrice() * $newTicket->getAmount();
+          $ticketsPrice = $this->currentOrderItems[$itemCount]->getTicketPrice($newTicket->getAmount());
         }
         $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
 
