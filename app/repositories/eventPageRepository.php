@@ -87,7 +87,7 @@ class EventPageRepository extends Repository
 
     public function getAllEventPageTitles()
     {
-        $sql = "SELECT title FROM events_page";
+        $sql = "SELECT title FROM events_page WHERE id > 2";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         $eventPageTitles = $statement->fetchAll(PDO::FETCH_ASSOC);
