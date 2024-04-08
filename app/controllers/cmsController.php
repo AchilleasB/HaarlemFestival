@@ -115,12 +115,6 @@ class CmsController extends Controller
             $schedule = isset($eventDetails["schedule"])
                 ? $eventDetails["schedule"]
                 : "";
-            $eventImage = isset($eventDetails["event_image"])
-                ? $eventDetails["event_image"]
-                : "";
-            $buttonPath = isset($eventDetails["button_path"])
-                ? $eventDetails["button_path"]
-                : "";
 
             $event = new EventOverview();
             $event->setId($id);
@@ -129,8 +123,6 @@ class CmsController extends Controller
             $event->setDescription($description);
             $event->setLocations($locations);
             $event->setSchedule($schedule);
-            $event->setImage($eventImage);
-            $event->setButton($buttonPath);
 
             $success = $this->festivalService->updateEventDetails($event);
 

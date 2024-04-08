@@ -67,8 +67,7 @@ class FestivalRepository extends Repository
                         title = :title,
                         sub_title = :subTitle,
                         locations = :locations,
-                        schedule = :schedule,
-                        button_path = :buttonPath
+                        schedule = :schedule
                     WHERE id = :eventId";
     
             $statement = $this->connection->prepare($sql);
@@ -78,7 +77,6 @@ class FestivalRepository extends Repository
             $subTitle = $event->getSubTitle();
             $locations = $event->getLocations();
             $schedule = $event->getSchedule();
-            $buttonPath = $event->getButton();
             $eventId = $event->getId();
     
             $statement->bindParam(':description', $description);
@@ -86,7 +84,6 @@ class FestivalRepository extends Repository
             $statement->bindParam(':subTitle', $subTitle);
             $statement->bindParam(':locations', $locations);
             $statement->bindParam(':schedule', $schedule);
-            $statement->bindParam(':buttonPath', $buttonPath);
             $statement->bindParam(':eventId', $eventId);
             $statement->execute();
     

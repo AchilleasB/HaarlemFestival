@@ -81,21 +81,7 @@
                                     <textarea id="schedule<?php echo $event->getId(); ?>"
                                         name="events[<?php echo $event->getId(); ?>][schedule]"><?php echo $event->getSchedule(); ?></textarea>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <label for="event_image<?php echo $event->getId(); ?>" class="form-label">Event
-                                        Image</label>
-                                    <textarea id="event_image<?php echo $event->getId(); ?>"
-                                        name="events[<?php echo $event->getId(); ?>][event_image]"><?php echo $event->getImage(); ?></textarea>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="button_path<?php echo $event->getId(); ?>" class="form-label">Button
-                                        Path</label>
-                                    <textarea id="button_path<?php echo $event->getId(); ?>"
-                                        name="events[<?php echo $event->getId(); ?>][button_path]"><?php echo $event->getButton(); ?></textarea>
-                                </div>
-
+                                
                                 <input type="hidden" name="events[<?php echo $event->getId(); ?>][id]"
                                     value="<?php echo $event->getId(); ?>">
                                 <div>
@@ -113,7 +99,7 @@
     <script>
     <?php foreach ($events as $event): ?>
     tinymce.init({
-        selector: "#title<?php echo $event->getId(); ?>, #subTitle<?php echo $event->getId(); ?>, #description<?php echo $event->getId(); ?>, #locations<?php echo $event->getId(); ?>, #schedule<?php echo $event->getId(); ?>, #event_image<?php echo $event->getId(); ?>, #button_path<?php echo $event->getId(); ?>",
+        selector: "#title<?php echo $event->getId(); ?>, #subTitle<?php echo $event->getId(); ?>, #description<?php echo $event->getId(); ?>, #locations<?php echo $event->getId(); ?>, #schedule<?php echo $event->getId(); ?>",
         plugins: 'autolink lists link',
         toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link',
         height: 400,
