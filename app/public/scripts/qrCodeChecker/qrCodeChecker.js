@@ -14,7 +14,12 @@ function displayTicket(ticket) {
   if (ticket) {
     $(firstname).html(ticket.firstname);
     $(lastname).html(ticket.lastname);
-    $(event).html(ticket.name);
+    if (ticket.type){
+    $(event).html(`${ticket.name} ${ticket.type}`);}
+    else{
+    $(event).html(`${ticket.name}`);}
+
+    
     if (ticket.date != null) {
       $(datetime).html(`${ticket.date} ${ticket.start_time}`);
     }

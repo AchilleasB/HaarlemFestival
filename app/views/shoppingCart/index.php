@@ -57,13 +57,16 @@
 
                 $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
 
-                if ($this->products[$orderItem]['Event']->getTicketPrice()) {
+                if ( $this->products[$orderItem]['Event']->getTicketPrice()){
                   $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
-                } else {
-                  $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice();
-                }
-
-                $pricePerItem = $ticketPrice * $ticketAmount;
+                  $pricePerItem = $ticketPrice * $ticketAmount;
+                  }
+                  else
+                  {
+                    $pricePerItem =  $this->currentOrderItems[$orderItem]->getCalcPrice();
+  
+                  }
+  
 
                 $ticketsAvailableForEvent = $this->products[$orderItem]['Event']->getTicketsAvailable();
 
@@ -115,6 +118,8 @@
                 </td>
                 <td class="align-middle">
                   <div class="quantityValues m-1">
+                  <?php if ($this->currentOrderItems[$orderItem]->getHistoryTourId() == NULL){ ?>
+
                   <form method="POST" action="/shoppingCart/updateTicketQuantity">
 
                     <input type="number" id="quantity" name="quantity" class="quantity"
@@ -132,7 +137,33 @@
                     <?php } 
                   else {?>
                     <div> Sold out</div>
-                    <?php }?>
+                    <?php }}
+                    
+                    else {?>
+
+
+<form >
+
+<input type="number" id="quantity" name="quantity" class="quantity"
+  value=<?= $ticketAmount ?> min="1"
+max="10" readonly>
+
+<button id="updateQuantity" class="updateQuantity" type=submit name=update
+  value=<?=$orderItem?> disabled>Save</button>
+<div> The seats for this event can't be updated </div>
+<div>due to seats number limitation</div>
+</form>
+<?php  if ($ticketsAvailableForEvent > 0) {?>
+                    <div>Only
+                      <?= $ticketsAvailableForEvent ?> left
+                    </div>
+                    <?php } 
+                  else {?>
+                    <div> Sold out</div>
+
+                    <?php }}?>
+
+
                 </td>
                 <td class="align-middle">
                   &euro;

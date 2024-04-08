@@ -98,7 +98,7 @@ class TicketRepository extends Repository
 
 
         try {
-            $query = "SELECT users.firstname, users.lastname, artists.name, dance_events.date, dance_events.start_time FROM tickets
+            $query = "SELECT users.firstname, users.lastname, artists.name, dance_events.date, dance_events.start_time, dance_events.type FROM tickets
                         LEFT JOIN users ON tickets.user_id = users.id                                               
                         LEFT JOIN event_artists ON tickets.dance_event_id = event_artists.event_id
                         LEFT JOIN artists ON event_artists.artist_id = artists.id
@@ -111,6 +111,7 @@ class TicketRepository extends Repository
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $row = $stmt->fetch();
+            if ($row['name'] == NULL) {$row['name']="Dance!";}
             return $row;
         } catch (PDOException $e) {
             echo $e->getMessage() . $e->getLine();

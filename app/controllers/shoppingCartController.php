@@ -113,10 +113,8 @@ class ShoppingCartController extends Controller
 
         if ($this->products[$itemCount]['Event']->getTicketPrice()) {
           $ticketsPrice = $this->products[$itemCount]['Event']->getTicketPrice() * $newTicket->getAmount();
-        } else {
-          $ticketsPrice = $this->currentOrderItems[$itemCount]->getTicketPrice() * $newTicket->getAmount();
-        }
-        $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
+        
+          $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);}
 
 
         $_SESSION['selected_items_to_purchase'][$itemCount] = $newTicket;
@@ -164,7 +162,7 @@ class ShoppingCartController extends Controller
     
     } else {
 
-      echo "<p style='padding-left:12px;'>Select payment method</p> ";
+      require __DIR__ . '/../views/shoppingCart/paymentMethod.php';
 
     }
   }

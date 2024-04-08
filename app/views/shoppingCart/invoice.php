@@ -33,13 +33,14 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($products as $orderItem=>$i) { 
-                      $eventName =  $products[$orderItem]['Event']->getName();
+              <?php 
+              foreach ($products as $orderItem=>$i) { 
+                $eventName =  $products[$orderItem]['Event']->getName();
 
-                      $ticketAmount = $orderItems[$orderItem]->amount;
+                $ticketAmount = $orderItems[$orderItem]->amount;
 
-                        $pricePerItem = $orderItems[$orderItem]->calc_price;
-
+                $pricePerItem = $orderItems[$orderItem]->calc_price;
+              
                       ?>
                 <tr class="product">
                 <td class="col-md-4">

@@ -74,11 +74,14 @@
 
             $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
 
-            if ($this->products[$orderItem]['Event']->getTicketPrice()) {
+            if ( $this->products[$orderItem]['Event']->getTicketPrice()){
               $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
-            } else {
-              $ticketPrice = $this->currentOrderItems[$orderItem]->getCalcPrice() / $this->currentOrderItems[$orderItem]->getAmount();
-            }
+              $pricePerItem = $ticketPrice * $ticketAmount;
+              }
+              else
+              {
+                $pricePerItem =  $this->currentOrderItems[$orderItem]->getCalcPrice();
+              }
 
             $totalPrice = $this->orderTotal;
 
@@ -101,7 +104,7 @@
                   </li>
                   <li class="list-group-item border-0 p-0">
                     <strong> &euro;
-                      <?= $ticketPrice * $ticketAmount ?>
+                      <?= $pricePerItem ?>
                     </strong>
                   </li>
                   <li class="list-group-item border-0 p-0">

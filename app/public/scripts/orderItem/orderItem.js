@@ -66,24 +66,6 @@ function updateAvailableTicketsForDanceEvent(eventData) {
 }
 
 
-
-
-//reload available tour tickets data asynchronously  so the changes can be loaded without scrolling the page backward
-
-function updateAvailableTicketsForTourEvent(eventData) {
-
-    $.ajax({
-        type: "POST",
-        url: `${urlBasePath}api/Ticket/UpdateAvailableTicketsForTourEvent`,
-        data: eventData,
-        success: function () {
-            window.location.reload();
-        }
-    });
-
-}
-
-
 //reload available reservations  data asynchronously so the changes can be loaded without scrolling the page backward
 
 function updateAvailableReservationsForYummyEvent(eventData) {
@@ -129,13 +111,6 @@ function setOrderItemsData() {
             if (ticketData['dance_event_id'] !== null) {
                 eventData.event_id = ticketData['dance_event_id'];
                 updateAvailableTicketsForDanceEvent(eventData);
-            }
-
-
-            if (ticketData['history_tour_id'] !== null) {
-                eventData.event_id = ticketData['history_tour_id'];
-                updateAvailableTicketsForTourEvent(eventData);
-
             }
 
             if (ticketData['reservation_id'] !== null) {
