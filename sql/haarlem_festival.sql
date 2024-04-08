@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 08, 2024 at 04:07 PM
--- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
--- PHP Version: 8.2.17
+-- Generation Time: Apr 08, 2024 at 04:59 PM
+-- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -127,25 +127,25 @@ CREATE TABLE `dance_events` (
 --
 
 INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, `session`, `tickets_available`, `price`, `type`) VALUES
-(1, 1, 'FRIDAY 26 JULY', '20:00', '02:00', 'BACK2BACK', 1350, 75.00, 'SINGLE-CONCERT'),
-(2, 3, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 197, 60.00, 'SINGLE-CONCERT'),
-(3, 4, 'FRIDAY 26 JULY', '23:00', '00:30', 'CLUB', 299, 60.00, 'SINGLE-CONCERT'),
-(4, 5, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(5, 6, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(6, 2, 'SATURDAY 27 JULY', '14:00', '23:00', 'BACK2BACK', 1798, 110.00, 'SINGLE-CONCERT'),
-(7, 4, 'SATURDAY 27 JULY', '22:00', '23:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
-(8, 1, 'SATURDAY 27 JULY', '21:00', '01:00', 'TIESTOWORLD', 1499, 75.00, 'SINGLE-CONCERT'),
-(9, 3, 'SATURDAY 27 JULY', '23:00', '00:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(10, 2, 'SUNDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 1800, 110.00, 'SINGLE-CONCERT'),
-(11, 4, 'SUNDAY 28 JULY', '19:00', '20:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
-(12, 5, 'SUNDAY 28 JULY', '21:00', '22:30', 'CLUB', 1500, 90.00, 'SINGLE-CONCERT'),
-(13, 3, 'SUNDAY 28 JULY', '18:00', '19:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(14, 1, 'FRIDAY 26 JULY', '20:00', '02:00', 'BACK2BACK', 150, 125.00, '1-DAY-PASS'),
-(15, 2, 'SATURDAY 27 JULY', '14:00', '01:00', 'BACK2BACK', 200, 150.00, '1-DAY-PASS'),
-(16, 2, 'SUNDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 200, 150.00, '1-DAY-PASS'),
-(17, 1, 'FRIDAY 26 JULY', '20:00', '23:00', 'BACK2BACK', 148, 250.00, '3-DAY-PASS'),
-(36, 2, 'MONDAY 29 JULY', '13:00', '18:00', 'BACK2BACK', 1798, 500.00, 'SINGLE-CONCERT'),
-(37, 4, 'MONDAY 29 JULY', '20:00', '22:30', 'CLUB', 150, 250.00, 'SINGLE-CONCERT');
+(1, 1, 'FRIDAY 26 JULY', '20:00', '02:00', 'BACK2BACK', 1350, '75.00', 'SINGLE-CONCERT'),
+(2, 3, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 197, '60.00', 'SINGLE-CONCERT'),
+(3, 4, 'FRIDAY 26 JULY', '23:00', '00:30', 'CLUB', 299, '60.00', 'SINGLE-CONCERT'),
+(4, 5, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 200, '60.00', 'SINGLE-CONCERT'),
+(5, 6, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 200, '60.00', 'SINGLE-CONCERT'),
+(6, 2, 'SATURDAY 27 JULY', '14:00', '23:00', 'BACK2BACK', 1798, '110.00', 'SINGLE-CONCERT'),
+(7, 4, 'SATURDAY 27 JULY', '22:00', '23:30', 'CLUB', 300, '60.00', 'SINGLE-CONCERT'),
+(8, 1, 'SATURDAY 27 JULY', '21:00', '01:00', 'TIESTOWORLD', 1499, '75.00', 'SINGLE-CONCERT'),
+(9, 3, 'SATURDAY 27 JULY', '23:00', '00:30', 'CLUB', 200, '60.00', 'SINGLE-CONCERT'),
+(10, 2, 'SUNDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 1800, '110.00', 'SINGLE-CONCERT'),
+(11, 4, 'SUNDAY 28 JULY', '19:00', '20:30', 'CLUB', 300, '60.00', 'SINGLE-CONCERT'),
+(12, 5, 'SUNDAY 28 JULY', '21:00', '22:30', 'CLUB', 1500, '90.00', 'SINGLE-CONCERT'),
+(13, 3, 'SUNDAY 28 JULY', '18:00', '19:30', 'CLUB', 200, '60.00', 'SINGLE-CONCERT'),
+(14, 1, 'FRIDAY 26 JULY', '20:00', '02:00', 'BACK2BACK', 150, '125.00', '1-DAY-PASS'),
+(15, 2, 'SATURDAY 27 JULY', '14:00', '01:00', 'BACK2BACK', 200, '150.00', '1-DAY-PASS'),
+(16, 2, 'SUNDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 200, '150.00', '1-DAY-PASS'),
+(17, 1, 'FRIDAY 26 JULY', '20:00', '23:00', 'BACK2BACK', 148, '250.00', '3-DAY-PASS'),
+(36, 2, 'MONDAY 29 JULY', '13:00', '18:00', 'BACK2BACK', 1798, '500.00', 'SINGLE-CONCERT'),
+(37, 4, 'MONDAY 29 JULY', '20:00', '22:30', 'CLUB', 150, '250.00', 'SINGLE-CONCERT');
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,7 @@ INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, 
 
 CREATE TABLE `drinks` (
   `id` int(11) NOT NULL,
-  `price_bottle` int(11) NOT NULL
+  `price_bottle` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -180,8 +180,8 @@ CREATE TABLE `events` (
   `description` varchar(10000) DEFAULT NULL,
   `title` varchar(100) DEFAULT NULL,
   `sub_title` varchar(1000) DEFAULT NULL,
-  `locations` varchar(100) DEFAULT NULL,
-  `schedule` varchar(1000) DEFAULT NULL,
+  `locations` varchar(2000) DEFAULT NULL,
+  `schedule` varchar(2000) DEFAULT NULL,
   `event_image` int(11) DEFAULT NULL,
   `button_path` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -191,9 +191,9 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `description`, `title`, `sub_title`, `locations`, `schedule`, `event_image`, `button_path`) VALUES
-(1, '<p><span style=\"font-size: 10pt;\">Whether you are a seasoned dancer or just looking to let loose and have a good time, there is something for everyone.</span></p>', 'DANCE!', 'Lose yourself in DANCE!', NULL, 'Friday - Sunday from 18:00 till 22:20', 23, '/dance'),
-(2, '<p><span style=\"font-size: 10pt;\">Explore the restaurants end enjoy the delights made with extra passion!</span></p>', 'YUMMIE!', 'Satisfy your apetite!', NULL, 'Friday - Sunday from 18:00 till 22:20', 24, '/yummy'),
-(3, '<p><span style=\"font-size: 10pt;\">Take a tour through Haarlem&rsquo;s historic locations.</span></p>', 'A STROLL THROUGH HISTORY', 'Visiting Haarlem’s historic landmarks!', NULL, 'Friday - Sunday from 18:00 till 22:20', 25, '/history');
+(1, '<p><span style=\"font-size: 10pt;\">Whether you are a seasoned dancer or just looking to let loose and have a good time, there is something for everyone.</span></p>', '<p>Dance</p>', '<p>Lose yourself in DANCE!</p>', '<p><span style=\"font-size: 10pt;\">The DANCE! performances will be held at six different venues:</span></p>\r\n<ul>\r\n<li style=\"font-weight: bold;\"><strong><span style=\"font-size: 10pt;\">Club Stalker</span></strong></li>\r\n<li style=\"font-weight: bold;\"><strong><span style=\"font-size: 10pt;\">Lichtfabriek</span></strong></li>\r\n<li style=\"font-weight: bold;\"><strong><span style=\"font-size: 10pt;\">Jopenkerk</span></strong></li>\r\n<li style=\"font-weight: bold;\"><strong><span style=\"font-size: 10pt;\">XO the Club</span></strong></li>\r\n<li style=\"font-weight: bold;\"><strong><span style=\"font-size: 10pt;\">Club Ruis</span></strong></li>\r\n<li style=\"font-weight: bold;\"><strong><span style=\"font-size: 10pt;\">Carpera Openluchttheater</span></strong></li>\r\n</ul>', '<p style=\"line-height: 1;\"><strong><span style=\"font-size: 10pt;\">July 27, 2023:</span></strong><br><span style=\"font-size: 10pt;\">20:00 - 02:00 <strong>Nicky Romero / Afrojack </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">22:00 - 23:30 <strong>Tiesto </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">23:00 - 00:30 <strong>Hardwell </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">22:00 - 23:30 <strong>Armin van Buuren </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">22:00 - 23:30 <strong>Martin Garrix</strong></span><br><br><strong><span style=\"font-size: 10pt;\">July 28, 2023:</span></strong><br><span style=\"font-size: 10pt;\">14:00 - 23:00 <strong>Hardwell / Martin Garrix / Armin van Buuren </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">22:00 - 23:30 <strong>Afrojack </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">21:00 - 01:00 <strong>Tiesto </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">23:30 - 01:00 <strong>Nicky Romero</strong></span><br><br><strong><span style=\"font-size: 10pt;\">July 29, 2023:</span></strong><br><span style=\"font-size: 10pt;\">14:00 - 23:00 <strong>Afrojack / Tiesto / Nicky Romero </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">19:00 - 20:30 <strong>Armin van Buuren </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">21:00 - 22:30 <strong>Hardwell </strong></span></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">18:00 - 19:30 Martin Garrix</span></p>', 23, '/dance'),
+(2, '<p><span style=\"font-size: 10pt;\">Explore the restaurants end enjoy the delights made with extra passion!</span></p>', '<p>YUMMIE!</p>', '<p>Satisfy your apetite!</p>', '<p style=\"line-height: 1;\"><strong><span style=\"font-size: 10pt;\">27th of July 2023 - 31th of July 2023: </span></strong></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">Check the location based on the selected restaurant</span></p>', '<p><strong><span style=\"font-size: 10pt;\">Check the specific schedule based on each restaurant</span></strong></p>', 24, '/yummy'),
+(3, '<p><span style=\"font-size: 10pt;\">Take a tour through Haarlem&rsquo;s historic locations.</span></p>', '<p>A STROLL THROUGH HISTORY</p>', '<p>Visiting Haarlem&rsquo;s historic landmarks!</p>', '<p><span style=\"font-size: 10pt;\"><strong>Start Location:</strong> Church of St. Bavo</span></p>\r\n<p><span style=\"font-size: 10pt;\"><strong>End Location:</strong> Hof van Bakenes</span></p>', '<p style=\"line-height: 1;\"><strong><span style=\"font-size: 10pt;\">July 27, 2023: </span></strong></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">10:00 - 16:00</span><br><br><strong><span style=\"font-size: 10pt;\">July 28, 2023: </span></strong></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">10:00 - 16:00</span><br><br><strong><span style=\"font-size: 10pt;\">July 29, 2023: </span></strong></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">10:00 - 16:00</span><br><br><strong><span style=\"font-size: 10pt;\">July 30, 2023: </span></strong></p>\r\n<p style=\"line-height: 1;\"><span style=\"font-size: 10pt;\">10:00 - 16:00</span></p>', 25, '/history');
 
 -- --------------------------------------------------------
 
@@ -346,9 +346,13 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (12, 'restaurant-fris-banner.png', NULL),
 (14, 'grand-cafe-brinkman-banner.png', NULL),
 (15, 'urban-frenchy-bistro-toujours-banner.png', NULL),
+(16, 'restaurant-ml-1.png', 2),
+(17, 'restaurant-ml-2.png', 2),
+(18, 'restaurant-ml-3.png', 2),
 (19, 'ratatouille-1.png', 1),
 (20, 'ratatouille-2.png', 1),
 (21, 'ratatouille-3.png', 1),
+(22, 'ratatouille-1.png', 4),
 (23, 'dance.png', NULL),
 (24, 'yummy.png', NULL),
 (25, 'history-image.png', NULL),
@@ -357,10 +361,7 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (30, 'test-banner.png', NULL),
 (31, 'restaurant-ml-banner.png', NULL),
 (32, 'test-banner.png', NULL),
-(33, 'manol-draganov-banner.png', NULL),
-(34, 'restaurant-ml-1.png', 2),
-(35, 'restaurant-fris-1.png', 3),
-(36, 'restaurant-fris-2.png', 3);
+(33, 'manol-draganov-banner.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -412,21 +413,21 @@ CREATE TABLE `menu_items` (
 --
 
 INSERT INTO `menu_items` (`id`, `name`, `description`, `price_per_portion`, `restaurant_id`) VALUES
-(1, 'Grilled Salmon', 'Fresh salmon with a lemon herb seasoning', 25.00, 1),
-(2, 'Caesar Salad', 'Classic Caesar salad with homemade dressing', 12.00, 1),
-(3, 'Beef Burger', 'Juicy beef burger with cheese and special sauce', 15.00, 1),
-(4, 'Margherita Pizza', 'Classic pizza with tomatoes, mozzarella, and basil', 18.00, 1),
-(5, 'Chocolate Lava Cake', 'Warm cake with a gooey chocolate center', 10.00, 1),
-(6, 'Sushi Platter', 'Assorted nigiri and rolls, serves two', 30.00, 2),
-(7, 'Ramen Bowl', 'Rich broth with noodles, pork, and vegetables', 20.00, 2),
-(8, 'Vegetarian Pasta', 'Pasta with seasonal vegetables in tomato sauce', 16.00, 2),
-(9, 'Tiramisu', 'Classic Italian dessert with coffee and mascarpone', 11.00, 2),
-(10, 'Mediterranean Salad', 'Mixed greens with feta, olives, and vinaigrette', 14.00, 2),
-(11, 'Chardonnay', 'Elegant white wine with notes of apple and oak', 5.00, 1),
+(1, 'Grilled Salmon', 'Fresh salmon with a lemon herb seasoning', '25.00', 1),
+(2, 'Caesar Salad', 'Classic Caesar salad with homemade dressing', '12.00', 1),
+(3, 'Beef Burger', 'Juicy beef burger with cheese and special sauce', '15.00', 1),
+(4, 'Margherita Pizza', 'Classic pizza with tomatoes, mozzarella, and basil', '18.00', 1),
+(5, 'Chocolate Lava Cake', 'Warm cake with a gooey chocolate center', '10.00', 1),
+(6, 'Sushi Platter', 'Assorted nigiri and rolls, serves two', '30.00', 2),
+(7, 'Ramen Bowl', 'Rich broth with noodles, pork, and vegetables', '20.00', 2),
+(8, 'Vegetarian Pasta', 'Pasta with seasonal vegetables in tomato sauce', '16.00', 2),
+(9, 'Tiramisu', 'Classic Italian dessert with coffee and mascarpone', '11.00', 2),
+(10, 'Mediterranean Salad', 'Mixed greens with feta, olives, and vinaigrette', '14.00', 2),
+(11, 'Chardonnay', 'Elegant white wine with notes of apple and oak', '5.00', 1),
 (12, 'Pinot Noir', 'Medium-bodied red wine with flavors of cherry and raspberry', NULL, 1),
-(13, 'Sauvignon Blanc', 'Crisp and refreshing white wine with citrus notes', 8.50, 1),
-(14, 'Cabernet Sauvignon', 'Robust red wine with hints of blackberry and vanilla', 7.00, 2),
-(15, 'Merlot', 'Smooth red wine with soft tannins and plum flavors', 22.20, 2);
+(13, 'Sauvignon Blanc', 'Crisp and refreshing white wine with citrus notes', '8.50', 1),
+(14, 'Cabernet Sauvignon', 'Robust red wine with hints of blackberry and vanilla', '7.00', 2),
+(15, 'Merlot', 'Smooth red wine with soft tannins and plum flavors', '22.20', 2);
 
 -- --------------------------------------------------------
 
@@ -446,8 +447,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `date_time`, `payment_status`, `total_price`) VALUES
-(1, '2024-04-01 22:47:26', 'paid', 50.00),
-(2, '2024-04-01 23:38:48', 'paid', 87.50);
+(1, '2024-04-01 22:47:26', 'paid', '50.00'),
+(2, '2024-04-01 23:38:48', 'paid', '87.50');
 
 -- --------------------------------------------------------
 
@@ -485,9 +486,9 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `restaurant_id`, `session_id`, `user_id`, `number_of_people`, `mobile_number`, `remark`, `is_active`) VALUES
-(27, 1, NULL, 10, 41, '4564156456', 'codskl5vDF', 1),
-(28, 6, NULL, 10, 1, '51151561465', 'njnjn', 0),
-(29, 1, NULL, 10, 1, '5151116211515', 'jnjnk', 0),
+(27, 1, 1, 10, 41, '4564156456', 'codskl5vDF', 1),
+(28, 6, 2, 10, 1, '51151561465', 'njnjn', 0),
+(29, 1, 1, 10, 1, '5151116211515', 'jnjnk', 0),
 (30, 5, NULL, 5, 4, '1231312321321', NULL, 0),
 (31, 2, NULL, 8, 14, '1231421414', NULL, 0),
 (32, NULL, NULL, 9, 3, '0885790202', NULL, 1);
@@ -517,9 +518,9 @@ INSERT INTO `restaurants` (`id`, `name`, `location`, `description`, `number_of_s
 (1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 33, '4', 10, 1),
 (2, 'Restaurant ML', 'Kleine Houtstraat 70, 2011 DR Haarlem, Nederland', 'Still at a top level but also with a more lower price, Toujours wins the top for the the best restaurant in terms of price-quality. For an intimate, cozy and beautiful dinner with friends or family, take a seat in our beautiful restaurant area. With radiant daylight thanks to the domes on our roof. Which provide a magical beautiful light in the evening, when dining under the starry sky comes very close.', 59, '2', 31, 1),
 (3, 'Restaurant Fris', 'Twijnderslaan 7, 2012 BG Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 45, '4', 12, 0),
-(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 29, 0),
+(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 29, 1),
 (5, 'Grand Cafe Brinkman', 'Grote Markt 13, 2011 RC Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 100, '3', 14, 0),
-(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 44, '3', 15, 0);
+(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 44, '3', 15, 1);
 
 -- --------------------------------------------------------
 
@@ -538,22 +539,22 @@ CREATE TABLE `restaurants_cuisines` (
 
 INSERT INTO `restaurants_cuisines` (`restaurant_id`, `cuisine_id`) VALUES
 (1, 1),
-(2, 1),
-(5, 1),
-(6, 1),
 (1, 2),
 (1, 3),
-(4, 3),
-(5, 3),
-(6, 3),
-(4, 4),
 (1, 5),
+(1, 7),
+(2, 1),
 (2, 5),
 (3, 5),
-(6, 5),
+(4, 3),
+(4, 4),
+(4, 7),
+(5, 1),
+(5, 3),
 (5, 6),
-(1, 7),
-(4, 7);
+(6, 1),
+(6, 3),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -571,34 +572,17 @@ CREATE TABLE `restaurants_sessions` (
 --
 
 INSERT INTO `restaurants_sessions` (`restaurant_id`, `session_id`) VALUES
-(1, 14),
-(1, 15),
-(2, 16),
-(3, 16),
-(4, 16),
-(1, 17),
-(4, 17),
-(5, 18),
-(6, 18),
-(6, 20),
-(3, 21),
-(2, 22),
-(3, 22),
-(5, 23),
-(6, 23),
-(2, 24),
-(4, 24),
-(5, 24),
-(3, 25),
-(1, 26),
-(5, 26),
-(1, 27),
-(5, 27),
-(2, 28),
-(3, 29),
-(4, 30),
-(2, 31),
-(4, 31);
+(1, 1),
+(2, 1),
+(2, 2),
+(2, 4),
+(3, 1),
+(4, 2),
+(4, 4),
+(5, 2),
+(5, 4),
+(6, 2),
+(6, 4);
 
 -- --------------------------------------------------------
 
@@ -617,26 +601,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `start_date`, `end_date`) VALUES
-(12, '2024-07-28 11:00:00', '2024-07-28 11:24:00'),
-(13, '2024-07-28 03:30:00', '2024-07-28 03:51:00'),
-(14, '2024-07-27 15:00:00', '2024-07-27 15:27:00'),
-(15, '2024-07-27 02:30:00', '2024-07-27 03:45:00'),
-(16, '2024-07-28 20:00:00', '2024-07-28 21:15:00'),
-(17, '2024-07-26 07:00:00', '2024-07-26 08:15:00'),
-(18, '2024-07-26 02:15:00', '2024-07-26 03:45:00'),
-(19, '2024-07-26 11:30:00', '2024-07-26 11:46:00'),
-(20, '2024-07-28 02:15:00', '2024-07-28 03:00:00'),
-(21, '2024-07-28 18:15:00', '2024-07-28 18:57:00'),
-(22, '2024-07-27 03:30:00', '2024-07-28 03:15:00'),
-(23, '2024-07-27 03:00:00', '2024-07-27 03:00:00'),
-(24, '2024-07-28 00:15:00', '2024-07-28 00:29:00'),
-(25, '2024-07-26 21:00:00', '2024-07-26 21:03:00'),
-(26, '2024-07-27 19:30:00', '2024-07-28 19:15:00'),
-(27, '2024-07-27 00:15:00', '2024-07-27 01:30:00'),
-(28, '2024-07-28 00:15:00', '2024-07-28 01:15:00'),
-(29, '2024-07-27 02:15:00', '2024-07-27 03:45:00'),
-(30, '2024-07-28 02:30:00', '2024-07-28 03:11:00'),
-(31, '2024-07-28 01:00:00', '2024-07-29 00:45:00');
+(1, '2024-02-28 18:00:00', '2023-02-09 19:30:00'),
+(2, '2024-03-05 19:30:00', '2024-03-05 21:00:00'),
+(4, '2024-03-05 21:00:00', '2024-03-25 22:30:00');
 
 -- --------------------------------------------------------
 
@@ -660,18 +627,18 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id`, `calc_price`, `amount`, `dance_event_id`, `history_tour_id`, `reservation_id`, `user_id`, `order_id`) VALUES
-('254d8f2d-02ba-496b-ba5c-58456deb355e', 1000.00, 2, 36, NULL, NULL, 2, NULL),
-('5524381e-3762-4a36-95b5-7bef06d92e83', 120.00, 2, NULL, 2, NULL, 9, NULL),
-('0b9b65c9-2c73-4470-8efe-7e64b566d2b5', 220.00, 2, 6, NULL, NULL, 2, NULL),
-('81642e06-018c-48c3-b422-8ab5fe4ade3a', 10.00, 1, NULL, NULL, 23, 10, 2),
-('187900b5-6761-4dd1-b9f1-8ef25e103e04', 60.00, 1, 3, NULL, NULL, 10, 2),
-('d029ec15-1352-439d-ba1c-907ab9e60a02', 60.00, 1, 2, NULL, NULL, 2, NULL),
-('bafe9fc3-d6b6-4f61-a23c-9f369604fa44', 120.00, 2, 2, NULL, NULL, 10, NULL),
-('bfa288be-2d8d-4fa0-b0dc-9f7a0b01d375', 75.00, 1, 1, NULL, NULL, NULL, NULL),
-('eb07ebad-d4c6-462e-9e35-b2aa31289207', 40.00, 4, NULL, NULL, 28, 10, NULL),
-('9b9c83ff-4c37-490c-9636-d12e5a06b6bc', 75.00, 1, 8, NULL, NULL, 6, NULL),
-('586bd32c-3ca4-49e7-8ca2-f3ef13b7a5ff', 17.50, 1, NULL, 1, NULL, 10, 2),
-('426c623e-8963-4f04-8410-f82e017d1009', 500.00, 2, 17, NULL, NULL, 2, NULL);
+('254d8f2d-02ba-496b-ba5c-58456deb355e', '1000.00', 2, 36, NULL, NULL, 2, NULL),
+('5524381e-3762-4a36-95b5-7bef06d92e83', '120.00', 2, NULL, 2, NULL, 9, NULL),
+('0b9b65c9-2c73-4470-8efe-7e64b566d2b5', '220.00', 2, 6, NULL, NULL, 2, NULL),
+('81642e06-018c-48c3-b422-8ab5fe4ade3a', '10.00', 1, NULL, NULL, 23, 10, 2),
+('187900b5-6761-4dd1-b9f1-8ef25e103e04', '60.00', 1, 3, NULL, NULL, 10, 2),
+('d029ec15-1352-439d-ba1c-907ab9e60a02', '60.00', 1, 2, NULL, NULL, 2, NULL),
+('bafe9fc3-d6b6-4f61-a23c-9f369604fa44', '120.00', 2, 2, NULL, NULL, 10, NULL),
+('bfa288be-2d8d-4fa0-b0dc-9f7a0b01d375', '75.00', 1, 1, NULL, NULL, NULL, NULL),
+('eb07ebad-d4c6-462e-9e35-b2aa31289207', '40.00', 4, NULL, NULL, 28, 10, NULL),
+('9b9c83ff-4c37-490c-9636-d12e5a06b6bc', '75.00', 1, 8, NULL, NULL, 6, NULL),
+('586bd32c-3ca4-49e7-8ca2-f3ef13b7a5ff', '17.50', 1, NULL, 1, NULL, 10, 2),
+('426c623e-8963-4f04-8410-f82e017d1009', '500.00', 2, 17, NULL, NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -690,8 +657,8 @@ CREATE TABLE `ticket_types` (
 --
 
 INSERT INTO `ticket_types` (`id`, `ticket_type`, `price`) VALUES
-(1, 'Single', 17.50),
-(2, 'Family (4p.)', 60.00);
+(1, 'Single', '17.50'),
+(2, 'Family (4p.)', '60.00');
 
 -- --------------------------------------------------------
 
@@ -983,7 +950,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -1025,7 +992,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tour_guides`
