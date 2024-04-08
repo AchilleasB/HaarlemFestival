@@ -57,6 +57,7 @@ class CmsController extends Controller
     }
     public function historyManagement()
     {
+        $this->isAuthorized();
         $tours = $this->historyTourService->getAllTours();
         $locations = $this->locationService->getAllLocations();
         $guides = $this->historyTourService->getAllGuides();
@@ -75,12 +76,6 @@ class CmsController extends Controller
         $this->isAuthorized();
         $this->displayView($this);
     }
-    public function historyManagement()
-    {
-        $this->isAuthorized();
-        $this->displayView($this);
-    }
-
     public function orderManagement()
     {
         $this->isAuthorized();
@@ -417,6 +412,7 @@ class CmsController extends Controller
             } else {
                 echo "No $entityType selected for deletion.";
             }
+        }
         $this->isAuthorized();
         $this->displayView($this);
     }
