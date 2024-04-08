@@ -47,11 +47,6 @@ class HistoryTourService {
     public function updateSeats($historyTourId, $seatsToDeduct){
         return $this->repository->updateSeats($historyTourId, $seatsToDeduct);
     }
-
-    public function updateSeatsWithNewAvailableSeats($id, $newSeatsAvailable)
-    {
-        return $this->repository->updateSeatsWithNewAvailableSeats($id, $newSeatsAvailable);
-    }
     
 }
 

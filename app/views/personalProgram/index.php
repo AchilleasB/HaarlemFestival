@@ -252,13 +252,15 @@
                 $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
 
                 if ( $this->products[$orderItem]['Event']->getTicketPrice()){
-                $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();}
-                else
-                {
-                  $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice($ticketAmount);
-                }
-
-                $pricePerItem = $ticketPrice * $ticketAmount;
+                  $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
+                  $pricePerItem = $ticketPrice * $ticketAmount;
+                  }
+                  else
+                  {
+                    $pricePerItem =  $this->currentOrderItems[$orderItem]->getCalcPrice();
+  
+                  }
+  
 
                 $totalPrice = $this->orderTotal;
                 $totalVAT = $this->orderVAT;?>
@@ -319,7 +321,8 @@
                   </ul>
                 </td>
                 <td class="align-middle">
-                  <div class="quantityValues m-1">
+                <div class="quantityValues m-1">
+                  <?php if ($this->currentOrderItems[$orderItem]->getHistoryTourId() == NULL){ ?>
                   <form method="POST" action="/personalProgram/updateTicketQuantity">
 
                     <input type="number" id="quantity" name="quantity" class="quantity"
@@ -330,11 +333,29 @@
                       value=<?=$orderItem?>>Save</button>
                     
                     </form>
+                    <?php }
+                    else { ?>
+                      <form >
+
+                      <input type="number" id="quantity" name="quantity" class="quantity"
+                        value=<?= $ticketAmount ?> min="1"
+                      max="10" readonly>
+  
+                      <button id="updateQuantity" class="updateQuantity" type=submit name=update
+                        value=<?=$orderItem?> disabled>Save</button>
+                     <div> The seats for this event can't be updated </div>
+                     <div>due to seats number limitation</div>
+                      </form>
+
+
+                   <?  } ?>
+                    </div>
+
                 </td>
+
                 <td class="align-middle">
                   &euro;
-                  <?= $pricePerItem ?>
-
+                  <?= $pricePerItem; ?>
                 </td>
                 <td class="align-middle">
                   <form method="POST" action="/personalProgram/addToCart">

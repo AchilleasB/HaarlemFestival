@@ -63,15 +63,6 @@ class TicketService
         $danceRepository->updateTicketsAmount($id, $newTicketsAvailable);
     }
 
-
-    //Function used to update available tickets at checkout
-    //Allows users to be simultaneously updated with available history tour tickets
-    public function updateAvailableTourTicketsAtCheckout($id, $ticketAmountSubtracted)
-    {
-        $historyTourRepository = new HistoryTourRepository();
-        $historyTourRepository->updateSeats($id, $ticketAmountSubtracted);
-    }
-
     //Function used to update available reservations at checkout
     //Allows users to be simultaneously updated with available reservations
     public function updateAvailableReservationsAtCheckout($id, $newSeatsAvailable)

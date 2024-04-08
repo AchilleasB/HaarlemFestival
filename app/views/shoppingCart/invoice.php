@@ -39,13 +39,8 @@
 
                 $ticketAmount = $orderItems[$orderItem]->amount;
 
-                if ($products[$orderItem]['Event']->getTicketPrice()){
-                  $pricePerItem = $orderItems[$orderItem]->calc_price;
-                }
-                else {
-                  $pricePerItem = $orderItems[$orderItem]->calc_price * $ticketAmount;
-                }
-
+                $pricePerItem = $orderItems[$orderItem]->calc_price;
+              
                       ?>
                 <tr class="product">
                 <td class="col-md-4">
