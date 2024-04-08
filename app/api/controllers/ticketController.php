@@ -75,22 +75,6 @@ class TicketController extends ApiController
     }
 
 
-    public function UpdateAvailableTicketsForTourEvent()
-    {
-        try {
-
-            $eventId = htmlspecialchars($_POST['event_id']);
-            $availableSeats = htmlspecialchars($_POST['tickets_available']);
-
-            $this->ticketService->updateAvailableTourTicketsAtCheckout($eventId, $availableSeats);
-
-
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo $e;
-        }
-    }
-
     public function UpdateAvailableReservationsForYummyEvent()
     {
         try {
