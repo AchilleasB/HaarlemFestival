@@ -136,11 +136,38 @@
             <div class="row mb-5">
                 <div class="col-lg-8 col-md-12 schedule">
                     <h3>Schedule</h3>
-                    ...
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $count = 1; ?>
+                                <?php foreach ($restaurant->getSessions() as $session) : ?>
+                                    <?php
+                                    $sessionDate = $session['date'];
+                                    list($start, $end) = explode(', ', $sessionDate);
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $count++; ?></td>
+                                        <td><?php echo $start; ?></td>
+                                        <td><?php echo $end; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <h3>Location</h3>
-                    ...
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-map-marker-alt text-danger me-2" style="font-size: 1.5rem;"></i>
+                        <p class="mb-0"><?php echo htmlspecialchars($restaurant->getLocation()); ?></p>
+                    </div>
                 </div>
             </div>
             <div class="row mb-5">
