@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 06, 2024 at 11:35 PM
--- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
--- PHP Version: 8.2.17
+-- Generation Time: Apr 07, 2024 at 03:14 PM
+-- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
+-- PHP Version: 8.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -127,25 +127,25 @@ CREATE TABLE `dance_events` (
 --
 
 INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, `session`, `tickets_available`, `price`, `type`) VALUES
-(1, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 1350, 75.00, 'SINGLE-CONCERT'),
-(2, 3, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 197, 60.00, 'SINGLE-CONCERT'),
-(3, 4, 'FRIDAY 27 JULY', '23:00', '00:30', 'CLUB', 299, 60.00, 'SINGLE-CONCERT'),
-(4, 5, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(5, 6, 'FRIDAY 27 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(6, 2, 'SATURDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 1798, 110.00, 'SINGLE-CONCERT'),
-(7, 4, 'SATURDAY 28 JULY', '22:00', '23:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
-(8, 1, 'SATURDAY 28 JULY', '21:00', '01:00', 'TIESTOWORLD', 1499, 75.00, 'SINGLE-CONCERT'),
-(9, 3, 'SATURDAY 28 JULY', '23:00', '00:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(10, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 1800, 110.00, 'SINGLE-CONCERT'),
-(11, 4, 'SUNDAY 29 JULY', '19:00', '20:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
-(12, 5, 'SUNDAY 29 JULY', '21:00', '22:30', 'CLUB', 1500, 90.00, 'SINGLE-CONCERT'),
-(13, 3, 'SUNDAY 29 JULY', '18:00', '19:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
-(14, 1, 'FRIDAY 27 JULY', '20:00', '02:00', 'BACK2BACK', 150, 125.00, '1-DAY-PASS'),
-(15, 2, 'SATURDAY 28 JULY', '14:00', '01:00', 'BACK2BACK', 200, 150.00, '1-DAY-PASS'),
-(16, 2, 'SUNDAY 29 JULY', '14:00', '23:00', 'BACK2BACK', 200, 150.00, '1-DAY-PASS'),
-(17, 1, 'FRIDAY 27 JULY', '20:00', '23:00', 'BACK2BACK', 148, 250.00, '3-DAY-PASS'),
-(36, 2, 'MONDAY 30 JULY', '13:00', '18:00', 'BACK2BACK', 1798, 500.00, 'SINGLE-CONCERT'),
-(37, 4, 'MONDAY 30 JULY', '20:00', '22:30', 'CLUB', 150, 250.00, 'SINGLE-CONCERT');
+(1, 1, 'FRIDAY 26 JULY', '20:00', '02:00', 'BACK2BACK', 1350, 75.00, 'SINGLE-CONCERT'),
+(2, 3, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 197, 60.00, 'SINGLE-CONCERT'),
+(3, 4, 'FRIDAY 26 JULY', '23:00', '00:30', 'CLUB', 299, 60.00, 'SINGLE-CONCERT'),
+(4, 5, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
+(5, 6, 'FRIDAY 26 JULY', '22:00', '23:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
+(6, 2, 'SATURDAY 27 JULY', '14:00', '23:00', 'BACK2BACK', 1798, 110.00, 'SINGLE-CONCERT'),
+(7, 4, 'SATURDAY 27 JULY', '22:00', '23:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
+(8, 1, 'SATURDAY 27 JULY', '21:00', '01:00', 'TIESTOWORLD', 1499, 75.00, 'SINGLE-CONCERT'),
+(9, 3, 'SATURDAY 27 JULY', '23:00', '00:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
+(10, 2, 'SUNDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 1800, 110.00, 'SINGLE-CONCERT'),
+(11, 4, 'SUNDAY 28 JULY', '19:00', '20:30', 'CLUB', 300, 60.00, 'SINGLE-CONCERT'),
+(12, 5, 'SUNDAY 28 JULY', '21:00', '22:30', 'CLUB', 1500, 90.00, 'SINGLE-CONCERT'),
+(13, 3, 'SUNDAY 28 JULY', '18:00', '19:30', 'CLUB', 200, 60.00, 'SINGLE-CONCERT'),
+(14, 1, 'FRIDAY 26 JULY', '20:00', '02:00', 'BACK2BACK', 150, 125.00, '1-DAY-PASS'),
+(15, 2, 'SATURDAY 27 JULY', '14:00', '01:00', 'BACK2BACK', 200, 150.00, '1-DAY-PASS'),
+(16, 2, 'SUNDAY 28 JULY', '14:00', '23:00', 'BACK2BACK', 200, 150.00, '1-DAY-PASS'),
+(17, 1, 'FRIDAY 26 JULY', '20:00', '23:00', 'BACK2BACK', 148, 250.00, '3-DAY-PASS'),
+(36, 2, 'MONDAY 29 JULY', '13:00', '18:00', 'BACK2BACK', 1798, 500.00, 'SINGLE-CONCERT'),
+(37, 4, 'MONDAY 29 JULY', '20:00', '22:30', 'CLUB', 150, 250.00, 'SINGLE-CONCERT');
 
 -- --------------------------------------------------------
 
@@ -214,15 +214,9 @@ CREATE TABLE `events_page` (
 --
 
 INSERT INTO `events_page` (`id`, `title`, `sub_title`, `description`, `information`) VALUES
-(2, 'The Festival', '<p><span style=\"background-color: #ecf0f1;\">&nbsp;A Summer to remember&nbsp;</span></p>', 'Get ready for the summer festival with activities for everyone.\n                        From jazz to the latest EDM artists, the festival has something for everyone. Foodies, history\n                        lovers and kids too!\n                        <br><br>\n                        Explore our Jazz, Dance, Yummie, A stroll through history, and The secret of Dr. Teyler!', NULL),
-(3, 'lalala', 'cwcew', '<p>cewfew</p>', '<p>cwel</p>'),
-(4, 'testing', 'g1', '<p>g2</p>', '<p>g3</p>'),
-(5, 'da', NULL, NULL, NULL),
-(6, 'da', NULL, NULL, NULL),
-(7, 'das', NULL, NULL, NULL),
-(8, 'dsadadsa', NULL, NULL, NULL),
-(16, 'az-sum-pedal-i-to-golem', 'dsada', '<p>dsada</p>', '<p>asdsad</p>'),
-(17, 'maznaa', 'dsadsad', '<p>dsadsa</p>', '');
+(1, 'A Stroll Through History', 'Visiting Haarlem\'s historical landmarks', 'In this event, we take a walking tour around some of the most historical musems in Haarlem. Participants get to see and learn about the historical sites and how they come to be.<br><br> The tour starts at the Church of St Bavo and ends at Hof van Bakenes. There will be a break in between, at the Jopenkerk where the tourists can enjoy some beer!', '<li>Due to the nature of the walk, participants must be a minimum of 12 years old and no strollers are allowed.</li><li>A giant flag will mark the starting location.</li><li>Groups will consist of 12 participants and 1 tour guide.</li><li>Every participant can enjoy one drink with the ticket!</li>'),
+(2, 'The Festival', '<p><span style=\"background-color: #ecf0f1;\">&nbsp;A Summer to remember&nbsp;</span></p>', 'Get ready for the summer festival with activities for everyone.\r\n                        From jazz to the latest EDM artists, the festival has something for everyone. Foodies, history\r\n                        lovers and kids too!\r\n                        <br><br>\r\n                        Explore our Jazz, Dance, Yummie, A stroll through history, and The secret of Dr. Teyler!', NULL),
+(3, 'lalala', 'cwcew', '<p>cewfew</p>', '<p>cwel</p>');
 
 -- --------------------------------------------------------
 
@@ -352,10 +346,13 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (12, 'restaurant-fris-banner.png', NULL),
 (14, 'grand-cafe-brinkman-banner.png', NULL),
 (15, 'urban-frenchy-bistro-toujours-banner.png', NULL),
+(16, 'restaurant-ml-1.png', 2),
+(17, 'restaurant-ml-2.png', 2),
 (18, 'restaurant-ml-3.png', 2),
 (19, 'ratatouille-1.png', 1),
 (20, 'ratatouille-2.png', 1),
 (21, 'ratatouille-3.png', 1),
+(22, 'ratatouille-1.png', 4),
 (23, 'dance.png', NULL),
 (24, 'yummy.png', NULL),
 (25, 'history-image.png', NULL),
@@ -364,8 +361,7 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (30, 'test-banner.png', NULL),
 (31, 'restaurant-ml-banner.png', NULL),
 (32, 'test-banner.png', NULL),
-(33, 'manol-draganov-banner.png', NULL),
-(34, 'restaurant-ml-1.png', 2);
+(33, 'manol-draganov-banner.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -495,7 +491,7 @@ INSERT INTO `reservations` (`id`, `restaurant_id`, `session_id`, `user_id`, `num
 (29, 1, 1, 10, 1, '5151116211515', 'jnjnk', 0),
 (30, 5, NULL, 5, 4, '1231312321321', NULL, 0),
 (31, 2, NULL, 8, 14, '1231421414', NULL, 0),
-(32, NULL, NULL, NULL, 3, '0885790202', NULL, 1);
+(32, NULL, NULL, 9, 3, '0885790202', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -638,6 +634,7 @@ INSERT INTO `tickets` (`id`, `calc_price`, `amount`, `dance_event_id`, `history_
 ('187900b5-6761-4dd1-b9f1-8ef25e103e04', 60.00, 1, 3, NULL, NULL, 10, 2),
 ('d029ec15-1352-439d-ba1c-907ab9e60a02', 60.00, 1, 2, NULL, NULL, 2, NULL),
 ('bafe9fc3-d6b6-4f61-a23c-9f369604fa44', 120.00, 2, 2, NULL, NULL, 10, NULL),
+('bfa288be-2d8d-4fa0-b0dc-9f7a0b01d375', 75.00, 1, 1, NULL, NULL, NULL, NULL),
 ('eb07ebad-d4c6-462e-9e35-b2aa31289207', 40.00, 4, NULL, NULL, 28, 10, NULL),
 ('9b9c83ff-4c37-490c-9636-d12e5a06b6bc', 75.00, 1, 8, NULL, NULL, 6, NULL),
 ('586bd32c-3ca4-49e7-8ca2-f3ef13b7a5ff', 17.50, 1, NULL, 1, NULL, 10, 2),
@@ -911,7 +908,7 @@ ALTER TABLE `venues`
 -- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `cuisines`
@@ -923,7 +920,7 @@ ALTER TABLE `cuisines`
 -- AUTO_INCREMENT for table `dance_events`
 --
 ALTER TABLE `dance_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `drinks`
@@ -941,7 +938,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `events_page`
 --
 ALTER TABLE `events_page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `history_tours`
@@ -953,7 +950,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -1013,7 +1010,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `venues`
 --
 ALTER TABLE `venues`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
