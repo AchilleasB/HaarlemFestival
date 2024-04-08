@@ -2,7 +2,7 @@ async function handleAddImage(restaurantId) {
     const form = document.getElementById('add-image-form');
     if (form.checkValidity()) {
         await postImageRequest();
-        await handleManageGallery(restaurantId); // Refresh the gallery to show the new image
+        await handleManageGallery(restaurantId);
     } else {
         alert("Please fill in all fields.");
     }

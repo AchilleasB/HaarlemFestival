@@ -29,12 +29,12 @@ async function updateAvailability() {
 function checkPhoneValidity() {
     const phoneValue = phoneInput.value.trim();
     // Define a regular expression pattern to match a simple phone number format
-    // Min 7 digits, optional + at the beginning
+    // Min 7 digits (standart for mobile phones internationally), optional + at the beginning
     const phonePattern = /^\+?\d{7,}$/;
     const isValidPhone = phonePattern.test(phoneValue);
     const phoneHelp = document.getElementById('phone-help-message');
 
-    if (isValidPhone && currentAvailability > 0) { // Check both conditions
+    if (isValidPhone && currentAvailability > 0) {
         button.removeAttribute('disabled');
         phoneHelp.textContent = 'Valid phone number.';
         phoneHelp.classList.remove('text-danger');
@@ -51,7 +51,7 @@ function setMaxGuests(availability) {
     const guestsInput = document.getElementById('guests');
     const currentGuestsInputValue = guestsInput.value;
 
-    currentAvailability = availability; // Ensure the global variable is up-to-date
+    currentAvailability = availability;
 
     if (availability === 0) {
         guestsInput.setAttribute('min', 0);

@@ -73,8 +73,7 @@ class YummyController extends Controller
             $this->handleException($e);
         }
         // } else {
-        //     header('Location: /login?redirect=' . urlencode($_SERVER['REQUEST_URI']));
-        //     exit();
+        //     
         // }
     }
 

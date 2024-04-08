@@ -84,7 +84,7 @@ function populateFormWithRestaurantDetails(editRestaurantContainer, restaurantDe
 }
 
 function generateStarOptions(numberOfStars) {
-    let optionsHtml = '<option value="">Select Stars</option>'; // Default prompt option
+    let optionsHtml = '<option value="">Select Stars</option>';
 
     for (let i = 1; i <= 5; i++) {
         // Check if the current iteration matches the restaurant's star rating
