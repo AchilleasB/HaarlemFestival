@@ -3,6 +3,7 @@ const sessionAPIendpoint = "http://localhost/api/session";
 const cuisineAPIendpoint = "http://localhost/api/cuisine";
 const reservationAPIendpoint = "http://localhost/api/reservation";
 const galleryAPIendpoint = "http://localhost/api/gallery";
+const menuAPIendpoint = "http://localhost/api/menu";
 
 const itemsListContainer = document.getElementById("items-list");
 const restaurantRadioButton = document.getElementById("restaurant-radio-btn");
@@ -38,11 +39,11 @@ var radioButtons = document.querySelectorAll('.btn-check');
 radioButtons.forEach(function (radioButton) {
     radioButton.addEventListener('change', function (event) {
         var selectedRadio = event.target;
-        if (selectedRadio.checked && selectedRadio.id !== 'reservation-radio-btn') { // Check if it's not the "Reservations" radio button
+        if (selectedRadio.checked && selectedRadio.id !== 'reservation-radio-btn') {
             var labelText = document.querySelector('label[for="' + selectedRadio.id + '"]').textContent.slice(0, -1);
             generateButton("Add " + labelText.toLowerCase(), labelText.toLowerCase());
         } else if (selectedRadio.checked && selectedRadio.id === 'reservation-radio-btn') {
-            document.getElementById("dynamic-add-button-container").innerHTML = ''; // Clear the button if "Reservations" radio button is selected
+            document.getElementById("dynamic-add-button-container").innerHTML = '';
         }
     });
 });
@@ -81,8 +82,6 @@ async function loadItems(apiEndpoint, itemType) {
         const response = await fetch(apiEndpoint, {
             method: 'GET',
         });
-        // const responseData = await response.text(); // Get response body as text
-        // console.log(responseData); // Log response body
         const data = await response.json();
         data.forEach(item => {
             const itemCard = createItemCard(item, itemType);
@@ -151,8 +150,8 @@ function createItemCard(item, itemType) {
             item.name
         ],
         reservation: [
-            item.userLastname,
-            formatRestaurantNameForReservations(item.restaurantName),
+            formatStringNameforReservation(item.userLastname),
+            formatStringNameforReservation(item.restaurantName),
             formatSessionTimesForReservation(item.sessionStartTime, item.sessionEndTime),
             item.mobileNumber,
             formatIsActiveForReservation(item.isActive)
@@ -206,8 +205,7 @@ function createItemCard(item, itemType) {
     if (deleteButton) {
         deleteButton.addEventListener("click", function () {
 
-            const userConfirmation = confirm(`Are you sure you want to delete this ${itemType}?`);
-            if (!userConfirmation) return;
+            if (!confirmDeletion(itemType)) return;
 
             if (itemType === "restaurant") {
                 handleDeleteRestaurant(item.id);
@@ -327,7 +325,7 @@ function formatSessionTimesForReservation(startTime, endTime) {
     }
 }
 
-function formatRestaurantNameForReservations(name) {
+function formatStringNameforReservation(name) {
     if (!name) {
         return '<span class="no-data"><i class="fas fa-exclamation-circle"></i> NO DATA</span>';
     } else {
@@ -385,4 +383,30 @@ function validateCheckkboxes() {
 
     if (!cuisinesValid || !sessionsValid) return false;
     return true;
+}
+
+function setupFilePreview(fileInputId, previewImageId) {
+    const fileInput = document.getElementById(fileInputId);
+    const preview = document.getElementById(previewImageId);
+
+    fileInput.addEventListener('change', function (event) {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+function confirmDeletion(itemType) {
+    return confirm(`Are you sure you want to delete this ${itemType}?`);
+}
+
+function closeContainer(container) {
+    container.innerHTML = '';
 }

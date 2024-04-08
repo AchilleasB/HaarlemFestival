@@ -4,7 +4,7 @@ class ReservationCms implements JsonSerializable
 {
     private int $id;
     private ?string $restaurantName;
-    private string $userLastname;
+    private ?string $userLastname;
     private ?DateTime $sessionStartTime;
     private ?DateTime $sessionEndTime;
     private int $numberOfPeople;
@@ -14,8 +14,8 @@ class ReservationCms implements JsonSerializable
 
     /**
      * Reservation constructor.
-     * @param int $restaurantId
      * @param string|null $restaurantName
+     * @param string|null $userLastname
      * @param ?DateTime $sessionStartTime
      * @param ?DateTime $sessionEndTime
      * @param int $numberOfPeople
@@ -27,7 +27,7 @@ class ReservationCms implements JsonSerializable
         ?string $restaurantName, 
         ?DateTime $sessionStartTime, 
         ?DateTime $sessionEndTime, 
-        string $userLastname, 
+        ?string $userLastname, 
         int $numberOfPeople, 
         string $mobileNumber, 
         ?string $remark, 

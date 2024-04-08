@@ -16,6 +16,30 @@ class ImageRepository extends Repository
         }
     }
 
+    public function getImagesAndIdsByRestaurantId($restaurantId)
+    {
+        try {
+            $stmt = $this->connection->prepare('SELECT id, image FROM images WHERE restaurant_id = :restaurant_id');
+            $stmt->execute([':restaurant_id' => $restaurantId]);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching images', $e->getCode(), $e);
+        }
+    }
+
+    public function getImageNameById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare('SELECT image FROM images WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching image', $e->getCode(), $e);
+        }
+    }
+
     public function addImageToRestaurant($restaurantId, $imagePath)
     {
         try {

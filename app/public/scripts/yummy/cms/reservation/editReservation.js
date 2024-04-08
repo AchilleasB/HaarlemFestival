@@ -11,11 +11,11 @@ async function handleEditReservation(reservation) {
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">User's last name</label>
-                    <p class="reservantion-unchangeable">${reservation.userLastname}</p>
+                    <p class="reservantion-unchangeable">${formatStringNameforReservation(reservation.userLastname)}</p>
                 </div>
                 <div class="mb-3">
                     <label for="restaurant" class="form-label">Restaurant name</label>
-                    <p class="reservantion-unchangeable">${formatRestaurantNameForReservations(reservation.restaurantName)}</p>
+                    <p class="reservantion-unchangeable">${formatStringNameforReservation(reservation.restaurantName)}</p>
                 </div>
                 <div class="mb-3">
                     <label for="session" class="form-label">Session</label>

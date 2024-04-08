@@ -43,10 +43,6 @@ async function postRestaurantRequest() {
         body: formData
     });
 
-    // // Log the raw response text
-    // const text = await response.text();
-    // console.log('Raw response:', text);
-
     const data = await response.json();
     displayMessage(data.message, 3000);
 
@@ -105,7 +101,7 @@ function htmlAddRestaurantForm(cuisinesData, sessionsData) {
     </form>`;
 
     populateStarsSelect();
-    setupFilePreview();
+    setupFilePreview('restaurant-banner-file', 'banner-preview');
 }
 
 function populateStarsSelect() {
@@ -116,23 +112,5 @@ function populateStarsSelect() {
         option.textContent = `${i} Star${i !== 1 ? 's' : ''}`;
         starsSelect.appendChild(option);
     }
-}
-
-function setupFilePreview() {
-    const fileInput = document.getElementById('restaurant-banner-file');
-    const bannerPreview = document.getElementById('banner-preview');
-
-    fileInput.addEventListener('change', function (event) {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-                bannerPreview.src = e.target.result;
-            };
-
-            reader.readAsDataURL(file);
-        }
-    });
 }
 

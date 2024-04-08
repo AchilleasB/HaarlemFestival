@@ -310,4 +310,16 @@ class RestaurantRepository extends Repository
             echo $e->getMessage() . $e->getLine();
         }
     }
+
+    public function getRestaurantNameById($restaurantId)
+    {
+        try {
+            $stmt = $this->connection->prepare('SELECT name FROM restaurants WHERE id = :id');
+            $stmt->execute([':id' => $restaurantId]);
+
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching restaurant name', $e->getCode(), $e);
+        }
+    }
 }

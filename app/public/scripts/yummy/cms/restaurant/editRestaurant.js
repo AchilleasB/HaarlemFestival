@@ -12,7 +12,7 @@ async function handleEditRestaurant(restaurantId) {
     populateFormWithRestaurantDetails(editRestaurantContainer, restaurantDetailed, cuisinesData, sessionsData);
 
     // Setup event listeners for form interactions
-    setupFormEventListeners(editRestaurantContainer, restaurantId, restaurantDetailed);
+    setupFormEventListeners(editRestaurantContainer);
 }
 
 function populateFormWithRestaurantDetails(editRestaurantContainer, restaurantDetailed, cuisinesData, sessionsData) {
@@ -41,7 +41,7 @@ function populateFormWithRestaurantDetails(editRestaurantContainer, restaurantDe
                     <label for="restaurant-banner" class="form-label">Upload Restaurant Banner</label>
                     <input type="file" class="form-control" id="restaurant-banner-file" name="restaurant-banner" accept="image/png">
                     <input type="hidden" id="current-banner" name="current-banner" value="${restaurantDetailed.banner}">
-                    <img id="banner-preview" src="/../images/yummy/banners/${restaurantDetailed.banner}" alt="Image of ${restaurantDetailed.name}" style="max-width: 100px; height: auto;">
+                    <img id="banner-preview" src="${restaurantBannerPath}${restaurantDetailed.banner}" alt="Image of ${restaurantDetailed.name}" style="max-width: 100px; height: auto;">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
@@ -95,7 +95,7 @@ function generateStarOptions(numberOfStars) {
     return optionsHtml;
 }
 
-function setupFormEventListeners(editRestaurantContainer, restaurantId, restaurantDetailed) {
+function setupFormEventListeners(editRestaurantContainer) {
     // Update button
     const updateRestaurantButton = document.getElementById("update-restaurant-button");
     updateRestaurantButton.addEventListener("click", function (e) {
@@ -116,25 +116,7 @@ function setupFormEventListeners(editRestaurantContainer, restaurantId, restaura
     });
 
     // File input for banner preview
-    setupFilePreview();
-}
-
-function setupFilePreview() {
-    const fileInput = document.getElementById('restaurant-banner-file');
-    const bannerPreview = document.getElementById('banner-preview');
-
-    fileInput.addEventListener('change', function (event) {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-                bannerPreview.src = e.target.result;
-            };
-
-            reader.readAsDataURL(file);
-        }
-    });
+    setupFilePreview('restaurant-banner-file', 'banner-preview');
 }
 
 async function fetchRestaurantDetailed(restaurantId) {

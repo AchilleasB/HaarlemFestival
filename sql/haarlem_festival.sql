@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 05, 2024 at 03:04 PM
+-- Generation Time: Apr 06, 2024 at 11:35 PM
 -- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
 -- PHP Version: 8.2.17
 
@@ -214,9 +214,15 @@ CREATE TABLE `events_page` (
 --
 
 INSERT INTO `events_page` (`id`, `title`, `sub_title`, `description`, `information`) VALUES
-(1, 'A Stroll Through History', 'Visiting Haarlem\'s historical landmarks', 'In this event, we take a walking tour around some of the most historical musems in Haarlem. Participants get to see and learn about the historical sites and how they come to be.<br><br> The tour starts at the Church of St Bavo and ends at Hof van Bakenes. There will be a break in between, at the Jopenkerk where the tourists can enjoy some beer!', '<li>Due to the nature of the walk, participants must be a minimum of 12 years old and no strollers are allowed.</li><li>A giant flag will mark the starting location.</li><li>Groups will consist of 12 participants and 1 tour guide.</li><li>Every participant can enjoy one drink with the ticket!</li>'),
-(2, 'The Festival', '<p><span style=\"background-color: #ecf0f1;\">&nbsp;A Summer to remember&nbsp;</span></p>', 'Get ready for the summer festival with activities for everyone.\r\n                        From jazz to the latest EDM artists, the festival has something for everyone. Foodies, history\r\n                        lovers and kids too!\r\n                        <br><br>\r\n                        Explore our Jazz, Dance, Yummie, A stroll through history, and The secret of Dr. Teyler!', NULL),
-(3, 'lalala', 'cwcew', '<p>cewfew</p>', '<p>cwel</p>');
+(2, 'The Festival', '<p><span style=\"background-color: #ecf0f1;\">&nbsp;A Summer to remember&nbsp;</span></p>', 'Get ready for the summer festival with activities for everyone.\n                        From jazz to the latest EDM artists, the festival has something for everyone. Foodies, history\n                        lovers and kids too!\n                        <br><br>\n                        Explore our Jazz, Dance, Yummie, A stroll through history, and The secret of Dr. Teyler!', NULL),
+(3, 'lalala', 'cwcew', '<p>cewfew</p>', '<p>cwel</p>'),
+(4, 'testing', 'g1', '<p>g2</p>', '<p>g3</p>'),
+(5, 'da', NULL, NULL, NULL),
+(6, 'da', NULL, NULL, NULL),
+(7, 'das', NULL, NULL, NULL),
+(8, 'dsadadsa', NULL, NULL, NULL),
+(16, 'az-sum-pedal-i-to-golem', 'dsada', '<p>dsada</p>', '<p>asdsad</p>'),
+(17, 'maznaa', 'dsadsad', '<p>dsadsa</p>', '');
 
 -- --------------------------------------------------------
 
@@ -346,13 +352,10 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (12, 'restaurant-fris-banner.png', NULL),
 (14, 'grand-cafe-brinkman-banner.png', NULL),
 (15, 'urban-frenchy-bistro-toujours-banner.png', NULL),
-(16, 'restaurant-ml-1.png', 2),
-(17, 'restaurant-ml-2.png', 2),
 (18, 'restaurant-ml-3.png', 2),
 (19, 'ratatouille-1.png', 1),
 (20, 'ratatouille-2.png', 1),
 (21, 'ratatouille-3.png', 1),
-(22, 'ratatouille-1.png', 4),
 (23, 'dance.png', NULL),
 (24, 'yummy.png', NULL),
 (25, 'history-image.png', NULL),
@@ -361,7 +364,8 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (30, 'test-banner.png', NULL),
 (31, 'restaurant-ml-banner.png', NULL),
 (32, 'test-banner.png', NULL),
-(33, 'manol-draganov-banner.png', NULL);
+(33, 'manol-draganov-banner.png', NULL),
+(34, 'restaurant-ml-1.png', 2);
 
 -- --------------------------------------------------------
 
@@ -491,7 +495,7 @@ INSERT INTO `reservations` (`id`, `restaurant_id`, `session_id`, `user_id`, `num
 (29, 1, 1, 10, 1, '5151116211515', 'jnjnk', 0),
 (30, 5, NULL, 5, 4, '1231312321321', NULL, 0),
 (31, 2, NULL, 8, 14, '1231421414', NULL, 0),
-(32, NULL, NULL, 9, 3, '0885790202', NULL, 1);
+(32, NULL, NULL, NULL, 3, '0885790202', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -937,7 +941,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `events_page`
 --
 ALTER TABLE `events_page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `history_tours`
@@ -949,7 +953,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `locations`
