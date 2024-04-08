@@ -3,36 +3,70 @@ require_once(__DIR__ . '/repository.php');
 
 class HistoryTourRepository extends Repository
 {
-   
-    public function getOrganizedTours()
-    {
+    public function getAllTours() {
         try {
-            $sql = "SELECT date, 
-                           DATE_FORMAT(date, '%e %M') as formatted_date,
-                           MAX(CASE WHEN time = '10:00:00.00000' THEN guides ELSE '' END) AS '10:00',
-                           MAX(CASE WHEN time = '13:00:00.00000' THEN guides ELSE '' END) AS '13:00',
-                           MAX(CASE WHEN time = '16:00:00.00000' THEN guides ELSE '' END) AS '16:00'
-                    FROM (
-                        SELECT ht.date, ht.time, 
-                               GROUP_CONCAT(CONCAT(g.name, ' (', g.language, ')') SEPARATOR '<br>') AS guides
-                        FROM history_tours ht
-                        LEFT JOIN tour_guides g ON ht.guide = g.id
-                        GROUP BY ht.date, ht.time
-                    ) AS subquery
-                    GROUP BY date
-                    ORDER BY date";
-
-            $statement = $this->connection->prepare($sql);
-            $statement->execute();
-
-            $organizedTours = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            return $organizedTours;
+            $sql = "SELECT tours.*, tour_guides.name AS guide_name
+                    FROM history_tours AS tours
+                    INNER JOIN tour_guides ON tours.guide = tour_guides.id
+                     ORDER BY tours.id";
+            $statement = $this->connection->query($sql);
+            $tours = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $tours;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return []; 
         }
     }
+      
+    public function getAllGuides()
+{
+    try {
+        $sql = "SELECT * FROM tour_guides";
+        $statement = $this->connection->query($sql);
+        $guides = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $guides;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+public function getOrganizedTours()
+{
+    try {
+        $sql = "SELECT ht.date, ht.time, CONCAT(g.name, ' (', g.language, ')') AS guide
+                FROM history_tours ht
+                LEFT JOIN tour_guides g ON ht.guide = g.id
+                ORDER BY ht.date, ht.time";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+
+        $tours = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $organizedTours = [];
+        foreach ($tours as $tour) {
+            $date = $tour['date'];
+            $time = $tour['time'];
+            $guide = $tour['guide'];
+
+            if (!isset($organizedTours[$date])) {
+                $organizedTours[$date] = [];
+            }
+
+            if (!isset($organizedTours[$date][$time])) {
+                $organizedTours[$date][$time] = [];
+            }
+            $organizedTours[$date][$time][] = $guide;
+        }
+
+        return $organizedTours;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
     public function getLanguages()
     {
         try {
@@ -94,7 +128,7 @@ class HistoryTourRepository extends Repository
         }
     }
     public function checkForMatchingTour($language, $date, $time)
-{
+    {
     try {
         $sql = "SELECT ht.id
                 FROM history_tours ht
@@ -172,6 +206,100 @@ function addTicketToCart($historyTicket)
         echo 'Error: ' . $e->getMessage();
     }
 }
+public function createTour(HistoryTour $tour)
+{
+    try {
+        $sql = "INSERT INTO history_tours (date, time, guide, seats) VALUES (:date, :time, :guide, :seats)"; 
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            ':date' => $tour->getDate(),
+            ':time' => $tour->getTime(),
+            ':guide' => $tour->getGuide(),
+            ':seats' => $tour->getSeats()
+        ]);
 
+        return true;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+public function updateTour(HistoryTour $tour)
+{
+    try {
+        $sql = "UPDATE history_tours SET date = :date, time = :time, guide = :guide, seats = :seats WHERE id = :id";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            ':id' => $tour->getId(),
+            ':date' => $tour->getDate(),
+            ':time' => $tour->getTime(),
+            ':guide' => $tour->getGuide(),
+            ':seats' => $tour->getSeats()
+        ]);
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+    public function deleteTour($tourId)
+    {
+        try {
+            $sql = "DELETE FROM history_tours WHERE id = :id";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([':id' => $tourId]);
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    public function createGuide(Guide $guide)
+    {
+        try {
+            $sql = "INSERT INTO tour_guides (name, language) VALUES (:name, :language)";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([
+                ':name' => $guide->getName(),
+                ':language' => $guide->getLanguage()
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
+    public function updateGuide(Guide $guide)
+    {
+        try {
+            $sql = "UPDATE tour_guides SET name = :name, language = :language WHERE id = :id";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([
+                ':name' => $guide->getName(),
+                ':language' => $guide->getLanguage(),
+                ':id' => $guide->getId()
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
+    public function deleteGuide($id)
+    {
+        try {
+            $sql = "DELETE FROM tour_guides WHERE id = :id";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([':id' => $id]);
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
 }
 ?>

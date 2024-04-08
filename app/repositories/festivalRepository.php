@@ -59,142 +59,49 @@ class FestivalRepository extends Repository
         }
     }
 
-public function updateEventTitle($eventId, $title)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE events_page SET title = :title WHERE id = :eventId');
-        $stmt->execute([
-            ':title' => $title,
-            ':eventId' => $eventId
-        ]);
-
-        if ($stmt->rowCount() > 0) {
-            return true; 
-        } else {
+    public function updateEventDetails(EventOverview $event)
+    {
+        try {
+            $sql = "UPDATE events 
+                    SET description = :description,
+                        title = :title,
+                        sub_title = :subTitle,
+                        locations = :locations,
+                        schedule = :schedule,
+                        button_path = :buttonPath
+                    WHERE id = :eventId";
+    
+            $statement = $this->connection->prepare($sql);
+    
+            $description = $event->getDescription();
+            $title = $event->getTitle();
+            $subTitle = $event->getSubTitle();
+            $locations = $event->getLocations();
+            $schedule = $event->getSchedule();
+            $buttonPath = $event->getButton();
+            $eventId = $event->getId();
+    
+            $statement->bindParam(':description', $description);
+            $statement->bindParam(':title', $title);
+            $statement->bindParam(':subTitle', $subTitle);
+            $statement->bindParam(':locations', $locations);
+            $statement->bindParam(':schedule', $schedule);
+            $statement->bindParam(':buttonPath', $buttonPath);
+            $statement->bindParam(':eventId', $eventId);
+            $statement->execute();
+    
+            if ($statement->rowCount() > 0) {
+                return true; 
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
             return false; 
         }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false; 
     }
-}
-public function updateEventSubTitle($eventId, $subTitle)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE events_page SET sub_title = :sub_title WHERE id = :eventId');
-        $stmt->execute([
-            ':sub_title' => $subTitle,
-            ':eventId' => $eventId
-        ]);
-
-        if ($stmt->rowCount() > 0) {
-            return true; 
-        } else {
-            return false; 
-        }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false; 
-    }
-}
-public function updateEventDescription($eventId, $description)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE events_page SET description = :description WHERE id = :eventId');
-        $stmt->execute([
-            ':description' => $description,
-            ':eventId' => $eventId
-        ]);
-
-        if ($stmt->rowCount() > 0) {
-            return true; 
-        } else {
-            return false; 
-        }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false; 
-    }
-}
-public function updateEventTitleOverview($eventId, $title)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE events SET title = :title WHERE id = :eventId');
-        $stmt->execute([
-            ':title' => $title,
-            ':eventId' => $eventId
-        ]);
-
-        if ($stmt->rowCount() > 0) {
-            return true; 
-        } else {
-            return false; 
-        }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false; 
-    }
-}
-
-public function updateEventDescriptionOverview($eventId, $description)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE events SET description = :description WHERE id = :eventId');
-        $stmt->execute([
-            ':description' => $description,
-            ':eventId' => $eventId
-        ]);
-
-        if ($stmt->rowCount() > 0) {
-            return true; 
-        } else {
-            return false; 
-        }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false; 
-    }
-}
-
-public function updateEventSchedule($eventId, $schedule)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE events SET schedule = :schedule WHERE id = :eventId');
-        $stmt->execute([
-            ':schedule' => $schedule,
-            ':eventId' => $eventId
-        ]);
-
-        if ($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false; 
-        }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false; 
-    }
-}
-
-public function updateEventLocation($eventId, $location)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE events SET locations = :locations WHERE id = :eventId');
-        $stmt->execute([
-            ':locations' => $location,
-            ':eventId' => $eventId
-        ]);
-
-        if ($stmt->rowCount() > 0) {
-            return true; 
-        } else {
-            return false; 
-        }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false; 
-    }
-}
+    
+    
 }
 
 

@@ -22,27 +22,6 @@ class LocationRepository extends Repository
             return [];
         }
     }
-
-
-    public function getLocationById($id)
-    {
-        try {
-
-            $sql = "SELECT * FROM locations WHERE id = :id";
-
-            $statement = $this->connection->prepare($sql);
-            $statement->bindParam(':id', $id);
-            $statement->execute();
-
-            $location = $statement->fetch(PDO::FETCH_ASSOC);
-
-            return $location;
-        } catch (PDOException $e) {
-
-            echo "Error: " . $e->getMessage();
-            return null;
-        }
-    }
     public function getLocationImages(int $id): array|null
     {
         try {
@@ -67,58 +46,78 @@ class LocationRepository extends Repository
             return null;
         }
     }
-    public function addLocation($location)
-{
-    try {
-        $stmt = $this->connection->prepare('INSERT INTO locations (location_name, address, location_type, description, links, images) VALUES (:location_name, :address, :location_type, :description, :links, :images)');
-        $stmt->execute([
-            ':location_name' => $location->getLocationName(),
-            ':address' => $location->getAddress(),
-            ':location_type' => $location->getLocationType(),
-            ':description' => $location->getDescription(),
-            ':links' => $location->getLinks(),
-            ':images' => $location->getImages()
-        ]);
-
-        return true;
-
-    } catch (PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-    }
-}
-
-public function updateLocation($location)
-{
-    try {
-        $stmt = $this->connection->prepare('UPDATE locations SET location_name = :location_name, address = :address, location_type = :location_type, description = :description, links = :links, images = :images WHERE id = :id');
-        $stmt->execute([
-            ':id' => $location->getId(),
-            ':location_name' => $location->getLocationName(),
-            ':address' => $location->getAddress(),
-            ':location_type' => $location->getLocationType(),
-            ':description' => $location->getDescription(),
-            ':links' => $location->getLinks(),
-            ':images' => $location->getImages()
-        ]);
-
-        return true;
-
-    } catch (PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-    }
-}
-
-public function deleteLocation($id)
-{
-    try {
-        $stmt = $this->connection->prepare('DELETE FROM locations WHERE id = :id');
-        $stmt->execute([':id' => $id]);
-
-        return true;
-
-    } catch (PDOException $e) {
-        echo 'Error: ' . $e->getMessage();
-    }
-}
+    public function createLocation(Location $location)
+    {
+        try {
+            $sql = "INSERT INTO locations (location_name, address, description, links, images) 
+                    VALUES (:location_name, :address, :description, :links, :imageId)";
     
+            $stmt = $this->connection->prepare($sql);
+    
+            $location_name = $location->getLocationName();
+            $address = $location->getAddress();
+            $description = $location->getDescription();
+            $links = $location->getLinks();
+
+            $stmt->bindParam(':location_name', $location_name);
+            $stmt->bindParam(':address', $address);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':links', $links);
+            $stmt->bindParam(':imageId', $imageId);
+    
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
+    
+    public function updateLocation(Location $location)
+    {
+        try {
+            $sql = "UPDATE locations 
+                    SET location_name = :location_name, 
+                        address = :address, 
+                        description = :description, 
+                        links = :links 
+                    WHERE id = :id";
+                        
+            $stmt = $this->connection->prepare($sql);
+            
+            $locationName = $location->getLocationName();
+            $address = $location->getAddress();
+            $description = $location->getDescription();
+            $links = $location->getLinks();
+            $id = $location->getId();
+            
+            $stmt->bindParam(':location_name', $locationName);
+            $stmt->bindParam(':address', $address);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':links', $links);
+            $stmt->bindParam(':id', $id);
+        
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
+    public function deleteLocation($locationId)
+    {
+        try {
+            $sql = "DELETE FROM locations WHERE id = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':id', $locationId);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+  
 }

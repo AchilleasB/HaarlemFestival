@@ -15,19 +15,18 @@ class LocationService
         return $this->locationRepository->getAllLocations();
     }
 
-    public function addLocation($location)
+    public function createLocation(Location $location)
     {
-        return $this->locationRepository->addLocation($location);
+        return $this->locationRepository->createLocation($location);
     }
-
-    public function updateLocation($location)
+    public function updateLocation(Location $location)
     {
         return $this->locationRepository->updateLocation($location);
     }
 
-    public function deleteLocation($id)
+    public function deleteLocation($locationId)
     {
-        return $this->locationRepository->deleteLocation($id);
+        return $this->locationRepository->deleteLocation($locationId);
     }
 
 }

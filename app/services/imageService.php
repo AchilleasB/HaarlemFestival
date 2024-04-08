@@ -10,12 +10,10 @@ class ImageService
     {
         $this->imageRepository = new ImageRepository();
     }
-
     public function getImagesByRestaurantId($restaurantId)
     {
         return $this->imageRepository->getImagesByRestaurantId($restaurantId);
     }
-
     public function addImageToRestaurant($restaurantId, $restaurantName)
     {
         $images = $this->imageRepository->getImagesByRestaurantId($restaurantId);

@@ -58,11 +58,11 @@
     {
         $this->link= $link;
     }
-    public function getImage(): string
+    public function getImage(): ?string
     {
         return $this->image;
     }
-    public function setImage(string $image): void
+    public function setImage(?string $image): void
     {
         $this->image = $image;
     }

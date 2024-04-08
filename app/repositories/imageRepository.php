@@ -59,4 +59,5 @@ class ImageRepository extends Repository
             throw new RepositoryException('Error deleting image', $e->getCode(), $e);
         }
     }
+   
 }

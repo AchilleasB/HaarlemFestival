@@ -25,7 +25,7 @@
             <div class="cms-buttons-container">
             <a href="/cms/eventManagement" class="cms-btn d-inline-block">Event</a>
                 <a href="/cms/festivalManagement" class="cms-btn d-inline-block">Festival</a>
-                <a href="/cms/historyManagement" class="cms-btn d-inline-block">History</a>
+                <a href="cms/historyManagement" class="cms-btn d-inline-block">History</a>
                 <a href="/cms/danceManagement" class="cms-btn d-inline-block">Dance</a>
                 <a href="/cms/yummyManagement" class="cms-btn d-inline-block">Yummy</a>
                 <a href="/cms/userManagement" class="cms-btn d-inline-block">Users</a>

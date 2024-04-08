@@ -7,6 +7,7 @@ class HistoryTour
     private string $time;
     private string $guide;
     private string $language; 
+    private int $seats;
 
     public function getId(): int
     {
@@ -55,5 +56,14 @@ class HistoryTour
     public function setLanguage(string $language): void 
     {
         $this->language = $language;
+    }
+    public function getSeats(): int
+    {
+        return $this->seats;
+    }
+
+    public function setSeats(int $seats): void
+    {
+        $this->seats = $seats;
     }
 }

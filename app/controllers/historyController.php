@@ -32,8 +32,7 @@ class HistoryController extends Controller
 
         require(__DIR__ . '/../views/history/index.php');
     }
-
-
+ 
    
   
 }
