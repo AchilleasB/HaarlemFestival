@@ -28,6 +28,7 @@ class CmsController extends Controller
     }
     public function festivalManagement()
     {
+        $this->isAuthorized();
         $festivalService = new FestivalService();
         $event = $festivalService->getEventDetails();
         $events = $festivalService->getAllEvents();
@@ -36,25 +37,30 @@ class CmsController extends Controller
     }
     public function eventManagement()
     {
+        $this->isAuthorized();
         $eventPages = $this->eventPageService->getAllEvents();
         require_once(__DIR__ . '/../views/cms/eventManagement.php');
     }
     public function danceManagement()
     {
+        $this->isAuthorized();
         $this->displayView($this);
     }
 
     public function userManagement()
     {
+        $this->isAuthorized();
         $this->displayView($this);
     }
     public function historyManagement()
     {
+        $this->isAuthorized();
         $this->displayView($this);
     }
 
     public function orderManagement()
     {
+        $this->isAuthorized();
         $orderService = new OrderService();
         $orders = $orderService->getAllOrders();
         $data = [
@@ -67,41 +73,49 @@ class CmsController extends Controller
 
     public function updateEventTitle()
     {
+        $this->isAuthorized();
         $this->updateEventField('title');
     }
 
     public function updateEventSubTitle()
     {
+        $this->isAuthorized();
         $this->updateEventField('subTitle');
     }
 
     public function updateEventDescription()
     {
+        $this->isAuthorized();
         $this->updateEventField('description');
     }
 
     public function updateEventTitleOverview()
     {
+        $this->isAuthorized();
         $this->updateEventField('titleOverview');
     }
 
     public function updateEventDescriptionOverview()
     {
+        $this->isAuthorized();
         $this->updateEventField('descriptionOverview');
     }
 
     public function updateEventSchedule()
     {
+        $this->isAuthorized();
         $this->updateEventField('schedule');
     }
 
     public function updateEventLocation()
     {
+        $this->isAuthorized();
         $this->updateEventField('location');
     }
 
     public function updateEventField($field)
     {
+        $this->isAuthorized();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $eventId = $_POST['event_id'];
             $value = $_POST[$field];
@@ -122,6 +136,7 @@ class CmsController extends Controller
 
     public function createEventPage()
     {
+        $this->isAuthorized();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $eventPage = new EventPage();
             $eventPage->setTitle($_POST['title']);
@@ -164,6 +179,7 @@ class CmsController extends Controller
 
     public function updateEventPage()
     {
+        $this->isAuthorized();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $eventPage = new EventPage();
             $eventPage->setId($_POST['event_id']);
@@ -184,6 +200,7 @@ class CmsController extends Controller
 
     public function deleteEventPage()
     {
+        $this->isAuthorized();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $eventId = $_POST['id'];
 
@@ -199,10 +216,16 @@ class CmsController extends Controller
 
     public function yummyManagement()
     {
-        if (isset($_SESSION['user_role'])) {
-            $this->displayView($this);
+        $this->isAuthorized();
+        $this->displayView($this);
+    }
+
+    private function isAuthorized()
+    {
+        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'Admin') {
+            return true;
         } else {
-            header('Location: /login');
+            header('Location: /login?redirect=' . urlencode($_SERVER['REQUEST_URI']));
             exit();
         }
     }

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 07, 2024 at 03:14 PM
--- Server version: 11.0.3-MariaDB-1:11.0.3+maria~ubu2204
--- PHP Version: 8.2.9
+-- Generation Time: Apr 08, 2024 at 04:07 PM
+-- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
+-- PHP Version: 8.2.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -155,7 +155,7 @@ INSERT INTO `dance_events` (`id`, `venue_id`, `date`, `start_time`, `end_time`, 
 
 CREATE TABLE `drinks` (
   `id` int(11) NOT NULL,
-  `price_bottle` int(11) DEFAULT NULL
+  `price_bottle` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -346,13 +346,9 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (12, 'restaurant-fris-banner.png', NULL),
 (14, 'grand-cafe-brinkman-banner.png', NULL),
 (15, 'urban-frenchy-bistro-toujours-banner.png', NULL),
-(16, 'restaurant-ml-1.png', 2),
-(17, 'restaurant-ml-2.png', 2),
-(18, 'restaurant-ml-3.png', 2),
 (19, 'ratatouille-1.png', 1),
 (20, 'ratatouille-2.png', 1),
 (21, 'ratatouille-3.png', 1),
-(22, 'ratatouille-1.png', 4),
 (23, 'dance.png', NULL),
 (24, 'yummy.png', NULL),
 (25, 'history-image.png', NULL),
@@ -361,7 +357,10 @@ INSERT INTO `images` (`id`, `image`, `restaurant_id`) VALUES
 (30, 'test-banner.png', NULL),
 (31, 'restaurant-ml-banner.png', NULL),
 (32, 'test-banner.png', NULL),
-(33, 'manol-draganov-banner.png', NULL);
+(33, 'manol-draganov-banner.png', NULL),
+(34, 'restaurant-ml-1.png', 2),
+(35, 'restaurant-fris-1.png', 3),
+(36, 'restaurant-fris-2.png', 3);
 
 -- --------------------------------------------------------
 
@@ -486,9 +485,9 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `restaurant_id`, `session_id`, `user_id`, `number_of_people`, `mobile_number`, `remark`, `is_active`) VALUES
-(27, 1, 1, 10, 41, '4564156456', 'codskl5vDF', 1),
-(28, 6, 2, 10, 1, '51151561465', 'njnjn', 0),
-(29, 1, 1, 10, 1, '5151116211515', 'jnjnk', 0),
+(27, 1, NULL, 10, 41, '4564156456', 'codskl5vDF', 1),
+(28, 6, NULL, 10, 1, '51151561465', 'njnjn', 0),
+(29, 1, NULL, 10, 1, '5151116211515', 'jnjnk', 0),
 (30, 5, NULL, 5, 4, '1231312321321', NULL, 0),
 (31, 2, NULL, 8, 14, '1231421414', NULL, 0),
 (32, NULL, NULL, 9, 3, '0885790202', NULL, 1);
@@ -518,9 +517,9 @@ INSERT INTO `restaurants` (`id`, `name`, `location`, `description`, `number_of_s
 (1, 'Ratatouille', 'Spaarne 96, 2011 CL Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 33, '4', 10, 1),
 (2, 'Restaurant ML', 'Kleine Houtstraat 70, 2011 DR Haarlem, Nederland', 'Still at a top level but also with a more lower price, Toujours wins the top for the the best restaurant in terms of price-quality. For an intimate, cozy and beautiful dinner with friends or family, take a seat in our beautiful restaurant area. With radiant daylight thanks to the domes on our roof. Which provide a magical beautiful light in the evening, when dining under the starry sky comes very close.', 59, '2', 31, 1),
 (3, 'Restaurant Fris', 'Twijnderslaan 7, 2012 BG Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 45, '4', 12, 0),
-(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 29, 1),
+(4, 'Specktakel', 'Spekstraat 4, 2011 HM Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 36, '3', 29, 0),
 (5, 'Grand Cafe Brinkman', 'Grote Markt 13, 2011 RC Haarlem, Nederland', 'With Jozua Jaring, not everything is as it seems. He pays great attention to detail in the meticulous presentation of his dishes and likes to surprise diners with contrasting colours and forms. This is a restaurant with a real wow factor chef Jaring who puts his own exciting spin on classical flavours, taking your taste buds on a culinary adventure.', 100, '3', 14, 0),
-(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 44, '3', 15, 1);
+(6, 'Urban Frenchy Bistro Toujours', 'Oude Groenmarkt 10-12, 2011 HL Haarlem, Nederland', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 44, '3', 15, 0);
 
 -- --------------------------------------------------------
 
@@ -572,17 +571,34 @@ CREATE TABLE `restaurants_sessions` (
 --
 
 INSERT INTO `restaurants_sessions` (`restaurant_id`, `session_id`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(2, 2),
-(4, 2),
-(5, 2),
-(6, 2),
-(2, 4),
-(4, 4),
-(5, 4),
-(6, 4);
+(1, 14),
+(1, 15),
+(2, 16),
+(3, 16),
+(4, 16),
+(1, 17),
+(4, 17),
+(5, 18),
+(6, 18),
+(6, 20),
+(3, 21),
+(2, 22),
+(3, 22),
+(5, 23),
+(6, 23),
+(2, 24),
+(4, 24),
+(5, 24),
+(3, 25),
+(1, 26),
+(5, 26),
+(1, 27),
+(5, 27),
+(2, 28),
+(3, 29),
+(4, 30),
+(2, 31),
+(4, 31);
 
 -- --------------------------------------------------------
 
@@ -601,9 +617,26 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `start_date`, `end_date`) VALUES
-(1, '2024-02-28 18:00:00', '2023-02-09 19:30:00'),
-(2, '2024-03-05 19:30:00', '2024-03-05 21:00:00'),
-(4, '2024-03-05 21:00:00', '2024-03-25 22:30:00');
+(12, '2024-07-28 11:00:00', '2024-07-28 11:24:00'),
+(13, '2024-07-28 03:30:00', '2024-07-28 03:51:00'),
+(14, '2024-07-27 15:00:00', '2024-07-27 15:27:00'),
+(15, '2024-07-27 02:30:00', '2024-07-27 03:45:00'),
+(16, '2024-07-28 20:00:00', '2024-07-28 21:15:00'),
+(17, '2024-07-26 07:00:00', '2024-07-26 08:15:00'),
+(18, '2024-07-26 02:15:00', '2024-07-26 03:45:00'),
+(19, '2024-07-26 11:30:00', '2024-07-26 11:46:00'),
+(20, '2024-07-28 02:15:00', '2024-07-28 03:00:00'),
+(21, '2024-07-28 18:15:00', '2024-07-28 18:57:00'),
+(22, '2024-07-27 03:30:00', '2024-07-28 03:15:00'),
+(23, '2024-07-27 03:00:00', '2024-07-27 03:00:00'),
+(24, '2024-07-28 00:15:00', '2024-07-28 00:29:00'),
+(25, '2024-07-26 21:00:00', '2024-07-26 21:03:00'),
+(26, '2024-07-27 19:30:00', '2024-07-28 19:15:00'),
+(27, '2024-07-27 00:15:00', '2024-07-27 01:30:00'),
+(28, '2024-07-28 00:15:00', '2024-07-28 01:15:00'),
+(29, '2024-07-27 02:15:00', '2024-07-27 03:45:00'),
+(30, '2024-07-28 02:30:00', '2024-07-28 03:11:00'),
+(31, '2024-07-28 01:00:00', '2024-07-29 00:45:00');
 
 -- --------------------------------------------------------
 
@@ -950,7 +983,7 @@ ALTER TABLE `history_tours`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -992,7 +1025,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tour_guides`

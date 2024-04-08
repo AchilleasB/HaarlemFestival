@@ -21,7 +21,7 @@
 
         <div class="container pt-5">
             <div class="row mb-3">
-                <div class="col-md-8">
+                <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="d-flex align-items-center mb-3 heading">
                         <h1 class="mb-0"><?php echo htmlspecialchars($restaurant->getName()); ?></h1>
                         <div class="star-spacing">
@@ -40,7 +40,7 @@
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <img src="<?php echo $restaurantBannerPath . htmlspecialchars($restaurant->getBanner()) ?>" class="img-fluid rounded-stylish-border" alt="Image of <?php echo htmlspecialchars($restaurant->getName()) ?>">
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <?php if (!empty($foodItems) || !empty($drinkItems)) : ?>
                 <!-- Render menus -->
                 <div class="row mt-5 mb-3 menu">
-                    <div>
+                    <div class="col-12">
                         <h3 class="heading">Menu</h3>
                         <ul class="list-unstyled">
                             <?php if (!empty($foodItems)) : ?>
@@ -120,11 +120,12 @@
             <?php if (!empty($restaurant->getImages())) : ?>
                 <!-- Render gallery -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <h4>Gallery</h4>
                         <div class="row">
                             <?php foreach ($restaurant->getImages() as $imagePath) : ?>
-                                <div class="col-md-4 mb-3">
+                                <!-- Adjust column sizes for different screen sizes -->
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                                     <img src="<?php echo $restaurantImagesPath . $imagePath; ?>" class="img-fluid rounded-stylish-border" alt="Image of <?php echo htmlspecialchars($restaurant->getName()) ?>">
                                 </div>
                             <?php endforeach; ?>
@@ -133,48 +134,22 @@
                 </div>
             <?php endif; ?>
             <div class="row mb-5">
-                <div class="col-md-8 schedule">
+                <div class="col-lg-8 col-md-12 schedule">
                     <h3>Schedule</h3>
-                    <div class="table-wrapper">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Start</th>
-                                    <th>End</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $count = 1; ?>
-                                <?php foreach ($restaurant->getSessions() as $session) : ?>
-                                    <?php
-                                    $sessionDate = $session['date'];
-                                    list($start, $end) = explode(', ', $sessionDate);
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $count++; ?></td>
-                                        <td><?php echo $start; ?></td>
-                                        <td><?php echo $end; ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                    ...
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4 col-md-12">
                     <h3>Location</h3>
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-map-marker-alt text-danger me-2" style="font-size: 1.5rem;"></i>
-                        <p class="mb-0"><?php echo htmlspecialchars($restaurant->getLocation()); ?></p>
-                    </div>
+                    ...
                 </div>
             </div>
             <div class="row mb-5">
-                <div class="col-md-12 text-center">
+                <div class="col-12 text-center">
                     <button class="btn btn-custom" onclick="window.location.href='/yummy/reservationForm'">Reserve</button>
                 </div>
             </div>
         </div>
+
         <?php
         include_once(__DIR__ . '/../footer.php');
         ?>
