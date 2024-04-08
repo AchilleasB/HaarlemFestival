@@ -8,6 +8,6 @@ Description: You can find user credentials for some of the users in this table l
 
 | Email                          | Password   | Role       |
 |--------------------------------|------------|------------|
-| johndoe@mail.com               | Otednodo8  | admin      |
+| ahilleasballanos@gmail.com     | achil1234  | admin      |
 | achilleasballanos@outlook.com  | hulk1234   | employee   |
-| ahilleasballanos@gmail.com     | achil1234  | customer   |
+| iuma710@outlook.com            | password   | customer   |
