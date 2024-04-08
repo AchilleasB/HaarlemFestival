@@ -162,7 +162,7 @@ class ShoppingCartController extends Controller
     
     } else {
 
-      echo "<p style='padding-left:12px;'>Select payment method</p> ";
+      require __DIR__ . '/../views/shoppingCart/paymentMethod.php';
 
     }
   }
