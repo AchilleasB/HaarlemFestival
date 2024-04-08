@@ -52,5 +52,26 @@
 
     <?php include __DIR__ . '/../footer.php'; ?>
 
-</body>
-</html>
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio3">Guides</label>
+            </div>
+            <div class="content-container">
+                <div class="add-event-container mt-5 mb-5" id="add-location-button">
+                </div>
+                </div>
+                <div class=" add-event-form container-lg" id="add-location-form-container">
+                </div>
+                <div class="items-list container-lg" id="items-list">
+                </div>
+            </div>
+        </div>
+    </main>
+    <?php
+    include __DIR__ . '/../backToTop.php';
+    include __DIR__ . '/../footer.php';
+    ?>
+
+    <script> const urlBasePath = "<?php echo $urlBasePath; ?>";</script>
+    <script src="/../scripts/history/cms/index.js"></script>
+    <script src="/../scripts/history/cms/addLocations.js"></script>
+

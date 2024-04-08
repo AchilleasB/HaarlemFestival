@@ -46,11 +46,57 @@ class LocationRepository extends Repository
             return null;
         }
     }
-    public function createLocation(Location $location)
-    {
-        try {
-            $sql = "INSERT INTO locations (location_name, address, description, links, images) 
-                    VALUES (:location_name, :address, :description, :links, :imageId)";
+    public function addLocation($location)
+{
+    try {
+        $stmt = $this->connection->prepare('INSERT INTO locations (location_name, address, description, links, images) VALUES (:location_name, :address, :description, :links, :images)');
+        $stmt->execute([
+            ':location_name' => $location->getLocationName(),
+            ':address' => $location->getAddress(),
+            ':description' => $location->getDescription(),
+            ':links' => $location->getLinks(),
+            ':images' => $location->getImages()
+        ]);
+
+        return true;
+
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
+}
+
+public function updateLocation($location)
+{
+    try {
+        $stmt = $this->connection->prepare('UPDATE locations SET location_name = :location_name, address = :address, description = :description, links = :links, images = :images WHERE id = :id');
+        $stmt->execute([
+            ':id' => $location->getId(),
+            ':location_name' => $location->getLocationName(),
+            ':address' => $location->getAddress(),
+            ':description' => $location->getDescription(),
+            ':links' => $location->getLinks(),
+            ':images' => $location->getImages()
+        ]);
+
+        return true;
+
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
+}
+
+public function deleteLocation($id)
+{
+    try {
+        $stmt = $this->connection->prepare('DELETE FROM locations WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+
+        return true;
+
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
+}
     
             $stmt = $this->connection->prepare($sql);
     
