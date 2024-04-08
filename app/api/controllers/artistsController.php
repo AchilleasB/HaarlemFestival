@@ -6,7 +6,6 @@ require_once __DIR__ . '/../../models/artistInfo.php';
 class ArtistsController
 {
     private $artistService;
-    private $danceService;
 
     function __construct()
     {
