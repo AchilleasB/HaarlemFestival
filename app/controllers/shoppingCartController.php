@@ -5,6 +5,8 @@ require_once __DIR__ . '/../services/userService.php';
 require_once __DIR__ . '/../services/ticketService.php';
 require_once __DIR__ . '/../services/orderService.php';
 require_once __DIR__ . '/../services/orderItemService.php';
+require_once __DIR__ . '/../services/yummy/reservationService.php';
+
 
 
 
@@ -33,33 +35,45 @@ class ShoppingCartController extends Controller
     $this->ticketService = new TicketService();
     $this->orderService = new OrderService();
     $this->shoppingCartService = new OrderItemService();
-    $this->user = $this->userService->getUserByEmail($_SESSION['user_email']);
+    $this->user = $this->userService->getUserByEmail($this->getRegisteredUserEmail());
     $this->currentOrderItems = $this->getItems();
     $this->products = $this->shoppingCartService->getProducts($this->currentOrderItems);
     $this->orderTotal = $this->shoppingCartService->calculateOrderTotal($this->currentOrderItems, $this->products);
-    $this->orderVAT= $this->shoppingCartService->calculateOrderVAT($this->currentOrderItems, $this->products);
+    $this->orderVAT = $this->shoppingCartService->calculateOrderVAT($this->currentOrderItems, $this->products);
     $this->mollie = new \Mollie\Api\MollieApiClient();
     $this->mollie->setApiKey($mollieKey);
     $this->mollieProfile = $this->mollie->profiles->getCurrent();
-    
+
 
   }
 
 
   public function index()
-  {  
+  {
     require __DIR__ . '/../views/shoppingCart/index.php';
 
   }
+
+
+  public function getRegisteredUserEmail(){
+    $userEmail=NULL;
+    if(isset($_SESSION['user_email']) && ($_SESSION['user_email'] != NULL)){
+      $userEmail = $_SESSION['user_email'];
+    }
+     return $userEmail;
+   
+  }
+
 
   //retrieve only the tickets which are added by the user in the present session
   public function getItems()
   {
 
-    if (!isset($_SESSION['selected_items_to_purchase'])){
-      $_SESSION['selected_items_to_purchase']=[];
+    if (!isset($_SESSION['selected_items_to_purchase'])) {
+      $_SESSION['selected_items_to_purchase'] = [];
     }
     $orderItems = unserialize(serialize($_SESSION['selected_items_to_purchase']));
+    
 
     return $orderItems;
 
@@ -68,10 +82,11 @@ class ShoppingCartController extends Controller
 
   public function removeItem()
   {
-    foreach ($_SESSION['selected_items_to_purchase'] as $itemCount=>$item) {
-      if ($itemCount == $_POST['removeItem']){
-      array_splice($_SESSION['selected_items_to_purchase'], $itemCount, 1);
-    }}
+    foreach ($_SESSION['selected_items_to_purchase'] as $itemCount => $item) {
+      if ($itemCount == $_POST['removeItem']) {
+        array_splice($_SESSION['selected_items_to_purchase'], $itemCount, 1);
+      }
+    }
     header("location: /shoppingCart");
   }
 
@@ -79,45 +94,61 @@ class ShoppingCartController extends Controller
   public function updateTicketQuantity()
   {
     foreach ($_SESSION['selected_items_to_purchase'] as $itemCount => $item) {
-      if ($itemCount == $_POST['update']){
+      if ($itemCount == $_POST['update']) {
         $ticket = $this->currentOrderItems[$itemCount];
-         $newTicket = new Ticket();
-         $newTicket->setId($ticket->getId());
+        $newTicket = new Ticket();
+        $newTicket->setId($ticket->getId());
         $newTicket->setAmount($_POST['quantity']);
         $newTicket->setCalcPrice($ticket->getCalcPrice());
-        if ($ticket->getDanceEventId() !==null){
-        $newTicket->setDanceEventId($ticket->getDanceEventId());}
-        if ($ticket->getHistoryTourId() !==null){
-          $newTicket->setHistoryTourId($ticket->getHistoryTourId());}
+        if ($ticket->getDanceEventId() !== null) {
+          $newTicket->setDanceEventId($ticket->getDanceEventId());
+        }
+        if ($ticket->getHistoryTourId() !== null) {
+          $newTicket->setHistoryTourId($ticket->getHistoryTourId());
+        }
+        if ($ticket->getReservationId() !== null) {
+          $newTicket->setReservationId($ticket->getReservationId());
+        }
         $newTicket->setUserId($ticket->getUserId());
-        $ticketsPrice=($newTicket->getTicketPrice() * $newTicket->getAmount());
-        $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);
+
+        if ($this->products[$itemCount]['Event']->getTicketPrice()) {
+          $ticketsPrice = $this->products[$itemCount]['Event']->getTicketPrice() * $newTicket->getAmount();
+        
+          $this->ticketService->updateCalculatedPrice($ticket->getId(), $ticketsPrice);}
 
 
-        $_SESSION['selected_items_to_purchase'][$itemCount] = $newTicket; 
+        $_SESSION['selected_items_to_purchase'][$itemCount] = $newTicket;
+      }
     }
-  }
-  header("location: /shoppingCart");
+    header("location: /shoppingCart");
 
   }
-
 
 
   public function selectPaymentMethod()
   {
+   
     if ($this->orderTotal > 0) {
-    require '../views/shoppingCart/paymentMethod.php';
-  }
-  else {
-    header("location: /shoppingCart");
+      if ($this->user != NULL){
+      require '../views/shoppingCart/paymentMethod.php';
+      }
+      else {
+      
+        header("location: /registration");
+       
+      }
+     
+    } else {
+      header("location: /shoppingCart");
+    }
+
+  
   }
 
-  }
+
 
   public function confirmPurchase()
   {
-
-
 
     if (isset($_POST["paymentMethod"])) {
       if ($_POST["paymentMethod"] == "ideal") {
@@ -127,11 +158,11 @@ class ShoppingCartController extends Controller
       } else if ($_POST["paymentMethod"] == "visa" || $_POST["paymentMethod"] == "mastercard") {
         $this->processCreditcardPayment($this->currentOrder);
       }
+
+    
     } else {
 
-      require '../views/shoppingbasket/paymentMethod.php';
-      echo "<p style='padding-left:12px;'>Select payment method</p> ";
-
+      require __DIR__ . '/../views/shoppingCart/paymentMethod.php';
 
     }
   }
@@ -264,7 +295,8 @@ class ShoppingCartController extends Controller
   public function displayOrderConfirmation()
   {
 
-    $_SESSION['selected_items_to_purchase']=[];
+    $_SESSION['selected_items_to_purchase'] = [];
+
 
     require_once __DIR__ . "/../views/shoppingCart/confirmedOrder.php";
   }

@@ -230,12 +230,9 @@ function createItemElement(item, itemType) {
                 </div>
                 <div class="col-6 col-md-4 d-flex mb-3 pt-5">
                     ${htmlGenerateButtons()}
-                </div>
-                <div class="col-sm-6">
-                </div>
-                <div class="col-6 d-flex mb-3">
                     ${htmlArtistPageButtons()}
                 </div>
+                
             </div>
             <div class="handle-artist-container" id="handle-artist-container-${item.id}">
             </div> 
@@ -265,7 +262,7 @@ function createItemElement(item, itemType) {
         `;
     }
 
-    // line 262 : each edit container is given a unique id
+    // line 263 : each edit container is given a unique id
 
     itemElement.innerHTML = itemData;
 
@@ -344,7 +341,7 @@ function htmlArtistPageButtons() {
             </div>
             <div class="col">
                 <span class="item-data-value">
-                    <button class="btn btn-outline-dark delete-page-button">Delete page</button>
+                    <button class="btn btn-outline-dark delete-page-button">Delete page content</button>
                 </span>
             </div>
         </div>

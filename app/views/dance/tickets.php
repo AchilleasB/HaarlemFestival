@@ -16,8 +16,9 @@
 <body>
     <?php
     include __DIR__ . '/../header.php';
-
-    $user_id = $_SESSION['user_id'];
+if (isset($_SESSION['user_id'])){
+    $user_id = $_SESSION['user_id'];}
+    else {$user_id=NULL;}
     require __DIR__ . '/../../config/imgconfig.php';
     require __DIR__ . '/../../config/urlconfig.php';
     ?>
@@ -37,6 +38,6 @@
     <script>
         const imageBasePath = "<?php echo $imageBasePath; ?>";
         const user_id = <?php echo json_encode($user_id) ?>;
-        const urlBasePath = "<?php echo 'http://localhost/'; ?>";
+        const urlBasePath = "<?php echo $urlBasePath; ?>";
     </script>
     <script type="module" src="../scripts/dance/tickets.js"></script>

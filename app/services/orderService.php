@@ -29,18 +29,19 @@ class OrderService
         return $this->orderRepository->retrievePreviousOrderId();
     }
 
-    
+
     public function addOrder($id, $payment_status, $total_price)
     {
         return $this->orderRepository->addOrder($id, $payment_status, $total_price);
     }
 
 
-    public function updateOrder($id, $paymentStatus) {     
-    
-        return $this->orderRepository->updateOrder($id, $paymentStatus);   
-   }
-   
+    public function updateOrder($id, $paymentStatus)
+    {
+
+        return $this->orderRepository->updateOrder($id, $paymentStatus);
+    }
+
 
 
 

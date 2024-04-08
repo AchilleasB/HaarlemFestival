@@ -126,14 +126,6 @@ class ApiController
         return 'set' . $camelCaseProperty;
     }
 
-    // Construct the getter method name based on the property name
-    private function constructGetterMethodName($property)
-    {
-        $camelCaseProperty = lcfirst(str_replace('_', '', ucwords($property, '_')));
-
-        return 'get' . $camelCaseProperty;
-    }
-
     private function getServiceObjectType($service) {
         //Default
         $object = "Object";
@@ -146,6 +138,12 @@ class ApiController
                 break;
             case $service instanceof RestaurantService:
                 $object = "Restaurant";
+                break;
+            case $service instanceof ImageService:
+                $object = "Image";
+                break;
+            case $service instanceof MenuService:
+                $object = "Menu item";
                 break;
             default:
                 break;

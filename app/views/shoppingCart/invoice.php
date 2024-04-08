@@ -21,7 +21,7 @@
         <div>To:
           <?= $user->getFirstname() . $user->getLastName() ?>
         </div>
-        <div>User address</div>
+        <div>Email address: <?= $user->getEmail() ?></div>
         <div class="table-responsive pt-5">
           <h5>Your items</h5>
           <table id="orderItemsTable" style="text-align:center">
@@ -33,14 +33,14 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($products as $orderItem=>$i) { 
-                      $eventName =  $products[$orderItem]['Event']->getName();
+              <?php 
+              foreach ($products as $orderItem=>$i) { 
+                $eventName =  $products[$orderItem]['Event']->getName();
 
-                      $ticketAmount = $orderItems[$orderItem]->amount;
+                $ticketAmount = $orderItems[$orderItem]->amount;
 
-                        $pricePerItem = $orderItems[$orderItem]->calc_price;
-
-                      $ticketType = $products[$orderItem]['Event']->getTicketType();
+                $pricePerItem = $orderItems[$orderItem]->calc_price;
+              
                       ?>
                 <tr class="product">
                 <td class="col-md-4">

@@ -1,12 +1,14 @@
 <?php
 
+require_once(__DIR__ . '/../repositories/eventPageRepository.php');
+
 class EventPageService
 {
     private $repository;
 
     public function __construct()
-    {     
-            $this->repository = new EventPageRepository();
+    {
+        $this->repository = new EventPageRepository();
     }
     public function getAllEvents()
     {
@@ -24,5 +26,9 @@ class EventPageService
     {
         return $this->repository->deleteEventPage($eventId);
     }
-}
 
+    public function getAllEventPageTitles()
+    {
+        return $this->repository->getAllEventPageTitles();
+    }
+}

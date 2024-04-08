@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const events = await fetch(danceEventsAPIendpoint);
         const eventsData = await events.json();
-        
+
         const venues = await fetch(venuesAPIendpoint);
         const venuesData = await venues.json();
 
         const artists = await fetch(artistsAPIendpoint);
         const artistsData = await artists.json();
-        
+
         htmlAddEventForm(eventsData, venuesData, artistsData);
 
         const saveEvent = document.getElementById('save-event-button');
@@ -30,30 +30,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 async function saveEventToDatabase() {
-
     const selectedArtists = Array.from(document.querySelectorAll('input[name="artist"]:checked')).map(artist => artist.value);
-    console.log(selectedArtists);
-    const response = await fetch(danceEventsAPIendpoint, { 
+
+    const date = document.getElementById('date').value;
+    const start_time = document.getElementById('start-time').value;
+    const end_time = document.getElementById('end-time').value;
+    const session = document.getElementById('session').value;
+    const tickets_available = parseInt(document.getElementById('tickets').value);
+    const price = parseFloat(document.getElementById('price').value);
+    const venue_id = parseInt(document.getElementById('venue').value);
+    const type = document.getElementById('type').value;
+    const artists = selectedArtists.map(artist => parseInt(artist));
+    const venue_name = document.getElementById('venue').options[document.getElementById('venue').selectedIndex].text;
+
+    if (!date || !start_time || !end_time || !session ||
+        isNaN(tickets_available) || isNaN(price) ||
+        isNaN(venue_id) || !type || artists.length === 0
+    ) {
+        displayMessage('Please fill in all fields', 3000);
+        return;
+    }
+
+    const response = await fetch(danceEventsAPIendpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            date: document.getElementById('date').value,
-            start_time: document.getElementById('start-time').value,
-            end_time: document.getElementById('end-time').value,
-            session: document.getElementById('session').value,
-            tickets_available: parseInt(document.getElementById('tickets').value),
-            price: parseFloat(document.getElementById('price').value),
-            venue_id: parseInt(document.getElementById('venue').value),
-            type: document.getElementById('type').value,
-            artists: selectedArtists.map(artist => parseInt(artist)),
-            venue_name: document.getElementById('venue').options[document.getElementById('venue').selectedIndex].text                     
+            date, start_time, end_time, session,
+            tickets_available, price, venue_id, type,
+            artists, venue_name
         })
     });
 
     const data = await response.json();
-    displayMessage(data.message);
+    displayMessage(data.message, 3000);
     itemsListContainer.innerHTML = '';
     loadItems(danceEventsAPIendpoint, 'danceEvents');
 }
@@ -108,7 +119,7 @@ function htmlAddEventForm(eventsData, venuesData, artistsData) {
 </form>
 `;
 
-console.log(artistsData)
+    console.log(artistsData)
 }
 
 function generateEventVenueOptions(venuesData) {

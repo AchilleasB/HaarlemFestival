@@ -5,18 +5,24 @@ use FontLib\Table\Type\head;
 require_once(__DIR__ . '/controller.php');
 require_once(__DIR__ . '/../services/yummy/restaurantService.php');
 require_once(__DIR__ . '/../services/yummy/reservationService.php');
+require_once(__DIR__ . '/../services/userService.php');
 require_once(__DIR__ . '/../models/ticket.php');
 require_once(__DIR__ . '/../services/ticketService.php');
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Ramsey\Uuid\Uuid;
 
 class YummyController extends Controller
 {
     private $restaurantService;
     private $reservationService;
+    private $userService;
 
     public function __construct()
     {
         $this->restaurantService = new RestaurantService();
         $this->reservationService = new ReservationService();
+        $this->userService = new UserService();
     }
 
     public function index()
@@ -30,7 +36,7 @@ class YummyController extends Controller
         ];
 
 
-        $this->displayYummyView($this, $data);
+        $this->displayViewWithDataSet($this, $data);
     }
 
     public function restaurant()
@@ -50,17 +56,26 @@ class YummyController extends Controller
 
     public function reservationForm()
     {
+        // if (isset($_SESSION['user_role'])) {
         $id = $_SESSION['restaurant_id'];
         try {
             $restaurant = $this->restaurantService->getRestaurantDetailedInfoById($id);
+            $user = null;
+            if (isset($_SESSION['user_id'])) {
+                $user = $this->userService->getUserById($_SESSION['user_id']);
+            }
             $data = [
                 'restaurant' => $restaurant,
-                'availability' => $restaurant->getNumberOfSeats() - $this->reservationService->getAvailability(1, $id)
+                'user' => $user
             ];
-            $this->displayYummyView($this, $data);
+            $this->displayViewWithDataSet($this, $data);
         } catch (RepositoryException $e) {
             $this->handleException($e);
         }
+        // } else {
+        //     header('Location: /login?redirect=' . urlencode($_SERVER['REQUEST_URI']));
+        //     exit();
+        // }
     }
 
     public function reservation()
@@ -69,7 +84,7 @@ class YummyController extends Controller
             $reservation = new Reservation(
                 $_SESSION['restaurant_id'],
                 $_POST['session_id'],
-                $_SESSION['user_id'],
+                isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null,
                 $_POST['guests'],
                 $_POST['phone'],
                 $_POST['remark'],
@@ -77,20 +92,28 @@ class YummyController extends Controller
                 false
             );
             try {
-                $this->reservationService->addReservation($reservation);
-                $reservation = $this->reservationService->getLastReservationByRestaurantAndSessionAndUser(
-                    $reservation->getRestaurantId(),
-                    $reservation->getSessionId(),
-                    $reservation->getUserId()
-                );
+                $reservationId = $this->reservationService->addReservation($reservation);
+                $reservation = $this->reservationService->getReservationById($reservationId);
 
                 $price = $reservation->getNumberOfPeople() * 10;
                 $reservationTicket = new Ticket();
+                $reservationTicket->setId(Uuid::uuid4()->toString());
                 $reservationTicket->setAmount($reservation->getNumberOfPeople());
                 $reservationTicket->setReservationId($reservation->getId());
                 $reservationTicket->setUserId($reservation->getUserId());
                 $reservationTicket->setCalcPrice($price);
                 $this->reservationService->addReservationToCart($reservationTicket);
+
+                  //added by Maria to enable adding dance tickets to shopping cart by visitor
+
+                  if(!isset($_SESSION['user_id'])){
+                    if (!isset($_SESSION['selected_items_to_purchase'])){
+                        $_SESSION['selected_items_to_purchase']=[];
+                    }
+                    $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])]=$reservationTicket;
+
+                }
+                //end of added by Maria
 
                 header('Location: /yummy/restaurant?id=' . $_SESSION['restaurant_id']);
             } catch (RepositoryException $e) {

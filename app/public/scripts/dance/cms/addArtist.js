@@ -25,6 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function saveArtistDataToDatabase() {
 
+    const name = document.getElementById("name").value;
+    const genre = document.getElementById("genre").value;
+    const image = document.getElementById("image");
+
+    if (name === "" || genre === "" || !image.files[0]) {
+        displayMessage("Please fill in all fields", 3000);
+        return;
+    }
+    
     const formData = new FormData(document.getElementById("add-artist-form"));
     const response = await fetch(artistsAPIendpoint, {
         method: "POST",

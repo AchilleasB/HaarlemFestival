@@ -3,7 +3,8 @@ require __DIR__ . '/../../services/danceService.php';
 require_once __DIR__ . '/../../models/dance.php';
 require_once __DIR__ . '/../../models/ticket.php';
 require_once __DIR__ . '/../../services/ticketService.php';
-
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Ramsey\Uuid\Uuid;
 
 class DanceEventsController
 {
@@ -31,7 +32,22 @@ class DanceEventsController
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-            $this->handleDanceEventRequest('delete');
+            $body = file_get_contents('php://input');
+            $object = json_decode($body);
+
+            if ($object === null && json_last_error() !== JSON_ERROR_NONE) {
+                header('Content-Type: application/json');
+                echo json_encode('Invalid JSON');
+            }
+
+            if ($this->danceService->deleteDanceEvent($object->id)) {
+                $message = 'Dance event was deleted successfully';
+            } else {
+                $message = 'An error occurred while deleting the dance event';
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode(['message' => $message, 'danceEvent' => $object]);
         }
     }
 
@@ -75,14 +91,6 @@ class DanceEventsController
             }
         }
 
-        if ($request_type === 'delete') {
-            if ($this->danceService->deleteDanceEvent($object->id)) {
-                $message = 'Dance event was deleted successfully';
-            } else {
-                $message = 'An error occurred while deleting the dance event';
-            }
-        }
-
         header('Content-Type: application/json');
         echo json_encode(['message' => $message, 'danceEvent' => $object]);
     }
@@ -100,9 +108,13 @@ class DanceEventsController
             }
 
             $danceTicket = new Ticket();
+
+            $danceTicket->setId(Uuid::uuid4()->toString());
             $danceTicket->setAmount($object->amount);
             $danceTicket->setDanceEventId($object->event_id);
-            $danceTicket->setUserId($object->user_id);
+            if ($object->user_id != NULL){
+            $danceTicket->setUserId($object->user_id);}
+            else {$danceTicket->setUserId(NULL);}
 
             $event_price = $this->danceService->getDanceEventPrice($object->event_id);
             $calc_price = $event_price * $object->amount;
@@ -113,15 +125,22 @@ class DanceEventsController
                 $message = 'Invalid amount! Try again with a valid amount of tickets';
             } elseif ($this->danceService->checkTicketAvailability($danceTicket)) {
                 if($this->danceService->addTicketToCart($danceTicket)){
-                    $this->danceService->updateAvailableTickets($danceTicket);
                     $message = 'Ticket(s) added to cart successfully';
+
+                    //added by Maria to enable adding dance tickets to shopping cart by visitor
+
+                    if(!isset($_SESSION['user_id'])){
+                        if (!isset($_SESSION['selected_items_to_purchase'])){
+                            $_SESSION['selected_items_to_purchase']=[];
+                        }
+                        $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])]=$danceTicket;
+
+                    }
+                    //end of added by Maria
                 } else {
                     $message = 'An error occurred while adding ticket(s) to cart';
                 }
-                
-                // Start of added by Maria
-                 $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$danceTicket;
-                // End of added by Maria
+
             } else {
                 $message = 'The requested amount of tickets is not available for this event';
             }

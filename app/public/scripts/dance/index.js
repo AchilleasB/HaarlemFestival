@@ -230,7 +230,6 @@ async function displayVenues() {
 function renderVenueCard(venue) {
     const venueCard = document.createElement('div');
     venueCard.classList.add('venue-card');
-    venueCard.style.width = '25%';
     const venueImage = htmlVenueImage(venue);
     const venueName = htmlVenue(venue);
     const venueAddress = htmlVenueAddress(venue);
@@ -296,7 +295,7 @@ function renderDateSchedule(danceEvents, date) {
 
         const artists = document.createElement('div');
         artists.classList.add('schedule-artists');
-        artists.innerHTML = event.artists.map(artist => artist.name).join('/ ');
+        artists.innerHTML = event.artists.map(artist => artist.name).join(' / ');
 
         const venue = document.createElement('div');
         venue.classList.add('schedule-venue');

@@ -17,7 +17,7 @@
       data-width="50%"><a href="https://tenor.com/view/what-huh-confused-john-travolta-gif-16946746">What Huh
         GIF</a>from <a href="https://tenor.com/search/what-gifs">What GIFs</a></div>
     <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-    <p class="lead">Try going back to the <a href="/home">homepage</a>.</p>
+    <p class="lead">Try going back to the <a href="/festival">homepage</a>.</p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -10,17 +10,18 @@ class OrderController extends ApiController
     {
         $this->orderService = new OrderService();
     }
-          
 
 
-    public function getAllOrders(){
+
+    public function getAllOrders()
+    {
 
         try {
             $this->sendHeaders();
             $orders = NULL;
             $orders = $this->orderService->getAllOrders();
-            echo Json_encode($orders); }
-         catch (InvalidArgumentException | Exception $e) {
+            echo Json_encode($orders);
+        } catch (InvalidArgumentException | Exception $e) {
             http_response_code(500); // sending bad request error to APi request if something goes wrong
             echo $e->getMessage();
         }

@@ -301,5 +301,29 @@ public function updateTour(HistoryTour $tour)
             return false;
         }
     }
+
+public function updateSeats($historyTourId, $seatsToDeduct)
+{
+    try {
+        $sql = "UPDATE history_tours 
+                SET seats = seats - :seatsToDeduct 
+                WHERE id = :historyTourId";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindParam(':seatsToDeduct', $seatsToDeduct, PDO::PARAM_INT);
+        $statement->bindParam(':historyTourId', $historyTourId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+        return false;
+    }
+}
+
+
+
+
 }
 ?>

@@ -12,23 +12,19 @@
   <script src="http://code.jquery.com/jquery-migrate-1.1.1.js"></script>
   <link rel="stylesheet" href="../styles/main.css">
 </head>
-<body class="border border-white ">
+<body>
   <?php
     include __DIR__ . '/../header.php';
     require __DIR__ . '/../../config/urlconfig.php';
 
     ?>
-  <main class="border border-white " style="margin-bottom:100px;">
+  <main style="margin-bottom:100px;">
 
   <?php $paidTickets=$this->paidTickets;?>
     <div class="grid pt-5" style="--bs-columns: 10; --bs-gap: 1rem;">
       <div class="g-col-12">
         <h1>Your personal program</h1>
-        <div class="grid py-2 pb-5" style="row-gap: 0;">
-    <div class="g-col-2">Share your personal program</div>
-    <div class="g-col-8"><img class="pr-2" src="/../icons/facebook.svg"><img class="px-2" src="/../icons/instagram.svg"><img class="px-2" src="/../icons/twitter.svg"></div>
-
-  </div>
+     
 
   <h2 class="text-center">July</h2>
 
@@ -244,6 +240,9 @@
                 else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL){
                   $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();}
 
+                  else if ($eventImage = $this->products[$orderItem]['Event']->getYummyEventImage() != NULL){
+                    $eventImage = $this->products[$orderItem]['Event']->getYummyEventImage();}
+
                 $datetime = $this->products[$orderItem]['Event']->getDateTime();
 
                   $locationName = $this->products[$orderItem]['Event']->getLocationName();
@@ -253,15 +252,15 @@
                 $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
 
                 if ( $this->products[$orderItem]['Event']->getTicketPrice()){
-                $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();}
-                else
-                {
-                  $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice();
-                }
-
-                $pricePerItem = $ticketPrice * $ticketAmount;
-
-                $ticketsAvailableForEvent = $this->products[$orderItem]['Event']->getTicketsAvailable();
+                  $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
+                  $pricePerItem = $ticketPrice * $ticketAmount;
+                  }
+                  else
+                  {
+                    $pricePerItem =  $this->currentOrderItems[$orderItem]->getCalcPrice();
+  
+                  }
+  
 
                 $totalPrice = $this->orderTotal;
                 $totalVAT = $this->orderVAT;?>
@@ -293,10 +292,7 @@
                             <?= $product ?>
                           </strong>
                         </li>
-                        <li class="list-group-item border-0 pt-5">
-                          <span class=" text-decoration-underline"> <a href="" class="text-dark"> Click here for event
-                              details</a> </span>
-                        </li>
+                        
                       </ul>
                     </div>
                   </div>
@@ -325,7 +321,8 @@
                   </ul>
                 </td>
                 <td class="align-middle">
-                  <div class="quantityValues m-1">
+                <div class="quantityValues m-1">
+                  <?php if ($this->currentOrderItems[$orderItem]->getHistoryTourId() == NULL){ ?>
                   <form method="POST" action="/personalProgram/updateTicketQuantity">
 
                     <input type="number" id="quantity" name="quantity" class="quantity"
@@ -336,19 +333,29 @@
                       value=<?=$orderItem?>>Save</button>
                     
                     </form>
-                    <?php  if ($ticketsAvailableForEvent > 0) {?>
-                    <div>Only
-                      <?= $ticketsAvailableForEvent ?> left
+                    <?php }
+                    else { ?>
+                      <form >
+
+                      <input type="number" id="quantity" name="quantity" class="quantity"
+                        value=<?= $ticketAmount ?> min="1"
+                      max="10" readonly>
+  
+                      <button id="updateQuantity" class="updateQuantity" type=submit name=update
+                        value=<?=$orderItem?> disabled>Save</button>
+                     <div> The seats for this event can't be updated </div>
+                     <div>due to seats number limitation</div>
+                      </form>
+
+
+                   <?  } ?>
                     </div>
-                    <?php } 
-                  else {?>
-                    <div> Sold out</div>
-                    <?php }?>
+
                 </td>
+
                 <td class="align-middle">
                   &euro;
-                  <?= $pricePerItem ?>
-
+                  <?= $pricePerItem; ?>
                 </td>
                 <td class="align-middle">
                   <form method="POST" action="/personalProgram/addToCart">
@@ -378,7 +385,7 @@
           </h5>
         </div>
         <?php } ?>
-        <a href="/">
+        <a href="/festival">
           <button class="rounded-0 px-5 py-2 mt-5" type=submit name=browse id="browse">Continue
             browsing</button>
         </a>
@@ -396,6 +403,8 @@
 <script> var totalVAT= "<?php echo $totalVAT; ?>";</script>
 <script>var paidTickets = <?php echo json_encode($paidTickets); ?>;</script>
 
-<script src="/scripts/orderItem/orderItem.js"></script>
+<script src="/scripts/orderItem/personalProgram.js"></script>
+
+
 
 </html>

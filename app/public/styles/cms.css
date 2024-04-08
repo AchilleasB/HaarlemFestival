@@ -115,6 +115,7 @@
     .header {
         font-size: 1.5em;
     }
+
     .cms-btn {
         font-size: 1.2em;
         margin-top: 1em;
@@ -126,4 +127,114 @@
         justify-content: center;
         align-items: center;
     }
+}
+
+.inactive-row {
+    background-color: #c4c4c4;
+}
+
+.reservantion-unchangeable {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #555555;
+    font-style: italic;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-row {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.button-col {
+    flex: 1;
+    padding: 0 5px;
+}
+
+.button-col>.item-data-value>.btn {
+    width: 100px;
+}
+
+.manage-gallery-button,
+.manage-menu-button {
+    height: 60px;
+}
+
+#masonryGrid {
+    column-count: 3;
+    /* Adjust based on your preference */
+    column-gap: 3em;
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1em;
+    position: relative;
+    /* Ensure the child elements can be positioned in relation to this container */
+}
+
+.masonry-item img {
+    width: 100%;
+    display: block;
+}
+
+.delete-btn {
+    display: block;
+    margin: 0.5em auto;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.menu-section {
+    margin-bottom: 20px;
+}
+
+.menu-section h2 {
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.menu-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.menu-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-item-content {
+    flex: 1;
+}
+
+.menu-item h3 {
+    color: #333;
+    margin: 0;
+    display: inline;
+}
+
+.menu-item p {
+    margin: 0;
+    color: #666;
+}
+
+.menu-item-description {
+    display: block;
+}
+
+.menu-item-price {
+    display: block;
 }

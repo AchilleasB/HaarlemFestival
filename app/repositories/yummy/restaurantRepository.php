@@ -35,13 +35,12 @@ class RestaurantRepository extends Repository
             }
 
             return $restaurants;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
         }
     }
 
-    public function getRestaurantBaseInfoById($restaurantId) 
+    public function getRestaurantBaseInfoById($restaurantId)
     {
         try {
             $stmt = $this->connection->prepare("
@@ -66,7 +65,6 @@ class RestaurantRepository extends Repository
             $restaurant->setId($data['id']);
 
             return $restaurant;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
         }
@@ -100,7 +98,6 @@ class RestaurantRepository extends Repository
             }
 
             return $restaurants;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
         }
@@ -128,13 +125,12 @@ class RestaurantRepository extends Repository
 
             $restaurants = [];
             foreach ($restaurantsData as $data) {
-                $restaurant = new RestaurantDetailed($data['name'], $data['number_of_stars'], $data['banner'], [], $data['description'], $data['location'], $data['number_of_seats'], [], [], []);
+                $restaurant = new RestaurantDetailed($data['name'], $data['number_of_stars'], $data['banner'], [], $data['description'], $data['location'], $data['number_of_seats'], [], [], [], $data['is_recommended']);
                 $restaurant->setId($data['id']);
                 $restaurants[] = $restaurant;
             }
 
             return $restaurants;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurants', $e->getCode(), $e);
         }
@@ -156,7 +152,27 @@ class RestaurantRepository extends Repository
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $data['number_of_seats'];
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
+        }
+    }
 
+    public function getBannerById($restaurantId)
+    {
+        try {
+            $stmt = $this->connection->prepare("
+            SELECT 
+                banner
+            FROM 
+                restaurants
+            WHERE 
+                id = ?
+            LIMIT 1");
+            $stmt->execute([$restaurantId]);
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data['banner'];
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
         }
@@ -172,7 +188,8 @@ class RestaurantRepository extends Repository
                     r.number_of_stars,
                     r.number_of_seats,
                     r.description,
-                    r.location, 
+                    r.location,
+                    r.is_recommended, 
                     i.image AS banner
                 FROM 
                     restaurants r
@@ -187,63 +204,64 @@ class RestaurantRepository extends Repository
 
             // Instantiate RestaurantDetailed object
             $restaurant = new RestaurantDetailed(
-                $data['name'], 
-                $data['number_of_stars'], 
-                $data['banner'], 
+                $data['name'],
+                $data['number_of_stars'],
+                $data['banner'],
                 [], // Assuming you populate these fields later
-                $data['description'], 
-                $data['location'], 
-                $data['number_of_seats'], 
-                [], 
-                [], 
-                []
+                $data['description'],
+                $data['location'],
+                $data['number_of_seats'],
+                [],
+                [],
+                [],
+                $data['is_recommended']
             );
             $restaurant->setId($data['id']);
 
             return $restaurant;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error fetching restaurant', $e->getCode(), $e);
         }
     }
 
 
-    public function addRestaurant($restaurant)
+    public function addRestaurant($name, $location, $description, $numberOfSeats, $numberOfStars, $banner, $isRecommended)
     {
         try {
-            $stmt = $this->connection->prepare('INSERT INTO restaurants (name, location, description, number_of_seats, number_of_stars, banner) VALUES (:name, :location, :description, :number_of_seats, :number_of_stars, :banner)');
+            $stmt = $this->connection->prepare('INSERT INTO restaurants (name, location, description, number_of_seats, number_of_stars, banner, is_recommended) VALUES (:name, :location, :description, :number_of_seats, :number_of_stars, :banner, :is_recommended)');
             $stmt->execute([
-                ':name' => $restaurant->getName(),
-                ':location' => $restaurant->getLocation(),
-                ':description' => $restaurant->getDescription(),
-                ':number_of_seats' => $restaurant->getNumberOfSeats(),
-                ':number_of_stars' => $restaurant->getNumberOfStars(),
-                ':banner' => $restaurant->getBanner()
+                ':name' => $name,
+                ':location' => $location,
+                ':description' => $description,
+                ':number_of_seats' => $numberOfSeats,
+                ':number_of_stars' => $numberOfStars,
+                ':banner' => $banner,
+                ':is_recommended' => $isRecommended ? 1 : 0
             ]);
+            $lastInsertedId = $this->connection->lastInsertId();
 
-            return true;
-
+            return $lastInsertedId;
         } catch (PDOException $e) {
             throw new RepositoryException('Error adding restaurant', $e->getCode(), $e);
         }
     }
 
-    public function updateRestaurant($restaurant)
+    public function updateRestaurant($id, $name, $location, $description, $number_of_seats, $number_of_stars, $banner, $isRecommended)
     {
         try {
-            $stmt = $this->connection->prepare('UPDATE restaurants SET name = :name, location = :location, description = :description, number_of_seats = :number_of_seats, number_of_stars = :number_of_stars, banner = :banner WHERE id = :id');
+            $stmt = $this->connection->prepare('UPDATE restaurants SET name = :name, location = :location, description = :description, number_of_seats = :number_of_seats, number_of_stars = :number_of_stars, banner = :banner, is_recommended = :is_recommended WHERE id = :id');
             $stmt->execute([
-                ':id' => $restaurant->getId(),
-                ':name' => $restaurant->getName(),
-                ':location' => $restaurant->getLocation(),
-                ':description' => $restaurant->getDescription(),
-                ':number_of_seats' => $restaurant->getNumberOfSeats(),
-                ':number_of_stars' => $restaurant->getNumberOfStars(),
-                ':banner' => $restaurant->getBanner()
+                ':id' => $id,
+                ':name' => $name,
+                ':location' => $location,
+                ':description' => $description,
+                ':number_of_seats' => $number_of_seats,
+                ':number_of_stars' => $number_of_stars,
+                ':banner' => $banner,
+                ':is_recommended' => $isRecommended ? 1 : 0
             ]);
 
             return true;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error updating restaurant', $e->getCode(), $e);
         }
@@ -256,9 +274,52 @@ class RestaurantRepository extends Repository
             $stmt->execute([':id' => $restaurantId]);
 
             return true;
-
         } catch (PDOException $e) {
             throw new RepositoryException('Error deleting restaurant', $e->getCode(), $e);
+        }
+    }
+
+    public function updateSeats($id, $newSeatsAvailable)
+    {
+        try {
+
+            $query = $this->connection->prepare("UPDATE restaurants SET number_of_seats=:number_of_seats WHERE id=:id");
+            $query->bindParam(":id", $id);
+            $query->bindParam(":number_of_seats", $newSeatsAvailable);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
+
+
+    }
+
+
+    public function getRestaurantIdByName($name)
+    {
+        try {
+
+            $query = $this->connection->prepare("SELECT id FROM restaurants WHERE name=:name ");
+            $query->bindParam(":name", $name);
+            $query->execute();
+
+            $query->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $query->fetch();
+            return $row['id'];
+        } catch (PDOException $e) {
+            echo $e->getMessage() . $e->getLine();
+        }
+    }
+
+    public function getRestaurantNameById($restaurantId)
+    {
+        try {
+            $stmt = $this->connection->prepare('SELECT name FROM restaurants WHERE id = :id');
+            $stmt->execute([':id' => $restaurantId]);
+
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            throw new RepositoryException('Error fetching restaurant name', $e->getCode(), $e);
         }
     }
 }

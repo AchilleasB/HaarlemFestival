@@ -29,7 +29,7 @@
                     <h1 class="text fw-bold bg-black d-inline-block w-auto">DANCE!</h1>
                 </div>
                 <div class="image-secondary-text position-absolute top-0 end-0 ">
-                    <h2 class="">27.07 / 28.07 / 29.07</h2>
+                    <h2 class="">26.07 / 27.07 / 28.07</h2>
                     <button class="buy-tickets-btn fw-bold bg-danger d-inline-block">GET YOUR TICKETS NOW!</button>
                 </div>
             </div>
@@ -69,7 +69,7 @@
     ?>
 
     <script>
-        const imageBasePath = "<?php echo '/images/'; ?>";
+        const imageBasePath = "<?php echo $imageBasePath; ?>";
         const urlBasePath = "<?php echo $urlBasePath; ?>";
     </script>
     

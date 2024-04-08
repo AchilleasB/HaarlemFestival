@@ -1,7 +1,10 @@
 <?php
 
+require_once(__DIR__ . '/../repository.php');
 require_once(__DIR__ . ' /../../models/yummy/menuItem.php');
 require_once(__DIR__ . ' /../../models/yummy/drinkItem.php');
+require_once(__DIR__ . '/../../exceptions/baseException.php');
+require_once(__DIR__ . '/../../exceptions/repositoryException.php');
 
 class MenuRepository extends Repository
 {
@@ -32,31 +35,72 @@ class MenuRepository extends Repository
                 $menuItems['drinks'][] = $drinkItem;
             }
         }
-
-        // while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        //     if (is_null($row['price_bottle'])) {
-        //         // It's a regular menu item (food), not a drink
-        //         $menuItem = new MenuItem();
-        //         $menuItem->setId($row['id']);
-        //         $menuItem->setName($row['name']);
-        //         $menuItem->setDescription($row['description']);
-        //         // Handle NULL value for price per portion
-        //         $menuItem->setPricePerPortion($row['price_per_portion'] ?? null);
-        //         $menuItems['food'][] = $menuItem;
-        //     } else {
-        //         // It's a drink
-        //         $drinkItem = new DrinkItem();
-        //         $drinkItem->setId($row['id']);
-        //         $drinkItem->setName($row['name']);
-        //         $drinkItem->setDescription($row['description']);
-        //         // Handle NULL value for price per portion
-        //         $drinkItem->setPricePerPortion($row['price_per_portion'] ?? null);
-        //         $drinkItem->setPriceBottle($row['price_bottle']);
-        //         $menuItems['drinks'][] = $drinkItem;
-        //     }
-        // }
     
         return $menuItems;
     }
+
+    public function addMenuItemToRestaurant($restaurantId, $menuItem) {
+        try {
+            $stmt = $this->connection->prepare("
+                INSERT INTO menu_items (restaurant_id, name, description, price_per_portion)
+                VALUES (?, ?, ?, ?)");
+            $stmt->execute([$restaurantId, $menuItem->getName(), $menuItem->getDescription(), $menuItem->getPricePerPortion()]);
+
+            $lastInsertId = $this->connection->lastInsertId();
+
+            return $lastInsertId;
+        } catch (PDOException $e) {
+            throw new RepositoryException("Failed to add food menu item to restaurant", $e->getCode(), $e);
+        }
+    }
+
+    public function addDrinkToRestaurant($drinkItem) {
+        try {
+            $stmt = $this->connection->prepare("
+                INSERT INTO drinks (id, price_bottle)
+                VALUES (?, ?)");
+            $stmt->execute([$drinkItem->getId(), $drinkItem->getPriceBottle()]);
+        } catch (PDOException $e) {
+            throw new RepositoryException("Failed to add drink menu item to restaurant", $e->getCode(), $e);
+        }
+    }
+
+    public function deleteMenuItem($menuItemId) {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM menu_items WHERE id = ?");
+            $stmt->execute([$menuItemId]);
+
+            return true;
+        } catch (PDOException $e) {
+            throw new RepositoryException("Failed to delete menu item", $e->getCode(), $e);
+        }
+    }
     
+    public function updateMenuItem($menuItem) {
+        try {
+            $stmt = $this->connection->prepare("
+                UPDATE menu_items
+                SET name = ?, description = ?, price_per_portion = ?
+                WHERE id = ?");
+            $stmt->execute([$menuItem->getName(), $menuItem->getDescription(), $menuItem->getPricePerPortion(), $menuItem->getId()]);
+
+            return true;
+        } catch (PDOException $e) {
+            throw new RepositoryException("Failed to update menu item", $e->getCode(), $e);
+        }
+    }
+
+    public function updateDrink($drinkItem) {
+        try {
+            $stmt = $this->connection->prepare("
+                UPDATE drinks
+                SET price_bottle = ?
+                WHERE id = ?");
+            $stmt->execute([$drinkItem->getPriceBottle(), $drinkItem->getId()]);
+
+            return true;
+        } catch (PDOException $e) {
+            throw new RepositoryException("Failed to update drink item", $e->getCode(), $e);
+        }
+    }
 }

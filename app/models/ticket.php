@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
-use Ramsey\Uuid\Uuid;
+//require_once __DIR__ . '/../vendor/autoload.php';
+//use Ramsey\Uuid\Uuid;
 
 class Ticket implements JsonSerializable
 {
@@ -10,11 +10,11 @@ class Ticket implements JsonSerializable
     private ?int $dance_event_id = null;
     private ?int $history_tour_id = null;
     private ?int $reservation_id = null;
-    private ?int $user_id;
+    private ?int $user_id = null;
     private ?int $order_id = null;
 
     public function __construct() {
-        $this->id = Uuid::uuid4()->toString();
+        //$this->id = Uuid::uuid4()->toString();
     }
 
     public function getId(): string
@@ -48,11 +48,12 @@ class Ticket implements JsonSerializable
     }
 
 
-    public function getTicketPrice(): float
+    //Getter used to retrieve the ticket price for complex event tables
+    //Used when one table is composed of more tables and they are not joined due to database design 
+    public function getTicketPrice(int $newTicketAmount): float
     {
-        return ($this->calc_price / $this->amount) * $this->amount;
+        return fdiv($this->calc_price, $this->amount) * $newTicketAmount;
     }
-
 
     public function getDanceEventId(): ?int
     {
@@ -89,7 +90,7 @@ class Ticket implements JsonSerializable
         return $this->user_id;
     }
 
-    public function setUserId(int $user_id): void
+    public function setUserId(?int $user_id): void
     {
         $this->user_id = $user_id;
     }
@@ -99,7 +100,7 @@ class Ticket implements JsonSerializable
         return $this->order_id;
     }
 
-    public function setOrderId(int $order_id): void
+    public function setOrderId(?int $order_id): void
     {
         $this->order_id = $order_id;
     }

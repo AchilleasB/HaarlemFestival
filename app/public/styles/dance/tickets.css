@@ -66,17 +66,24 @@
     border-left: black 4px solid;
 }
 
+.ticket-data {
+    display: flex;
+    align-items: center;
+}
+
 .ticket-details {
-    width: 50%;
-    margin-top: 1em;
-    margin-left: 12em;
+    width: 100%;
     padding: 1em;
+    margin: auto;
+
 }
 
 .ticket-amount {
-    width: 25%;
+    width: 15%;
     margin: 0 0 0 1em;
-    font-size: 1.1em;
+    font-size: 1.3em;
+    border-radius: .2em;
+    border: .2em solid #A60303;
 }
 
 .ticket-price {
@@ -87,12 +94,18 @@
 .ticket-images {
     width: 80%;
     display: flex;
-    object-fit: cover;
+    justify-content: right;
 }
 
-.ticket-image {
+.artists-images {
     width: 30%;
     height: 30%;
+    margin: 1em;
+}
+
+.daypass-image {
+    width: 100%;
+    height: 100%;
     margin: 1em;
 }
 
@@ -107,7 +120,7 @@
     border-radius: .3em;
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 990px) {
     .ticket-container {
         display: flex;
         flex-direction: column;
@@ -117,10 +130,44 @@
     .ticket-images {
         width: 100%;
         display: flex;
+        flex-direction: column;
+        align-items: center;
         object-fit: cover;
     }
 
-    .ticket-amount {
+    .artists-images {
         width: 50%;
+        height: 50%;
+        margin: 1em;
+    }
+
+    .ticket-amount {
+        width: 20%;
+    }
+
+}
+
+@media screen and (max-width: 660px) {
+    .ticket-data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ticket-details {
+        margin: auto;
+    }
+    .ticket-images {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        object-fit: cover;
+    }
+
+    .artists-images {
+        width: 25%;
+        height: 30%;
+        margin: 1em;
     }
 }

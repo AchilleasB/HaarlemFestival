@@ -22,8 +22,11 @@ class QrCodeCheckerController extends Controller
 
   public function index()
   { 
-    echo $this->user->getFirstname();
-    require __DIR__ . '/../views/qrCodeChecker/index.php';
+    if ($this->user != NULL){
+      require __DIR__ . '/../views/qrCodeChecker/index.php';
+      }else{
+        header("location: /login");
+      }
 
   }
 

@@ -105,7 +105,7 @@ function htmlDisplayTicket(event, eventType) {
     let ticketData = `
             <div class="row">
                 <div class="col text-center">
-                    <div class="row d-flex align-items-center">
+                    <div class="row ticket-data">
                         <div class="col">
                             <div class="ticket-details">
                                 <h5 class="ticket-title">${showArtistsNamesOrDayPass(event.artists, eventType)}</h5>
@@ -193,9 +193,9 @@ function showDateAndTime(date, time) {
 
 function showEventImages(artists, eventType) {
     if (eventType === 'SINGLE-CONCERT') {
-        return artists.map(artist => `<img src="${imageBasePath}${artist.artist_image}" class="ticket-image" >`).join('');
+        return artists.map(artist => `<img src="${imageBasePath}${artist.artist_image}" class="artists-images" >`).join('');
     } else {
-        return `<img src="${imageBasePath}dance.png" class="ticket-image">`;
+        return `<img src="${imageBasePath}dance_pass.png" class="daypass-image">`;
     }
 }
 

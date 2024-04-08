@@ -2,6 +2,9 @@
 
 require_once(__DIR__ . '/../../services/historyTourService.php');
 require_once __DIR__ . '/../../models/ticket.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Ramsey\Uuid\Uuid;
+
 
 class HistoryTourController 
 {
@@ -30,7 +33,7 @@ class HistoryTourController
     public function generateTicket()
     {
 
-        $this->checkSession();
+       // $this->checkSession();
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -65,10 +68,13 @@ class HistoryTourController
                 } else {
                     
                     $ticket = new Ticket();
+                    $ticket->setId(Uuid::uuid4()->toString());
                     $ticket->setAmount($quantity);
                     
                     $ticket->setHistoryTourId($historyTourID); 
-                    $ticket->setUserId($user_id); 
+                    if ($data['user_id'] != NULL){
+                        $ticket->setUserId($user_id);}
+                        else {$ticket->setUserId(NULL);}
     
                     $ticketPrice = $this->historyTourService->getTicketTypePrice($ticketType);
                     $calc_price = $ticketPrice * $quantity;
@@ -76,10 +82,17 @@ class HistoryTourController
                     $ticket->setCalcPrice($calc_price); 
     
                         $this->historyTourService->addTicketToCart($ticket);
-                    // Start of added by Maria
-                    $_SESSION['order_items_data'][count($_SESSION['order_items_data'])]=$ticket;
-                    
-                    // End of added by Maria
+
+                    //added by Maria to enable also adding history tour tickets to shopping cart by visitor
+                    if(!isset($_SESSION['user_id'])){
+                        if (!isset($_SESSION['selected_items_to_purchase'])){
+                            $_SESSION['selected_items_to_purchase']=[];
+                        }
+                        $_SESSION['selected_items_to_purchase'][count($_SESSION['selected_items_to_purchase'])]=$ticket;
+
+                    }
+                    //end of added by Maria 
+
                     $this->historyTourService->updateSeats($historyTourID, $requiredSeats);
                     echo json_encode(['message' => 'Ticket generated successfully']);
                 }

@@ -15,7 +15,7 @@ async function handleEditSession(session) {
                     <input type="datetime-local" id="edit-session-end-date" name="end_date" value="${formatEndDatetoDateTimeLocal(session.endDate)}" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary" id="update-session-button">Update</button>
-                <button type="submit" class="btn btn-danger" id="close-session-button">Close</button>
+                <button type="button" class="btn btn-danger" id="close-session-button">Close</button>
             </form>
         </div>
     </div>
@@ -25,8 +25,18 @@ async function handleEditSession(session) {
 
     updateSessionButton.addEventListener("click", function (e) {
         e.preventDefault();
-        updateSessionData(session);
-        editSessionContainer.innerHTML = null;
+        const startDateInput = document.getElementById('edit-session-start-date').value;
+        const endDateInput = document.getElementById('edit-session-end-date').value;
+    
+        const startDate = new Date(startDateInput);
+        const endDate = new Date(endDateInput);
+    
+        if (endDate > startDate) {
+            updateSessionData(session);
+            editSessionContainer.innerHTML = '';
+        } else {
+            alert("End time must be after start time.");
+        }
     });
 
     const closeEventFormButton = document.getElementById("close-session-button");
@@ -38,7 +48,7 @@ async function handleEditSession(session) {
 
 async function updateSessionData(session) {
 
-    const response = await fetch(`/api/session`, {
+    const response = await fetch(sessionAPIendpoint, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

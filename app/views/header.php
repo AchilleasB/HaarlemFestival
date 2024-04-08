@@ -3,21 +3,19 @@
 if (isset($_SESSION['user_firstname'])) {
     $username = $_SESSION['user_firstname'];
 }
-
 ?>
 
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid">
         <img src="/../icons/haarlem-logo.svg" class="header-logo" alt="Visit Haarlem icon" id="logo">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="nav-pages ms-auto">
                 <ul class="navbar-nav">
-                <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/festival">
                             <img src="/../icons/human.svg" class="human-icon w-10 h-10" alt="Human icon">
                             Festival</a>
@@ -64,34 +62,34 @@ if (isset($_SESSION['user_firstname'])) {
                                 <a class="nav-link" href="/qrCodeChecker"><i class="fa-solid fa-clipboard"></i> QR code
                                     checker</a>
                             </li>
-                        <?php } ?>
 
+                        <?php } ?>
                         <li class="nav-item">
                                 <a class="nav-link" href="/personalProgram">
-                                    <img src="/../icons/favorite.svg" class="sw-10 h-10"
-                                        alt="Favorite icon">
-                                  <span class="bg-secondary rounded-circle px-1" style="--bs-bg-opacity: .5;"> 
-                              <?php    if (isset($_SESSION['order_items_data'])){echo count($_SESSION['order_items_data']);}
-                                       else {$_SESSION['order_items_data']=[];} 
-
-                              ?>                                    
+                                    <img src="/../icons/favorite.svg" class="sw-10 h-10 px-2"
+                                        alt="Favorite icon">Favorite
                         </a>
                         </li>
-                            <li class="nav-item">
+                        <?php }?>
+
+                        <li class="nav-item">
                                 <a class="nav-link" href="/shoppingCart">
                                     <img src="/../icons/shopping-cart.svg" class="shopping-cart-icon w-10 h-10"
                                         alt="Shopping cart icon">
-                                    Cart
+                                    Shopping cart
                                     <?php if (!isset($_SESSION['order_items_data'])) { 
                                         $_SESSION['order_items_data'] = []; } 
                                     ?>
                                 </a>
                             </li>
+                            
+                            <?php if (isset($username)) { ?>
+
                         <li class="nav-item">
                             <a class="nav-link" href="/login/logout"><i class="fa-solid fa-right-from-bracket"></i> Log
                                 out</a>
                         </li>
-                    <?php } ?>
+                        <?php }?>
                 </ul>
             </div>
         </div>

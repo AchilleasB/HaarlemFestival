@@ -49,8 +49,21 @@ class LoginController extends Controller
                     $_SESSION['user_role'] = $user->getRole();
                     $_SESSION['user_registration_date'] = $user->getRegistrationDate();
 
-                    header('Location: /festival');
+                    $redirectUrl = isset($_GET['redirect']) ? urldecode($_GET['redirect']) : '/festival';
+                    header('Location: ' . $redirectUrl);
                     exit();
+
+                //added by Maria to enable keeping user data if the user logs in at checkout
+
+                    if (isset($_SESSION['selected_items_to_purchase'])){
+                        $user=$this->userService->getUserByEmail($email);
+                        $_SESSION['user_id']=$user->getId();
+                        $_SESSION['user_firstname']=$user->getFirstName();
+                        $_SESSION['user_lastname']=$user->getLastName();
+                        $_SESSION['user_email']=$user->getEmail();
+                        $_SESSION['user_role']=$user->getRole();
+                        header("location: /shoppingCart");
+                    }
 
                 } else {
                     $_SESSION['errorMessage'] = 'Invalid password.';
@@ -67,5 +80,4 @@ class LoginController extends Controller
         header('Location: /festival');
         exit();
     }
-
 }

@@ -1,12 +1,15 @@
 <?php
 
 require_once(__DIR__ . '/../../repositories/yummy/sessionRepository.php');
+require_once(__DIR__ . '/../../repositories/yummy/reservationRepository.php');
 
 class SessionService {
     private $sessionRepository;
+    private $reservationRepository;
 
     public function __construct() {
         $this->sessionRepository = new SessionRepository();
+        $this->reservationRepository = new ReservationRepository();
     }
 
     public function getAllSessions() {
@@ -22,41 +25,35 @@ class SessionService {
     }
     
     public function addSession($session) {
-        // list($startDateTime, $endDateTime) = $this->validateDates($startDate, $endDate);
-
-        // $session = new Session();
-        // $session->setStartDate($startDateTime);
-        // $session->setEndDate($endDateTime);
+        list($validatedStartDate, $validatedEndDate) = $this->validateDates($session->getStartDate(), $session->getEndDate());
+    
+        $session->setStartDate($validatedStartDate);
+        $session->setEndDate($validatedEndDate);
         
         return $this->sessionRepository->addSession($session);
     }
 
     public function updateSession($session) {
-        // list($validatedStartDate, $validatedEndDate) = $this->validateDates($session->getStartDate(), $session->getEndDate());
+        list($validatedStartDate, $validatedEndDate) = $this->validateDates($session->getStartDate(), $session->getEndDate());
     
-        // $session->setStartDate($validatedStartDate);
-        // $session->setEndDate($validatedEndDate);
+        $session->setStartDate($validatedStartDate);
+        $session->setEndDate($validatedEndDate);
         
         return $this->sessionRepository->updateSession($session);
     }
     
 
     public function deleteSession($id) {
+        $this->reservationRepository->deactivateReservationsBySessionId($id);
         return $this->sessionRepository->deleteSession($id);
     }
 
     private function validateDates($startDate, $endDate) {
-        $startDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $startDate);
-        $endDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $endDate);
 
-        if ($startDateTime === false || $endDateTime === false) {
-            throw new Exception("Invalid date format. Please use 'Y-m-d H:i:s'.");
-        }
-
-        if ($startDateTime >= $endDateTime) {
+        if ($startDate >= $endDate) {
             throw new Exception("Start date must be before end date.");
         }
 
-        return [$startDateTime, $endDateTime];
+        return [$startDate, $endDate];
     }
 }

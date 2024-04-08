@@ -184,25 +184,6 @@ class DanceRepository extends Repository
         }
     }
 
-    function areTicketsAvailable($ticket){
-        try {
-            $stmt = $this->connection->prepare('SELECT tickets_available FROM dance_events WHERE id = :id');
-            $stmt->execute([':id' => $ticket->getDanceEventId()]);
-
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Dance');
-            $ticketsAvailable = $stmt->fetch();
-
-            if ($ticketsAvailable->getTicketsAvailable() >= $ticket->getAmount()) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
-    }
-    
     function ticketsAvailable($id){
         try {
             $stmt = $this->connection->prepare('SELECT tickets_available FROM dance_events WHERE id = :id');

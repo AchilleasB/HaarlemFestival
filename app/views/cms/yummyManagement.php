@@ -74,3 +74,13 @@
     <script src="/../scripts/yummy/cms/restaurant/deleteRestaurant.js"></script>
     <script src="/../scripts/yummy/cms/restaurant/editRestaurant.js"></script>
     <script src="/../scripts/yummy/cms/restaurant/addRestaurant.js"></script>
+    <script src="/../scripts/yummy/cms/restaurant/gallery/index.js"></script>
+    <script src="/../scripts/yummy/cms/restaurant/gallery/deleteImage.js"></script>
+    <script src="/../scripts/yummy/cms/restaurant/gallery/addImage.js"></script>
+    <script src="/../scripts/yummy/cms/restaurant/menu/index.js"></script>
+    <script src="/../scripts/yummy/cms/restaurant/menu/addMenuItem.js"></script>
+    <script src="/../scripts/yummy/cms/restaurant/menu/deleteMenuItem.js"></script>
+    <script src="/../scripts/yummy/cms/restaurant/menu/editMenuItem.js"></script>
+
+    <script src="/../scripts/yummy/cms/reservation/activationReservation.js"></script>
+    <script src="/../scripts/yummy/cms/reservation/editReservation.js"></script>

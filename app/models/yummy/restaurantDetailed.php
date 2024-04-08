@@ -7,6 +7,7 @@ class RestaurantDetailed extends RestaurantRecommended
     private array $menu;
     private array $images;
     private array $sessions;
+    private bool $isRecommended;
 
     /**
      * RestaurantDetailed constructor.
@@ -20,6 +21,7 @@ class RestaurantDetailed extends RestaurantRecommended
      * @param array $menu
      * @param array $images
      * @param array $sessions
+     * @param bool $isRecommended
      */
     public function __construct(
         string $name,
@@ -31,7 +33,8 @@ class RestaurantDetailed extends RestaurantRecommended
         int $number_of_seats,
         array $menu,
         array $images,
-        array $sessions
+        array $sessions,
+        bool $isRecommended
     ) {
         parent::__construct($name, $number_of_stars, $banner, $cuisines, $description);
         $this->location = $location;
@@ -39,6 +42,7 @@ class RestaurantDetailed extends RestaurantRecommended
         $this->menu = $menu;
         $this->images = $images;
         $this->sessions = $sessions;
+        $this->isRecommended = $isRecommended;
     }
 
     public function getLocation(): string
@@ -97,6 +101,16 @@ class RestaurantDetailed extends RestaurantRecommended
         $this->sessions = $sessions;
     }
 
+    public function getIsRecommended(): bool
+    {
+        return $this->isRecommended;
+    }
+
+    public function setIsRecommended(bool $isRecommended): void
+    {
+        $this->isRecommended = $isRecommended;
+    }
+
     public function addToImageArray(string $image): void {
         $this->images[] = $image;
     }
@@ -109,6 +123,7 @@ class RestaurantDetailed extends RestaurantRecommended
         $data['menu'] = $this->menu;
         $data['images'] = $this->getImages();
         $data['sessions'] = $this->getSessions();
+        $data['isRecommended'] = $this->getIsRecommended();
 
         return $data;
     }

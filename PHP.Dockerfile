@@ -8,9 +8,11 @@ RUN docker-php-ext-configure gd --enable-gd --with-freetype
 
 RUN docker-php-ext-install gd
 
-RUN echo "upload_max_filesize = 20M" > /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "post_max_size = 20M" >> /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/uploads.ini
-
-
+# Commented out Xdebug installation for simplicity, uncomment if needed
 # RUN pecl install xdebug && docker-php-ext-enable xdebug
+
+# Increase upload file sizes and post sizes
+RUN { \
+        echo 'upload_max_filesize = 20M'; \
+        echo 'post_max_size = 25M'; \
+    } > /usr/local/etc/php/conf.d/uploads.ini

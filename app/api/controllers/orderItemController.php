@@ -11,14 +11,15 @@ class OrderItemController extends ApiController
         $this->shoppingCartService = new OrderItemService();
     }
 
-    public function getProductData(){
+    public function getProductData()
+    {
 
         try {
             $this->sendHeaders();
             $event = NULL;
 
             if (!empty($_GET['id'])) {
-                $ticketId= htmlspecialchars($_GET['id']);
+                $ticketId = htmlspecialchars($_GET['id']);
 
                 $event = $this->shoppingCartService->getProductData($ticketId);
             }

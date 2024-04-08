@@ -12,13 +12,13 @@
   <script src="http://code.jquery.com/jquery-migrate-1.1.1.js"></script>
   <link rel="stylesheet" href="../styles/main.css">
 </head>
-<body class="border border-white ">
+<body>
   <?php
     include __DIR__ . '/../header.php';
     require __DIR__ . '/../../config/urlconfig.php';
 
     ?>
-  <main class="border border-white " style="margin-bottom:100px;">
+  <main style="margin-bottom:100px;">
     <div class="grid pt-5" style="--bs-columns: 10; --bs-gap: 1rem;">
       <div class="g-col-7">
         <div class="table-responsive">
@@ -39,35 +39,40 @@
               <tr class="product bg-white">
                 <?php $product = $this->products[$orderItem]['Event']->getName();
 
-                 $orderItemId = $this->currentOrderItems[$orderItem]->getId();
+                $orderItemId = $this->currentOrderItems[$orderItem]->getId();
 
-                 if ($eventImage = $this->products[$orderItem]['Event']->getArtistImage() != NULL){
-                  $eventImage = $this->products[$orderItem]['Event']->getArtistImage();}
-                else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL){
-                  $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();}
+                if ($eventImage = $this->products[$orderItem]['Event']->getArtistImage() != NULL) {
+                  $eventImage = $this->products[$orderItem]['Event']->getArtistImage();
+                } else if ($eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage() != NULL) {
+                  $eventImage = $this->products[$orderItem]['Event']->getHistoryTourImage();
+                } else if ($eventImage = $this->products[$orderItem]['Event']->getYummyEventImage() != NULL) {
+                  $eventImage = $this->products[$orderItem]['Event']->getYummyEventImage();
+                }
 
-                 $locationName = $this->products[$orderItem]['Event']->getLocationName();
+                $locationName = $this->products[$orderItem]['Event']->getLocationName();
 
-                $locationAddress = $this->products[$orderItem]['Event']->getLocationAddress(); 
+                $locationAddress = $this->products[$orderItem]['Event']->getLocationAddress();
 
                 $datetime = $this->products[$orderItem]['Event']->getDateTime();
 
                 $ticketAmount = $this->currentOrderItems[$orderItem]->getAmount();
 
                 if ( $this->products[$orderItem]['Event']->getTicketPrice()){
-                  $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();}
-                else
-                  {
-                    $ticketPrice = $this->currentOrderItems[$orderItem]->getTicketPrice();
+                  $ticketPrice = $this->products[$orderItem]['Event']->getTicketPrice();
+                  $pricePerItem = $ticketPrice * $ticketAmount;
                   }
-
-                $pricePerItem = $ticketPrice * $ticketAmount;
+                  else
+                  {
+                    $pricePerItem =  $this->currentOrderItems[$orderItem]->getCalcPrice();
+  
+                  }
+  
 
                 $ticketsAvailableForEvent = $this->products[$orderItem]['Event']->getTicketsAvailable();
 
                 $totalPrice = $this->orderTotal;
 
-                $totalVAT = $this->orderVAT;?>
+                $totalVAT = $this->orderVAT; ?>
                 
                 <td class="itemId" style="display:none"><?= $orderItemId ?></td>
                 <td class="col-md-4 text-start align-middle">
@@ -83,10 +88,7 @@
                             <?= $product ?>
                           </strong>
                         </li>
-                        <li class="list-group-item border-0 pt-5">
-                          <span class=" text-decoration-underline"> <a href="" class="text-dark"> Click here for event
-                              details</a> </span>
-                        </li>
+                       
                       </ul>
                     </div>
                   </div>
@@ -116,6 +118,8 @@
                 </td>
                 <td class="align-middle">
                   <div class="quantityValues m-1">
+                  <?php if ($this->currentOrderItems[$orderItem]->getHistoryTourId() == NULL){ ?>
+
                   <form method="POST" action="/shoppingCart/updateTicketQuantity">
 
                     <input type="number" id="quantity" name="quantity" class="quantity"
@@ -133,11 +137,37 @@
                     <?php } 
                   else {?>
                     <div> Sold out</div>
-                    <?php }?>
+                    <?php }}
+                    
+                    else {?>
+
+
+<form >
+
+<input type="number" id="quantity" name="quantity" class="quantity"
+  value=<?= $ticketAmount ?> min="1"
+max="10" readonly>
+
+<button id="updateQuantity" class="updateQuantity" type=submit name=update
+  value=<?=$orderItem?> disabled>Save</button>
+<div> The seats for this event can't be updated </div>
+<div>due to seats number limitation</div>
+</form>
+<?php  if ($ticketsAvailableForEvent > 0) {?>
+                    <div>Only
+                      <?= $ticketsAvailableForEvent ?> left
+                    </div>
+                    <?php } 
+                  else {?>
+                    <div> Sold out</div>
+
+                    <?php }}?>
+
+
                 </td>
                 <td class="align-middle">
                   &euro;
-                  <?= $ticketPrice * $ticketAmount ?>
+                  <?= $pricePerItem; ?>
                 </td>
                 <td class="align-middle">
                   <form method="POST" action="/shoppingCart/removeItem">
@@ -167,7 +197,7 @@
           </h5>
         </div>
         <?php } ?>
-        <a href="/">
+        <a href="/festival">
           <button class="rounded-0 px-5 py-2 mt-5" type=submit name=browse id="browse">Continue
             browsing</button>
         </a>
