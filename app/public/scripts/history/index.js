@@ -35,10 +35,50 @@
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                alert(xhr.responseText);
+                // Remove the alert statement
+                const data = JSON.parse(xhr.responseText);
+                displayMessage(data.message);
             }
-        };
-        
+        };       
         xhr.send(JSON.stringify(formData));
     }
-
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('ticketForm');
+    
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+    
+            const formData = {
+                language: document.getElementById('languageSelect').value,
+                date: document.getElementById('dateSelect').value,
+                time: document.getElementById('timeSelect').value,
+                quantity: document.getElementById('quantitySelect').value,
+                ticketType: document.getElementById('ticketTypeSelect').value,
+                user_id: form.getAttribute('data-user-id')
+            };
+    
+            const response = await fetch('api/historyTour/generateTicket', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            const data = await response.json();
+    
+            displayMessage(data.message);
+        });
+    
+        function displayMessage(message) {
+            const messageContainer = document.createElement('div');
+            messageContainer.classList.add('message-container');
+            messageContainer.textContent = message;
+    
+            document.body.appendChild(messageContainer);
+            setTimeout(() => {
+                document.body.removeChild(messageContainer);
+            }, 3000); 
+        }
+    });
+    
