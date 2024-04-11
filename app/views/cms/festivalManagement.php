@@ -46,7 +46,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                         <div class="event-details p-5">
-                            <form action="/cms/updateEventDetails" method="post" class="row g-3">
+                            <form action="/api/festivalPage/updateEventDetails" method="post" class="row g-3">
                                 <div class="col-md-6">
                                     <label for="title<?php echo $event->getId(); ?>" class="form-label">Event
                                         Title</label>

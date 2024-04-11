@@ -1,6 +1,6 @@
 <?php
 
- class Location implements JsonSerializable
+ class Location
 {
     private int $id;
     private string $location_name;
@@ -66,18 +66,6 @@
     {
         $this->image = $image;
     }
-    public function jsonSerialize(): mixed
-    {
-        return [
-            'id' => $this->id,
-            'location_name' => $this->location_name,
-            'address' => $this->address,
-            'description' => $this->description,
-            'link' => $this->link,
-            'image' => $this->image
-        ];
-    }
-  
 }
 
    

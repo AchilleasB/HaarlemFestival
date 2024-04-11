@@ -13,7 +13,7 @@
         <div class="tab-pane fade show active" id="add-guide" role="tabpanel" aria-labelledby="addGuide-tab">
             <div class="p-5">
                 <h2>Add Guide</h2>
-                <form action="/cms/createGuide" method="post">
+                <form action="/api/historyTour/createGuide" method="post">
                     <label for="add-guide-name">Name:</label>
                     <textarea type="text" id="add-guide-name" name="name"></textarea><br><br>
 
@@ -38,7 +38,7 @@
                     <div class="tab-pane fade" id="guide-<?= $guide['id'] ?>" role="tabpanel" aria-labelledby="guide-tab-<?= $guide['id'] ?>">
                         <div class="p-5">
                             <h2>Update Guide</h2>
-                <form action="/cms/updateGuide" method="post">
+                <form action="/api/historyTour/updateGuide" method="post">
                 <input type="hidden" name="id" value="<?= $guide['id'] ?>">
                 <div class="form-group">
                                 <label for="update-guide-name">Name:</label>
@@ -60,7 +60,7 @@
         <div class="tab-pane fade" id="delete-guide" role="tabpanel" aria-labelledby="deleteGuide-tab">
             <div class="p-5">
                 <h2>Delete Guide</h2>
-                <form action="/cms/deleteGuide" method="post">
+                <form action="/api/historyTour/deleteGuide" method="post">
                     <table class="table">
                         <thead>
                             <tr>

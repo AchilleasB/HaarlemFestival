@@ -18,7 +18,7 @@
     <div class="tab-pane fade show active" id="add-location" role="tabpanel" aria-labelledby="add-location-tab">
         <div class="p-5">
             <h2>Add Location</h2>
-            <form action="/cms/createLocation" method="post" enctype="multipart/form-data">
+            <form action="/api/historyTour/createLocation" method="post" enctype="multipart/form-data">
                 <label for="add-location-name">Location Name:</label>
                 <textarea id="add-location-name" name="location_name"></textarea><br><br>
 
@@ -54,7 +54,7 @@
                     aria-labelledby="location-tab-<?= $location['id'] ?>">
                     <div class="p-5">
                         <h2>Update Location</h2>
-                        <form action="/cms/updateLocation" method="post" enctype="multipart/form-data">
+                        <form action="/api/historyTour/updateLocation" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<?= $location['id'] ?>">
                             <label for="update-location-name">Location Name:</label>
                             <textarea id="update-location-name" name="location_name" rows="1" cols="50"
@@ -84,7 +84,7 @@
     <div class="tab-pane fade" id="delete-location" role="tabpanel" aria-labelledby="delete-location-tab">
         <div class="p-5">
             <h2>Delete Location</h2>
-            <form action="/cms/deleteLocation" method="post">
+            <form action="/api/historyTour/deleteLocation" method="post">
                 <table class="table">
                     <thead>
                         <tr>

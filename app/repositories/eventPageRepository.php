@@ -11,8 +11,22 @@ class EventPageRepository extends Repository
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         $eventPages = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $eventPages;
+    
+        $events = [];
+        foreach ($eventPages as $eventData) {
+            $event = new EventPage();
+            $event->setId($eventData['id']);
+            $event->setTitle($eventData['title']);
+            $event->setSubTitle($eventData['sub_title']);
+            $event->setDescription($eventData['description']);
+            $event->setInformation($eventData['information']);
+            $event->setImage($eventData['event_image']);
+            $events[] = $event;
+        }
+    
+        return $events;
     }
+    
 
     public function createEventPage(EventPage $eventPage)
     {
@@ -84,13 +98,34 @@ class EventPageRepository extends Repository
             return false;
         }
     }
+    public function getEventPageById($eventId)
+{
+    $sql = "SELECT * FROM events_page WHERE id = :eventId";
+    $statement = $this->connection->prepare($sql);
+    $statement->bindParam(':eventId', $eventId, PDO::PARAM_INT);
+    $statement->execute();
+    $eventPageData = $statement->fetch(PDO::FETCH_ASSOC);
 
-    public function getAllEventPageTitles()
-    {
-        $sql = "SELECT title FROM events_page WHERE id > 2";
-        $statement = $this->connection->prepare($sql);
-        $statement->execute();
-        $eventPageTitles = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $eventPageTitles;
+    if ($eventPageData) {
+        $eventPage = new EventPage();
+        $eventPage->setId($eventPageData['id']);
+        $eventPage->setTitle($eventPageData['title']);
+        $eventPage->setSubTitle($eventPageData['sub_title']);
+        $eventPage->setDescription($eventPageData['description']);
+        $eventPage->setInformation($eventPageData['information']);
+
+        return $eventPage;
+    } else {
+        return null; 
     }
+}
+public function getAllEventPageTitles()
+{
+    $sql = "SELECT title FROM events_page WHERE id > 2";
+    $statement = $this->connection->prepare($sql);
+    $statement->execute();
+    $eventPageTitles = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $eventPageTitles;
+}
+
 }

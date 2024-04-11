@@ -16,7 +16,7 @@
     <div class="tab-pane fade show active" id="add-tour" role="tabpanel" aria-labelledby="add-tour-tab">
         <div class="p-5">
             <h2>Add Tour</h2>
-            <form action="/cms/createTour" method="post" enctype="multipart/form-data">
+            <form action="/api/historyTour/createTour" method="post" enctype="multipart/form-data">
                 <label for="add-date">Date:</label>
                 <input type="date" class="form-control" id="add-date" name="date" required>
 
@@ -60,7 +60,7 @@
                     aria-labelledby="tour-tab-<?= $tour['id'] ?>">
                     <div class="p-5">
                         <h2>Update Tour</h2>
-                        <form action="/cms/updateTour" method="post" enctype="multipart/form-data">
+                        <form action="/api/historyTour/updateTour" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<?= $tour['id'] ?>">
 
                             <div class="form-group">
@@ -101,7 +101,7 @@
     <div class="tab-pane fade" id="delete-tour" role="tabpanel" aria-labelledby="delete-tour-tab">
         <div class="p-5">
             <h2>Delete Tour</h2>
-            <form action="/cms/deleteTour" method="post">
+            <form action="/api/historyTour/deleteTour" method="post">
                 <table class="table">
                     <thead>
                         <tr>

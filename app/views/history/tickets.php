@@ -38,7 +38,6 @@
             <div class="col">
                 <label for="ticketTypeSelect" class="form-label">Ticket Type</label>
                 <select class="form-select" id="ticketTypeSelect" name="ticketType">
-                    <option value="" selected disabled>Select Ticket</option>
                     <?php foreach ($ticketTypes as $type) : ?>
                     <option value="<?php echo $type['ticket_type']; ?>">
                         <?php echo $type['ticket_type'] . ' - ' . $type['price'] . ' EUR'; ?>
