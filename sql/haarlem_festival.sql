@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 08, 2024 at 07:58 PM
+-- Generation Time: Apr 08, 2024 at 08:36 PM
 -- Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204
 -- PHP Version: 8.2.17
 
@@ -441,7 +441,10 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `date_time`, `payment_status`, `total_price`) VALUES
 (1, '2024-04-01 22:47:26', 'paid', 50.00),
-(2, '2024-04-01 23:38:48', 'paid', 87.50);
+(2, '2024-04-01 23:38:48', 'paid', 87.50),
+(3, '2024-04-08 20:23:08', 'paid', 87.50),
+(4, '2024-04-08 20:28:17', 'paid', 75.00),
+(5, '2024-04-08 20:33:34', 'paid', 60.00);
 
 -- --------------------------------------------------------
 
@@ -486,7 +489,8 @@ INSERT INTO `reservations` (`id`, `restaurant_id`, `session_id`, `user_id`, `num
 (31, 2, NULL, 8, 14, '1231421414', NULL, 0),
 (32, NULL, NULL, 9, 3, '0885790202', NULL, 1),
 (33, 2, NULL, 9, 2, '8978978978', '', 0),
-(34, 6, NULL, 9, 5, '678686678', '', 0);
+(34, 6, NULL, 9, 5, '678686678', '', 0),
+(35, 2, 16, 8, 1, '+359885790202', 'Bla bla', 1);
 
 -- --------------------------------------------------------
 
@@ -659,16 +663,20 @@ INSERT INTO `tickets` (`id`, `calc_price`, `amount`, `dance_event_id`, `history_
 ('b5afdd80-532d-46f8-9f50-14dbb49d53d4', 35.00, 2, NULL, 12, NULL, 9, NULL),
 ('254d8f2d-02ba-496b-ba5c-58456deb355e', 1000.00, 2, 36, NULL, NULL, 2, NULL),
 ('69c8066e-3ab8-4da1-a74b-62bb2fbfa910', 35.00, 2, NULL, 12, NULL, 9, NULL),
-('11f17cfc-f5c9-4799-aa10-7c5c7460316c', 17.50, 1, NULL, 1, NULL, 8, NULL),
+('11f17cfc-f5c9-4799-aa10-7c5c7460316c', 17.50, 1, NULL, 1, NULL, 8, 3),
 ('0b9b65c9-2c73-4470-8efe-7e64b566d2b5', 220.00, 2, 6, NULL, NULL, 2, NULL),
+('47f21eb9-02a4-4b22-b0f6-837b32d2591d', 10.00, 1, NULL, NULL, 35, 8, 3),
 ('81642e06-018c-48c3-b422-8ab5fe4ade3a', 10.00, 1, NULL, NULL, 23, 10, 2),
 ('187900b5-6761-4dd1-b9f1-8ef25e103e04', 60.00, 1, 3, NULL, NULL, 10, 2),
 ('d029ec15-1352-439d-ba1c-907ab9e60a02', 60.00, 1, 2, NULL, NULL, 2, NULL),
+('7424eabd-d6df-4a86-8bca-9846279c6624', 60.00, 1, 4, NULL, NULL, 8, 3),
 ('0688ab55-2d14-4480-8da4-9c152d857f4f', 17.50, 1, NULL, 9, NULL, 9, NULL),
 ('bafe9fc3-d6b6-4f61-a23c-9f369604fa44', 120.00, 2, 2, NULL, NULL, 10, NULL),
 ('bfa288be-2d8d-4fa0-b0dc-9f7a0b01d375', 75.00, 1, 1, NULL, NULL, NULL, NULL),
 ('3a740498-17a4-44b1-bbf4-b0ca3e3307d5', 17.50, 1, NULL, 9, NULL, 9, NULL),
 ('eb07ebad-d4c6-462e-9e35-b2aa31289207', 40.00, 4, NULL, NULL, 28, 10, NULL),
+('7f042a48-80ea-45bf-96fa-bf15aea1df55', 60.00, 1, 4, NULL, NULL, 10, 5),
+('b9258c9c-1457-4d82-9ca1-cef31f3d7389', 75.00, 1, 1, NULL, NULL, NULL, 4),
 ('9b9c83ff-4c37-490c-9636-d12e5a06b6bc', 75.00, 1, 8, NULL, NULL, 6, NULL),
 ('586bd32c-3ca4-49e7-8ca2-f3ef13b7a5ff', 17.50, 1, NULL, 1, NULL, 10, 2),
 ('426c623e-8963-4f04-8410-f82e017d1009', 500.00, 2, 17, NULL, NULL, 2, NULL);
@@ -740,13 +748,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `registration_date`) VALUES
-(2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$ZSIYLLcEL.tgMorcLdTzcO84RRvfPPZHyNntErm3IK5TdYCKAG73K', 'Customer', '11-02-2024'),
+(2, 'Achil', 'Ballanos', 'ahilleasballanos@gmail.com', '$2y$10$ZSIYLLcEL.tgMorcLdTzcO84RRvfPPZHyNntErm3IK5TdYCKAG73K', 'Admin', '11-02-2024'),
 (5, 'Hulk', 'Banner', 'achilleasballanos@outlook.com', '$2y$10$ncp7mP0hjtXyKua87OGQUuFxBmEL9r9PzuLIKAQMj0GhJ//ML.vuC', 'Employee', '25-02-2024'),
 (6, 'Thor', 'Odinson', 'thor@email.com', '$2y$10$FKn5WvU4.YDLV3IjmuATqugZtA1dMBOnqaK/LGXpXKSCsGfFE.CD6', 'Employee', '23-02-2024'),
 (7, 'Tony', 'Stark', 'stark@email.com', '$2y$10$cv1rrTS179h1RsWHGXo4J.ho0UH3C49dpEQdvo2srjwa1zSjU9cP.', 'Customer', '12-02-2024'),
 (8, 'John', 'Doe', 'johndoe@mail.com', '$2y$10$EPBD8eQqFU5H/2IVapkpa.umoHV3f1XwvUKWIWVqN7Bn2VTlGcubG', 'Admin', '04-03-2024'),
-(9, 'Oliwia', 'Wolska', 'oliwiabckp@gmail.com', '$2y$10$.dMUe51QgOfntTcp2D3vJO0IfEV/mx2po6YfJmbwEmqFoksVjvdje', 'Admin', '26-03-2024'),
-(10, 'newuser', 'blahblah', 'iuma710@outlook.com', '$2y$10$46OOEuYfPiigCH5Of0wbJO1fFG5HcEjmhFRk76QJ62XqYQNlM366W', 'Admin', '01-04-2024');
+(9, 'Oliwia', 'Wolska', 'oliwiabckp@gmail.com', '$2y$10$.dMUe51QgOfntTcp2D3vJO0IfEV/mx2po6YfJmbwEmqFoksVjvdje', 'Customer', '26-03-2024'),
+(10, 'newuser', 'blahblah', 'iuma710@outlook.com', '$2y$10$46OOEuYfPiigCH5Of0wbJO1fFG5HcEjmhFRk76QJ62XqYQNlM366W', 'Customer', '01-04-2024');
 
 -- --------------------------------------------------------
 
@@ -1001,7 +1009,7 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `password_reset_tokens`
@@ -1013,7 +1021,7 @@ ALTER TABLE `password_reset_tokens`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
