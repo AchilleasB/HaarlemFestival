@@ -20,7 +20,7 @@ class EventPageRepository extends Repository
             $event->setSubTitle($eventData['sub_title']);
             $event->setDescription($eventData['description']);
             $event->setInformation($eventData['information']);
-            $event->setImage($eventData['event_image']);
+           // $event->setImage($eventData['event_image']);
             $events[] = $event;
         }
     
