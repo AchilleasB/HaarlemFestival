@@ -37,8 +37,7 @@
                             aria-describedby="passwordHelpBlock">
                         <div id="passwordHelpBlock" class="form-text">
                             Your password must be 8-20 characters long, contain letters and numbers, and must not
-                            contain spaces,
-                            special characters, or emoji.
+                            contain spaces, special characters, or emoji.
                         </div>
                     </div>
                     <div class="g-recaptcha" data-sitekey="6LdyLWspAAAAAD2F0-rClAJA92KmKYyh80ELuyRq"></div> <br />

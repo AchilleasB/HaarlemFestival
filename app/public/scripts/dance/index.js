@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     displaySchedule();
 });
 
-export async function getDanceEventsFromAPI() {
+async function getDanceEventsFromAPI() {
     try {
         const response = await fetch(urlBasePath + 'api/danceEvents');
         if (!response.ok) {

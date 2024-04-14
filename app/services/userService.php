@@ -100,8 +100,8 @@ class UserService
     }
 
     // this function is used to register someone as customer
-    // the admin and employee accounts will be mapped seperately
-    // and only when in the CMS by an administrator
+    // the admin and employee accounts can be created only
+    // in the CMS by an administrator
     function mapToCustomer($firstname, $lastname, $email, $password)
     {
         $user = new User();
