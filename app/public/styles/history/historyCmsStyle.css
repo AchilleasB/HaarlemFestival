@@ -1,0 +1,24 @@
+.custom-btn-group .btn {
+  border-radius: 0;
+  border: 1px solid #007bff;
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+.custom-btn-group .btn:first-child {
+  border-radius: 4px 0 0 4px;
+}
+.custom-btn-group .btn:last-child {
+  border-radius: 0 4px 4px 0;
+}
+.custom-btn-group .btn:not(:last-child) {
+  border-right: none;
+}
+  .custom-btn-group .btn:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .custom-btn-group .btn.active {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+    }

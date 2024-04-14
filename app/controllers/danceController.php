@@ -45,13 +45,7 @@ class DanceController extends Controller
 
     public function tickets()
     {
-       // if (isset($_SESSION['user_id'])) {
-            $this->displayView($this);
-        // } else {
-        //     //header('Location: /login');
-        //     require __DIR__ . '/../views/registerOrContinueAsVisitorPage.php';
-        //     exit();
-        // }
+        $this->displayView($this);
     }
 
  

@@ -26,7 +26,10 @@ class EventPageService
     {
         return $this->repository->deleteEventPage($eventId);
     }
-
+    public function getEventPageById($eventId)
+    {
+        return $this->repository->getEventPageById($eventId);
+    }
     public function getAllEventPageTitles()
     {
         return $this->repository->getAllEventPageTitles();

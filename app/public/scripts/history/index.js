@@ -1,44 +1,62 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('ticketForm');
 
-    function scrollToTickets() {
-        document.getElementById('ticketSection').scrollIntoView({ behavior: 'smooth' });
+    if (form) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            checkForTour();
+        });
+    } else {
+        console.error('Ticket form not found in the document.');
     }
-    document.addEventListener('DOMContentLoaded', function () {
-        var ticketForm = document.getElementById('ticketForm');
-        if (ticketForm) {
-            ticketForm.addEventListener('submit', function (event) {
-                event.preventDefault();
-                checkForTour();
-            });
-        } else {
-            console.error('Ticket form not found in the document.');
-        }
-    });
-    function checkForTour() {
-        var language = document.getElementById('languageSelect').value;
-        var date = document.getElementById('dateSelect').value;
-        var time = document.getElementById('timeSelect').value;
-        var ticketType = document.getElementById('ticketTypeSelect').value;
-        var quantity = document.getElementById('quantitySelect').value;
-        var user_id = document.getElementById('ticketForm').getAttribute('data-user-id');
 
-        var formData = {
+    function checkForTour() {
+        const language = document.getElementById('languageSelect').value;
+        const date = document.getElementById('dateSelect').value;
+        const time = document.getElementById('timeSelect').value;
+        const ticketType = document.getElementById('ticketTypeSelect').value;
+        const quantity = document.getElementById('quantitySelect').value;
+        const user_id = form.getAttribute('data-user-id');
+
+        const formData = {
             language: language,
             date: date,
             time: time,
             ticketType: ticketType,
             quantity: quantity,
-            user_id: user_id 
+            user_id: user_id
         };
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/historyTour/generateTicket', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                alert(xhr.responseText);
+        fetch('/api/historyTour/generateTicket', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
             }
-        };
-        
-        xhr.send(JSON.stringify(formData));
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayMessage(data.message);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            displayMessage('An error occurred. Please try again later.');
+        });
     }
 
+    function displayMessage(message) {
+        const messageContainer = document.createElement('div');
+        messageContainer.classList.add('message-container');
+        messageContainer.textContent = message;
+
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+            document.body.removeChild(messageContainer);
+        }, 3000);
+    }
+});

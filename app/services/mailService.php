@@ -24,7 +24,7 @@ class MailService
         $this->userRepository->addToken($user->getId(), $token);
 
         $mail = new Mail();
-        $mail->setFrom("haarlemfestivalsupp0rt@gmail.com", "Haarlem Festival Support");
+        $mail->setFrom("iumahedgehogie@gmail.com", "Haarlem Festival Support");
         $mail->setSubject("Password Reset");
         $mail->addTo($email, $user->getFirstname() . ' ' . $user->getLastname());
         $mail->addContent("text/html", "Click <a href=\"http://localhost/profile/resetPassword?token=$token\">here</a> to reset your password");
@@ -50,7 +50,7 @@ class MailService
         $user = $this->userRepository->getUserByEmail($email);
 
         $mail = new Mail();
-        $mail->setFrom("haarlemfestivalsupp0rt@gmail.com", "Haarlem Festival Support");
+        $mail->setFrom("iumahedgehogie@gmail.com", "Haarlem Festival Support");
         $mail->setSubject("Password Reset");
         $mail->addTo($email, $user->getFirstname() . ' ' . $user->getLastname());
         $mail->addContent("text/html", "Your password has been updated successfully! If you did not make this change, please contact us immediately.");

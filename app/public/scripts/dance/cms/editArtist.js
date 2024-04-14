@@ -20,8 +20,8 @@ function handleEditArtist(artist) {
                 </div>
                 <div class="mb-3">
                     <label for="artist_image" class="form-label">Upload Artist Image</label>
-                    <input type="file" class="form-control" id="artist_image" name="artist_image" accept="image/*" required>
-                    <input type="hidden" id="artist_image" name="artist_image" value="${artist.artist_image}">
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                    <input type="hidden" id="image" name="artist_image" value="${artist.artist_image}">
                 </div>
                 <button type="submit" class="btn btn-primary" id="update-artist-button">Update</button>
                 <button type="button" class="btn btn-danger" id="close-artist-button">Close</button>
@@ -45,14 +45,14 @@ function handleEditArtist(artist) {
 }
 
 async function updateArtistData() {
-    const name = document.getElementById("name").value;
-    const genre = document.getElementById("genre").value;
-    const image = document.getElementById("image");
+    // const name = document.getElementById("name").value;
+    // const genre = document.getElementById("genre").value;
+    // const image = document.getElementById("image");
 
-    if (name === "" || genre === "" || !image.files[0]) {
-        displayMessage("Please fill in all fields", 3000);
-        return;
-    }
+    // if (name === "" || genre === "" || !image.files[0]) {
+    //     displayMessage("Please fill in all fields", 3000);
+    //     return;
+    // }
     
     const formData = new FormData(document.getElementById('edit-artist-form'));
     const response = await fetch(`/api/artists`, {

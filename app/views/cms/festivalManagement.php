@@ -11,53 +11,110 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/cms.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <script src="https://cdn.tiny.cloud/1/dacel3kg9auup3593i648va8wcvi2j7ybudwbv0qmqbz74lc/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/dacel3kg9auup3593i648va8wcvi2j7ybudwbv0qmqbz74lc/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
 </head>
+
 <body>
     <?php
     include __DIR__ . '/../header.php';
     ?>
 
-<div id="editFormsContainer" class="container m-5">
-        <div class="btn-group" role="group" aria-label="Edit Options">
-            <input type="radio" class="btn-check" name="editOption" id="editEvent" autocomplete="off" value="event" checked>
-            <label class="btn btn-outline-primary" for="editEvent">Edit Event</label>
 
-            <input type="radio" class="btn-check" name="editOption" id="editOverview" autocomplete="off" value="overview">
-            <label class="btn btn-outline-primary" for="editOverview">Edit Events Overview</label>
-        </div>
+    <div class="edit-form-container">
+        <h2 class="text-center p-5">Festival Page Main content</h2>
 
-        <div id="editEventContainer" class="edit-form-container">
-            <?php renderEditForm("Edit Event Title", "title", $event->getTitle(), $event->getId()); ?>
-            <?php renderEditForm("Edit Event Sub Title", "subTitle", $event->getSubTitle(), $event->getId()); ?>
-            <?php renderEditForm("Edit Event Description", "description", $event->getDescription(), $event->getId()); ?>
-        </div>
+        <ul class="nav nav-tabs" id="eventTabs" role="tablist">
+            <?php foreach ($events as $index => $event): ?>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link <?php echo $index === 0 ? 'active' : ''; ?>"
+                    id="tab-<?php echo $event->getId(); ?>" data-bs-toggle="tab"
+                    data-bs-target="#event-<?php echo $event->getId(); ?>" type="button" role="tab"
+                    aria-controls="event-<?php echo $event->getId(); ?>"
+                    aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>">
+                    <?php echo $event->getTitle(); ?>
+                </button>
+            </li>
+            <?php endforeach; ?>
+        </ul>
 
-        <div id="editOverviewContainer" class="edit-form-container" style="display: none;">
-            <?php foreach ($events as $event): ?>
-                <?php renderEditForm("Edit Event Title Overview", "titleOverview", $event->getTitle(), $event->getId()); ?>
-                <?php renderEditForm("Edit Event Description Overview", "descriptionOverview", $event->getDescription(), $event->getId()); ?>
-                <?php renderEditForm("Edit Event Schedule Overview", "schedule", $event->getSchedule(), $event->getId()); ?>
-                <?php renderEditForm("Edit Event Location Overview: " . $event->getTitle(), "location", $event->getLocations(), $event->getId()); ?>
+        <div class="tab-content" id="eventTabsContent">
+            <?php foreach ($events as $index => $event): ?>
+            <div class="tab-pane fade <?php echo $index === 0 ? 'show active' : ''; ?>"
+                id="event-<?php echo $event->getId(); ?>" role="tabpanel"
+                aria-labelledby="tab-<?php echo $event->getId(); ?>">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="event-details p-5">
+                            <form action="/api/festivalPage/updateEventDetails" method="post" class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="title<?php echo $event->getId(); ?>" class="form-label">Event
+                                        Title</label>
+                                    <textarea id="title<?php echo $event->getId(); ?>"
+                                        name="events[<?php echo $event->getId(); ?>][title]"><?php echo $event->getTitle(); ?></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="subTitle<?php echo $event->getId(); ?>" class="form-label">Event Sub
+                                        Title</label>
+                                    <textarea id="subTitle<?php echo $event->getId(); ?>"
+                                        name="events[<?php echo $event->getId(); ?>][subTitle]"><?php echo $event->getSubTitle(); ?></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="description<?php echo $event->getId(); ?>" class="form-label">Event
+                                        Description</label>
+                                    <textarea id="description<?php echo $event->getId(); ?>"
+                                        name="events[<?php echo $event->getId(); ?>][description]"><?php echo $event->getDescription(); ?></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="locations<?php echo $event->getId(); ?>"
+                                        class="form-label">Locations</label>
+                                    <textarea id="locations<?php echo $event->getId(); ?>"
+                                        name="events[<?php echo $event->getId(); ?>][locations]"><?php echo $event->getLocations(); ?></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="schedule<?php echo $event->getId(); ?>"
+                                        class="form-label">Schedule</label>
+                                    <textarea id="schedule<?php echo $event->getId(); ?>"
+                                        name="events[<?php echo $event->getId(); ?>][schedule]"><?php echo $event->getSchedule(); ?></textarea>
+                                </div>
+                                
+                                <input type="hidden" name="events[<?php echo $event->getId(); ?>][id]"
+                                    value="<?php echo $event->getId(); ?>">
+                                <div>
+                                    <input type="submit" value="Save" class="btn btn-lg btn-primary">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php endforeach; ?>
         </div>
     </div>
-   <?php
+
+    <script>
+    <?php foreach ($events as $event): ?>
+    tinymce.init({
+        selector: "#title<?php echo $event->getId(); ?>, #subTitle<?php echo $event->getId(); ?>, #description<?php echo $event->getId(); ?>, #locations<?php echo $event->getId(); ?>, #schedule<?php echo $event->getId(); ?>",
+        plugins: 'autolink lists link',
+        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link',
+        height: 400,
+        width: 500,
+    });
+    <?php endforeach; ?>
+    </script>
+
+
+    <?php
     include __DIR__ . '/../footer.php';
     ?>
-       <script src="/../scripts/festival/festivalCms.js"></script>
- 
-</body>  
+
+</body>
 
 <?php
-function renderEditForm($title, $name, $value, $eventId) {
-    echo '<div class="container">';
-    echo '<h2 class = "text-center p-4">' . $title . '</h2>';
-    echo '<form action="/cms/updateEvent' . ucfirst($name) . '" method="post">';
-    echo '<textarea id="' . $name . '" name="' . $name . '" class="tinymce-field" required>' . $value . '</textarea><br><br>';
-    echo '<input type="hidden" name="event_id" value="' . $eventId . '">';
-    echo '<input type="submit" value="Save" class="btn btn-primary">';
-    echo '</form>';
-    echo '</div>';
-}
+
 ?>

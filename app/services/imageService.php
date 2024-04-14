@@ -13,7 +13,6 @@ class ImageService
         $this->imageRepository = new ImageRepository();
         $this->restaurantRepository = new RestaurantRepository();
     }
-
     public function getImagesByRestaurantId($restaurantId)
     {
         return $this->imageRepository->getImagesByRestaurantId($restaurantId);

@@ -17,10 +17,11 @@ class FestivalController extends Controller
         $events = $this->festivalService->getAllEvents();
         $event = $this->festivalService->getEventDetails();
         
-        require(__DIR__ . '/../views/festival/index.php');
+        $data = [
+            'events' => $events,
+            'event' => $event
+        ];
 
+        $this->displayViewWithDataSet($this, $data);
     }
- 
-
-
 }

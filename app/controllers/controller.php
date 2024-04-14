@@ -63,4 +63,5 @@ class Controller
 
         require __DIR__ . "/../views/$directory/$view.php";
     }
+    
 }

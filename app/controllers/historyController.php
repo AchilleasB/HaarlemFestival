@@ -29,12 +29,18 @@ class HistoryController extends Controller
         $times = $this->historyTourService->getTimes();
         $ticketTypes = $this->historyTourService->getTicketTypes();
         $event = $this->historyService->getEventDetails();
+        
+        $data = [
+            'locations' => $locations,
+            'organizedTours' => $organizedTours,
+            'languages' => $languages,
+            'dates' => $dates,
+            'times' => $times,
+            'ticketTypes' => $ticketTypes,
+            'event' => $event
+        ];
 
-        require(__DIR__ . '/../views/history/index.php');
+        $this->displayViewWithDataSet($this, $data);
     }
-
-
-   
-  
 }
 ?>
